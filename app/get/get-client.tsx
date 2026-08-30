@@ -1,9 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import Image from 'next/image'
+
+import { useEffect, useState } from 'react'
 import { LogoMark } from '@/components/ui/logo'
 import { Button } from '@/components/ui/button'
+import { EarlyAccessForm } from '@/components/ui/early-access-form'
 import {
   iosHref,
   androidHref,
@@ -75,12 +77,11 @@ export function GetClient() {
       <div className="mt-9 flex w-full max-w-xs flex-col gap-3">
         {platform === 'android' && !isLive.android ? (
           <>
-            <Button asChild size="lg">
-              <a href={NOTIFY_MAILTO}>Tell me when Android is ready</a>
-            </Button>
             <p className="text-[13px] text-subtle">
-              ImprovTalk is on iPhone first. Android is next.
+              ImprovTalk is on iPhone first. Leave your address and we&rsquo;ll tell you the
+              moment Android is ready.
             </p>
+            <EarlyAccessForm align="center" />
           </>
         ) : (
           <>
@@ -89,22 +90,24 @@ export function GetClient() {
                 {isLive.ios ? 'Download on the App Store' : isLive.testflight ? 'Join the TestFlight beta' : 'Get notified at launch'}
               </a>
             </Button>
+            {/* Switches to the Android view, which carries the form — better
+                than dumping the visitor into a mail client. */}
             {!isLive.android && (
-              <Button asChild variant="outline" size="lg">
-                <a href={NOTIFY_MAILTO}>I&rsquo;m on Android</a>
+              <Button variant="outline" size="lg" onClick={() => setPlatform('android')}>
+                I&rsquo;m on Android
               </Button>
             )}
           </>
         )}
       </div>
 
-      {/* Desktop visitors get the code to scan with the phone they'll install on. */}
+      {/* Desktop visitors scan with the phone they will install on. */}
       {platform === 'other' && (
         <div className="mt-12 flex flex-col items-center gap-3">
           <div className="rounded-2xl bg-white p-3">
             <Image src="/qr-get.svg" alt="" width={132} height={132} className="size-32" unoptimized />
           </div>
-          <p className="max-w-[14rem] text-[13px] leading-relaxed text-subtle">
+          <p className="max-w-[15rem] text-[13px] leading-relaxed text-subtle">
             Scan this with your phone to open this page there.
           </p>
         </div>

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { LogoMark } from '@/components/ui/logo'
 import { InstallBlock } from '@/components/ui/install'
+import { EarlyAccessForm } from '@/components/ui/early-access-form'
 import { fadeUp, stagger, viewportOnce } from '@/lib/motion'
 import { stats } from '@/content/catalogs'
 
@@ -39,8 +40,12 @@ export function FinalCta() {
             Get it over with somewhere it costs you nothing. {stats.freeWeekly} conversations a week,
             free, no card.
           </motion.p>
+          <motion.div variants={fadeUp} className="mt-10" id="early-access">
+            <EarlyAccessForm align="center" />
+          </motion.div>
+
           <motion.div variants={fadeUp} className="mt-10 flex justify-center">
-            <InstallBlock compact align="center" />
+            <InstallBlock compact align="center" badgesOnly />
           </motion.div>
         </motion.div>
       </div>

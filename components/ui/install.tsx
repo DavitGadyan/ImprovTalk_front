@@ -1,12 +1,13 @@
 'use client'
 
 import Image from 'next/image'
+
 import { Button } from '@/components/ui/button'
 import { iosHref, androidHref, isLive, NOTIFY_MAILTO } from '@/content/links'
 import { cn } from '@/lib/utils'
 
 /**
- * Install block: primary action, QR, and both store badges.
+ * Install block: primary action, both store badges, and the scan code.
  *
  * Nothing here is a dead end. While the store URLs in content/links.ts are
  * empty, the badges render disabled with an honest "coming soon" and the
@@ -73,10 +74,14 @@ export function InstallBlock({
   className,
   compact = false,
   align = 'left',
+  badgesOnly = false,
 }: {
   className?: string
   compact?: boolean
   align?: 'left' | 'center'
+  /** Drops the primary button — for places that already have their own CTA,
+      like the final section, where the email form is the action. */
+  badgesOnly?: boolean
 }) {
   const anyStoreLive = isLive.ios || isLive.android
   const primaryHref = isLive.ios ? iosHref() : isLive.testflight ? iosHref() : NOTIFY_MAILTO
@@ -95,21 +100,24 @@ export function InstallBlock({
       )}
     >
       <div className={cn('flex flex-col gap-4', align === 'center' && 'items-center')}>
-        <div
-          className={cn(
-            'flex flex-wrap items-center gap-3',
-            align === 'center' && 'justify-center',
-          )}
-        >
-          <Button asChild size="lg">
-            <a href={primaryHref}>{primaryLabel}</a>
-          </Button>
-          {!compact && (
-            <Button asChild variant="ghost" size="lg">
-              <a href="#how">See how it works</a>
+        {!badgesOnly && (
+          <div
+            className={cn(
+              'flex flex-wrap items-center gap-3',
+              align === 'center' && 'justify-center',
+            )}
+          >
+            <Button asChild size="lg">
+              <a href={primaryHref}>{primaryLabel}</a>
             </Button>
-          )}
-        </div>
+            {!compact && (
+              <Button asChild variant="ghost" size="lg">
+                <a href="#how">See how it works</a>
+              </Button>
+            )}
+          </div>
+        )}
+
         <div
           className={cn(
             'flex flex-wrap items-center gap-2.5',
@@ -133,10 +141,13 @@ export function InstallBlock({
         </div>
       </div>
 
-      {/* QR: desktop only — scanning your own screen is not a thing. */}
+      {/* Desktop only — scanning the screen you are reading is not a thing.
+          The white padding is part of the quiet zone: the file carries 2
+          modules and this contributes the rest. 112px is the size the
+          generator verifies a successful decode at. */}
       <div className="hidden shrink-0 flex-col items-center gap-2 lg:flex">
-        <div className="rounded-xl bg-white p-2.5">
-          <Image src="/qr-get.svg" alt="" width={96} height={96} className="size-24" unoptimized />
+        <div className="rounded-xl bg-white p-3">
+          <Image src="/qr-get.svg" alt="" width={112} height={112} className="size-28" unoptimized />
         </div>
         <span className="text-[11px] leading-tight text-subtle">
           Scan to

@@ -27,15 +27,15 @@ export const TESTFLIGHT_URL = ''
 
 export const SUPPORT_EMAIL = 'support@s1mpleai.org'
 
+/** Where the QR points. Stable across launch — /get does the routing. */
+export const GET_URL = 'https://improvtalk.s1mpleai.org/get/'
+
 export const NOTIFY_MAILTO =
   `mailto:${SUPPORT_EMAIL}` +
   '?subject=' + encodeURIComponent('ImprovTalk — tell me when it launches') +
   '&body=' + encodeURIComponent(
     "I'd like to know when ImprovTalk is available.\n\nWhich phone do you use? (iPhone / Android)\n",
   )
-
-/** Where the QR points. Stable across launch — /get does the routing. */
-export const GET_URL = 'https://improvtalk.s1mpleai.org/get/'
 
 export const iosHref = () => APP_STORE_URL || TESTFLIGHT_URL || NOTIFY_MAILTO
 export const androidHref = () => PLAY_STORE_URL || NOTIFY_MAILTO

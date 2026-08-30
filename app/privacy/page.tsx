@@ -68,6 +68,14 @@ export default function PrivacyPage() {
         </tbody>
       </table>
 
+      <h2>The early-access list</h2>
+      <p>
+        If you give us your email address on this website to request TestFlight access, we use it
+        for one thing: sending you the invite and telling you when the app is available on your
+        platform. We do not add you to a marketing list, and we do not pass it on. Ask us at any
+        time and we will delete it.
+      </p>
+
       <h2>What we do not collect</h2>
       <ul>
         <li>No contacts, calendar, photos or location.</li>
