@@ -156,8 +156,26 @@ Then add two repository secrets:
 
 ## Deploying
 
-Push to `main`, or run the workflow manually. It builds, sanity-checks the
-export, syncs immutable assets first and HTML second, then invalidates the CDN.
+Push to `main`, or run the workflow manually.
+
+Until `GCP_WIF_PROVIDER` and `GCP_DEPLOY_SA` exist, the workflow still builds and
+reports green — it just skips the publish steps and leaves a notice. So you can
+push freely before the GCP side is ready.
+
+Once configured it runs in this order, which matters:
+
+1. Build and sanity-check the export (fails loudly rather than syncing a
+   half-built site over a working one).
+2. `_next/**` hashed assets — `max-age=31536000, immutable`.
+3. `scenarios/**` video and posters — `max-age=2592000` (30 days). Without this
+   a returning visitor re-downloads ~3 MB of video every visit. Rename the file
+   to bust it.
+4. HTML and everything else — `max-age=0, must-revalidate`, so a deploy is
+   visible immediately.
+5. CDN invalidation.
+
+Assets go up before HTML on purpose: a visitor who loads the new HTML can then
+never request an asset that has not been uploaded yet.
 
 ## Verify after the first deploy
 
