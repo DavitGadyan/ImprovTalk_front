@@ -1,0 +1,20 @@
+node_modules/
+.next/
+out/
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+.env*.local
+
+# Playwright MCP scratch output
+.playwright-mcp/
+
+# Source video masters — transcode with scripts/transcode-video.sh, commit only
+# the H.264 output in public/scenarios/
+/*.mp4
+/*.mov
+
+# Design reference PDFs — third-party agency case-study work, kept local.
+# Publishing them in this repo would redistribute someone else's portfolio,
+# and they are 12 MB that the site itself never uses.
+design_examples/
