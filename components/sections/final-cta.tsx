@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import { LogoMark } from '@/components/ui/logo'
-import { InstallBlock } from '@/components/ui/install'
 import { fadeUp, stagger, viewportOnce } from '@/lib/motion'
 import { stats } from '@/content/catalogs'
 
@@ -39,9 +38,7 @@ export function FinalCta() {
             Get it over with somewhere it costs you nothing. {stats.freeWeekly} conversations a week,
             free, no card.
           </motion.p>
-          <motion.div variants={fadeUp} className="mt-10 flex justify-center" id="early-access">
-            <InstallBlock compact align="center" />
-          </motion.div>
+
         </motion.div>
       </div>
     </section>

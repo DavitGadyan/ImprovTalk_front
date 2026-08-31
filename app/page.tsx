@@ -13,7 +13,7 @@ import { Progress } from '@/components/sections/progress'
 import { Faq } from '@/components/sections/faq'
 import { FinalCta } from '@/components/sections/final-cta'
 import { Footer } from '@/components/sections/footer'
-import { MobileBar } from '@/components/ui/mobile-bar'
+import { ScrollCta } from '@/components/ui/scroll-cta'
 import { homeJsonLd } from '@/lib/jsonld'
 
 /**
@@ -49,7 +49,7 @@ export default function HomePage() {
         <FinalCta />
       </main>
       <Footer />
-      <MobileBar />
+      <ScrollCta />
     </>
   )
 }

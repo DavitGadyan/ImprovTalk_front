@@ -66,7 +66,7 @@ export function Hero() {
               you said it.
             </motion.p>
 
-            <motion.div variants={fadeUp} className="mt-8">
+            <motion.div variants={fadeUp} className="mt-8" id="hero-cta">
               <InstallBlock />
             </motion.div>
 
