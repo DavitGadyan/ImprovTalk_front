@@ -7,8 +7,8 @@
  * broken page.
  */
 export const analytics = {
-  /** GA4 measurement ID, e.g. 'G-XXXXXXXXXX'. */
-  GA4_ID: '',
+  /** GA4 measurement ID for the improvtalk.vip web stream. */
+  GA4_ID: 'G-TQHK0W81XE',
 
   /** Google Ads conversion ID, e.g. 'AW-XXXXXXXXX'. */
   ADS_ID: '',
