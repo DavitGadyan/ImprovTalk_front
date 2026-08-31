@@ -26,7 +26,7 @@ export function Simulator() {
   return (
     <Section
       id="simulator"
-      index={5}
+      index={6}
       tone="canvas"
       label="Watch it played out"
       hue="var(--color-simulate)"

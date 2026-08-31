@@ -19,7 +19,7 @@ export function Progress() {
   return (
     <Section
       id="progress"
-      index={8}
+      index={9}
       tone="deep"
       curved
       label="Your progress"

@@ -1,13 +1,16 @@
 'use client'
 
-import Image from 'next/image'
+import { useState } from 'react'
+
 
 import { Button } from '@/components/ui/button'
-import { iosHref, androidHref, isLive, NOTIFY_MAILTO } from '@/content/links'
+import { iosHref, androidHref, isLive } from '@/content/links'
 import { cn } from '@/lib/utils'
+import { EarlyAccessDialog } from '@/components/ui/early-access-dialog'
+import { track } from '@/lib/analytics'
 
 /**
- * Install block: primary action, both store badges, and the scan code.
+ * Install block: primary action plus both store badges.
  *
  * Nothing here is a dead end. While the store URLs in content/links.ts are
  * empty, the badges render disabled with an honest "coming soon" and the
@@ -36,12 +39,14 @@ function StoreBadge({
   glyph,
   top,
   bottom,
+  onClick,
 }: {
   live: boolean
   href: string
   glyph: React.ReactNode
   top: string
   bottom: string
+  onClick?: () => void
 }) {
   const inner = (
     <>
@@ -64,7 +69,11 @@ function StoreBadge({
     )
   }
   return (
-    <a href={href} className={cn(base, 'hover:border-ink/40 hover:bg-raised/50')}>
+    <a
+      href={href}
+      onClick={onClick}
+      className={cn(base, 'hover:border-ink/40 hover:bg-raised/50')}
+    >
       {inner}
     </a>
   )
@@ -83,78 +92,87 @@ export function InstallBlock({
       like the final section, where the email form is the action. */
   badgesOnly?: boolean
 }) {
+  const [dialogOpen, setDialogOpen] = useState(false)
+
   const anyStoreLive = isLive.ios || isLive.android
-  const primaryHref = isLive.ios ? iosHref() : isLive.testflight ? iosHref() : NOTIFY_MAILTO
   const primaryLabel = anyStoreLive
     ? 'Get the app'
     : isLive.testflight
       ? 'Join the beta'
-      : 'Get notified at launch'
+      : 'Get early access'
+
+  /*
+   * Pre-launch there is nowhere to send anyone, so the primary action opens the
+   * early-access panel instead of a mail client. Once a store URL exists it
+   * becomes an ordinary link again, with no code change beyond content/links.ts.
+   */
+  const goesToStore = isLive.ios || isLive.testflight
 
   return (
     <div
       className={cn(
-        'flex flex-col gap-6 sm:flex-row sm:items-center',
-        align === 'center' && 'sm:justify-center',
+        'flex flex-col gap-4',
+        align === 'center' && 'items-center',
         className,
       )}
     >
-      <div className={cn('flex flex-col gap-4', align === 'center' && 'items-center')}>
-        {!badgesOnly && (
-          <div
-            className={cn(
-              'flex flex-wrap items-center gap-3',
-              align === 'center' && 'justify-center',
-            )}
-          >
-            <Button asChild size="lg">
-              <a href={primaryHref}>{primaryLabel}</a>
-            </Button>
-            {!compact && (
-              <Button asChild variant="ghost" size="lg">
-                <a href="#how">See how it works</a>
-              </Button>
-            )}
-          </div>
-        )}
-
+      {!badgesOnly && (
         <div
           className={cn(
-            'flex flex-wrap items-center gap-2.5',
+            'flex flex-wrap items-center gap-3',
             align === 'center' && 'justify-center',
           )}
         >
-          <StoreBadge
-            live={isLive.ios}
-            href={iosHref()}
-            glyph={<AppleGlyph />}
-            top={isLive.ios ? 'Download on the' : 'Coming soon to'}
-            bottom="App Store"
-          />
-          <StoreBadge
-            live={isLive.android}
-            href={androidHref()}
-            glyph={<PlayGlyph />}
-            top={isLive.android ? 'Get it on' : 'Coming soon to'}
-            bottom="Google Play"
-          />
+          {goesToStore ? (
+            <Button asChild size="lg">
+              <a href={iosHref()} onClick={() => track('notify_click', { target: 'store' })}>
+                {primaryLabel}
+              </a>
+            </Button>
+          ) : (
+            <Button
+              size="lg"
+              onClick={() => {
+                track('notify_click', { target: 'early_access' })
+                setDialogOpen(true)
+              }}
+            >
+              {primaryLabel}
+            </Button>
+          )}
+          {!compact && (
+            <Button asChild variant="ghost" size="lg">
+              <a href="#how">See how it works</a>
+            </Button>
+          )}
         </div>
+      )}
+
+      <div
+        className={cn(
+          'flex flex-wrap items-center gap-2.5',
+          align === 'center' && 'justify-center',
+        )}
+      >
+        <StoreBadge
+          live={isLive.ios}
+          href={iosHref()}
+          glyph={<AppleGlyph />}
+          top={isLive.ios ? 'Download on the' : 'Coming soon to'}
+          bottom="App Store"
+          onClick={() => track('notify_click', { target: 'app_store_badge' })}
+        />
+        <StoreBadge
+          live={isLive.android}
+          href={androidHref()}
+          glyph={<PlayGlyph />}
+          top={isLive.android ? 'Get it on' : 'Coming soon to'}
+          bottom="Google Play"
+          onClick={() => track('notify_click', { target: 'play_badge' })}
+        />
       </div>
 
-      {/* Desktop only — scanning the screen you are reading is not a thing.
-          The white padding is part of the quiet zone: the file carries 2
-          modules and this contributes the rest. 112px is the size the
-          generator verifies a successful decode at. */}
-      <div className="hidden shrink-0 flex-col items-center gap-2 lg:flex">
-        <div className="rounded-xl bg-white p-3">
-          <Image src="/qr-get.svg" alt="" width={112} height={112} className="size-28" unoptimized />
-        </div>
-        <span className="text-[11px] leading-tight text-subtle">
-          Scan to
-          <br />
-          install
-        </span>
-      </div>
+      <EarlyAccessDialog open={dialogOpen} onClose={() => setDialogOpen(false)} />
     </div>
   )
 }

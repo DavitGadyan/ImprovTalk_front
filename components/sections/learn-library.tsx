@@ -9,7 +9,7 @@ export function LearnLibrary() {
   return (
     <Section
       id="library"
-      index={7}
+      index={8}
       tone="canvas"
       label="Something to talk about"
       hue="var(--color-learn)"

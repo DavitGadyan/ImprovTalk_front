@@ -1,0 +1,71 @@
+# ImprovTalk
+
+> A voice-first AI communication coach. You hold a button and talk to an AI
+> conversation partner out loud, then get scored on what you said and how you
+> said it. iPhone and Android.
+
+ImprovTalk is a mobile app for practising real conversations — small talk,
+interviews, networking, storytelling, tough feedback, and meeting new people —
+by actually speaking them, not by reading about them.
+
+## What makes it different
+
+- **You speak; it speaks back.** Live voice, in real time, over WebRTC. There is
+  no typing mode.
+- **Three conversation languages.** A session can run in English, Spanish or
+  Russian. The AI partner replies only in the language you picked, and the
+  written feedback comes back in that same language. (The app's own interface is
+  English only.)
+- **The score shows its work.** Every number opens to the measurements behind
+  it, for example "7 fillers in 3 minutes; pace 142 wpm; target band 130-160".
+- **No social risk.** You practise alone, on your phone, on your own schedule,
+  as many times as you want.
+
+## How the score works
+
+Charisma Score = Fluency x 0.40 + Confidence x 0.35 + Improvisation x 0.25.
+
+It is computed server-side from the recording and transcript, so the same
+session always produces the same number. Delivery metrics — pace, pauses, filler
+count, pitch and volume steadiness — come from acoustic analysis of the audio
+(librosa and Parselmouth/Praat), not from a model's opinion. Lexical diversity
+uses MATTR and MTLD.
+
+## What is in it
+
+- 70 live practice scenarios across 13 venues
+- 225 AI-vs-AI simulator scenarios across 19 venues
+- 2,766 reference items across 22 catalogues (countries, accents, films, music,
+  art, professions, gestures and more)
+- 195 nationalities and 29 accents, which shape who the AI partner is and how
+  she sounds in English — they do not change the conversation language
+- 16 solo drills including behavioural interview, networking, storytelling,
+  tough feedback, light debate and rejection recovery
+
+## Privacy
+
+Audio uploads only when a session ends and is hard-deleted 24 hours after
+scoring. The microphone is not active outside a session screen. No contacts,
+calendar, photos or location are collected, and the app ships no advertising or
+analytics SDKs. Users can export or delete everything.
+
+## Pricing
+
+Free to start, with 3 AI conversations a week. Paid tiers raise the limit. Final
+pricing is confirmed at launch.
+
+## Status
+
+Pre-launch. Not yet listed on the App Store or Google Play.
+
+## Pages
+
+- Home: https://improvtalk.vip/
+- Get the app: https://improvtalk.vip/get/
+- Privacy policy: https://improvtalk.vip/privacy/
+- Terms of service: https://improvtalk.vip/terms/
+- Support: https://improvtalk.vip/support/
+
+## Contact
+
+support@s1mpleai.org

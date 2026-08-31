@@ -9,7 +9,7 @@ export function Drills() {
   return (
     <Section
       id="drills"
-      index={6}
+      index={7}
       tone="raised"
       curved
       label="Solo drills"

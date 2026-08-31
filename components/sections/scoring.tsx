@@ -11,7 +11,7 @@ export function Scoring() {
   return (
     <Section
       id="scoring"
-      index={4}
+      index={5}
       tone="brand"
       curved
       label="Every score shows its work"

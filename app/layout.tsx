@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import localFont from 'next/font/local'
 import { Providers } from './providers'
+import { GoogleTags } from '@/components/analytics/gtag'
+import { ConsentBanner } from '@/components/analytics/consent-banner'
 import { site } from '@/content/site'
 import './globals.css'
 
@@ -84,7 +86,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
+        <GoogleTags />
         <Providers>{children}</Providers>
+        <ConsentBanner />
       </body>
     </html>
   )

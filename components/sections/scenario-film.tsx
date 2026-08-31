@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { scenarios, videoSrc, posterSrc, hasScenarioFilms } from '@/content/media'
 import { fadeUp, viewportOnce } from '@/lib/motion'
 import { cn } from '@/lib/utils'
+import { track } from '@/lib/analytics'
 
 /**
  * Scenario films, with a location switcher.
@@ -165,7 +166,10 @@ export function ScenarioFilm() {
                   playsInline
                   preload="auto"
                   aria-label={current.alt}
-                  onPlay={() => setPlaying(true)}
+                  onPlay={() => {
+                    setPlaying(true)
+                    track('scenario_play', { scenario: current.slug })
+                  }}
                   onPause={() => setPlaying(false)}
                   onEnded={() => goTo(active + 1)}
                 >

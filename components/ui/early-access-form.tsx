@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { waitlist, hasEndpoint } from '@/content/waitlist'
 import { cn } from '@/lib/utils'
+import { track } from '@/lib/analytics'
 
 type State = 'idle' | 'sending' | 'done' | 'error'
 
@@ -44,6 +45,7 @@ export function EarlyAccessForm({
         `mailto:${waitlist.DELIVER_TO}` +
         `?subject=${encodeURIComponent(waitlist.SUBJECT)}` +
         `&body=${encodeURIComponent(body)}`
+      track('early_access_submit', { method: 'mailto', platform })
       setState('done')
       return
     }
@@ -60,6 +62,7 @@ export function EarlyAccessForm({
           freeform: `TestFlight request from ${email} (${platform})`,
         }),
       })
+      if (res.ok) track('early_access_submit', { method: 'form', platform })
       setState(res.ok ? 'done' : 'error')
     } catch {
       setState('error')

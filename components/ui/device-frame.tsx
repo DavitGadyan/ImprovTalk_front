@@ -27,10 +27,16 @@ import { cn } from '@/lib/utils'
  */
 export type Tilt = 'none' | 'left' | 'right'
 
+/*
+ * Near-upright with a slight turn, as in design_examples/Evoli.pdf where the
+ * hero phones stand almost vertical. The previous 15deg yaw read as a graphic
+ * rather than as a phone standing on a surface — at that angle the near edge
+ * foreshortens enough that the screen stops looking rectangular.
+ */
 const tilts: Record<Tilt, string> = {
   none: '',
-  left: 'rotateY(15deg) rotateX(4deg) rotateZ(-3deg)',
-  right: 'rotateY(-15deg) rotateX(4deg) rotateZ(3deg)',
+  left: 'rotateY(7deg) rotateX(2deg) rotateZ(-1.5deg)',
+  right: 'rotateY(-7deg) rotateX(2deg) rotateZ(1.5deg)',
 }
 
 const TABS = ['Home', 'Practice', 'Learn', 'History'] as const
@@ -157,7 +163,7 @@ export function DeviceCluster({
       <div
         aria-hidden="true"
         className="pointer-events-none absolute right-0 top-8 hidden w-full max-w-[300px] opacity-40 sm:block"
-        style={{ transform: 'translateX(4%) rotateY(-20deg) rotateZ(5deg) scale(0.84)' }}
+        style={{ transform: 'translateX(7%) rotateY(-10deg) rotateZ(2.5deg) scale(0.86)' }}
       >
         <DeviceFrame label="" activeTab={0}>
           {back}

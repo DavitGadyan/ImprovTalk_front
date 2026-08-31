@@ -11,9 +11,22 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden pb-20 pt-8 md:pb-28 md:pt-12">
       {/*
-        A single soft violet bloom behind the phone. This is light, not a
-        gradient wash — it sits under one element and never touches the type.
+        A lighter stage behind the device.
+
+        The phone bezel is #05080f on a #0b1220 canvas — barely three points of
+        luminance apart, so the device had no edge to read against and dissolved
+        into the page. This puts a lighter plate underneath it, with the violet
+        bloom on top, so the dark screen finally has something to sit on. The
+        rest of the page stays near-black.
       */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-[-6%] top-[2%] hidden h-[46rem] w-[42rem] rounded-[6rem] lg:block"
+        style={{
+          background:
+            'radial-gradient(120% 100% at 50% 40%, #1b2440 0%, #141c30 45%, transparent 78%)',
+        }}
+      />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute right-[-10%] top-[-8%] hidden size-[46rem] rounded-full opacity-40 blur-[120px] lg:block"

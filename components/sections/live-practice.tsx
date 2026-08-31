@@ -17,7 +17,7 @@ export function LivePractice() {
   return (
     <Section
       id="practice"
-      index={3}
+      index={4}
       tone="deep"
       curved
       label="Live practice"

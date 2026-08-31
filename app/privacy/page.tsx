@@ -76,13 +76,27 @@ export default function PrivacyPage() {
         time and we will delete it.
       </p>
 
-      <h2>What we do not collect</h2>
+      <h2>What the app does not collect</h2>
       <ul>
         <li>No contacts, calendar, photos or location.</li>
         <li>No microphone access outside an active session screen.</li>
         <li>No advertising SDKs.</li>
         <li>No third-party analytics SDKs that ingest your transcripts.</li>
       </ul>
+
+      <h2>This website</h2>
+      <p>
+        The app and this website are separate, and it would be misleading to describe them as
+        one. The four points above are about the <strong>app</strong>. This website is a
+        different thing: it uses Google Analytics to see which pages people read, and Google
+        Ads to see which adverts brought them here.
+      </p>
+      <p>
+        Neither loads until you accept the banner. Decline and no analytics or advertising
+        cookies are set at all — everything is denied by default, and the choice is stored on
+        your own device so you are not asked again. This has no bearing on the app, which ships
+        neither.
+      </p>
 
       <h2>How audio is handled</h2>
       <ol className="list-decimal space-y-2 pl-5">
