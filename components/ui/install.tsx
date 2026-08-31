@@ -143,7 +143,7 @@ export function InstallBlock({
             <Button
               size="lg"
               onClick={() => {
-                track('notify_click', { target: 'early_access' })
+                track('notify_click', { target: 'install_panel' })
                 setDialogOpen(true)
               }}
             >

@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { LogoMark } from '@/components/ui/logo'
 import { Button } from '@/components/ui/button'
-import { EarlyAccessForm } from '@/components/ui/early-access-form'
 import { track } from '@/lib/analytics'
 import {
   iosHref,
@@ -84,13 +83,10 @@ export function GetClient() {
 
       <div className="mt-9 flex w-full max-w-xs flex-col gap-3">
         {platform === 'android' && !isLive.android ? (
-          <>
-            <p className="text-[13px] text-subtle">
-              ImprovTalk is on iPhone first. Leave your address and we&rsquo;ll tell you the
-              moment Android is ready.
-            </p>
-            <EarlyAccessForm align="center" />
-          </>
+          <p className="text-[14px] leading-relaxed text-muted">
+            ImprovTalk is on iPhone while it is in beta. The Android build is coming — check
+            back soon.
+          </p>
         ) : (
           <>
             <Button asChild size="lg">

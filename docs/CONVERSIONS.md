@@ -1,80 +1,76 @@
 # What counts as a conversion
 
-Short answer, today: **one email address you can actually reach.** Nothing else.
+**Leaving the site for TestFlight.** That is the whole model.
 
-Everything else on this page is a signal worth watching, but only that one is
-worth spending money against.
+## The funnel
 
-## The funnel as it exists
+| Step | Event | Count it as |
+|---|---|---|
+| Sees the page | `page_view` | traffic |
+| Watches a scenario | `scenario_play` | engagement |
+| Opens the install panel | `notify_click` / `qr_reveal` | **interest** |
+| Leaves for TestFlight | `testflight_click` | **the conversion** |
+| Actually installs | — | **not measurable here** |
 
-| Step | Event | What it proves | Count it as |
-|---|---|---|---|
-| Sees the page | `page_view` | nothing about intent | traffic |
-| Watches a scenario | `scenario_play` | held their attention | engagement |
-| Clicks an install CTA | `notify_click` | wants it enough to click | **interest** |
-| Opens the panel | `qr_reveal` | reached the ask | micro |
-| Mail client opened | `early_access_intent` | typed an address, may not have sent | **not a conversion** |
-| Server confirmed the address | `early_access_submit` | you can reach this person | **the conversion** |
-| Installs from TestFlight | — | the real goal | **not measurable here** |
+Fired from every route out: the hero button, the header, the mobile bar, the
+panel's link, the `/get` button, and the `/get` auto-redirect a QR scan lands on.
+The redirect fires the event *before* navigating — gtag uses `sendBeacon` so the
+call survives unload, but only if it happens first.
+
+## Why there is no email capture
+
+There was one, briefly. It was removed for two reasons, and the second is the
+one that matters.
+
+The visible problem: with no form endpoint configured, submitting fell back to
+`window.location.href = 'mailto:…'`. On a machine with no mail client that does
+nothing, or errors. The button looked broken because it effectively was.
+
+The real problem: a signup form is a promise to do something with the address.
+Nobody was going to answer that inbox. So it collected addresses in exchange for
+a promise that would not be kept, and it did so *instead of* the click that
+would have taken someone straight to the beta. It cost a conversion to acquire
+an obligation.
+
+An iPhone visitor can install in about a minute. Asking them to type an address
+first is friction inserted in front of the thing you actually want.
 
 ## Why `notify_click` is not a conversion
 
-It is a button press. It costs nothing, commits to nothing, and a bored visitor
-produces one as readily as a serious one. It is genuinely useful as a
-denominator — clicks divided by submits tells you whether the ask is working —
-but if it drives bidding, Google will happily find you thousands of people who
-click and never sign up, because that is precisely what you asked it to optimise
-for.
+It opens a panel. It costs nothing and commits to nothing. Useful as a
+denominator — panel opens against TestFlight exits tells you whether the panel is
+working, separately from whether the traffic is any good — but if it drives
+bidding, Google will find you thousands of people who open it and leave.
 
-In Google Ads, mark it **Secondary**. Recorded and reportable, never used for
-bidding.
+In Google Ads it is **Secondary**: recorded, never used for bidding.
 
-## Why the mailto path is not a conversion either
+## What you cannot measure here
 
-Until `waitlist.ENDPOINT` is set, submitting the form opens the visitor's mail
-client with a pre-filled message. It does not send it. Whether they press send
-is invisible to us.
+Whether anyone installs. That happens inside TestFlight, on Apple's side of a
+boundary the website cannot see across. TestFlight tester counts live in App
+Store Connect; post-launch installs live there too.
 
-That is why it fires `early_access_intent` and not `early_access_submit`. If both
-fired the same event, the conversion count would include everyone who opened
-their mail app and thought better of it — and you would be bidding against an
-inflated number with no way to see the inflation.
+Measure to the click. Treat installs as a separate number from a separate
+system, and do not expect the two to reconcile. They never do.
 
-**This is the strongest reason to configure an endpoint before spending on ads.**
-It is not about convenience. Without it your primary conversion is unmeasurable,
-and every optimisation decision after that is guesswork dressed up as data.
-See `docs/EARLY-ACCESS.md`.
-
-## What you cannot measure from here
-
-Whether someone actually installs. That happens inside TestFlight or the App
-Store, on Apple's side of a boundary the website cannot see across.
-
-- **TestFlight** gives you tester counts and session data in App Store Connect.
-- **App Store Connect** gives you impressions, downloads and conversion rate per
-  source once you are listed.
-- Tying an ad click all the way through to an install needs Apple's attribution
-  frameworks. That is worth doing after launch, not before.
-
-So: measure to the email. Treat installs as a separate number from a separate
-system, and do not expect the two to reconcile exactly. They never do.
-
-## Recommended Google Ads setup
+## Google Ads setup
 
 | Conversion action | Fires on | Category | Setting |
 |---|---|---|---|
-| Early access signup | `early_access_submit` | Submit lead form | **Primary** |
-| Install intent | `notify_click` | Other | **Secondary** |
+| Early access signup | `testflight_click` | Sign-up | **Primary** |
+| Install intent | `notify_click` | Engagement | **Secondary** |
 
-Leave conversion value empty. Nothing is being bought yet, and a made-up value
-distorts bidding toward whichever number you invented.
+Labels live in `content/analytics.ts`. Leave conversion values equal — nothing is
+being bought, and an invented value distorts bidding toward the fiction.
+
+Keep **Sign-up** as the only account-default goal. If Engagement or YouTube
+follow-on views are also account-default with primary actions, campaigns will
+optimise toward those instead, because they are cheaper and more plentiful.
 
 ## In GA4
 
-Once `early_access_submit` has fired at least once, mark it as a **Key event**
-under Admin → Events. It cannot be marked before it has fired — the event has to
-exist in the property first.
+Once `testflight_click` has fired once, mark it a **Key event** under
+Admin → Events. It cannot be marked before it has fired.
 
-Worth building one report: `notify_click` against `early_access_submit`. That
-ratio is the health of the ask itself, separate from the health of the traffic.
-If clicks are high and submits are low, the problem is the panel, not the advert.
+Worth watching: `notify_click` against `testflight_click`. That ratio is the
+health of the panel itself, independent of traffic quality.
