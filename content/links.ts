@@ -22,7 +22,16 @@ export const ANDROID_PACKAGE = 'com.improvtalk.app'
 export const APP_STORE_URL = ''
 /** TODO at launch: `https://play.google.com/store/apps/details?id=${ANDROID_PACKAGE}` */
 export const PLAY_STORE_URL = ''
-/** TODO: App Store Connect -> TestFlight -> Public Link. Looks like https://testflight.apple.com/join/XXXXXXXX */
+/**
+ * TestFlight PUBLIC link. Must look like https://testflight.apple.com/join/XXXXXXXX
+ *
+ * Create it in App Store Connect: your app -> TestFlight -> a group with
+ * External Testing -> enable Public Link.
+ *
+ * Do NOT put an appstoreconnect.apple.com URL here. Those are admin pages behind
+ * an Apple developer login — every visitor would hit a sign-in wall, and it
+ * would look fine to you because you are already signed in.
+ */
 export const TESTFLIGHT_URL = ''
 
 export const SUPPORT_EMAIL = 'support@s1mpleai.org'

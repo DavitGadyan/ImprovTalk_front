@@ -45,7 +45,13 @@ export function EarlyAccessForm({
         `mailto:${waitlist.DELIVER_TO}` +
         `?subject=${encodeURIComponent(waitlist.SUBJECT)}` +
         `&body=${encodeURIComponent(body)}`
-      track('early_access_submit', { method: 'mailto', platform })
+      /*
+       * Deliberately NOT early_access_submit. Opening a mail client is not the
+       * same as sending the mail, and we get no confirmation either way. Firing
+       * the conversion event here would overstate the real number — and Ads
+       * would then bid toward it.
+       */
+      track('early_access_intent', { method: 'mailto', platform })
       setState('done')
       return
     }
@@ -62,6 +68,7 @@ export function EarlyAccessForm({
           freeform: `TestFlight request from ${email} (${platform})`,
         }),
       })
+      /* Only on a confirmed 2xx — this is the number spend is optimised against. */
       if (res.ok) track('early_access_submit', { method: 'form', platform })
       setState(res.ok ? 'done' : 'error')
     } catch {
@@ -70,6 +77,12 @@ export function EarlyAccessForm({
   }
 
   if (state === 'done') {
+    /*
+     * Two different truths. With an endpoint we know the address arrived. With
+     * the mailto fallback all we did was open their mail client — telling them
+     * they are "on the list" would be a promise we have no basis for, and they
+     * would never find out it was wrong.
+     */
     return (
       <p
         className={cn(
@@ -78,8 +91,18 @@ export function EarlyAccessForm({
           className,
         )}
       >
-        Thanks — you&rsquo;re on the list. The TestFlight invite goes to{' '}
-        <span className="text-ink-soft">{email}</span>.
+        {hasEndpoint ? (
+          <>
+            Thanks — you&rsquo;re on the list. The TestFlight invite goes to{' '}
+            <span className="text-ink-soft">{email}</span>.
+          </>
+        ) : (
+          <>
+            Your email app should be open. Press send and you&rsquo;re on the list — the
+            invite comes back to{' '}
+            <span className="text-ink-soft">{email}</span>.
+          </>
+        )}
       </p>
     )
   }

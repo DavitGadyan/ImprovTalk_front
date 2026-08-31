@@ -32,9 +32,23 @@ export const hasAds = Boolean(analytics.ADS_ID)
 /** Nothing is loaded, and no banner shown, unless at least one tag is configured. */
 export const trackingEnabled = hasGA || hasAds
 
-/** GA4 event names. Kept here so the call sites cannot drift from the reports. */
+/**
+ * GA4 event names, kept here so call sites cannot drift from the reports.
+ *
+ * The distinction that matters for bidding:
+ *
+ *   early_access_submit  A server confirmed it has the address. This is the
+ *                        only real conversion, and the only one worth
+ *                        optimising spend against.
+ *   early_access_intent  The visitor's mail client was opened with a
+ *                        pre-filled message. We cannot know whether they
+ *                        pressed send, so this must never be counted as a
+ *                        conversion — it would silently inflate the number.
+ *   notify_click         Someone clicked an install CTA. Interest, not a lead.
+ */
 export type TrackEvent =
   | 'early_access_submit'
+  | 'early_access_intent'
   | 'notify_click'
   | 'qr_reveal'
   | 'scenario_play'
