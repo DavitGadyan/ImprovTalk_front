@@ -70,7 +70,7 @@ export function EarlyAccessDialog({
             <LogoMark size={40} />
             <div>
               <h2 id="ea-title" className="text-lg font-semibold text-ink">
-                {isAndroid ? 'iPhone first' : 'Get the beta'}
+                {isAndroid ? 'iPhone first' : 'Get early access'}
               </h2>
               <p className="mt-0.5 text-[13px] text-subtle">
                 {isAndroid ? 'Android is next' : 'Free, on TestFlight'}

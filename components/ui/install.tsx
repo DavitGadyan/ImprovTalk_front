@@ -97,11 +97,12 @@ export function InstallBlock({
   const platform = usePlatform()
 
   const anyStoreLive = isLive.ios || isLive.android
-  const primaryLabel = anyStoreLive
-    ? 'Get the app'
-    : isLive.testflight
-      ? 'Join the beta'
-      : 'Get early access'
+  /*
+   * One label, everywhere. "Join the beta" and "Get early access" described the
+   * same click, and two names for one action makes a page feel assembled by
+   * different people. It only changes once the app is genuinely on the store.
+   */
+  const primaryLabel = anyStoreLive ? 'Get the app' : 'Get early access'
 
   /*
    * A TestFlight link only does anything on an iPhone. Sent to a desktop it
