@@ -28,7 +28,7 @@ export const analytics = {
    */
   CONVERSIONS: {
     /** Primary: someone left an address for TestFlight access. */
-    earlyAccess: '',
+    earlyAccess: 'AW-18052428576/4jb2CJySoescEKDmiKBD',
     /** Weak: someone clicked an install CTA while the app is still pre-launch. */
     notifyClick: '',
   },
