@@ -136,6 +136,9 @@ export function InstallBlock({
           ) : (
             <Button
               size="lg"
+              /* The attention halo lives here, on the one action the page is
+                 actually asking for — not on every gradient button. */
+              className="animate-[brand-pan_6s_ease-in-out_infinite,cta-pulse_3s_cubic-bezier(0.22,1,0.36,1)_infinite]"
               onClick={() => {
                 track('notify_click', { target: 'install_panel' })
                 setDialogOpen(true)

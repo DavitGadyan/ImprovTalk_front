@@ -21,11 +21,14 @@ const variants: Record<Variant, string> = {
    */
   brand:
     'text-white [background-image:var(--gradient-brand)] bg-[length:200%_100%] ' +
+    // The gradient drifts across itself. The attention halo is deliberately NOT
+    // here: this variant is also used by the consent banner's Accept button, and
+    // a pulsing Accept is a consent dark pattern — visual pressure on a choice
+    // that has to be freely given. Opt into the halo per call site instead.
     'animate-[brand-pan_6s_ease-in-out_infinite] ' +
     'shadow-[0_8px_30px_-10px_rgba(175,82,222,0.6)] ' +
-    'transition-[transform,box-shadow] duration-300 ' +
-    'hover:-translate-y-0.5 hover:shadow-[0_14px_40px_-10px_rgba(175,82,222,0.85)] ' +
-    'active:translate-y-0 active:scale-[0.985]',
+    'transition-transform duration-300 ' +
+    'hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.985]',
   solid: 'bg-ink text-canvas hover:bg-white active:scale-[0.985]',
   outline:
     'border border-line-strong text-ink hover:border-ink/45 hover:bg-raised/50 active:scale-[0.985]',

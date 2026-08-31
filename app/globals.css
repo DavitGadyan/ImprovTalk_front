@@ -212,6 +212,36 @@
  *
  * The reduced-motion block below collapses it to a still frame.
  */
+/*
+ * Attention ring on the primary CTA — a halo that expands out of the button and
+ * fades, roughly every three seconds.
+ *
+ * Driven by box-shadow rather than a scaled pseudo-element: the button's own
+ * gradient background sits on the element itself, so anything stacked behind it
+ * is simply covered. A spreading shadow escapes the box without needing an extra
+ * node, which also keeps <Button asChild> working unchanged.
+ *
+ * The rest colour is the practice pink from the app palette, so the halo reads
+ * as part of the brand rather than a generic glow.
+ */
+@keyframes cta-pulse {
+  0% {
+    box-shadow:
+      0 10px 34px -12px rgb(175 82 222 / 0.7),
+      0 0 0 0 rgb(255 55 95 / 0.55);
+  }
+  70% {
+    box-shadow:
+      0 10px 34px -12px rgb(175 82 222 / 0.7),
+      0 0 0 18px rgb(255 55 95 / 0);
+  }
+  100% {
+    box-shadow:
+      0 10px 34px -12px rgb(175 82 222 / 0.7),
+      0 0 0 0 rgb(255 55 95 / 0);
+  }
+}
+
 @keyframes brand-pan {
   0%,
   100% {
