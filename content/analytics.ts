@@ -10,8 +10,15 @@ export const analytics = {
   /** GA4 measurement ID for the improvtalk.vip web stream. */
   GA4_ID: 'G-TQHK0W81XE',
 
-  /** Google Ads conversion ID, e.g. 'AW-XXXXXXXXX'. */
-  ADS_ID: '',
+  /**
+   * Google Ads conversion ID.
+   *
+   * Configured as a destination on the same Google tag as GA4, so it loads
+   * through the existing gtag — and therefore inherits the Consent Mode
+   * defaults set before that library initialises. Pasting the snippet Ads
+   * offers instead would load it outside that gate.
+   */
+  ADS_ID: 'AW-18052428576',
 
   /**
    * Ads conversion labels, full 'AW-XXXXXXXXX/AbC-D_efG' form.
