@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Section } from '@/components/ui/section'
-import { fadeUp, stagger, viewportOnce } from '@/lib/motion'
+import { fadeUp, popIn, stagger, viewportOnce } from '@/lib/motion'
 
 const points = [
   {
@@ -38,7 +38,11 @@ export function Gap() {
         className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3"
       >
         {points.map((p, i) => (
-          <motion.li key={p.title} variants={fadeUp} className="bg-canvas p-7 md:p-8">
+          <motion.li
+            key={p.title}
+            variants={popIn}
+            className="bg-canvas p-7 transition-colors duration-300 hover:bg-white/[0.025] md:p-8"
+          >
             <span className="numeric text-[11px] font-semibold tracking-[0.16em] text-subtle">
               0{i + 1}
             </span>

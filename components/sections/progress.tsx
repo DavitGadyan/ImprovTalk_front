@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Section } from '@/components/ui/section'
 import { fadeUp, stagger, viewportOnce } from '@/lib/motion'
+import { AnimatedNumber } from '@/components/ui/animated-number'
 
 const figures = [
   { label: 'Day streak', value: '12', hue: 'var(--color-learn)' },
@@ -44,7 +45,7 @@ export function Progress() {
                 className="numeric mt-2 font-[family-name:var(--font-display)] text-5xl font-semibold leading-none"
                 style={{ color: f.hue }}
               >
-                {f.value}
+                <AnimatedNumber value={Number(f.value)} />
               </dd>
             </motion.div>
           ))}

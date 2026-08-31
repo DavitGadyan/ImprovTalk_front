@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Section, Reveal } from '@/components/ui/section'
 import { catalogs, TOTAL_LIBRARY_ITEMS, stats } from '@/content/catalogs'
 import { fadeUp, staggerFast, viewportOnce } from '@/lib/motion'
+import { AnimatedNumber } from '@/components/ui/animated-number'
 
 export function LearnLibrary() {
   return (
@@ -13,7 +14,7 @@ export function LearnLibrary() {
       tone="canvas"
       label="Something to talk about"
       hue="var(--color-learn)"
-      title={<>{TOTAL_LIBRARY_ITEMS.toLocaleString('en')} things worth mentioning.</>}
+      title={<><AnimatedNumber value={TOTAL_LIBRARY_ITEMS} /> things worth mentioning.</>}
       intro="Half of being interesting is having something to say. The library is the part of the app you use when you are not practising — small, specific things you can actually bring up."
     >
       <motion.ul
@@ -27,7 +28,7 @@ export function LearnLibrary() {
           <motion.li
             key={c.name}
             variants={fadeUp}
-            className="flex items-baseline justify-between gap-4 bg-canvas px-5 py-4"
+            className="group flex items-baseline justify-between gap-4 bg-canvas px-5 py-4 transition-colors duration-300 hover:bg-white/[0.025]"
           >
             <span className="min-w-0">
               <span
@@ -39,7 +40,7 @@ export function LearnLibrary() {
               <span className="mt-1 block truncate text-[14px] text-ink">{c.name}</span>
             </span>
             <span className="numeric shrink-0 font-[family-name:var(--font-display)] text-lg font-semibold text-ink-soft">
-              {c.count}
+              <AnimatedNumber value={c.count} duration={900} />
             </span>
           </motion.li>
         ))}

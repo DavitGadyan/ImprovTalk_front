@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { DeviceCluster } from '@/components/ui/device-frame'
 import { InstallBlock } from '@/components/ui/install'
 import { Waveform } from '@/components/ui/meters'
@@ -8,6 +8,19 @@ import { fadeUp, stagger } from '@/lib/motion'
 import { stats } from '@/content/catalogs'
 
 export function Hero() {
+  /*
+   * The device drifts up slightly as the page scrolls, at a different rate from
+   * the text beside it. Small on purpose — 60px over a full viewport — because
+   * parallax that outruns the scroll reads as a broken page rather than depth.
+   *
+   * useReducedMotion returns null on the server and resolves after hydration,
+   * so the transform is neutralised rather than conditionally applied; swapping
+   * the hook call itself would break the rules of hooks.
+   */
+  const reduced = useReducedMotion()
+  const { scrollY } = useScroll()
+  const deviceY = useTransform(scrollY, [0, 900], [0, reduced ? 0 : -60])
+
   return (
     <section className="relative overflow-hidden pb-20 pt-8 md:pb-28 md:pt-12">
       {/*
@@ -76,8 +89,9 @@ export function Hero() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
+            style={{ y: deviceY }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           >
             <DeviceCluster

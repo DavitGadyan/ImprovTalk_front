@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Section, Reveal } from '@/components/ui/section'
 import { stats } from '@/content/catalogs'
 import { fadeUp, stagger, viewportOnce } from '@/lib/motion'
+import { AnimatedNumber } from '@/components/ui/animated-number'
 
 /**
  * Model rows mirror the picker in apps/mobile/app/cafe-simulator.
@@ -30,7 +31,7 @@ export function Simulator() {
       tone="canvas"
       label="Watch it played out"
       hue="var(--color-simulate)"
-      title={<>{stats.simScenarios} scenarios, run by AI, graded by AI.</>}
+      title={<><AnimatedNumber value={stats.simScenarios} /> scenarios, run by AI, graded by AI.</>}
       intro={`Not every rep has to be yours. Set two AI characters loose on a scenario across ${stats.simVenues} venues, watch it round by round, and read the coach's notes on what turned it.`}
     >
       {/*
@@ -119,7 +120,7 @@ export function Simulator() {
                 Scenarios
               </dt>
               <dd className="numeric mt-2 font-[family-name:var(--font-display)] text-4xl font-semibold text-ink">
-                {stats.simScenarios}
+                <AnimatedNumber value={stats.simScenarios} />
               </dd>
             </div>
             <div>
@@ -127,7 +128,7 @@ export function Simulator() {
                 Venues
               </dt>
               <dd className="numeric mt-2 font-[family-name:var(--font-display)] text-4xl font-semibold text-ink">
-                {stats.simVenues}
+                <AnimatedNumber value={stats.simVenues} />
               </dd>
             </div>
           </motion.dl>

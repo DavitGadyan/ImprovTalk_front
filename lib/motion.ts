@@ -19,6 +19,21 @@ export const fadeUp: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: easeOutSoft } },
 }
 
+/**
+ * For cards and tiles. The small scale change is what separates "landed" from
+ * "faded in" — at 0.96 it reads as arriving, and going lower starts to look
+ * like a popup.
+ */
+export const popIn: Variants = {
+  hidden: { opacity: 0, y: 22, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: easeOutSoft },
+  },
+}
+
 export const fadeIn: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.5, ease: easeOutSoft } },
