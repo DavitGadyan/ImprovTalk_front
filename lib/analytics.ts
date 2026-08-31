@@ -22,8 +22,16 @@ export function track(event: TrackEvent, params: Record<string, unknown> = {}) {
 
   window.gtag('event', event, params)
 
+  /*
+   * Both routes to acquiring a user map to the primary conversion: leaving for
+   * TestFlight, and leaving an address. They are the same outcome reached
+   * differently — an iPhone visitor installs directly, an Android visitor (or
+   * anyone hitting a closed beta) hands over an address instead. Counting only
+   * the form would have recorded nothing at all once the beta opened, because
+   * the people it works best for never touch the form.
+   */
   const label =
-    event === 'early_access_submit'
+    event === 'early_access_submit' || event === 'testflight_click'
       ? analytics.CONVERSIONS.earlyAccess
       : event === 'notify_click'
         ? analytics.CONVERSIONS.notifyClick

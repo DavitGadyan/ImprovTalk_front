@@ -5,6 +5,7 @@ import { LogoMark } from '@/components/ui/logo'
 import { Button } from '@/components/ui/button'
 import { iosHref, isLive } from '@/content/links'
 import { usePlatform } from '@/lib/platform'
+import { track } from '@/lib/analytics'
 import { cn } from '@/lib/utils'
 
 /**
@@ -60,7 +61,16 @@ export function MobileBar() {
           </span>
         </span>
         <Button asChild size="sm" className="shrink-0">
-          <a href={href}>{isLive.ios ? 'Get' : 'Notify me'}</a>
+          <a
+            href={href}
+            onClick={() =>
+              href.startsWith('http')
+                ? track('testflight_click', { source: 'mobile_bar' })
+                : track('notify_click', { source: 'mobile_bar' })
+            }
+          >
+            {isLive.ios ? 'Get' : 'Notify me'}
+          </a>
         </Button>
       </div>
     </div>

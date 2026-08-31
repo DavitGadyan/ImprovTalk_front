@@ -18,7 +18,7 @@ export const waitlist = {
   ENDPOINT: '',
   /** Extra fields the chosen service needs, e.g. { access_key: '…' }. */
   FIELDS: {} as Record<string, string>,
-  DELIVER_TO: 'support@s1mpleai.org',
+  DELIVER_TO: 'davidgadyan92@gmail.com',
   SUBJECT: 'ImprovTalk — TestFlight early access request',
 } as const
 

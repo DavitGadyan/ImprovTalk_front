@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { nav } from '@/content/site'
 import { iosHref, isLive } from '@/content/links'
 import { usePlatform } from '@/lib/platform'
+import { track } from '@/lib/analytics'
 import { cn } from '@/lib/utils'
 
 export function Header() {
@@ -57,7 +58,16 @@ export function Header() {
         </nav>
 
         <Button asChild size="sm" className="hidden sm:inline-flex">
-          <a href={ctaHref}>{isLive.ios ? 'Get the app' : 'Get early access'}</a>
+          <a
+            href={ctaHref}
+            onClick={() =>
+              ctaHref.startsWith('http')
+                ? track('testflight_click', { source: 'header' })
+                : track('notify_click', { source: 'header' })
+            }
+          >
+            {isLive.ios ? 'Get the app' : 'Get early access'}
+          </a>
         </Button>
       </div>
     </header>

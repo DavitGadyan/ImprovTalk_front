@@ -126,7 +126,7 @@ export function EarlyAccessDialog({
               <Button asChild variant="outline" size="sm" className="mt-4">
                 <a
                   href={iosHref()}
-                  onClick={() => track('notify_click', { target: 'testflight_dialog' })}
+                  onClick={() => track('testflight_click', { source: 'dialog' })}
                 >
                   Or open the link
                 </a>

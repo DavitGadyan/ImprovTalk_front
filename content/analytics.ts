@@ -55,6 +55,7 @@ export const trackingEnabled = hasGA || hasAds
  */
 export type TrackEvent =
   | 'early_access_submit'
+  | 'testflight_click'
   | 'early_access_intent'
   | 'notify_click'
   | 'qr_reveal'

@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { LogoMark } from '@/components/ui/logo'
 import { Button } from '@/components/ui/button'
 import { EarlyAccessForm } from '@/components/ui/early-access-form'
+import { track } from '@/lib/analytics'
 import {
   iosHref,
   androidHref,
@@ -52,6 +53,13 @@ export function GetClient() {
           : null
 
     if (target) {
+      /*
+       * Fire before navigating away. gtag uses sendBeacon, which survives the
+       * unload — but only if the call happens first. A QR scan lands straight
+       * here and is forwarded automatically, so without this the most direct
+       * install route on the whole site would record nothing.
+       */
+      track('testflight_click', { source: 'get_redirect', platform: p })
       setRedirecting(true)
       window.location.replace(target)
     }
@@ -86,8 +94,19 @@ export function GetClient() {
         ) : (
           <>
             <Button asChild size="lg">
-              <a href={isLive.ios || isLive.testflight ? iosHref() : NOTIFY_MAILTO}>
-                {isLive.ios ? 'Download on the App Store' : isLive.testflight ? 'Join the TestFlight beta' : 'Get notified at launch'}
+              <a
+                href={isLive.ios || isLive.testflight ? iosHref() : NOTIFY_MAILTO}
+                onClick={() =>
+                  isLive.ios || isLive.testflight
+                    ? track('testflight_click', { source: 'get_button' })
+                    : track('notify_click', { source: 'get_button' })
+                }
+              >
+                {isLive.ios
+                  ? 'Download on the App Store'
+                  : isLive.testflight
+                    ? 'Join the TestFlight beta'
+                    : 'Get notified at launch'}
               </a>
             </Button>
             {/* Switches to the Android view, which carries the form — better

@@ -132,7 +132,10 @@ export function InstallBlock({
         >
           {directToStore ? (
             <Button asChild size="lg">
-              <a href={iosHref()} onClick={() => track('notify_click', { target: 'store' })}>
+              <a
+                href={iosHref()}
+                onClick={() => track('testflight_click', { source: 'hero' })}
+              >
                 {primaryLabel}
               </a>
             </Button>

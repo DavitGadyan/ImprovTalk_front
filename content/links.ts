@@ -43,7 +43,7 @@ export const PLAY_STORE_URL = ''
  */
 export const TESTFLIGHT_URL = 'https://testflight.apple.com/join/TRmKruWt'
 
-export const SUPPORT_EMAIL = 'support@s1mpleai.org'
+export const SUPPORT_EMAIL = 'davidgadyan92@gmail.com'
 
 /** Where the QR points. Stable across launch — /get does the routing. */
 export const GET_URL = 'https://improvtalk.vip/get/'

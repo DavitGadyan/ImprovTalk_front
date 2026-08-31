@@ -7,7 +7,7 @@ than a real form, so it is worth the ten minutes.
 
 ## Where the address goes
 
-`content/waitlist.ts` sets `DELIVER_TO` to `support@s1mpleai.org`, not a personal
+`content/waitlist.ts` sets `DELIVER_TO` to `davidgadyan92@gmail.com`, not a personal
 Gmail. Forward that address to your inbox and you get the same mail.
 
 This matters: an address written into public HTML is harvested by scrapers
