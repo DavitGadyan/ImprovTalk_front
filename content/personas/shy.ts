@@ -11,14 +11,14 @@ export const shy: Persona = {
   },
   hero: {
     eyebrow: 'Practise out loud',
-    headline: { top: 'Good conversation is', bottom: 'a skill. Not a ', emphasis: 'gift.' },
-    sub: 'You can practise it the way you would practise anything else — out loud, in private, as many times as you like.',
+    headline: { top: 'Conversation is a', bottom: 'skill, not a ', emphasis: 'gift.' },
+    sub: 'Practise it out loud, in private, as many times as you like.',
     note: 'Free to start. No card.',
   },
   problem: {
     label: 'Why it feels hard',
-    title: 'You know what to say. Just not in the moment.',
-    intro: 'The right line turns up an hour later, in the shower.',
+    title: 'You know what to say.',
+    intro: 'Just not in the moment. The right line turns up an hour later, in the shower.',
     points: [
       { title: 'You plan it in your head', body: 'Where you are articulate and nobody interrupts.' },
       { title: 'Then it happens live', body: 'They answer sideways, and you hear yourself say "so, yeah".' },

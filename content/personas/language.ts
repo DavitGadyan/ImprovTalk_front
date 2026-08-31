@@ -15,13 +15,13 @@ export const language: Persona = {
   },
   hero: {
     eyebrow: 'Speak, do not translate',
-    headline: { top: 'You can read it.', bottom: 'Speaking is the ', emphasis: 'hard part.' },
-    sub: 'Practise real conversations out loud in English, Spanish or Russian — with someone who never gets bored of you starting again.',
+    headline: { top: 'You can read it.', bottom: 'Speaking is ', emphasis: 'harder.' },
+    sub: 'Practise out loud in English, Spanish or Russian, with someone who never gets bored.',
     note: 'Free to start. No card.',
   },
   problem: {
     label: 'Why it feels hard',
-    title: 'The words are there. They just will not come out.',
+    title: 'The words will not come out.',
     intro: 'You understand every word they said. Answering is the problem.',
     points: [
       { title: 'You translate first', body: 'By the time the sentence is ready, the moment has gone.' },
@@ -51,7 +51,7 @@ export const language: Persona = {
   },
   scoring: {
     label: 'It shows its working',
-    title: 'Where you actually slowed down.',
+    title: 'Where you slowed down.',
     intro: 'Not a mark out of ten. The measurements — pace, pauses, filler words — so you can see the hesitation you felt.',
     proof: 'Keep going and the pauses get shorter.',
   },

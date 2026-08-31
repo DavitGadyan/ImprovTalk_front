@@ -18,12 +18,12 @@ export const rusty: Persona = {
   hero: {
     eyebrow: 'Get back in practice',
     headline: { top: 'You used to be', bottom: 'fine at ', emphasis: 'this.' },
-    sub: 'Talking to people is a skill, and skills fade without use. A few sessions and it comes back faster than you would expect.',
+    sub: 'Skills fade without use, and come back with it. A few sessions is enough.',
     note: 'Free to start. No card.',
   },
   problem: {
     label: 'What happened',
-    title: 'It went quiet, and the habit went with it.',
+    title: 'The habit went quiet.',
     intro: 'Not a personality change. Just a long stretch without the reps.',
     points: [
       { title: 'The circle got smaller', body: 'A move, a break-up, years of working from home. Fewer conversations, without deciding to have fewer.' },

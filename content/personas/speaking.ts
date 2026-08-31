@@ -15,13 +15,13 @@ export const speaking: Persona = {
   },
   hero: {
     eyebrow: 'Say it clearly',
-    headline: { top: 'You had the point.', bottom: 'It came out ', emphasis: 'sideways.' },
-    sub: 'Practise saying the difficult thing out loud, and get the measurements back — how fast you spoke, where you hesitated, how often you said "um".',
+    headline: { top: 'You had the point.', bottom: 'It came out ', emphasis: 'wrong.' },
+    sub: 'Practise out loud and get the measurements back: your pace, your pauses, your fillers.',
     note: 'Free to start. No card.',
   },
   problem: {
     label: 'Why it feels hard',
-    title: 'Nobody has ever told you how you sound.',
+    title: 'Nobody tells you how you sound.',
     intro: 'Colleagues are too polite, and recordings of yourself are unbearable.',
     points: [
       { title: 'You speed up when nervous', body: 'And the room stops following about thirty seconds in.' },
@@ -57,7 +57,7 @@ export const speaking: Persona = {
   },
   inside: {
     label: 'What you get',
-    title: 'The situations that actually come up.',
+    title: 'The situations that come up.',
     intro: 'Interviews, networking, tough feedback, explaining something complicated.',
   },
   faq: [

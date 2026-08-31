@@ -19,12 +19,12 @@ export const social: Persona = {
   hero: {
     eyebrow: 'Practise the first minute',
     headline: { top: 'The hardest part', bottom: 'is the ', emphasis: 'first line.' },
-    sub: 'Rehearse it somewhere it costs you nothing — a café queue, a gym, a party — until walking over stops feeling like a decision.',
+    sub: 'Rehearse the first minute somewhere it costs you nothing — a café queue, a gym.',
     note: 'Free to start. No card.',
   },
   problem: {
     label: 'Why it feels hard',
-    title: 'You get one go, and no idea how it went.',
+    title: 'One go, and no replay.',
     intro: 'Real life has no replay and nobody explains what happened.',
     points: [
       { title: 'You think about it too long', body: 'By the time you have the opening line, the moment has passed.' },
@@ -45,7 +45,7 @@ export const social: Persona = {
   },
   how: {
     label: 'How it works',
-    title: 'Pick somewhere and start talking.',
+    title: 'Pick somewhere. Start talking.',
     steps: [
       { title: 'Pick a place', body: 'A café queue, a beach, a gym, a festival.' },
       { title: 'Talk out loud', body: 'Hold the button and speak. She answers in real time, and she can be guarded.' },

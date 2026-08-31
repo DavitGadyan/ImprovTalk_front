@@ -120,16 +120,8 @@ export function ScenarioFilm() {
     <div ref={sectionRef} className="relative">
       <div>
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
-          <div className="mb-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="mb-4">
-                <span className="eyebrow">Pick somewhere to walk into</span>
-              </p>
-              <h2 className="display-md max-w-xl text-ink">
-                The same nerve, four different rooms.
-              </h2>
-            </div>
-
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+            <p className="eyebrow">Pick somewhere to walk into</p>
             <div role="tablist" aria-label="Scenario location" className="flex flex-wrap gap-2">
               {scenarios.map((s, i) => (
                 <button
@@ -139,7 +131,7 @@ export function ScenarioFilm() {
                   aria-selected={i === active}
                   onClick={() => goTo(i)}
                   className={cn(
-                    'rounded-full border px-4 py-2 text-[13px] transition-colors',
+                    'rounded-full border px-3.5 py-1.5 text-[12.5px] transition-colors',
                     i === active
                       ? 'border-transparent bg-ink font-medium text-canvas'
                       : 'border-line-strong text-muted hover:border-ink/40 hover:text-ink',
