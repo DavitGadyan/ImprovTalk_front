@@ -2,34 +2,14 @@
 
 import { motion } from 'framer-motion'
 import { Section } from '@/components/ui/section'
-import { fadeUp, popIn, stagger, viewportOnce } from '@/lib/motion'
+import { popIn, stagger, viewportOnce } from '@/lib/motion'
+import type { Persona } from '@/content/personas'
 
-const points = [
-  {
-    title: 'You rehearse in your head',
-    body: 'Where you are articulate, never interrupted, and the other person says exactly what you expected.',
-  },
-  {
-    title: 'Then it happens live',
-    body: 'They answer sideways. You fill the gap with "so, yeah" and hear yourself doing it.',
-  },
-  {
-    title: 'And nobody tells you why',
-    body: 'The conversation just quietly goes flat. No feedback, no replay, nothing to work on.',
-  },
-]
-
-export function Gap() {
+/** "Recognise me" — the first job of the page. Copy comes from the persona. */
+export function Problem({ persona, index }: { persona: Persona; index: number }) {
+  const { label, title, intro, points } = persona.problem
   return (
-    <Section
-      id="gap"
-      index={1}
-      tone="raised"
-      curved
-      label="Why it's hard"
-      title={<>Reading about conversation doesn&rsquo;t make you better at it.</>}
-      intro="Talking is a motor skill. It improves the way motor skills improve — repetition, under pressure, with someone telling you what actually went wrong."
-    >
+    <Section id="problem" index={index} tone="raised" curved label={label} title={title} intro={intro}>
       <motion.ol
         variants={stagger}
         initial="hidden"

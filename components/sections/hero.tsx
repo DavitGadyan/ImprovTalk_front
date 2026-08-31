@@ -5,9 +5,9 @@ import { DeviceCluster } from '@/components/ui/device-frame'
 import { InstallBlock } from '@/components/ui/install'
 import { Waveform } from '@/components/ui/meters'
 import { fadeUp, stagger } from '@/lib/motion'
-import { stats } from '@/content/catalogs'
+import type { Persona } from '@/content/personas'
 
-export function Hero() {
+export function Hero({ persona }: { persona: Persona }) {
   /*
    * The device drifts up slightly as the page scrolls, at a different rate from
    * the text beside it. Small on purpose — 60px over a full viewport — because
@@ -20,6 +20,8 @@ export function Hero() {
   const reduced = useReducedMotion()
   const { scrollY } = useScroll()
   const deviceY = useTransform(scrollY, [0, 900], [0, reduced ? 0 : -60])
+
+  const { eyebrow, headline, sub, note } = persona.hero
 
   return (
     <section className="relative overflow-hidden pb-20 pt-8 md:pb-28 md:pt-12">
@@ -53,15 +55,15 @@ export function Hero() {
         <div className="grid items-center gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12">
           <motion.div variants={stagger} initial="hidden" animate="visible">
             <motion.p variants={fadeUp} className="mb-6">
-              <span className="eyebrow">Practice out loud</span>
+              <span className="eyebrow">{eyebrow}</span>
             </motion.p>
 
             <motion.h1 variants={fadeUp} className="display-xl text-ink">
-              Talk like you&rsquo;ve
+              {headline.top}
               <br />
-              done this{' '}
+              {headline.bottom}
               <span className="relative inline-block">
-                before.
+                {headline.emphasis}
                 {/* Gradient place 1 of 3. */}
                 <span
                   aria-hidden="true"
@@ -74,9 +76,7 @@ export function Hero() {
               variants={fadeUp}
               className="mt-7 max-w-lg text-lg leading-relaxed text-muted"
             >
-              A voice-first AI coach you actually speak to. Hold the button, have the conversation,
-              and get scored on what you said <em className="not-italic text-ink-soft">and</em> how
-              you said it.
+              {sub}
             </motion.p>
 
             <motion.div variants={fadeUp} className="mt-8" id="hero-cta">
@@ -84,7 +84,7 @@ export function Hero() {
             </motion.div>
 
             <motion.p variants={fadeUp} className="mt-6 text-sm text-subtle">
-              Free to start — {stats.freeWeekly} conversations a week. No card to try it.
+              {note}
             </motion.p>
           </motion.div>
 

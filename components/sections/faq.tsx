@@ -2,24 +2,17 @@
 
 import { motion } from 'framer-motion'
 import { Section } from '@/components/ui/section'
-import { faqs } from '@/content/faq'
 import { fadeUp, stagger, viewportOnce } from '@/lib/motion'
+import type { Persona } from '@/content/personas'
 
 /**
- * Native <details>. No Radix, no JS state — it is keyboard accessible, works
- * before hydration, and is findable by the browser's in-page search, which a
+ * Native <details>. No state, no library — keyboard accessible, works before
+ * hydration, and findable by the browser's own in-page search, which a
  * div-based accordion is not.
  */
-export function Faq() {
+export function Faq({ persona, index }: { persona: Persona; index: number }) {
   return (
-    <Section
-      id="faq"
-      index={10}
-      tone="raised"
-      curved
-      label="Questions"
-      title="The things people ask first."
-    >
+    <Section id="faq" index={index} tone="raised" curved label="Questions" title="Before you ask.">
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -27,7 +20,7 @@ export function Faq() {
         viewport={viewportOnce}
         className="max-w-3xl divide-y divide-line border-y border-line"
       >
-        {faqs.map((f) => (
+        {persona.faq.map((f) => (
           <motion.details key={f.q} variants={fadeUp} className="group py-5">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-[16px] font-medium text-ink marker:hidden">
               {f.q}

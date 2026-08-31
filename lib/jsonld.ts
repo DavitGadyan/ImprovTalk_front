@@ -75,21 +75,28 @@ export const softwareLd = {
   },
 }
 
-export const faqLd = {
-  '@type': 'FAQPage',
-  '@id': `${site.url}/#faq`,
-  mainEntity: faqs.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
+/**
+ * Built from the FAQ actually rendered on the page. Google requires FAQPage
+ * markup to match visible content, and each persona ships its own questions —
+ * a single shared block would describe a page the visitor is not looking at.
+ */
+export function faqLd(entries: readonly { q: string; a: string }[] = faqs) {
+  return {
+    '@type': 'FAQPage',
+    '@id': `${site.url}/#faq`,
+    mainEntity: entries.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  }
 }
 
 /** One graph rather than several loose blocks, so the @id references resolve. */
-export function homeJsonLd() {
+export function homeJsonLd(faqEntries?: readonly { q: string; a: string }[]) {
   return {
     '@context': 'https://schema.org',
-    '@graph': [organizationLd, websiteLd, softwareLd, faqLd],
+    '@graph': [organizationLd, websiteLd, softwareLd, faqLd(faqEntries)],
   }
 }
 

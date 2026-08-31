@@ -10,9 +10,9 @@ import { track } from '@/lib/analytics'
 /**
  * Scenario films, with a location switcher.
  *
- * No chapter number and no Section header chrome — the reference layouts in
- * design_examples/ all use unnumbered full-bleed visual bands, and numbering it
- * would leave a gap in the sequence if the videos were ever removed.
+ * Rendered inside the How it works section rather than as its own band: it is a
+ * demonstration of the three steps described just above it, and separating the
+ * two made the reader take the explanation on trust for another two screens.
  *
  * Playback model: each clip plays once and then advances to the next location,
  * so the band walks a visitor through all four without them touching anything.
@@ -35,7 +35,7 @@ export function ScenarioFilm() {
   /** Sticky intent: survives switching clips, so auto-advance keeps rolling. */
   const [wantsPlay, setWantsPlay] = useState(false)
 
-  const sectionRef = useRef<HTMLElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
@@ -117,8 +117,8 @@ export function ScenarioFilm() {
   }
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-[#070c17] py-20 md:py-24">
-      <div className="container-page">
+    <div ref={sectionRef} className="relative">
+      <div>
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <div className="mb-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
@@ -233,7 +233,7 @@ export function ScenarioFilm() {
           </div>
         </motion.div>
       </div>
-    </section>
+    </div>
   )
 }
 

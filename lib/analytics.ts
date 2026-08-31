@@ -17,10 +17,26 @@ declare global {
  * declined consent (in which case gtag is loaded but storage is denied), this
  * does nothing rather than throwing.
  */
+let currentVariant = ''
+
+/**
+ * Records which persona variant this visitor is seeing.
+ *
+ * Sent as a GA4 user property so it persists across sessions, and attached to
+ * every event below. Comparing by page_path alone would work today but breaks
+ * the moment a URL changes, and loses anyone returning by a different route.
+ */
+export function setVariant(slug: string) {
+  currentVariant = slug
+  if (!trackingEnabled || typeof window === 'undefined' || !window.gtag) return
+  window.gtag('set', 'user_properties', { variant: slug })
+}
+
 export function track(event: TrackEvent, params: Record<string, unknown> = {}) {
   if (!trackingEnabled || typeof window === 'undefined' || !window.gtag) return
 
-  window.gtag('event', event, params)
+  const withVariant = { ...params, variant: currentVariant }
+  window.gtag('event', event, withVariant)
 
   /*
    * Leaving for TestFlight is the conversion. There is no form to submit any
@@ -34,5 +50,5 @@ export function track(event: TrackEvent, params: Record<string, unknown> = {}) {
         ? analytics.CONVERSIONS.notifyClick
         : ''
 
-  if (label) window.gtag('event', 'conversion', { send_to: label, ...params })
+  if (label) window.gtag('event', 'conversion', { send_to: label, ...withVariant })
 }
