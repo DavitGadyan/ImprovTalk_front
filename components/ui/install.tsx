@@ -8,6 +8,7 @@ import { iosHref, androidHref, isLive } from '@/content/links'
 import { cn } from '@/lib/utils'
 import { EarlyAccessDialog } from '@/components/ui/early-access-dialog'
 import { track } from '@/lib/analytics'
+import { usePlatform } from '@/lib/platform'
 
 /**
  * Install block: primary action plus both store badges.
@@ -93,6 +94,7 @@ export function InstallBlock({
   badgesOnly?: boolean
 }) {
   const [dialogOpen, setDialogOpen] = useState(false)
+  const platform = usePlatform()
 
   const anyStoreLive = isLive.ios || isLive.android
   const primaryLabel = anyStoreLive
@@ -102,11 +104,16 @@ export function InstallBlock({
       : 'Get early access'
 
   /*
-   * Pre-launch there is nowhere to send anyone, so the primary action opens the
-   * early-access panel instead of a mail client. Once a store URL exists it
-   * becomes an ordinary link again, with no code change beyond content/links.ts.
+   * A TestFlight link only does anything on an iPhone. Sent to a desktop it
+   * renders a page telling you to open it on your device — a dead end, and it
+   * would also make the QR unreachable, since the QR is the thing that gets a
+   * desktop visitor onto their phone in the first place.
+   *
+   * So: iOS goes straight there in one tap. Everyone else, including 'unknown'
+   * before hydration resolves, opens the panel, which carries the QR and the
+   * Android fallback.
    */
-  const goesToStore = isLive.ios || isLive.testflight
+  const directToStore = isLive.ios || (isLive.testflight && platform === 'ios')
 
   return (
     <div
@@ -123,7 +130,7 @@ export function InstallBlock({
             align === 'center' && 'justify-center',
           )}
         >
-          {goesToStore ? (
+          {directToStore ? (
             <Button asChild size="lg">
               <a href={iosHref()} onClick={() => track('notify_click', { target: 'store' })}>
                 {primaryLabel}

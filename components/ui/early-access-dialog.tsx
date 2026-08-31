@@ -4,19 +4,25 @@ import { useCallback, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { EarlyAccessForm } from '@/components/ui/early-access-form'
 import { LogoMark } from '@/components/ui/logo'
+import { Button } from '@/components/ui/button'
+import { isLive, iosHref } from '@/content/links'
 import { track } from '@/lib/analytics'
+import { usePlatform } from '@/lib/platform'
 
 /**
- * Early-access panel: the email form and the scan code, behind one click.
+ * The install panel, behind one click.
  *
- * The QR used to sit in the hero, where it competed with the headline and asked
- * people to scan before they knew what the product was. Here it appears at the
- * moment someone has already decided they want it, next to the alternative —
- * leave an address, or scan to carry on with the phone you will install on.
+ * What this panel is for changed when the TestFlight link went live. It used to
+ * collect an address because there was nowhere to send anyone. Now there is, and
+ * the useful thing on a desktop is the QR — a TestFlight link is inert on a
+ * laptop, so the job is getting the visitor onto their phone.
  *
- * Built on native <dialog>, which brings focus trapping, Escape-to-close, inert
- * background and a backdrop with no dependency and no focus-management bugs of
- * my own making.
+ * Android still needs the address: TestFlight is iOS-only, and there is nothing
+ * to install on Android yet.
+ *
+ * Built on native <dialog>, which brings focus trapping, Escape-to-close, an
+ * inert background and a backdrop with no dependency and none of the
+ * focus-management bugs a hand-rolled modal collects.
  */
 export function EarlyAccessDialog({
   open,
@@ -26,6 +32,7 @@ export function EarlyAccessDialog({
   onClose: () => void
 }) {
   const ref = useRef<HTMLDialogElement>(null)
+  const platform = usePlatform()
 
   useEffect(() => {
     const el = ref.current
@@ -38,13 +45,23 @@ export function EarlyAccessDialog({
     }
   }, [open])
 
-  /* Backdrop clicks land on the dialog itself, so compare the target. */
+  /* Backdrop clicks land on the dialog element itself, so compare the target. */
   const onBackdrop = useCallback(
     (e: React.MouseEvent<HTMLDialogElement>) => {
       if (e.target === ref.current) onClose()
     },
     [onClose],
   )
+
+  const betaLive = isLive.testflight || isLive.ios
+  const showQr = betaLive && platform !== 'android'
+  /*
+   * The form stays available even with the beta link live. A TestFlight public
+   * link refuses testers whenever the group has no approved build, and the
+   * visitor cannot tell that from our side — without a fallback they would just
+   * bounce off Apple's "not accepting any new testers" page with nothing to do.
+   */
+  const showForm = true
 
   return (
     <dialog
@@ -63,9 +80,11 @@ export function EarlyAccessDialog({
             <LogoMark size={40} />
             <div>
               <h2 id="ea-title" className="text-lg font-semibold text-ink">
-                Get early access
+                {betaLive ? 'Join the beta' : 'Get early access'}
               </h2>
-              <p className="mt-0.5 text-[13px] text-subtle">TestFlight, iPhone first</p>
+              <p className="mt-0.5 text-[13px] text-subtle">
+                {betaLive ? 'Free, on TestFlight, iPhone only for now' : 'TestFlight, iPhone first'}
+              </p>
             </div>
           </div>
           <button
@@ -86,28 +105,50 @@ export function EarlyAccessDialog({
           </button>
         </div>
 
-        <div className="mt-7">
-          <EarlyAccessForm />
-        </div>
+        {showQr && (
+          <div className="mt-7 flex items-center gap-5">
+            <div className="shrink-0 rounded-xl bg-white p-2.5">
+              <Image
+                src="/qr-get.svg"
+                alt=""
+                width={112}
+                height={112}
+                className="size-28"
+                unoptimized
+              />
+            </div>
+            <div>
+              <p className="text-[15px] font-medium text-ink">Scan with your iPhone</p>
+              <p className="mt-2 text-[13px] leading-relaxed text-subtle">
+                TestFlight only works on the phone itself, so the code opens the install page
+                there. It takes about a minute.
+              </p>
+              <Button asChild variant="outline" size="sm" className="mt-4">
+                <a
+                  href={iosHref()}
+                  onClick={() => track('notify_click', { target: 'testflight_dialog' })}
+                >
+                  Or open the link
+                </a>
+              </Button>
+            </div>
+          </div>
+        )}
 
-        <div className="mt-8 flex items-center gap-5 border-t border-line pt-7">
-          <div className="shrink-0 rounded-xl bg-white p-2.5">
-            <Image
-              src="/qr-get.svg"
-              alt=""
-              width={96}
-              height={96}
-              className="size-24"
-              unoptimized
-            />
+        {showQr && showForm && <div className="mt-8 border-t border-line pt-7" />}
+
+        {showForm && (
+          <div className={showQr ? '' : 'mt-7'}>
+            {betaLive && (
+              <p className="mb-4 text-[13px] leading-relaxed text-subtle">
+                {platform === 'android'
+                  ? 'On Android? The beta is iPhone only for now. Leave your address and we will tell you the moment it is ready.'
+                  : 'Beta places are limited. If TestFlight says it is not taking testers, leave your address and we will let you in as soon as a place opens.'}
+              </p>
+            )}
+            <EarlyAccessForm />
           </div>
-          <div>
-            <p className="text-[14px] font-medium text-ink">Or carry on with your phone</p>
-            <p className="mt-1.5 text-[13px] leading-relaxed text-subtle">
-              Scan this and the install page opens on the device you will actually use it on.
-            </p>
-          </div>
-        </div>
+        )}
       </div>
     </dialog>
   )

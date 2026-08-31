@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react'
 import { LogoMark } from '@/components/ui/logo'
 import { Button } from '@/components/ui/button'
-import { iosHref, isLive, NOTIFY_MAILTO } from '@/content/links'
+import { iosHref, isLive } from '@/content/links'
+import { usePlatform } from '@/lib/platform'
 import { cn } from '@/lib/utils'
 
 /**
@@ -16,6 +17,7 @@ import { cn } from '@/lib/utils'
  */
 export function MobileBar() {
   const [show, setShow] = useState(false)
+  const platform = usePlatform()
 
   useEffect(() => {
     const onScroll = () => {
@@ -29,7 +31,12 @@ export function MobileBar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const href = isLive.ios || isLive.testflight ? iosHref() : NOTIFY_MAILTO
+  /* Android must never be pointed at an iOS-only beta; /get handles both. */
+  const href = isLive.ios
+    ? iosHref()
+    : isLive.testflight && platform === 'ios'
+      ? iosHref()
+      : '/get/'
 
   return (
     <div

@@ -32,7 +32,16 @@ export const PLAY_STORE_URL = ''
  * an Apple developer login — every visitor would hit a sign-in wall, and it
  * would look fine to you because you are already signed in.
  */
-export const TESTFLIGHT_URL = ''
+/*
+ * Public TestFlight link.
+ *
+ * As of 31 Aug 2026 this answers "This beta isn't accepting any new testers
+ * right now" — a public link only starts accepting once an external group has a
+ * build that has passed Apple's Beta App Review. It is shipped anyway by
+ * choice, so the email form stays visible beside it as a working path until the
+ * beta opens. Re-check in a private window, not on your own signed-in device.
+ */
+export const TESTFLIGHT_URL = 'https://testflight.apple.com/join/TRmKruWt'
 
 export const SUPPORT_EMAIL = 'support@s1mpleai.org'
 
