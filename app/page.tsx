@@ -11,7 +11,6 @@ import { Drills } from '@/components/sections/drills'
 import { LearnLibrary } from '@/components/sections/learn-library'
 import { Progress } from '@/components/sections/progress'
 import { Faq } from '@/components/sections/faq'
-import { FinalCta } from '@/components/sections/final-cta'
 import { Footer } from '@/components/sections/footer'
 import { ScrollCta } from '@/components/ui/scroll-cta'
 import { homeJsonLd } from '@/lib/jsonld'
@@ -46,7 +45,6 @@ export default function HomePage() {
         <LearnLibrary />
         <Progress />
         <Faq />
-        <FinalCta />
       </main>
       <Footer />
       <ScrollCta />
