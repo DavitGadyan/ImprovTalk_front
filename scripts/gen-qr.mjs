@@ -27,7 +27,7 @@ import jsQR from 'jsqr'
 import sharp from 'sharp'
 import { writeFile } from 'node:fs/promises'
 
-const GET_URL = 'https://improvtalk.s1mpleai.org/get/'
+const GET_URL = 'https://improvtalk.vip/get/'
 const OUT = 'public/qr-get.svg'
 const DISPLAY = 112 // px — the size install.tsx renders it at
 

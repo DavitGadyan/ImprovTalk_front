@@ -48,7 +48,7 @@ export function Footer() {
           <span className="flex items-center gap-2.5">
             <LogoMark size={22} />
             <Wordmark className="text-[15px]" />
-            <span className="text-[15px] text-subtle">· improvtalk.s1mpleai.org</span>
+            <span className="text-[15px] text-subtle">· improvtalk.vip</span>
           </span>
         </div>
       </div>

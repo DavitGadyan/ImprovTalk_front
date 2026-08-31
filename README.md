@@ -1,10 +1,10 @@
 # ImprovTalk — marketing site
 
-The site for [ImprovTalk](https://improvtalk.s1mpleai.org), a voice-first AI
+The site for [ImprovTalk](https://improvtalk.vip), a voice-first AI
 communication coach.
 
-Static Next.js export, served from a Cloud Storage bucket behind the Google
-Cloud load balancer that already fronts `api.s1mpleai.org`.
+Static Next.js export, published to GitHub Pages on every push to `main`.
+Setup and the reasoning are in [docs/DEPLOY.md](docs/DEPLOY.md).
 
 ## Run it
 

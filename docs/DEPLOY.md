@@ -1,227 +1,172 @@
-# Deploying improvtalk.s1mpleai.org
+# Deploying improvtalk.vip
 
-The site is a static export served from a Cloud Storage bucket attached as a
-**backend bucket** to the HTTPS load balancer that already fronts
-`api.s1mpleai.org`. There is no server and no container.
+The site is a static Next.js export published to **GitHub Pages** on every push
+to `main`. There is no server and no build step to run by hand.
 
-## Why not Caddy on the VM
+## Why Pages and not the GCP load balancer
 
-The repo `ImprovTalk/services/api/deploy/Caddyfile.*` describes Caddy terminating
-TLS with Let's Encrypt. Production has moved past that. Every certificate on
-`s1mpleai.org` is now issued by **Google Trust Services**, i.e. TLS terminates at
-a Google Cloud load balancer:
+The earlier plan put the site in a Cloud Storage bucket behind the load balancer
+that already fronts `api.s1mpleai.org`. That required minting a new managed
+certificate carrying all five hostnames and swapping it onto the HTTPS proxy —
+the same proxy that terminates TLS for the **live production API**. Getting that
+wrong takes the API down.
 
-```
-$ echo | openssl s_client -connect api.s1mpleai.org:443 -servername api.s1mpleai.org 2>/dev/null \
-    | openssl x509 -noout -issuer
-issuer=C=US, O=Google Trust Services, CN=WR3
-```
+Owning `improvtalk.vip` removes the reason to take that risk. Pages provisions
+and renews its own certificate, costs nothing (a GCLB forwarding rule is roughly
+$18/month), and cannot affect the API.
 
-So adding a host means changing the load balancer, not a Caddyfile.
+The GCP route is still written up at the bottom if you ever need it.
 
-## Current state (verified 30 Aug 2026)
-
-| Host | DNS | On managed cert | Backend |
-|---|---|---|---|
-| `api.s1mpleai.org` | 34.49.113.73 | yes | live (FastAPI) |
-| `s1mpleai.org` | 34.49.113.73 | yes | none — 503 |
-| `ideatest.s1mpleai.org` | 34.49.113.73 | yes | none — 503 |
-| `grafana.s1mpleai.org` | 34.49.113.73 | **no** | handshake fails |
-| `improvtalk.s1mpleai.org` | **none** | **no** | — |
-
-The managed certificate's SANs are exactly `s1mpleai.org`, `api.s1mpleai.org`,
-`ideatest.s1mpleai.org`, `api.ideatest.s1mpleai.org`.
+---
 
 ## One-time setup
 
-Everything below needs a principal with `compute.loadBalancerAdmin` and
-`storage.admin` on the project. Set these first:
+### 1. DNS at Namecheap
+
+The domain uses Namecheap's own nameservers (`dns1/dns2.registrar-servers.com`),
+so records go in **Domain List → Manage → Advanced DNS**.
+
+Delete the parking records first — the default `CNAME www → parkingpage.namecheap.com`
+and the `URL Redirect`/`A` record on `@` will otherwise shadow everything below.
+
+Then add, for the apex:
+
+| Type | Host | Value |
+|---|---|---|
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| CNAME | `www` | `davitgadyan.github.io.` |
+
+The four A records are GitHub's anycast addresses — all four, so a single
+point of failure does not take the site down. Optionally add the AAAA records
+too, for IPv6 visitors:
+
+```
+2606:50c0:8000::153   2606:50c0:8001::153
+2606:50c0:8002::153   2606:50c0:8003::153
+```
+
+Namecheap's default TTL is fine. Propagation is usually minutes, occasionally an
+hour.
+
+### 2. Enable Pages
+
+Repository → **Settings → Pages**:
+
+- **Source: GitHub Actions** (not "Deploy from a branch" — the workflow uploads
+  an artifact).
+- **Custom domain:** `improvtalk.vip` → Save. GitHub verifies the DNS above.
+- Once the check passes, tick **Enforce HTTPS**. The certificate is issued by
+  Let's Encrypt and renews automatically.
+
+The custom domain box may report an error until DNS propagates. That is normal;
+re-save it once `dig +short improvtalk.vip` returns the GitHub addresses.
+
+### 3. Push
+
+That is the whole setup. The workflow builds, verifies the export, and
+publishes.
+
+---
+
+## What the workflow guards against
+
+Two failure modes specific to Pages, both of which produce a broken site that
+looks like a successful deploy:
+
+- **`.nojekyll`** — Pages runs Jekyll by default, and Jekyll ignores any path
+  starting with an underscore. That is all of Next's `_next/static` output, so
+  without this file the site loads with no CSS and no JavaScript. The build
+  fails if it is missing.
+- **`CNAME`** — if it is not inside the published artifact, Pages drops the
+  custom domain on every deploy and reverts to `*.github.io`. The build checks
+  its contents, not just its presence.
+
+It also fails if any expected page, the QR, or any of the four videos is missing
+or empty, rather than replacing a working site with a partial one.
+
+---
+
+## Verify after the first deploy
 
 ```bash
-export PROJECT=<your-gcp-project-id>
-export BUCKET=improvtalk-site
-export HOST=improvtalk.s1mpleai.org
-export REGION=europe-west1        # pick the region nearest your users
+# Routes
+for p in / /privacy/ /terms/ /support/ /get/ /sitemap.xml /robots.txt; do
+  printf '%-16s %s\n' "$p" "$(curl -s -o /dev/null -w '%{http_code}' https://improvtalk.vip$p)"
+done
+
+# Certificate is real and covers the apex
+echo | openssl s_client -connect improvtalk.vip:443 -servername improvtalk.vip 2>/dev/null \
+  | openssl x509 -noout -issuer -subject -dates
+
+# CSS actually loaded — this is what catches a missing .nojekyll
+curl -s https://improvtalk.vip/ | grep -o '_next/static/css/[^"]*' | head -1
+
+# A video streams
+curl -s -o /dev/null -w '%{http_code} %{size_download} bytes\n' \
+  -r 0-99999 https://improvtalk.vip/scenarios/coffee-shop.mp4
+```
+
+Then scan the QR on the page with a real phone. It encodes
+`https://improvtalk.vip/get/`, and `/get` does the platform routing.
+
+## Known limitation
+
+Pages does not let you set response headers, so everything is served with
+`Cache-Control: max-age=600`. The four videos (11 MB total) therefore re-fetch
+more often than they would behind a CDN you control. Pages allows 100 GB of
+bandwidth a month — roughly 33,000 video views — so this only matters if the
+site gets genuinely popular. If it does, move to the GCP route below, which sets
+a 30-day cache on `/scenarios/`.
+
+---
+
+## Follow-ups outside this repo
+
+- **The mobile app still points at the old URLs.** `apps/mobile/app/settings.tsx:11-12`
+  and `app/sign-in.tsx:118-125` link to `https://s1mpleai.org/privacy` and
+  `/terms`, which serve nothing. Point them at `https://improvtalk.vip/privacy/`
+  and `/terms/`. This needs a mobile release, and App Review will check that the
+  privacy URL resolves.
+- **Stripe return URLs**, `services/api/app/deps/settings.py:74-75`, should
+  become `https://improvtalk.vip/billing/success` and `/billing/cancel`. Lower
+  priority — Stripe keys are currently empty so checkout is not live.
+- **API CORS**, `services/api/deploy/docker-compose.yml`, currently allows
+  `https://improvtalk.s1mpleai.org`. Add `https://improvtalk.vip` if you wire
+  the early-access form to your own API (see docs/EARLY-ACCESS.md option 3).
+
+---
+
+## Appendix: the GCP route
+
+Only worth it if you outgrow the Pages bandwidth allowance or need real cache
+control. It puts the export in a Cloud Storage bucket attached as a backend
+bucket to a load balancer.
+
+```bash
+export PROJECT=<project-id> BUCKET=improvtalk-site REGION=europe-west1
 gcloud config set project "$PROJECT"
-```
 
-### 1. DNS
-
-Add an **A record** `improvtalk` → `34.49.113.73` in the `s1mpleai.org` zone.
-Confirm before continuing — certificate provisioning fails without it:
-
-```bash
-dig +short "$HOST"   # must print 34.49.113.73
-```
-
-### 2. Bucket
-
-```bash
-gcloud storage buckets create "gs://$BUCKET" \
-  --location="$REGION" \
-  --uniform-bucket-level-access
-
-# Public read. The bucket holds only the published marketing site.
+gcloud storage buckets create "gs://$BUCKET" --location="$REGION" --uniform-bucket-level-access
 gcloud storage buckets add-iam-policy-binding "gs://$BUCKET" \
   --member=allUsers --role=roles/storage.objectViewer
 
 # MainPageSuffix is what makes /privacy/ resolve to privacy/index.html.
 # Without it every route except / returns 404 through the load balancer.
 gcloud storage buckets update "gs://$BUCKET" \
-  --web-main-page-suffix=index.html \
-  --web-error-page=404.html
-```
+  --web-main-page-suffix=index.html --web-error-page=404.html
 
-### 3. Backend bucket with CDN
-
-```bash
 gcloud compute backend-buckets create improvtalk-site-backend \
-  --gcs-bucket-name="$BUCKET" \
-  --enable-cdn \
-  --cache-mode=USE_ORIGIN_HEADERS   # respect the Cache-Control the workflow sets
+  --gcs-bucket-name="$BUCKET" --enable-cdn --cache-mode=USE_ORIGIN_HEADERS
+
+# improvtalk.vip is a separate domain, so this needs its own certificate —
+# no need to touch the one serving api.s1mpleai.org.
+gcloud compute ssl-certificates create improvtalk-vip --domains=improvtalk.vip --global
 ```
 
-### 4. Certificate
-
-Google-managed certificates are immutable, so adding a host means creating a new
-one carrying all five names and swapping it onto the HTTPS proxy.
-
-```bash
-# Confirm the proxy and its current cert first.
-gcloud compute target-https-proxies list
-export PROXY=<the proxy name from above>
-
-gcloud compute ssl-certificates create s1mpleai-v2 \
-  --domains=s1mpleai.org,api.s1mpleai.org,ideatest.s1mpleai.org,api.ideatest.s1mpleai.org,improvtalk.s1mpleai.org \
-  --global
-
-# Provisioning takes 15-60 minutes and needs the DNS record from step 1 live.
-# Wait for ACTIVE before swapping, or you will drop TLS for api.s1mpleai.org.
-watch -n 60 "gcloud compute ssl-certificates describe s1mpleai-v2 \
-  --global --format='value(managed.status)'"
-
-# Only once it reads ACTIVE:
-gcloud compute target-https-proxies update "$PROXY" --ssl-certificates=s1mpleai-v2
-```
-
-### 5. URL map host rule
-
-```bash
-gcloud compute url-maps add-path-matcher improvtalk-lb \
-  --path-matcher-name=improvtalk-site \
-  --default-backend-bucket=improvtalk-site-backend \
-  --new-hosts="$HOST"
-```
-
-Replace `improvtalk-lb` with the real URL map name if it differs
-(`gcloud compute url-maps list`), and update `URL_MAP` in
-`.github/workflows/deploy.yml` to match.
-
-### 6. Workload Identity Federation for GitHub Actions
-
-Avoids putting a long-lived service-account key in repository secrets.
-
-```bash
-export SA=improvtalk-site-deployer
-export REPO=DavitGadyan/ImprovTalk_front
-
-gcloud iam service-accounts create "$SA"
-gcloud storage buckets add-iam-policy-binding "gs://$BUCKET" \
-  --member="serviceAccount:$SA@$PROJECT.iam.gserviceaccount.com" \
-  --role=roles/storage.objectAdmin
-gcloud projects add-iam-policy-binding "$PROJECT" \
-  --member="serviceAccount:$SA@$PROJECT.iam.gserviceaccount.com" \
-  --role=roles/compute.loadBalancerAdmin   # for the CDN invalidation step
-
-gcloud iam workload-identity-pools create github --location=global
-gcloud iam workload-identity-pools providers create-oidc github-provider \
-  --location=global --workload-identity-pool=github \
-  --issuer-uri=https://token.actions.githubusercontent.com \
-  --attribute-mapping="google.subject=assertion.sub,attribute.repository=assertion.repository" \
-  --attribute-condition="assertion.repository=='$REPO'"
-
-export PROJECT_NUMBER=$(gcloud projects describe "$PROJECT" --format='value(projectNumber)')
-gcloud iam service-accounts add-iam-policy-binding \
-  "$SA@$PROJECT.iam.gserviceaccount.com" \
-  --role=roles/iam.workloadIdentityUser \
-  --member="principalSet://iam.googleapis.com/projects/$PROJECT_NUMBER/locations/global/workloadIdentityPools/github/attribute.repository/$REPO"
-```
-
-Then add two repository secrets:
-
-| Secret | Value |
-|---|---|
-| `GCP_WIF_PROVIDER` | `projects/$PROJECT_NUMBER/locations/global/workloadIdentityPools/github/providers/github-provider` |
-| `GCP_DEPLOY_SA` | `$SA@$PROJECT.iam.gserviceaccount.com` |
-
-## Deploying
-
-Push to `main`, or run the workflow manually.
-
-Until `GCP_WIF_PROVIDER` and `GCP_DEPLOY_SA` exist, the workflow still builds and
-reports green — it just skips the publish steps and leaves a notice. So you can
-push freely before the GCP side is ready.
-
-Once configured it runs in this order, which matters:
-
-1. Build and sanity-check the export (fails loudly rather than syncing a
-   half-built site over a working one).
-2. `_next/**` hashed assets — `max-age=31536000, immutable`.
-3. `scenarios/**` video and posters — `max-age=2592000` (30 days). Without this
-   a returning visitor re-downloads ~3 MB of video every visit. Rename the file
-   to bust it.
-4. HTML and everything else — `max-age=0, must-revalidate`, so a deploy is
-   visible immediately.
-5. CDN invalidation.
-
-Assets go up before HTML on purpose: a visitor who loads the new HTML can then
-never request an asset that has not been uploaded yet.
-
-## Verify after the first deploy
-
-```bash
-# Routes. /privacy/ is the one that proves MainPageSuffix is working —
-# if it 404s, step 2's bucket website config did not apply.
-for p in / /privacy/ /terms/ /support/ /get/ /sitemap.xml /robots.txt; do
-  printf '%-16s %s\n' "$p" "$(curl -s -o /dev/null -w '%{http_code}' https://improvtalk.s1mpleai.org$p)"
-done
-
-# Certificate covers the new host
-echo | openssl s_client -connect improvtalk.s1mpleai.org:443 \
-  -servername improvtalk.s1mpleai.org 2>/dev/null \
-  | openssl x509 -noout -text | grep -A2 "Subject Alternative Name"
-
-# Caching split: HTML must revalidate, hashed assets must be immutable
-curl -sI https://improvtalk.s1mpleai.org/ | grep -i cache-control
-curl -sI "https://improvtalk.s1mpleai.org/$(grep -o '_next/static/css/[^"]*' out/index.html | head -1)" | grep -i cache-control
-```
-
-### If `/privacy/` returns 404
-
-GCLB backend buckets are inconsistent about directory indexes. Re-check step 2's
-`--web-main-page-suffix`. If it still fails, add a fallback pass to the workflow
-that uploads each route's HTML as an extensionless object alongside it:
-
-```bash
-for r in privacy terms support get billing/success billing/cancel; do
-  gcloud storage cp "out/$r/index.html" "gs://$BUCKET/$r" \
-    --cache-control="public,max-age=0,must-revalidate" \
-    --content-type=text/html
-done
-```
-
-## Follow-ups outside this repo
-
-Because the site lives on the subdomain rather than the apex, these URLs in the
-mobile app still point at `s1mpleai.org`, which serves nothing. They need a
-mobile release to fix:
-
-- `ImprovTalk/apps/mobile/app/settings.tsx:11-12` — `PRIVACY_URL`, `TERMS_URL`
-- `ImprovTalk/apps/mobile/app/sign-in.tsx:118-125` — the same two links
-- `ImprovTalk/services/api/app/deps/settings.py:74-75` — Stripe `success_url` /
-  `cancel_url`. Lower priority: Stripe keys are currently empty so checkout is
-  not live, but this must be fixed before it is.
-
-Alternatively, point the apex at this same backend bucket — it is already on the
-certificate and currently 503s — and the app's existing links start working with
-no mobile release.
+Then point the domain's A record at the LB address, add a URL-map host rule, and
+replace the publish steps in the workflow with `gcloud storage rsync ./out`,
+setting `Cache-Control` per tier: `_next/**` immutable for a year,
+`scenarios/**` 30 days, HTML `max-age=0, must-revalidate`.

@@ -1,39 +1,33 @@
 name: Deploy site
 
-# Builds the static export and syncs it to the Cloud Storage bucket that sits
-# behind the existing HTTPS load balancer, then invalidates the CDN so visitors
-# get the new HTML instead of a cached copy.
+# Builds the static export and publishes it to GitHub Pages at improvtalk.vip.
 #
-# One-time infrastructure setup (bucket, backend bucket, certificate, URL map,
-# Workload Identity Federation) is in docs/DEPLOY.md.
+# Pages rather than a GCS bucket behind the load balancer: the LB path required
+# minting a new multi-SAN certificate and swapping it onto the HTTPS proxy that
+# also serves the live production API, which is a real outage risk for a
+# marketing site. Pages provisions and renews TLS on its own and costs nothing.
+#
+# One-time setup is in docs/DEPLOY.md.
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
-# Serialize deploys so two pushes can't interleave an rsync with an
-# invalidation and leave the CDN serving a half-updated site.
-concurrency:
-  group: deploy-site
-  cancel-in-progress: false
-
 permissions:
   contents: read
-  id-token: write # required for Workload Identity Federation
+  pages: write
+  id-token: write
 
-env:
-  BUCKET: gs://improvtalk-site
-  URL_MAP: improvtalk-lb
+# Never let two publishes interleave. Not cancel-in-progress: a half-finished
+# deploy that gets cancelled can leave the site mid-swap.
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    # Secrets cannot be read in a job-level `if`, so they are lifted into env
-    # first. Until GCP is wired up the build still runs and reports green; only
-    # the publish steps are skipped.
-    env:
-      HAS_GCP: ${{ secrets.GCP_WIF_PROVIDER != '' && secrets.GCP_DEPLOY_SA != '' }}
     steps:
       - uses: actions/checkout@v4
 
@@ -47,69 +41,45 @@ jobs:
       - name: Build static export
         run: npm run build
 
-      - name: Fail if the export looks wrong
-        # A silent partial export would otherwise sync a broken site over a
-        # working one. Cheaper to catch here than in the CDN cache.
+      - name: Verify the export
+        # A silent partial export would otherwise replace a working site.
+        # Cheaper to fail here than to find out from a visitor.
         run: |
           set -euo pipefail
           for f in index.html privacy/index.html terms/index.html support/index.html \
                    get/index.html billing/success/index.html billing/cancel/index.html \
-                   sitemap.xml robots.txt \
+                   sitemap.xml robots.txt qr-get.svg \
                    scenarios/coffee-shop.mp4 scenarios/bali-beach.mp4 \
                    scenarios/barcelona-beach.mp4 scenarios/gym.mp4; do
             [ -s "out/$f" ] || { echo "::error::missing or empty out/$f"; exit 1; }
           done
-          echo "export OK ($(find out -type f | wc -l | tr -d ' ') files)"
 
-      - name: Note when GCP is not configured yet
-        if: env.HAS_GCP != 'true'
-        run: |
-          echo "::notice::Build OK. Skipping publish - set GCP_WIF_PROVIDER and GCP_DEPLOY_SA to enable it (see docs/DEPLOY.md)."
+          # Jekyll strips underscore-prefixed paths, which is all of _next.
+          # Without this the site renders with no CSS and no JS.
+          [ -f out/.nojekyll ] || { echo "::error::out/.nojekyll missing"; exit 1; }
 
-      - uses: google-github-actions/auth@v2
-        if: env.HAS_GCP == 'true'
+          # Without CNAME in the artifact, Pages drops the custom domain on
+          # every deploy and reverts to github.io.
+          grep -qx 'improvtalk.vip' out/CNAME || { echo "::error::out/CNAME wrong"; exit 1; }
+
+          echo "export OK — $(find out -type f | wc -l | tr -d ' ') files, $(du -sh out | cut -f1)"
+
+      - uses: actions/configure-pages@v5
+        # Creates the Pages site on first run rather than failing until someone
+        # toggles it in Settings. The custom domain still has to be set there.
         with:
-          # No long-lived service-account key: WIF mints a short-lived token.
-          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
-          service_account: ${{ secrets.GCP_DEPLOY_SA }}
+          enablement: true
 
-      - uses: google-github-actions/setup-gcloud@v2
-        if: env.HAS_GCP == 'true'
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
 
-      # Hashed assets first, with a long immutable cache. Doing this before the
-      # HTML means a visitor who loads the new HTML can never request an asset
-      # that isn't uploaded yet.
-      - name: Sync immutable assets
-        if: env.HAS_GCP == 'true'
-        run: |
-          gcloud storage rsync ./out/_next "$BUCKET/_next" \
-            --recursive \
-            --cache-control="public,max-age=31536000,immutable"
-
-      # Scenario films and their posters. Content-stable and multi-megabyte, so
-      # they get a long cache — without this a returning visitor re-downloads
-      # ~3 MB of video on every visit. Renaming the file is how you bust it.
-      - name: Sync scenario media
-        if: env.HAS_GCP == 'true'
-        run: |
-          gcloud storage rsync ./out/scenarios "$BUCKET/scenarios" \
-            --recursive \
-            --cache-control="public,max-age=2592000"
-
-      # Then everything else, including the HTML, which must never be cached
-      # hard or a deploy would take a year to reach returning visitors.
-      - name: Sync HTML and static files
-        if: env.HAS_GCP == 'true'
-        run: |
-          gcloud storage rsync ./out "$BUCKET" \
-            --recursive \
-            --delete-unmatched-destination-objects \
-            --exclude="^_next/.*" \
-            --exclude="^scenarios/.*" \
-            --cache-control="public,max-age=0,must-revalidate"
-
-      - name: Invalidate CDN cache
-        if: env.HAS_GCP == 'true'
-        run: |
-          gcloud compute url-maps invalidate-cdn-cache "$URL_MAP" \
-            --path="/*" --async
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

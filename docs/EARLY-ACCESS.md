@@ -38,7 +38,7 @@ Free tier is 50 submissions a month.
 ## Option 3 — your own API (best, more work)
 
 `api.s1mpleai.org` is already live and its `CORS_ORIGINS` already allows
-`https://improvtalk.s1mpleai.org`. Add a `POST /waitlist` endpoint in the
+`https://improvtalk.vip`. Add a `POST /waitlist` endpoint in the
 ImprovTalk repo, store addresses in Postgres, and set `ENDPOINT` to it.
 
 You own the data outright, there is no third-party processor to disclose, and no

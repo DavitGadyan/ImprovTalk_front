@@ -10,7 +10,7 @@ export const site = {
   /* Kept under 160 characters so it survives intact in search results. */
   description:
     'ImprovTalk is a voice-first AI communication coach. Practise real conversations out loud and get scored on what you said and how you said it.',
-  url: 'https://improvtalk.s1mpleai.org',
+  url: 'https://improvtalk.vip',
   locale: 'en',
   supportEmail: 'support@s1mpleai.org',
   /* Company/legal entity name for the legal pages. */
