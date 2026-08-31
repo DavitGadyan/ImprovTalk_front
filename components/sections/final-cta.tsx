@@ -29,7 +29,7 @@ export function FinalCta() {
             <LogoMark size={56} className="rounded-[22.5%] shadow-[0_10px_36px_-10px_rgba(175,82,222,0.7)]" />
             <span className="text-center">
               <span className="eyebrow block">Start tonight</span>
-              <span className="mt-1 block text-sm text-subtle">ImprovTalk · iPhone &amp; Android</span>
+              <span className="mt-1 block text-sm text-subtle">ImprovTalk · iPhone, free on TestFlight</span>
             </span>
           </motion.div>
           <motion.h2 variants={fadeUp} className="display-lg text-ink">

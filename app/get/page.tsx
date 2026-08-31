@@ -3,7 +3,7 @@ import { GetClient } from './get-client'
 
 export const metadata: Metadata = {
   title: 'Get the app',
-  description: 'Install ImprovTalk on iPhone or Android.',
+  description: 'Install ImprovTalk on iPhone.',
   /* A redirector has no business in search results. */
   robots: { index: false, follow: true },
 }

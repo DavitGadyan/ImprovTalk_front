@@ -3,16 +3,11 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Logo } from '@/components/ui/logo'
-import { Button } from '@/components/ui/button'
 import { nav } from '@/content/site'
-import { iosHref, isLive } from '@/content/links'
-import { usePlatform } from '@/lib/platform'
-import { track } from '@/lib/analytics'
 import { cn } from '@/lib/utils'
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
-  const platform = usePlatform()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -20,18 +15,6 @@ export function Header() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
-
-  /*
-   * A TestFlight link does nothing off an iPhone, so only iOS gets it directly.
-   * Everyone else goes to /get, which resolves the platform and either forwards
-   * or shows the scan code. Sending a desktop visitor to TestFlight lands them
-   * on "open this on your device", which is a dead end.
-   */
-  const ctaHref = isLive.ios
-    ? iosHref()
-    : isLive.testflight && platform === 'ios'
-      ? iosHref()
-      : '/get/'
 
   return (
     <header
@@ -56,19 +39,6 @@ export function Header() {
             </a>
           ))}
         </nav>
-
-        <Button asChild size="sm" className="hidden sm:inline-flex">
-          <a
-            href={ctaHref}
-            onClick={() =>
-              ctaHref.startsWith('http')
-                ? track('testflight_click', { source: 'header' })
-                : track('notify_click', { source: 'header' })
-            }
-          >
-            {isLive.ios ? 'Get the app' : 'Get early access'}
-          </a>
-        </Button>
       </div>
     </header>
   )

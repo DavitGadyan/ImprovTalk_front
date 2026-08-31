@@ -105,8 +105,8 @@ export function GetClient() {
                     : 'Get notified at launch'}
               </a>
             </Button>
-            {/* Switches to the Android view, which carries the form — better
-                than dumping the visitor into a mail client. */}
+            {/* Switches to the Android view, which says plainly that the beta
+                is iPhone only rather than leaving them guessing. */}
             {!isLive.android && (
               <Button variant="outline" size="lg" onClick={() => setPlatform('android')}>
                 I&rsquo;m on Android

@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 
 import { Button } from '@/components/ui/button'
-import { iosHref, androidHref, isLive } from '@/content/links'
+import { iosHref, isLive } from '@/content/links'
 import { cn } from '@/lib/utils'
 import { EarlyAccessDialog } from '@/components/ui/early-access-dialog'
 import { track } from '@/lib/analytics'
@@ -26,13 +26,6 @@ function AppleGlyph() {
   )
 }
 
-function PlayGlyph() {
-  return (
-    <svg viewBox="0 0 24 24" className="size-5 shrink-0" fill="currentColor" aria-hidden="true">
-      <path d="M3.6 2.4c-.3.3-.5.8-.5 1.4v16.4c0 .6.2 1.1.5 1.4l.1.1 9.2-9.2v-.2L3.7 2.3l-.1.1zM16 15.3l-3.1-3.1v-.2L16 8.9l.1.1 3.6 2.1c1.1.6 1.1 1.6 0 2.2L16.1 15.2l-.1.1zM15.3 16 12.2 12.9 3 22.1c.4.4 1 .4 1.7 0l10.6-6.1M15.3 8 4.7 1.9C4 1.5 3.4 1.6 3 2l9.2 9.1L15.3 8z" />
-    </svg>
-  )
-}
 
 function StoreBadge({
   live,
@@ -172,14 +165,6 @@ export function InstallBlock({
           top={isLive.ios ? 'Download on the' : 'Coming soon to'}
           bottom="App Store"
           onClick={() => track('notify_click', { target: 'app_store_badge' })}
-        />
-        <StoreBadge
-          live={isLive.android}
-          href={androidHref()}
-          glyph={<PlayGlyph />}
-          top={isLive.android ? 'Get it on' : 'Coming soon to'}
-          bottom="Google Play"
-          onClick={() => track('notify_click', { target: 'play_badge' })}
         />
       </div>
 
