@@ -67,10 +67,10 @@ export default function TermsPage() {
         our payment processor.
       </p>
       <p>
-        Subscriptions renew automatically until cancelled. Cancel any time from your App Store or
-        Google Play account settings — cancelling stops the next renewal and you keep access until
-        the end of the period you have paid for. Refunds for purchases made through Apple or Google
-        are handled by Apple or Google under their policies.
+        Subscriptions renew automatically until cancelled. Cancel any time from your App Store
+        account settings — cancelling stops the next renewal and you keep access until the end of
+        the period you have paid for. Refunds for purchases made through Apple are handled by
+        Apple under their policies.
       </p>
 
       <h2>Your content</h2>

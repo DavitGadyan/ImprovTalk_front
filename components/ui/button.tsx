@@ -13,10 +13,19 @@ const variants: Record<Variant, string> = {
    * gradient fill, which is what keeps it reading as the primary action rather
    * than as decoration.
    */
+  /*
+   * Gradient place 2 of 3, and the only thing on the page that animates
+   * unprompted. Background-position is animated rather than transitioned on
+   * hover, because the two would fight over the same property; hover lifts and
+   * brightens instead.
+   */
   brand:
-    'text-white [background-image:var(--gradient-brand)] bg-[length:140%_100%] bg-left hover:bg-right ' +
-    'transition-[background-position,transform] duration-500 active:scale-[0.985] ' +
-    'shadow-[0_8px_30px_-10px_rgba(175,82,222,0.6)]',
+    'text-white [background-image:var(--gradient-brand)] bg-[length:200%_100%] ' +
+    'animate-[brand-pan_6s_ease-in-out_infinite] ' +
+    'shadow-[0_8px_30px_-10px_rgba(175,82,222,0.6)] ' +
+    'transition-[transform,box-shadow] duration-300 ' +
+    'hover:-translate-y-0.5 hover:shadow-[0_14px_40px_-10px_rgba(175,82,222,0.85)] ' +
+    'active:translate-y-0 active:scale-[0.985]',
   solid: 'bg-ink text-canvas hover:bg-white active:scale-[0.985]',
   outline:
     'border border-line-strong text-ink hover:border-ink/45 hover:bg-raised/50 active:scale-[0.985]',

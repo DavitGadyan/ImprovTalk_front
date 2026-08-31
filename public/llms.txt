@@ -2,7 +2,7 @@
 
 > A voice-first AI communication coach. You hold a button and talk to an AI
 > conversation partner out loud, then get scored on what you said and how you
-> said it. iPhone and Android.
+> said it. iPhone.
 
 ImprovTalk is a mobile app for practising real conversations — small talk,
 interviews, networking, storytelling, tough feedback, and meeting new people —
@@ -56,7 +56,7 @@ pricing is confirmed at launch.
 
 ## Status
 
-Pre-launch. Not yet listed on the App Store or Google Play.
+Pre-launch, in TestFlight beta on iPhone. Not yet listed on the App Store.
 
 ## Pages
 

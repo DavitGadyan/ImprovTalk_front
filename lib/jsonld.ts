@@ -45,7 +45,7 @@ export const softwareLd = {
   name: site.name,
   applicationCategory: 'EducationalApplication',
   applicationSubCategory: 'Communication skills training',
-  operatingSystem: 'iOS 16.0 or later, Android',
+  operatingSystem: 'iOS 16.0 or later',
   description: site.description,
   url: site.url,
   image: `${site.url}/og.png`,

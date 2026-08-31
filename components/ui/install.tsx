@@ -89,7 +89,7 @@ export function InstallBlock({
   const [dialogOpen, setDialogOpen] = useState(false)
   const platform = usePlatform()
 
-  const anyStoreLive = isLive.ios || isLive.android
+  const anyStoreLive = isLive.ios
   /*
    * One label, everywhere. "Join the beta" and "Get early access" described the
    * same click, and two names for one action makes a page feel assembled by
@@ -105,7 +105,7 @@ export function InstallBlock({
    *
    * So: iOS goes straight there in one tap. Everyone else, including 'unknown'
    * before hydration resolves, opens the panel, which carries the QR and the
-   * Android fallback.
+   * QR for anyone who is not already on the phone.
    */
   const directToStore = isLive.ios || (isLive.testflight && platform === 'ios')
 

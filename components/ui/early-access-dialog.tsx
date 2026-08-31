@@ -73,7 +73,7 @@ export function EarlyAccessDialog({
                 {isAndroid ? 'iPhone first' : 'Get early access'}
               </h2>
               <p className="mt-0.5 text-[13px] text-subtle">
-                {isAndroid ? 'Android is next' : 'Free, on TestFlight'}
+                {isAndroid ? 'iPhone only for now' : 'Free, on TestFlight'}
               </p>
             </div>
           </div>
@@ -97,8 +97,8 @@ export function EarlyAccessDialog({
 
         {isAndroid ? (
           <p className="mt-7 text-[15px] leading-relaxed text-muted">
-            ImprovTalk is on iPhone while it is in beta. The Android build is coming — check
-            back, or write to us and we will tell you when it lands.
+            ImprovTalk is on iPhone for now. Open improvtalk.vip on an iPhone and the beta
+            installs from there in about a minute.
           </p>
         ) : (
           <div className="mt-7 flex items-center gap-5">

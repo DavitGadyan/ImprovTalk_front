@@ -21,6 +21,6 @@ export const faqs = [
   },
   {
     q: 'When can I get it?',
-    a: 'ImprovTalk is in testing on iOS now, with Android to follow. Scan the code or use the button above and we will point you at the build the moment it is available on your platform.',
+    a: 'ImprovTalk is in testing on iPhone right now. Tap Get early access and it takes you straight to the TestFlight beta — it is free, and it takes about a minute to install.',
   },
 ] as const

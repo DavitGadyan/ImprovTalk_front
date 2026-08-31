@@ -32,12 +32,8 @@ export function MobileBar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  /* Android must never be pointed at an iOS-only beta; /get handles both. */
-  const href = isLive.ios
-    ? iosHref()
-    : isLive.testflight && platform === 'ios'
-      ? iosHref()
-      : '/get/'
+  /* Only iOS goes straight to the beta; /get explains it to everyone else. */
+  const href = isLive.ios || (isLive.testflight && platform === 'ios') ? iosHref() : '/get/'
 
   return (
     <div

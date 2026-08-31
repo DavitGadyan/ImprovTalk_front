@@ -204,6 +204,24 @@
   font-feature-settings: 'tnum' 1;
 }
 
+/*
+ * The primary CTA's gradient drifts slowly across itself. It is the one element
+ * on the page allowed to move on its own, and it is small — a button-sized
+ * composite, not the full-viewport blurred layer that got removed earlier for
+ * burning battery on mobile.
+ *
+ * The reduced-motion block below collapses it to a still frame.
+ */
+@keyframes brand-pan {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 

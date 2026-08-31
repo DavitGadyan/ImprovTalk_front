@@ -34,8 +34,8 @@ docs/DEPLOY.md       GCP setup and the deploy runbook
 
 The app is **pre-launch** — not listed on either store. Every install path
 currently falls back to the support mailto. At launch, edit
-[`content/links.ts`](content/links.ts) and set `APP_STORE_URL`, `PLAY_STORE_URL`
-and/or `TESTFLIGHT_URL`. Buttons, store badges and the `/get` redirect all follow
+[`content/links.ts`](content/links.ts) and set `APP_STORE_URL` and/or
+`TESTFLIGHT_URL`. Buttons, store badges and the `/get` redirect all follow
 from those three constants.
 
 The QR code does **not** need regenerating — it encodes `/get`, which does the

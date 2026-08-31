@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button'
 import { track } from '@/lib/analytics'
 import {
   iosHref,
-  androidHref,
   isLive,
   NOTIFY_MAILTO,
   SUPPORT_EMAIL,
@@ -47,9 +46,7 @@ export function GetClient() {
     const target =
       p === 'ios' && (isLive.ios || isLive.testflight)
         ? iosHref()
-        : p === 'android' && isLive.android
-          ? androidHref()
-          : null
+        : null
 
     if (target) {
       /*
@@ -82,10 +79,9 @@ export function GetClient() {
       </p>
 
       <div className="mt-9 flex w-full max-w-xs flex-col gap-3">
-        {platform === 'android' && !isLive.android ? (
+        {platform === 'android' ? (
           <p className="text-[14px] leading-relaxed text-muted">
-            ImprovTalk is on iPhone while it is in beta. The Android build is coming — check
-            back soon.
+            ImprovTalk is on iPhone for now. Open this page on an iPhone to install the beta.
           </p>
         ) : (
           <>
@@ -105,13 +101,6 @@ export function GetClient() {
                     : 'Get notified at launch'}
               </a>
             </Button>
-            {/* Switches to the Android view, which says plainly that the beta
-                is iPhone only rather than leaving them guessing. */}
-            {!isLive.android && (
-              <Button variant="outline" size="lg" onClick={() => setPlatform('android')}>
-                I&rsquo;m on Android
-              </Button>
-            )}
           </>
         )}
       </div>
