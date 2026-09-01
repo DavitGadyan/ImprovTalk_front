@@ -1,75 +1,72 @@
 import type { Persona } from './types'
 
 /**
- * Out of practice — a move, a break-up, years of remote work.
- *
- * This reader is not a beginner and should not be addressed as one. Reassurance
- * leads, the problem section is gentler, and the framing throughout is "it comes
- * back" rather than "you can learn it".
+ * Out of practice. This reader is not a beginner and must not be addressed as
+ * one — reassurance leads, and the framing is "it comes back", not "you can
+ * learn it".
  */
 export const rusty: Persona = {
   slug: 'rusty',
   path: '/out-of-practice/',
   meta: {
-    title: 'ImprovTalk — get back in practice at talking to people',
+    title: 'ImprovTalk — get back in practice at talking',
     description:
-      'You used to be fine at this. Small talk is a skill that fades without use and comes back with practice. Rehearse on your phone, in private.',
+      'You used to be fine at this. Talking is a habit, and habits come back with use. Practise on your phone, in private, a few minutes at a time.',
   },
   hero: {
     eyebrow: 'Get back in practice',
-    headline: { top: 'You used to be', bottom: 'fine at ', emphasis: 'this.' },
-    sub: 'Skills fade without use, and come back with it. A few sessions is enough.',
+    headline: { top: 'Like riding', bottom: 'a ', emphasis: 'bike.' },
+    sub: 'You used to be fine at this. A few short goes and most of it comes back.',
     note: 'Free to start. No card.',
   },
   problem: {
     label: 'What happened',
-    title: 'The habit went quiet.',
-    intro: 'Not a personality change. Just a long stretch without the reps.',
+    title: 'It went quiet.',
+    intro: 'Nothing changed about you. You just stopped getting the practice.',
     points: [
-      { title: 'The circle got smaller', body: 'A move, a break-up, years of working from home. Fewer conversations, without deciding to have fewer.' },
-      { title: 'So it feels effortful', body: 'The thing that used to be automatic now takes visible work.' },
-      { title: 'And you notice yourself trying', body: 'Which is the part that makes it awkward.' },
+      { title: 'The circle got smaller', body: 'A move, a break-up, working from home. Fewer chats, without choosing it.' },
+      { title: 'So it takes effort', body: 'The thing that used to be automatic now needs thinking about.' },
+      { title: 'And you notice', body: 'Which is the bit that makes it feel awkward.' },
     ],
   },
   learnable: {
-    label: 'It comes back',
-    title: 'This is rust, not damage.',
-    intro: 'You have done this before. It needs use, not repair.',
+    label: 'The good news',
+    title: 'It comes back quickly.',
+    intro: 'You have done this before. It needs using, not fixing.',
     points: [
-      { title: 'Start somewhere low-stakes', body: 'Your phone, your room. No one to explain yourself to afterwards.' },
-      { title: 'A few minutes at a time', body: 'Three minutes a day does more than one difficult evening out.' },
-      { title: 'Warm up before you go', body: 'Two rounds beforehand, so the first real conversation is not the cold one.' },
-      { title: 'See it coming back', body: 'The score is the same each time, so improvement is visible rather than a feeling.' },
+      { title: 'Start small', body: 'Your phone, your room. Nobody to explain yourself to afterwards.' },
+      { title: 'A few minutes', body: 'Three minutes a day beats one hard night out.' },
+      { title: 'Warm up first', body: 'Two goes before you head out, so the first real chat is not the cold one.' },
+      { title: 'Watch it come back', body: 'Same score every time, so you can see it move instead of guessing.' },
     ],
   },
   how: {
     label: 'How it works',
-    title: 'Three minutes, start to finish.',
+    title: 'Three minutes.',
     steps: [
-      { title: 'Pick a place', body: 'A café queue, a gym, a party.' },
-      { title: 'Talk out loud', body: 'Hold the button and speak. She answers back, in real time.' },
-      { title: 'See what landed', body: 'A score, the moments that worked, and a better line for the ones that did not.' },
+      { title: 'Pick a place', body: 'A café, a gym, a party.' },
+      { title: 'Talk', body: 'Hold the button and speak. She answers straight away.' },
+      { title: 'See your score', body: 'What worked, what did not, and what to say instead.' },
     ],
   },
   scoring: {
-    label: 'It shows its working',
+    label: 'Your score',
     title: 'Proof it is coming back.',
-    intro: 'The same measurements every session, so the difference between week one and week six is a number rather than a feeling.',
+    intro: 'The same score every session, so week six against week one is a number, not a feeling.',
     proof: 'Six weeks and the line moves.',
   },
   inside: {
     label: 'What you get',
-    title: 'Enough to keep going.',
-    intro: 'Not a demo you finish in a weekend.',
+    title: 'Plenty to practise with.',
+    intro: 'You will not run out.',
   },
   faq: [
-    { q: 'Do I have to speak out loud?', a: 'Yes — that is the point. You hold a button and talk, and it talks back. There is no typing mode.' },
-    { q: 'How long until it feels normal again?', a: 'Most of it is warming up rather than learning. The score is calculated the same way every session, so you can see the trend rather than guess at it.' },
-    { q: 'Is the feedback just an opinion?', a: 'Half of it is measurement. Pace, pauses, fillers and volume come from the recording, and every score opens up to show its numbers.' },
-    { q: 'What happens to my recordings?', a: 'It uploads only when you end a session, and is deleted 24 hours after scoring. No contacts, calendar, photos or location, and no ad SDKs.' },
-    { q: 'What does it cost?', a: 'Free to start — three conversations a week. Paid tiers raise that. Final pricing at launch.' },
-    { q: 'When can I get it?', a: 'It is in TestFlight beta on iPhone now. Tap Get early access and it takes you straight there.' },
+    { q: 'Do I have to talk out loud?', a: 'Yes. You hold a button and speak, and she speaks back. There is no typing.' },
+    { q: 'How long until it feels normal?', a: 'Most of it is warming up, not learning. The score works the same way every time, so you can watch the trend instead of guessing.' },
+    { q: 'Is it just a guess?', a: 'No. Your speed, pauses and filler words are measured from the recording. Tap any score to see the numbers.' },
+    { q: 'What happens to my recordings?', a: 'They are deleted 24 hours after scoring. No contacts, photos or location. No ads.' },
+    { q: 'What does it cost?', a: 'Free to start — three conversations a week. Paid plans give you more.' },
+    { q: 'How do I get it?', a: 'It is on TestFlight for iPhone. Tap Get early access and it takes you there.' },
   ],
-  /* Reassurance first — this reader does not need the problem explained. */
   order: ['learnable', 'problem', 'how', 'scoring', 'inside', 'faq'],
 }
