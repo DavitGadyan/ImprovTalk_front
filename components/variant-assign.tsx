@@ -58,6 +58,19 @@ export function VariantAssign() {
     var target = PATHS[chosen];
     if (!target || target === HOME) return;
 
+    // Stash the real referrer before leaving. location.replace() makes the
+    // destination's document.referrer this page, and gtag only fires after the
+    // redirect — so without this, anyone arriving untagged from Instagram,
+    // YouTube or a shared link is recorded as a self-referral and the true
+    // source is lost. UTM'd traffic is unaffected either way, since UTMs win
+    // over referrer.
+    try {
+      var ref = document.referrer;
+      if (ref && ref.indexOf(location.host) === -1) {
+        sessionStorage.setItem('improvtalk-ref', ref);
+      }
+    } catch (e) {}
+
     // search + hash preserved: this is what keeps gclid alive.
     location.replace(target + location.search + location.hash);
   } catch (e) {

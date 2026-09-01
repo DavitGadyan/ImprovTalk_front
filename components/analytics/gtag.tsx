@@ -52,8 +52,19 @@ gtag('js', new Date());
 
       <Script id="gtag-config" strategy="afterInteractive">
         {`
-${hasGA ? `gtag('config', '${analytics.GA4_ID}', { anonymize_ip: true });` : ''}
-${hasAds ? `gtag('config', '${analytics.ADS_ID}');` : ''}
+(function () {
+  // Recover the referrer the variant redirect consumed, so untagged traffic is
+  // still attributed to Instagram, YouTube or wherever it actually came from
+  // instead of to this site itself. Stashed by components/variant-assign.tsx.
+  var ref = null;
+  try {
+    ref = sessionStorage.getItem('improvtalk-ref');
+    if (ref) sessionStorage.removeItem('improvtalk-ref');
+  } catch (e) {}
+  var extra = ref ? { page_referrer: ref } : {};
+${hasGA ? `  gtag('config', '${analytics.GA4_ID}', Object.assign({ anonymize_ip: true }, extra));` : ''}
+${hasAds ? `  gtag('config', '${analytics.ADS_ID}', extra);` : ''}
+})();
         `}
       </Script>
     </>
