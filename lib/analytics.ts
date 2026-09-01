@@ -19,6 +19,39 @@ declare global {
  */
 let currentVariant = ''
 
+const TXN_KEY = 'improvtalk-txn'
+
+/**
+ * A per-session id for de-duplicating conversions.
+ *
+ * The conversion fires on every exit to TestFlight, so someone who clicks,
+ * comes back and clicks again would be counted twice. Google Ads dedupes on
+ * transaction_id, which makes the count "sessions that converted" rather than
+ * "times a link was clicked".
+ *
+ * Ads' own Count: One setting only dedupes within a single ad click, so it does
+ * nothing for organic visitors — who have no gclid to group by. Without this,
+ * GA4 and Ads would report different numbers and neither would obviously be
+ * wrong.
+ *
+ * sessionStorage on purpose: a genuine return visit tomorrow is a new session
+ * and should count again. Storage being unavailable is not fatal — the
+ * conversion still fires, it just is not deduped.
+ */
+function transactionId(): string | undefined {
+  if (typeof window === 'undefined') return undefined
+  try {
+    let id = sessionStorage.getItem(TXN_KEY)
+    if (!id) {
+      id = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`
+      sessionStorage.setItem(TXN_KEY, id)
+    }
+    return id
+  } catch {
+    return undefined
+  }
+}
+
 /**
  * Records which persona variant this visitor is seeing.
  *
@@ -50,5 +83,14 @@ export function track(event: TrackEvent, params: Record<string, unknown> = {}) {
         ? analytics.CONVERSIONS.notifyClick
         : ''
 
-  if (label) window.gtag('event', 'conversion', { send_to: label, ...withVariant })
+  if (!label) return
+
+  const txn = transactionId()
+  window.gtag('event', 'conversion', {
+    send_to: label,
+    ...withVariant,
+    /* Same id for the whole session, so repeat clicks collapse into one
+       conversion rather than inflating the number Ads bids against. */
+    ...(txn ? { transaction_id: `${event}-${txn}` } : {}),
+  })
 }
