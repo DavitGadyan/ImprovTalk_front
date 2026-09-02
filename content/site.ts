@@ -12,7 +12,7 @@ export const site = {
     'ImprovTalk is a voice-first AI communication coach. Practise real conversations out loud and get scored on what you said and how you said it.',
   url: 'https://improvtalk.vip',
   locale: 'en',
-  supportEmail: 'davidgadyan92@gmail.com',
+  supportEmail: 'support@improvtalk.vip',
   /* Company/legal entity name for the legal pages. */
   legalEntity: 'ImprovTalk',
   /*

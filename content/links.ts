@@ -12,6 +12,8 @@
  */
 
 /** From ImprovTalk/apps/mobile/eas.json -> submit.production.ios.ascAppId */
+import { site } from '@/content/site'
+
 export const IOS_APP_ID = '6774918599'
 /** TODO at launch: `https://apps.apple.com/app/id${IOS_APP_ID}` */
 export const APP_STORE_URL = ''
@@ -36,7 +38,8 @@ export const APP_STORE_URL = ''
  */
 export const TESTFLIGHT_URL = 'https://testflight.apple.com/join/TRmKruWt'
 
-export const SUPPORT_EMAIL = 'davidgadyan92@gmail.com'
+/** Re-exported from site.ts so the address is defined exactly once. */
+export const SUPPORT_EMAIL = site.supportEmail
 
 /** Where the QR points. Stable across launch — /get does the routing. */
 export const GET_URL = 'https://improvtalk.vip/get/'
