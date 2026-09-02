@@ -63,12 +63,30 @@ Pre-launch, in TestFlight beta on iPhone. Not yet listed on the App Store.
 
 ## Pages
 
-- Home: https://improvtalk.vip/
-- Get the app: https://improvtalk.vip/get/
-- Privacy policy: https://improvtalk.vip/privacy/
-- Terms of service: https://improvtalk.vip/terms/
-- Support: https://improvtalk.vip/support/
+- [Home](https://improvtalk.vip/): what the app is, how the score works, and the install link
+- [About](https://improvtalk.vip/about/): who makes it, what the method is built on, and the full scoring formula
+- [How to start a conversation](https://improvtalk.vip/how-to-start-a-conversation/): the method in four moves, with film of each
+- [Blog](https://improvtalk.vip/blog/): conversation technique, written out
+- [Support](https://improvtalk.vip/support/): help, data export and account deletion
+- [Privacy policy](https://improvtalk.vip/privacy/): what is collected and how long it is kept
+- [Terms of service](https://improvtalk.vip/terms/): the terms of use
+
+## Guides
+
+- [The excuse, or straight in](https://improvtalk.vip/blog/how-to-start-a-conversation-with-a-stranger/): the two openings that work on a stranger, and why mixing them fails
+- [Guess where they are from](https://improvtalk.vip/blog/how-to-break-the-ice/): greeting someone in their own language, and the two ways it goes wrong
+- [Notice one thing](https://improvtalk.vip/blog/what-to-say-to-someone-you-just-met/): the observation opener, and the line between noticing and surveilling
+- [Why you go blank](https://improvtalk.vip/blog/why-your-mind-goes-blank-in-conversation/): retrieval speed under load, and what actually shortens it
+- [Practising a language out loud](https://improvtalk.vip/blog/practise-speaking-a-language-out-loud/): why vocabulary study does not transfer to speaking
+- [How to stop saying um](https://improvtalk.vip/blog/how-to-stop-saying-um/): filler words as a mechanical habit, and the pause that replaces them
+
+## Landing pages by audience
+
+- [Second language](https://improvtalk.vip/second-language/): fluent on paper, stuck out loud
+- [Meeting people](https://improvtalk.vip/meeting-people/): practising the first line
+- [Speaking up](https://improvtalk.vip/speaking-up/): pace, fillers and being heard at work
+- [Out of practice](https://improvtalk.vip/out-of-practice/): getting it back rather than learning it
 
 ## Contact
 
-support@improvtalk.vip
+- [Email support](mailto:support@improvtalk.vip): a person reads every message

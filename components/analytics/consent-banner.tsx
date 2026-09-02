@@ -65,9 +65,14 @@ export function ConsentBanner() {
       className="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-canvas/95 backdrop-blur-md"
     >
       <div className="container-page flex flex-col gap-4 py-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-2xl text-[13px] leading-relaxed text-muted">
-          We use Google Analytics and Google Ads to see which adverts bring people here.
-          Nothing loads until you agree.{' '}
+        {/*
+          Kept short deliberately. This bar is fixed to the bottom, spans the
+          viewport and only paints after hydration, which made it the LCP element
+          on mobile — the metric was being set by a cookie notice rather than by
+          the hero. Fewer words is a smaller paint area and a better banner.
+        */}
+        <p className="max-w-md text-[13px] leading-relaxed text-muted">
+          Analytics and ads cookies. Nothing loads until you accept.{' '}
           <a href="/privacy/" className="text-accent underline underline-offset-4">
             How we handle data
           </a>

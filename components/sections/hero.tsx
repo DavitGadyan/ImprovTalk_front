@@ -53,7 +53,18 @@ export function Hero({ persona }: { persona: Persona }) {
 
       <div className="container-page relative">
         <div className="grid items-center gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12">
-          <motion.div variants={stagger} initial="hidden" animate="visible">
+          {/*
+            Rendered at its final state, not animated in.
+
+            This column starts above the fold on every load, so a fade from
+            opacity 0 buys a reveal nobody is there to see and costs the metric
+            that matters: Lighthouse cannot record the LCP of an invisible
+            element, so the h1's paint was being deferred until the JS had
+            downloaded, hydrated and run a 0.55s animation — 3.2s instead of
+            1.2s on a throttled phone. Sections below the fold still animate on
+            scroll, where the reveal is the point.
+          */}
+          <motion.div variants={stagger} initial="visible" animate="visible">
             <motion.p variants={fadeUp} className="mb-6">
               <span className="eyebrow">{eyebrow}</span>
             </motion.p>
@@ -88,12 +99,9 @@ export function Hero({ persona }: { persona: Persona }) {
             </motion.p>
           </motion.div>
 
-          <motion.div
-            style={{ y: deviceY }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          >
+          {/* Also above the fold, and a large LCP candidate in its own right.
+              The scroll parallax stays — it does not gate the first paint. */}
+          <motion.div style={{ y: deviceY }}>
             <DeviceCluster
               frontLabel="ImprovTalk live practice screen"
               front={<LivePracticeScreen />}
