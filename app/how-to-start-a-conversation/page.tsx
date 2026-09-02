@@ -1,7 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { PageShell } from '@/components/ui/page-shell'
+import Image from 'next/image'
+import { Header } from '@/components/sections/header'
+import { Footer } from '@/components/sections/footer'
 import { PostFilm } from '@/components/ui/post-film'
+import { PROSE } from '@/components/ui/prose'
 import { allVideosLd, breadcrumbLd, howToLd, pageJsonLd } from '@/lib/jsonld'
 
 const TITLE = 'How to start a conversation: the method in four moves'
@@ -57,15 +60,53 @@ export default function Page() {
   ])
 
   return (
-    <PageShell
-      title="How to start a conversation"
-      breadcrumb={[['Home', '/']]}
-      intro="People looking for something to say go looking for a line. The line is the wrong unit. What actually happens in a good opening is four moves, and each one is small enough to practise on its own."
-    >
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
-      />
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
+      <Header />
+
+      <main id="main">
+        <div className="relative h-[38vh] min-h-[260px] w-full overflow-hidden md:h-[46vh]">
+          <Image
+            src="/scenarios/coffee-shop-alt.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-[center_30%]"
+            priority
+            unoptimized
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-canvas/25 via-canvas/55 to-canvas" />
+        </div>
+
+        <article className="container-page relative z-10 -mt-24 pb-24 md:-mt-32 md:pb-32">
+          <div className="mx-auto max-w-[46rem]">
+            <nav aria-label="Breadcrumb" className="mb-6 text-[13px] text-subtle">
+              <ol className="flex flex-wrap items-center gap-x-2">
+                <li>
+                  <Link href="/" className="transition-colors hover:text-ink">
+                    Home
+                  </Link>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li className="text-muted">How to start a conversation</li>
+              </ol>
+            </nav>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="rounded-full border border-practice/40 px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-[0.13em] text-practice">
+                The method
+              </span>
+              <span className="text-[12.5px] text-subtle">4 moves · 6 min read</span>
+            </div>
+
+            <h1 className="display-md mt-5 text-ink">How to start a conversation</h1>
+
+            <p className="mt-6 border-l-2 border-line-strong pl-5 text-[18px] leading-relaxed text-muted">
+              People go looking for a line. The line is the wrong unit. What actually happens
+              is four moves, each small enough to practise on its own.
+            </p>
+
+            <div className={PROSE}>
 
       <h2>1. Borrow the situation, or go direct</h2>
       <p>
@@ -191,9 +232,31 @@ export default function Page() {
         person rather than a script. The twentieth is not braver than the first — it is
         just more practised, and from the outside those look identical.
       </p>
-      <p>
-        <Link href="/meeting-people/">Practise the first line →</Link>
-      </p>
-    </PageShell>
+            </div>
+
+            <aside className="mt-16 overflow-hidden rounded-2xl border border-line-strong bg-surface">
+              <div className="h-1 w-full bg-practice" />
+              <div className="p-7">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-subtle">
+                  Practise this
+                </p>
+                <p className="mt-3 text-[15.5px] leading-relaxed text-ink-soft">
+                  Twenty reps of an opener costs you nothing here. In a bar it costs you
+                  the evening.
+                </p>
+                <Link
+                  href="/meeting-people/"
+                  className="mt-5 inline-block text-sm font-medium text-accent underline underline-offset-4"
+                >
+                  Practise the first line →
+                </Link>
+              </div>
+            </aside>
+          </div>
+        </article>
+      </main>
+
+      <Footer />
+    </>
   )
 }

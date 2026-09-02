@@ -26,7 +26,7 @@ export function RelatedReading({ persona }: { persona: Persona }) {
       tone="raised"
       label="Read first"
       title="How to actually do it"
-      intro="The technique itself, written out — openers, what to notice, and how long you have."
+      intro="Openers, what to notice, and how long you have."
     >
       <div className="mt-10 grid gap-4 md:grid-cols-3">
         {shown.map((p) => (

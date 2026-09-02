@@ -27,8 +27,15 @@ export type Post = {
   /** Persona page this post links to. */
   personaPath: string
   personaLabel: string
-  /** Scenario film used in the post, if any. */
+  /** Scenario film embedded in the post body, if any. */
   film?: string
+  /** Card artwork. Every post has one — a wall of text is what a dull blog is. */
+  image: string
+  /** Short label, and the accent it borrows from the app's own palette. */
+  category: string
+  hue: string
+  /** Measured from the built page at 200 wpm, not guessed. */
+  minutes: number
 }
 
 const DATE = '2026-09-02'
@@ -46,6 +53,10 @@ export const posts: Post[] = [
     query: 'how to start a conversation with a stranger',
     personaPath: '/meeting-people/',
     personaLabel: 'Practise the first line',
+    image: '/scenarios/coffee-shop-alt.jpg',
+    category: 'Openers',
+    hue: 'var(--color-practice)',
+    minutes: 4,
     film: 'coffee-shop',
   },
   {
@@ -60,6 +71,10 @@ export const posts: Post[] = [
     query: 'how to break the ice',
     personaPath: '/meeting-people/',
     personaLabel: 'Practise the first line',
+    image: '/scenarios/bali-beach.jpg',
+    category: 'Openers',
+    hue: 'var(--color-practice)',
+    minutes: 4,
     film: 'bali-beach',
   },
   {
@@ -74,6 +89,10 @@ export const posts: Post[] = [
     query: 'what to say to someone you just met',
     personaPath: '/',
     personaLabel: 'Practice makes perfect',
+    image: '/scenarios/barcelona-beach-alt.jpg',
+    category: 'Attention',
+    hue: 'var(--color-learn)',
+    minutes: 4,
     film: 'barcelona-beach',
   },
   {
@@ -88,6 +107,10 @@ export const posts: Post[] = [
     query: 'mind goes blank in conversation',
     personaPath: '/',
     personaLabel: 'Practice makes perfect',
+    image: '/hero-minds.jpg',
+    category: 'Nerves',
+    hue: 'var(--color-simulate)',
+    minutes: 4,
   },
   {
     slug: 'practise-speaking-a-language-out-loud',
@@ -101,6 +124,10 @@ export const posts: Post[] = [
     query: 'practice speaking english out loud',
     personaPath: '/second-language/',
     personaLabel: 'Keep calm and talk',
+    image: '/scenarios/bali-beach-alt.jpg',
+    category: 'Languages',
+    hue: 'var(--color-accent)',
+    minutes: 4,
     film: 'barcelona-beach',
   },
   {
@@ -115,6 +142,10 @@ export const posts: Post[] = [
     query: 'how to stop saying um',
     personaPath: '/speaking-up/',
     personaLabel: 'Say what you mean',
+    image: '/scenarios/gym.jpg',
+    category: 'Delivery',
+    hue: 'var(--color-stats)',
+    minutes: 4,
   },
 ]
 
