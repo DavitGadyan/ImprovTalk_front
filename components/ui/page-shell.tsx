@@ -13,11 +13,14 @@ export function PageShell({
   title,
   updated,
   intro,
+  breadcrumb,
   children,
 }: {
   title: string
   updated?: string
   intro?: string
+  /** [label, href] pairs, excluding the current page. Renders a visible trail. */
+  breadcrumb?: readonly (readonly [string, string])[]
   children: React.ReactNode
 }) {
   return (
@@ -25,9 +28,25 @@ export function PageShell({
       <Header />
       <main id="main" className="container-page py-16 md:py-24">
         <div className="max-w-2xl">
-          <Link href="/" className="text-sm text-subtle transition-colors hover:text-ink">
-            ← Back
-          </Link>
+          {breadcrumb ? (
+            <nav aria-label="Breadcrumb" className="text-sm text-subtle">
+              <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 pl-0">
+                {breadcrumb.map(([label, href]) => (
+                  <li key={href} className="flex items-center gap-2">
+                    <Link href={href} className="transition-colors hover:text-ink">
+                      {label}
+                    </Link>
+                    <span aria-hidden="true">/</span>
+                  </li>
+                ))}
+                <li className="text-muted">{title}</li>
+              </ol>
+            </nav>
+          ) : (
+            <Link href="/" className="text-sm text-subtle transition-colors hover:text-ink">
+              ← Back
+            </Link>
+          )}
           <h1 className="display-md mt-6 text-ink">{title}</h1>
           {updated && (
             <p className="mt-3 text-[13px] text-subtle">Last updated {updated}</p>

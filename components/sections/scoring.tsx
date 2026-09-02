@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { Section, Reveal } from '@/components/ui/section'
 import { DeviceFrame, DeviceStage } from '@/components/ui/device-frame'
 import { ScoreBar, Meter } from '@/components/ui/meters'
-import { pillars, deliveryMeters } from '@/content/features'
+import { pillars, deliveryMeters, exampleCharismaScore } from '@/content/features'
 import { fadeUp, stagger, viewportOnce } from '@/lib/motion'
 import type { Persona } from '@/content/personas'
 
@@ -97,7 +97,7 @@ function ScoreScreen() {
           Charisma score
         </p>
         <p className="numeric mt-2 font-[family-name:var(--font-display)] text-[64px] font-semibold leading-none text-ink">
-          77
+          {exampleCharismaScore}
         </p>
         <p className="mt-2 text-[11px] text-stats">+6 on your baseline</p>
       </div>

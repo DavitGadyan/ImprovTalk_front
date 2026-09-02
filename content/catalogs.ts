@@ -41,7 +41,10 @@ export const TOTAL_LIBRARY_ITEMS = 2766
 export const stats = {
   liveScenarios: 70,
   liveVenues: 13,
-  simScenarios: 225,
+  /* Served, not shelved: the 19 files the loader reads hold 225 scenarios, but
+     15 carry `disabled: true` and are filtered out before any of them reach a
+     user. Counted from orchestrator.py's own _LOCATION_FILES list. */
+  simScenarios: 210,
   simVenues: 19,
   countries: 195,
   facePhotos: 631,

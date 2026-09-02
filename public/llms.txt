@@ -25,16 +25,18 @@ by actually speaking them, not by reading about them.
 
 Charisma Score = Fluency x 0.40 + Confidence x 0.35 + Improvisation x 0.25.
 
-It is computed server-side from the recording and transcript, so the same
-session always produces the same number. Delivery metrics — pace, pauses, filler
-count, pitch and volume steadiness — come from acoustic analysis of the audio
-(librosa and Parselmouth/Praat), not from a model's opinion. Lexical diversity
-uses MATTR and MTLD.
+Those three pillars are graded against a fixed rubric, then blended with the
+measured delivery score, which counts for a quarter of the total. Delivery
+metrics — pace, pauses, filler count, pitch and volume steadiness — come from
+acoustic analysis of the audio (librosa and Parselmouth/Praat) and are
+deterministic for the same recording. The rubric half is a model judgement made
+the same way every time, not a measurement. Lexical diversity uses MATTR and
+MTLD.
 
 ## What is in it
 
 - 70 live practice scenarios across 13 venues
-- 225 AI-vs-AI simulator scenarios across 19 venues
+- 210 AI-vs-AI simulator scenarios across 19 venues
 - 2,766 reference items across 22 catalogues (countries, accents, films, music,
   art, professions, gestures and more)
 - 195 nationalities and 29 accents, which shape who the AI partner is and how
@@ -44,10 +46,11 @@ uses MATTR and MTLD.
 
 ## Privacy
 
-Audio uploads only when a session ends and is hard-deleted 24 hours after
-scoring. The microphone is not active outside a session screen. No contacts,
-calendar, photos or location are collected, and the app ships no advertising or
-analytics SDKs. Users can export or delete everything.
+Your voice is used to score the session and nothing else. The microphone is not
+active outside a session screen. Transcripts and scores are kept until you
+delete them; deleting the account removes them. No contacts, calendar, photos or
+location are collected, and the app ships no advertising or analytics SDKs.
+Users can export or delete everything.
 
 ## Pricing
 

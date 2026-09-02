@@ -5,9 +5,9 @@ export const language: Persona = {
   slug: 'language',
   path: '/second-language/',
   meta: {
-    title: 'ImprovTalk — practise speaking a second language',
+    title: 'Practise speaking English, Spanish or Russian out loud',
     description:
-      'Reading is the easy part. Practise speaking English, Spanish or Russian out loud, as often as you like, with someone who never gets impatient.',
+      'Reading is the easy part. Practise speaking English, Spanish or Russian out loud with an AI that will not switch back to English when you stall.',
   },
   hero: {
     eyebrow: 'Speak, do not translate',
@@ -60,7 +60,7 @@ export const language: Persona = {
     { q: 'Which languages?', a: 'English, Spanish and Russian. You pick before you start. The app menus are in English.' },
     { q: 'Do I have to talk out loud?', a: 'Yes. Reading and writing are the parts you can already do. There is no typing.' },
     { q: 'Will it fix my grammar?', a: 'It tells you what worked and gives you a better way to say it. Your speed and pauses are measured from the recording.' },
-    { q: 'What happens to my recordings?', a: 'They are deleted 24 hours after scoring. No contacts, photos or location. No ads.' },
+    { q: 'What happens to my recordings?', a: 'Your voice is used to score the session and nothing else. Transcripts and scores stay until you delete them, and deleting your account removes them. No contacts, photos or location. No ads.' },
     { q: 'What does it cost?', a: 'Free to start — three conversations a week. Paid plans give you more.' },
     { q: 'How do I get it?', a: 'It is on TestFlight for iPhone. Tap Get early access and it takes you there.' },
   ],

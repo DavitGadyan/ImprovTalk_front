@@ -12,6 +12,7 @@
     "start": "next start",
     "lint": "next lint",
     "serve:out": "npx --yes serve out -l 3001",
+    "verify:tracking": "node scripts/verify-tracking.mjs",
     "gen:icons": "node scripts/gen-icons.mjs",
     "gen:assets": "npm run gen:icons && npm run gen:qr",
     "gen:qr": "node scripts/gen-qr.mjs"

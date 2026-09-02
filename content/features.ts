@@ -35,13 +35,14 @@ export const drills = [
 
 /** Voice & delivery meters, from apps/mobile/app/score-result.tsx. */
 export const deliveryMeters = [
-  { name: 'Depth', note: 'low, resonant', value: 78 },
-  { name: 'Intonation', note: 'expressive', value: 64 },
-  { name: 'Pace', note: 'calm, even', value: 86 },
-  { name: 'Pauses', note: 'composed', value: 71 },
-  { name: 'Fewer fillers', note: '7 in 3 minutes', value: 52 },
-  { name: 'Steady volume', note: 'no fade-out', value: 80 },
+  { name: 'Depth', note: 'low, resonant', value: 78, weight: 0.15 },
+  { name: 'Intonation', note: 'expressive', value: 64, weight: 0.15 },
+  { name: 'Pace', note: 'calm, even', value: 86, weight: 0.25 },
+  { name: 'Pauses', note: 'composed', value: 71, weight: 0.18 },
+  { name: 'Fewer fillers', note: '7 in 3 minutes', value: 52, weight: 0.17 },
+  { name: 'Steady volume', note: 'no fade-out', value: 80, weight: 0.10 },
 ] as const
+
 
 /** The three pillars and their real weights from services/api/app/services/rubric.py */
 export const pillars = [
@@ -55,3 +56,26 @@ export const venues = [
   'Mall', 'Grocery', 'Festival', 'Airport', 'Trail', 'Zoo', 'Aquarium',
   'Swimming pool', 'On the clock', 'Free improv',
 ] as const
+
+/**
+ * How much the measured delivery counts toward the headline score, from
+ * VOICE_WEIGHT in services/api/app/routers/sessions.py. The words still lead.
+ */
+export const VOICE_WEIGHT = 0.25
+
+const weighted = (rows: readonly { value: number; weight: number }[]) =>
+  rows.reduce((t, r) => t + r.value * r.weight, 0)
+
+/**
+ * The example score, derived rather than typed.
+ *
+ * It used to be a hard-coded 77 sitting directly above pillars that add up to 76
+ * before the voice blend and 75 after. Nobody checks a mockup — but the site now
+ * publishes the method, so the arithmetic on screen has to survive someone doing
+ * it themselves.
+ */
+export const exampleContentScore = Math.round(weighted(pillars))
+export const exampleVoiceScore = Math.round(weighted(deliveryMeters))
+export const exampleCharismaScore = Math.round(
+  weighted(pillars) * (1 - VOICE_WEIGHT) + weighted(deliveryMeters) * VOICE_WEIGHT,
+)

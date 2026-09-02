@@ -62,6 +62,9 @@ export const metadata: Metadata = {
     description: site.description,
     images: ['/og.png'],
   },
+  ...(site.googleSiteVerification
+    ? { verification: { google: site.googleSiteVerification } }
+    : {}),
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '48x48' },
@@ -69,7 +72,6 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
   },
-  alternates: { canonical: site.url },
 }
 
 export const viewport: Viewport = {

@@ -5,9 +5,9 @@ export const speaking: Persona = {
   slug: 'speaking',
   path: '/speaking-up/',
   meta: {
-    title: 'ImprovTalk — practise speaking clearly',
+    title: 'Practise speaking clearly and stop saying um',
     description:
-      'Talking too fast, saying um, losing the room. Practise out loud and get the numbers: your speed, your pauses, how often you said um.',
+      'Talking too fast, saying um, losing the room. Practise out loud and get real numbers: your words per minute, your pauses, your filler count.',
   },
   hero: {
     eyebrow: 'Say it clearly',
@@ -60,7 +60,7 @@ export const speaking: Persona = {
     { q: 'Do I have to talk out loud?', a: 'Yes. You cannot practise how you sound in your head. There is no typing.' },
     { q: 'What does it measure?', a: 'Your speed in words per minute, how long you pause, how often you say um, and how steady your voice is — all from the recording.' },
     { q: 'Is it just a guess?', a: 'No. The delivery half is measured, not guessed. Tap any score to see the numbers behind it.' },
-    { q: 'What happens to my recordings?', a: 'They are deleted 24 hours after scoring. No contacts, photos or location. No ads.' },
+    { q: 'What happens to my recordings?', a: 'Your voice is used to score the session and nothing else. Transcripts and scores stay until you delete them, and deleting your account removes them. No contacts, photos or location. No ads.' },
     { q: 'What does it cost?', a: 'Free to start — three conversations a week. Paid plans give you more.' },
     { q: 'How do I get it?', a: 'It is on TestFlight for iPhone. Tap Get early access and it takes you there.' },
   ],

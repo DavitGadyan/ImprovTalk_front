@@ -41,6 +41,11 @@ jobs:
       - name: Build static export
         run: npm run build
 
+      - name: Verify tracking invariants
+        # The money path breaks silently: a removed id or a renamed label still
+        # builds and still looks right. Cheaper to fail here than in Ads.
+        run: node scripts/verify-tracking.mjs
+
       - name: Verify the export
         # A silent partial export would otherwise replace a working site.
         # Cheaper to fail here than to find out from a visitor.

@@ -146,3 +146,19 @@ npm run gen:assets   # favicons + QR (QR self-verifies by decoding)
 ```
 
 Push to `main` deploys. `docs/` holds DEPLOY, CONVERSIONS and BRAND-AND-VIDEO.
+
+## Customer personas (docs/personas/)
+
+Five two-page PDFs, one per variant, built to the Google persona framework
+(name, age, location, household, education, occupation, goals, barriers) and
+extended with an acquisition plan: pain/barrier/solution, the message that
+lands, channels, a four-stage funnel (awareness → consideration → conversion →
+loyalty), the landing page, and a ready-to-paste video-generation prompt.
+
+Genders were set deliberately: **shy, language, social and speaking are male;
+rusty is female.** The AI conversation partner stays "she" throughout the app
+and site copy — that is not a persona pronoun.
+
+Regeneration, the page-height mechanism and the traps are in
+`docs/personas/src/README.md`. The one that will bite: a `.two` class on `.page`
+collides with the two-column grid and scrambles the layout in the PDF only.

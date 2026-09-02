@@ -1,22 +1,27 @@
 import type { Metadata } from 'next'
 import { PersonaPage } from '@/components/persona-page'
 import { personas } from '@/content/personas'
-import { site } from '@/content/site'
 
 const persona = personas.speaking
 
 /**
- * A split-test variant and campaign landing page.
+ * A campaign landing page, and indexable in its own right.
  *
- * noindex with a canonical back to `/`: five near-identical pages would
- * otherwise compete with each other in search and split the signal the
- * structured-data work exists to concentrate. It is also kept out of sitemap.ts.
+ * It was noindex with a canonical back to `/` while it was one arm of a live
+ * split. The split is paused (see content/personas/index.ts), and the copy here
+ * is genuinely distinct — its own headline, section order and FAQ, written for a
+ * different search intent — so it earns its own place in the index rather than
+ * competing with the homepage for the same query.
  */
 export const metadata: Metadata = {
   title: persona.meta.title,
   description: persona.meta.description,
-  robots: { index: false, follow: true },
-  alternates: { canonical: site.url },
+  alternates: { canonical: persona.path },
+  openGraph: {
+    url: persona.path,
+    title: persona.meta.title,
+    description: persona.meta.description,
+  },
 }
 
 export default function Page() {

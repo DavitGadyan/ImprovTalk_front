@@ -6,6 +6,8 @@ import { site } from '@/content/site'
 export const metadata: Metadata = {
   title: 'Terms of service',
   description: 'The terms you agree to when you use ImprovTalk.',
+  alternates: { canonical: '/terms/' },
+  openGraph: { url: '/terms/' },
 }
 
 /*

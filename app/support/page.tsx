@@ -2,10 +2,13 @@ import type { Metadata } from 'next'
 import { PageShell } from '@/components/ui/page-shell'
 import { SUPPORT_EMAIL } from '@/content/links'
 import { faqs } from '@/content/faq'
+import { breadcrumbLd, faqLd, pageJsonLd } from '@/lib/jsonld'
 
 export const metadata: Metadata = {
   title: 'Support',
   description: 'Get help with ImprovTalk — installing, billing, account deletion and data export.',
+  alternates: { canonical: '/support/' },
+  openGraph: { url: '/support/', title: 'Support · ImprovTalk' },
 }
 
 export default function SupportPage() {
@@ -14,6 +17,20 @@ export default function SupportPage() {
       title="Support"
       intro="Email is the fastest way to reach a person. We read everything."
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            pageJsonLd([
+              faqLd(faqs),
+              breadcrumbLd([
+                ['Home', '/'],
+                ['Support', '/support/'],
+              ]),
+            ]),
+          ),
+        }}
+      />
       <p>
         <a href={`mailto:${SUPPORT_EMAIL}`} className="text-lg">
           {SUPPORT_EMAIL}

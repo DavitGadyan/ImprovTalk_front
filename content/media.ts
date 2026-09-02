@@ -17,6 +17,8 @@
 export type Scenario = {
   slug: string
   label: string
+  /** ISO 8601, for VideoObject. Measured with ffprobe against the shipped mp4. */
+  duration: string
   /** Shown under the player — say what is happening, not what it looks like. */
   caption: string
   /** Describes the footage for screen readers and when video is unavailable. */
@@ -27,24 +29,28 @@ export const scenarios: Scenario[] = [
   {
     slug: 'coffee-shop',
     label: 'Coffee shop',
+    duration: 'PT20S',
     caption: 'The queue. Thirty seconds of shared waiting, and an opening if you take it.',
     alt: 'Two people talking while waiting in a coffee shop queue.',
   },
   {
     slug: 'bali-beach',
     label: 'Bali beach',
+    duration: 'PT20S',
     caption: 'Somewhere nobody knows you. The easiest place to practise and the easiest to freeze.',
     alt: 'Two people talking on a beach in Bali.',
   },
   {
     slug: 'barcelona-beach',
     label: 'Barcelona beach',
+    duration: 'PT24S',
     caption: 'A busy shoreline, a group, and the problem of joining a conversation already running.',
     alt: 'People talking on a busy beach in Barcelona.',
   },
   {
     slug: 'gym',
     label: 'Gym',
+    duration: 'PT20S',
     caption: 'Between sets. Short windows, high stakes, and the worst place to be long-winded.',
     alt: 'Two people talking between sets at a gym.',
   },
@@ -52,5 +58,12 @@ export const scenarios: Scenario[] = [
 
 export const videoSrc = (slug: string) => `/scenarios/${slug}.mp4`
 export const posterSrc = (slug: string) => `/scenarios/${slug}.jpg`
+
+/** All four were transcoded and published together. Used for VideoObject. */
+export const FILM_UPLOAD_DATE = '2026-08-30'
+
+/** Native size of the transcoded files, checked with ffprobe. */
+export const FILM_WIDTH = 1440
+export const FILM_HEIGHT = 810
 
 export const hasScenarioFilms = scenarios.length > 0

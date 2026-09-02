@@ -69,9 +69,15 @@ export function EarlyAccessDialog({
           <div className="flex items-center gap-3.5">
             <LogoMark size={40} />
             <div>
-              <h2 id="ea-title" className="text-lg font-semibold text-ink">
+              {/*
+                A <p>, not an <h2>. The dialog is mounted inside the hero, so an
+                h2 here lands ahead of the first real section in source order and
+                a crawler reads the page's opening heading as "Get early access".
+                aria-labelledby still names the dialog, so nothing is lost.
+              */}
+              <p id="ea-title" className="text-lg font-semibold text-ink">
                 {isAndroid ? 'iPhone first' : 'Get early access'}
-              </h2>
+              </p>
               <p className="mt-0.5 text-[13px] text-subtle">
                 {isAndroid ? 'iPhone only for now' : 'Free, on TestFlight'}
               </p>

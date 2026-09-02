@@ -19,7 +19,9 @@ export function Footer() {
             <FooterCol title="Product">
               <FooterLink href="/#how">How it works</FooterLink>
               <FooterLink href="/#scoring">Scoring</FooterLink>
-              <FooterLink href="/#library">Library</FooterLink>
+              <FooterLink href="/#inside">Library</FooterLink>
+              <FooterLink href="/how-to-start-a-conversation/">How to start a conversation</FooterLink>
+              <FooterLink href="/blog/">Blog</FooterLink>
               <FooterLink href="/get/">Get the app</FooterLink>
             </FooterCol>
             <FooterCol title="Legal">
@@ -27,6 +29,7 @@ export function Footer() {
               <FooterLink href="/terms/">Terms</FooterLink>
             </FooterCol>
             <FooterCol title="Contact">
+              <FooterLink href="/about/">About</FooterLink>
               <FooterLink href="/support/">Support</FooterLink>
               <FooterLink href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</FooterLink>
             </FooterCol>
@@ -62,7 +65,7 @@ function FooterCol({ title, children }: { title: string; children: React.ReactNo
       <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-subtle">
         {title}
       </h3>
-      <ul className="space-y-2.5">{children}</ul>
+      <ul className="space-y-1">{children}</ul>
     </div>
   )
 }
@@ -72,11 +75,11 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
   return (
     <li>
       {external ? (
-        <a href={href} className="text-sm text-muted transition-colors hover:text-ink">
+        <a href={href} className="block py-1.5 text-sm text-muted transition-colors hover:text-ink">
           {children}
         </a>
       ) : (
-        <Link href={href} className="text-sm text-muted transition-colors hover:text-ink">
+        <Link href={href} className="block py-1.5 text-sm text-muted transition-colors hover:text-ink">
           {children}
         </Link>
       )}

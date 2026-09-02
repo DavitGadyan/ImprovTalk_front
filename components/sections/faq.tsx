@@ -22,8 +22,8 @@ export function Faq({ persona, index }: { persona: Persona; index: number }) {
       >
         {persona.faq.map((f) => (
           <motion.details key={f.q} variants={fadeUp} className="group py-5">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-[16px] font-medium text-ink marker:hidden">
-              {f.q}
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-6 marker:hidden">
+              <h3 className="text-[16px] font-medium text-ink">{f.q}</h3>
               <span
                 aria-hidden="true"
                 className="relative size-4 shrink-0 text-subtle transition-transform duration-300 group-open:rotate-45"

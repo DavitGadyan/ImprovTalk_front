@@ -5,7 +5,7 @@ export const faqs = [
   },
   {
     q: 'What does it score me on?',
-    a: 'A Charisma Score built from three measured pillars — Fluency (40%), Confidence (35%) and Improvisation (25%). The score is computed on the server from your actual audio and transcript, so the same session always produces the same number.',
+    a: 'A Charisma Score built from three pillars — Fluency (40%), Confidence (35%) and Improvisation (25%) — graded against a fixed rubric, then blended with your measured delivery, which counts for a quarter of the total. The delivery half comes straight out of the audio; the rubric half is a judgement made the same way every time.',
   },
   {
     q: 'Is the feedback just an AI opinion?',
@@ -13,7 +13,7 @@ export const faqs = [
   },
   {
     q: 'What happens to my recordings?',
-    a: 'Audio is uploaded only when you end a session, and it is hard-deleted 24 hours after scoring. The transcript and scores stay until you delete them. No contacts, calendar, photos or location are collected, and there are no advertising SDKs in the app.',
+    a: 'Your voice is used to score the session and nothing else. The transcript and scores stay until you delete them, and deleting your account removes them. No contacts, calendar, photos or location are collected, and there are no advertising SDKs in the app. The privacy policy has the detail.',
   },
   {
     q: 'What does it cost?',

@@ -8,9 +8,9 @@ export const shy: Persona = {
   slug: 'shy',
   path: '/',
   meta: {
-    title: 'ImprovTalk — practise talking to people',
+    title: 'Practise talking to people out loud',
     description:
-      'Practise real conversations out loud on your phone. Nobody hears you, you can try as often as you like, and it tells you what went wrong.',
+      'Practise real conversations out loud on your phone. Nobody hears you, you can try as often as you like, and it tells you what went wrong when you freeze.',
   },
   hero: {
     eyebrow: 'Practise out loud',
@@ -61,9 +61,9 @@ export const shy: Persona = {
   },
   faq: [
     { q: 'Do I have to talk out loud?', a: 'Yes. You hold a button and speak, and it speaks back. There is no typing.' },
-    { q: 'What is the score?', a: 'How well you spoke — fluency, confidence and improvising. Worked out from your voice, so the same session always gets the same score.' },
+    { q: 'What is the score?', a: 'How well you spoke — fluency, confidence and improvising — and how you sounded saying it. Your pace, pauses and filler words are measured from the recording itself.' },
     { q: 'Is it just a guess?', a: 'No. Your speed, pauses and filler words are measured from the recording. Tap any score to see the numbers.' },
-    { q: 'What happens to my recordings?', a: 'They are deleted 24 hours after scoring. No contacts, photos or location. No ads.' },
+    { q: 'What happens to my recordings?', a: 'Your voice is used to score the session and nothing else. Transcripts and scores stay until you delete them, and deleting your account removes them. No contacts, photos or location. No ads.' },
     { q: 'What does it cost?', a: 'Free to start — three conversations a week. Paid plans give you more.' },
     { q: 'How do I get it?', a: 'It is on TestFlight for iPhone. Tap Get early access and it takes you there.' },
   ],

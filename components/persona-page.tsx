@@ -7,6 +7,7 @@ import { Scoring } from '@/components/sections/scoring'
 import { WhatsInside } from '@/components/sections/whats-inside'
 import { Faq } from '@/components/sections/faq'
 import { Footer } from '@/components/sections/footer'
+import { RelatedReading } from '@/components/sections/related-reading'
 import { ScrollCta } from '@/components/ui/scroll-cta'
 import { VariantTag } from '@/components/variant-tag'
 import { homeJsonLd } from '@/lib/jsonld'
@@ -48,6 +49,7 @@ export function PersonaPage({ persona }: { persona: Persona }) {
              every variant even though the sections themselves are reordered. */
           return <S key={key} persona={persona} index={i + 1} />
         })}
+        <RelatedReading persona={persona} />
       </main>
       <Footer />
       <ScrollCta />
