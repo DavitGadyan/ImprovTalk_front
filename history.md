@@ -162,3 +162,26 @@ and site copy — that is not a persona pronoun.
 Regeneration, the page-height mechanism and the traps are in
 `docs/personas/src/README.md`. The one that will bite: a `.two` class on `.page`
 collides with the two-column grid and scrambles the layout in the PDF only.
+
+## The deploy that succeeds while the site serves a README
+
+**Symptom:** `improvtalk.vip/` returns 200 with the title
+`ImprovTalk — marketing site | ImprovTalk_front`, every other route 404s, and
+`davitgadyan.github.io/ImprovTalk_front/` shows the same thing. The Deploy site
+workflow is green.
+
+**Cause:** Pages **Settings → Pages → Source** is on *Deploy from a branch*.
+GitHub's own Jekyll builder then publishes the repository root — rendering
+`README.md` as the homepage — and silently discards the artifact this workflow
+uploads. Both the build and the deploy still report success, because from the
+workflow's point of view nothing failed.
+
+**Fix:** Settings → Pages → Build and deployment → Source → **GitHub Actions**,
+then re-run the workflow. The `.nojekyll` file in `out/` does not help here: it
+only stops Jekyll processing *our* artifact, and in this failure mode our
+artifact is never served at all.
+
+**Guard:** the `smoke` job in `.github/workflows/deploy.yml` fetches the live
+site after deploying and fails if it is not this app, if any key route 404s, or
+if the custom domain has been dropped. Green build, broken site is the one
+failure a build-time check cannot catch.

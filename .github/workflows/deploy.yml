@@ -88,3 +88,62 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Everything above can go green while the live site serves something else
+  # entirely. That is not hypothetical: with the Pages source set to "Deploy from
+  # a branch" instead of "GitHub Actions", GitHub's own Jekyll builder publishes
+  # the repository root and silently discards this workflow's artifact — the
+  # domain then serves a rendered README, every route 404s, and the deploy still
+  # reports success. It went unnoticed until someone opened the site.
+  #
+  # So: verify what is actually being served, not what we uploaded.
+  smoke:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify the live site is this app
+        run: |
+          set -uo pipefail
+          SITE="https://improvtalk.vip"
+
+          # Pages serves partial state for a minute or two after a deploy, so
+          # poll rather than failing on the first miss.
+          for i in $(seq 1 15); do
+            body=$(curl -sL --max-time 20 "$SITE/?ci=$(date +%s)" || true)
+            if printf '%s' "$body" | grep -q '_next/static'; then
+              echo "live site is the Next export (attempt $i)"
+              break
+            fi
+            if [ "$i" -eq 15 ]; then
+              echo "::error::$SITE is not serving this app after 15 attempts."
+              echo "::error::Served title: $(printf '%s' "$body" | grep -o '<title>[^<]*</title>' | head -1)"
+              echo "::error::If this is a rendered README, Settings > Pages > Source is on"
+              echo "::error::'Deploy from a branch'. It must be 'GitHub Actions'."
+              exit 1
+            fi
+            sleep 12
+          done
+
+          # A homepage alone is not a working site. The Jekyll failure mode
+          # serves index and 404s everything else, so check real routes.
+          fail=0
+          for path in /sitemap.xml /robots.txt /llms.txt /about/ /blog/ /privacy/ /how-to-start-a-conversation/; do
+            code=$(curl -sL -o /dev/null -w '%{http_code}' --max-time 20 "$SITE$path" || echo 000)
+            if [ "$code" != "200" ]; then
+              echo "::error::$path returned $code"
+              fail=1
+            else
+              echo "  $path 200"
+            fi
+          done
+
+          # The custom domain is dropped whenever CNAME is missing from the
+          # artifact, which shows up as a redirect to github.io.
+          final=$(curl -sL -o /dev/null -w '%{url_effective}' --max-time 20 "$SITE/" || true)
+          case "$final" in
+            https://improvtalk.vip/*) echo "  custom domain intact" ;;
+            *) echo "::error::$SITE/ resolved to $final — CNAME lost"; fail=1 ;;
+          esac
+
+          [ "$fail" -eq 0 ] || exit 1
+          echo "live site verified"
