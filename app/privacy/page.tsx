@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { PageShell } from '@/components/ui/page-shell'
 import { SUPPORT_EMAIL } from '@/content/links'
+import { breadcrumbLd, pageJsonLd } from '@/lib/jsonld'
 
 export const metadata: Metadata = {
   title: 'Privacy policy',
@@ -22,6 +23,19 @@ export default function PrivacyPage() {
       updated="30 August 2026"
       intro="You are handing this app recordings of your own voice. Here is exactly what happens to them."
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            pageJsonLd([
+              breadcrumbLd([
+                ['Home', '/'],
+                ['Privacy policy', '/privacy/'],
+              ]),
+            ]),
+          ),
+        }}
+      />
       <h2>What we collect</h2>
       <table>
         <thead>

@@ -35,8 +35,22 @@ export const organizationLd = {
   logo: { '@type': 'ImageObject', url: LOGO, width: 512, height: 512 },
   email: site.supportEmail,
   description: site.description,
-  /* `sameAs` is omitted until real profiles exist — an empty or wrong entity
-     link is worse for disambiguation than none. */
+  /*
+   * How a reader actually reaches a person. Google surfaces this in the
+   * knowledge panel, and it is the structured-data half of saying plainly on
+   * the site where support lives.
+   */
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer support',
+    email: site.supportEmail,
+    url: `${site.url}/support/`,
+    /* Support is answered in English. The app converses in three languages;
+       that is a different claim and belongs on SoftwareApplication. */
+    availableLanguage: ['English'],
+  },
+  /* Omitted entirely while empty — see socialProfiles in content/site.ts. */
+  ...(site.socialProfiles.length ? { sameAs: [...site.socialProfiles] } : {}),
 }
 
 export const websiteLd = {

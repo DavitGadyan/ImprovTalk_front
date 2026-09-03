@@ -27,6 +27,18 @@ export const site = {
    * method also works but adds a file that must never be deleted.
    */
   googleSiteVerification: '',
+  /*
+   * Official profiles for this brand, emitted as Organization.sameAs.
+   *
+   * This is what lets Google tie the site, the App Store listing and the social
+   * accounts together as one entity, which is the prerequisite for a knowledge
+   * panel. Add real URLs only — an invented or wrong profile link is worse for
+   * disambiguation than an empty list, which is why this ships empty.
+   *
+   * Good candidates once they exist: the App Store page, LinkedIn, YouTube,
+   * Instagram, TikTok, X.
+   */
+  socialProfiles: [] as readonly string[],
 } as const
 
 export const nav = [

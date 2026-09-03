@@ -5,7 +5,7 @@ import { Footer } from '@/components/sections/footer'
 import { PostFilm } from '@/components/ui/post-film'
 import { scenarios } from '@/content/media'
 import { posts, type Post } from '@/content/posts'
-import { blogPostingLd, breadcrumbLd, pageJsonLd, videoLd } from '@/lib/jsonld'
+import { blogLd, blogPostingLd, breadcrumbLd, pageJsonLd, videoLd } from '@/lib/jsonld'
 import { PROSE } from '@/components/ui/prose'
 
 const longDate = (iso: string) =>
@@ -18,6 +18,9 @@ export function BlogPost({ post, children }: { post: Post; children: React.React
   const next = posts[(idx + 1) % posts.length]!
 
   const ld = pageJsonLd([
+    /* The Blog node travels with every post: BlogPosting.isPartOf points at its
+       @id, and without it in the same graph the reference dangles. */
+    blogLd,
     blogPostingLd(post),
     breadcrumbLd([['Home', '/'], ['Blog', '/blog/'], [post.title, post.path]]),
     ...(film ? [videoLd(film)] : []),

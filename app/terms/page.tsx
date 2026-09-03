@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { PageShell } from '@/components/ui/page-shell'
 import { SUPPORT_EMAIL } from '@/content/links'
+import { breadcrumbLd, pageJsonLd } from '@/lib/jsonld'
 import { site } from '@/content/site'
 
 export const metadata: Metadata = {
@@ -24,6 +25,19 @@ export default function TermsPage() {
       updated="30 August 2026"
       intro="Plain terms for using ImprovTalk. By installing the app or using the service, you agree to them."
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            pageJsonLd([
+              breadcrumbLd([
+                ['Home', '/'],
+                ['Terms of service', '/terms/'],
+              ]),
+            ]),
+          ),
+        }}
+      />
       <h2>What ImprovTalk is</h2>
       <p>
         ImprovTalk is a practice tool. It simulates conversations and scores your delivery so you
