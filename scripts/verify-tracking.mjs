@@ -59,9 +59,11 @@ if (!existsSync(OUT)) {
 const home = read('index.html')
 
 // --- tag identity -----------------------------------------------------------
-// The library src is inlined in the HTML as a preload hint; the Ads config call
-// and the conversion label are afterInteractive, so Next moves them into the JS
-// bundle. Look in both rather than assuming either.
+// The gtag library loads lazyOnload, so neither the measurement id nor the
+// library URL appears in the served HTML at all — Next injects both at runtime
+// from the JS bundle. What IS in every page's HTML is the beforeInteractive
+// consent bootstrap, which is the thing that must not regress: it has to run
+// before the library, and its absence on a page means that page ships untagged.
 const bundles = [...home.matchAll(/\/_next\/static\/chunks\/[^"']+\.js/g)].map((m) => m[0])
 const bundleText = bundles
   .map((b) => {
@@ -111,12 +113,16 @@ for (const page of PERSONA_PAGES) {
   check(`${page}: hero CTA id`, html.includes('id="hero-cta"'), 'the floating pill observes this')
   check(`${page}: install dialog present`, html.includes('<dialog'))
   check(`${page}: TestFlight link present`, html.includes('testflight.apple.com'))
-  check(`${page}: loads gtag`, html.includes(GA4))
+  check(`${page}: consent bootstrap present`, html.includes("gtag('consent', 'default'"))
 }
 
 for (const page of CONTENT_PAGES) {
   const html = read(page)
-  check(`${page}: loads gtag`, html.includes(GA4), 'content pages still need page_view')
+  check(
+    `${page}: consent bootstrap present`,
+    html.includes("gtag('consent', 'default'"),
+    'content pages still need page_view',
+  )
 }
 
 // --- the variant redirect ---------------------------------------------------

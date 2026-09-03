@@ -45,12 +45,27 @@ gtag('js', new Date());
         `}
       </Script>
 
+      {/*
+        lazyOnload, not afterInteractive.
+
+        afterInteractive makes Next emit <link rel="preload" as="script"> for
+        this in <head>, which hands a third-party analytics library
+        critical-path priority: a fresh DNS + TCP + TLS handshake to
+        googletagmanager.com, then a large script competing with our own CSS and
+        JS, before anything paints. Measured on a throttled phone it cost 2.9s
+        of FCP and 8.5s of DOMContentLoaded — it was the entire mobile
+        performance problem, not the fonts or the animation library.
+
+        The trade: page_view fires after load rather than during it, so a
+        visitor who bounces inside ~2s may go uncounted. Conversions are
+        unaffected — testflight_click fires on a tap, long after load.
+      */}
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${bootstrapId}`}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
 
-      <Script id="gtag-config" strategy="afterInteractive">
+      <Script id="gtag-config" strategy="lazyOnload">
         {`
 (function () {
   // Recover the referrer the variant redirect consumed, so untagged traffic is

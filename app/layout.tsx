@@ -24,7 +24,14 @@ const interTight = localFont({
   style: 'normal',
   display: 'swap',
   variable: '--font-inter-tight',
-  preload: true,
+  /*
+   * Not preloaded. Both faces total ~91KB gzipped and were being fetched at the
+   * very top of the critical path, competing with the CSS and the first JS chunk
+   * on a slow connection. display:'swap' means text paints immediately in the
+   * fallback either way, and adjustFontFallback keeps the swap from shifting
+   * layout — so the preload was buying nothing and costing first paint.
+   */
+  preload: false,
   fallback: ['ui-sans-serif', 'system-ui', 'sans-serif'],
   adjustFontFallback: 'Arial',
 })
@@ -35,7 +42,7 @@ const inter = localFont({
   style: 'normal',
   display: 'swap',
   variable: '--font-inter',
-  preload: true,
+  preload: false,
   fallback: ['ui-sans-serif', 'system-ui', 'sans-serif'],
   adjustFontFallback: 'Arial',
 })
