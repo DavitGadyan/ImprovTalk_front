@@ -100,7 +100,32 @@ jobs:
   smoke:
     needs: deploy
     runs-on: ubuntu-latest
+    permissions:
+      pages: read
     steps:
+      - name: Verify Pages still publishes this workflow's artifact
+        # The direct check for the failure above. build_type "legacy" means the
+        # Pages source has been switched back to "Deploy from a branch", so
+        # GitHub's Jekyll builder publishes the repo root and throws this
+        # workflow's artifact away — while every job still reports success.
+        # Catching the setting is better than inferring it from a 404.
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          bt=$(curl -sS --max-time 20 \
+                 -H "Authorization: Bearer $GH_TOKEN" \
+                 -H "Accept: application/vnd.github+json" \
+                 "https://api.github.com/repos/${{ github.repository }}/pages" \
+               | python3 -c "import json,sys; print(json.load(sys.stdin).get('build_type','?'))")
+          echo "Pages build_type: $bt"
+          if [ "$bt" != "workflow" ]; then
+            echo "::error::Pages build_type is '$bt', expected 'workflow'."
+            echo "::error::Settings > Pages > Source must be 'GitHub Actions'."
+            echo "::error::On 'Deploy from a branch' the site serves a rendered README."
+            exit 1
+          fi
+
       - name: Verify the live site is this app
         run: |
           set -uo pipefail
