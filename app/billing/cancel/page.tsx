@@ -4,6 +4,8 @@ import { SUPPORT_EMAIL } from '@/content/links'
 
 export const metadata: Metadata = {
   title: 'Checkout cancelled',
+  description:
+    'Checkout was cancelled and you have not been charged. You can pick a plan again whenever you are ready.',
   robots: { index: false, follow: false },
 }
 

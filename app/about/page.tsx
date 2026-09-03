@@ -6,7 +6,9 @@ import { stats, TOTAL_LIBRARY_ITEMS } from '@/content/catalogs'
 import { pillars, deliveryMeters, VOICE_WEIGHT } from '@/content/features'
 import { breadcrumbLd, pageJsonLd } from '@/lib/jsonld'
 
-const TITLE = 'About ImprovTalk'
+/* Just 'About' — the layout template appends the brand, and 'About ImprovTalk
+   · ImprovTalk' repeats it, which is the boilerplate mistake Google calls out. */
+const TITLE = 'About'
 const DESCRIPTION =
   'Who makes ImprovTalk, what the conversation method is built on, how the score is actually calculated, and what we deliberately do not claim.'
 

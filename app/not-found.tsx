@@ -1,5 +1,12 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { LogoMark } from '@/components/ui/logo'
+
+export const metadata: Metadata = {
+  title: 'Page not found',
+  description:
+    'That page does not exist. Try the method pages, the blog, or head back to the homepage.',
+}
 
 export default function NotFound() {
   return (

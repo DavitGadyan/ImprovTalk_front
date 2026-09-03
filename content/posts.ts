@@ -62,7 +62,7 @@ export const posts: Post[] = [
   {
     slug: 'how-to-break-the-ice',
     path: '/blog/how-to-break-the-ice/',
-    title: 'Guess where they are from, then say hello in their language',
+    title: 'Break the ice: say hello in their language',
     description:
       'One of the warmest openings there is: notice an accent, guess the country, greet them in their own language. Here is how to do it without it landing badly.',
     excerpt:
@@ -115,7 +115,7 @@ export const posts: Post[] = [
   {
     slug: 'practise-speaking-a-language-out-loud',
     path: '/blog/practise-speaking-a-language-out-loud/',
-    title: 'How to practise speaking when you have nobody to practise with',
+    title: 'How to practise speaking a language alone',
     description:
       'Reading and vocabulary are the parts you can already do alone. Speaking is the part that needs another person — unless you build the reps another way.',
     excerpt:

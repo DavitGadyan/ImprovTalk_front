@@ -4,6 +4,8 @@ import { SUPPORT_EMAIL } from '@/content/links'
 
 export const metadata: Metadata = {
   title: 'Subscription confirmed',
+  description:
+    'Your ImprovTalk subscription is active. Open the app to start practising, or contact support if anything looks wrong.',
   robots: { index: false, follow: false },
 }
 

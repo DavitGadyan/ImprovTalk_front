@@ -7,7 +7,7 @@ import { PostFilm } from '@/components/ui/post-film'
 import { PROSE } from '@/components/ui/prose'
 import { allVideosLd, breadcrumbLd, howToLd, pageJsonLd } from '@/lib/jsonld'
 
-const TITLE = 'How to start a conversation: the method in four moves'
+const TITLE = 'How to start a conversation: four moves'
 const DESCRIPTION =
   'Openers are not lines. There are four moves — borrow the situation or go direct, notice one public thing, guess where they are from, and read the window.'
 

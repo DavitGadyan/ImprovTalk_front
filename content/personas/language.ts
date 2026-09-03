@@ -5,7 +5,7 @@ export const language: Persona = {
   slug: 'language',
   path: '/second-language/',
   meta: {
-    title: 'Practise speaking English, Spanish or Russian out loud',
+    title: 'Practise speaking English, Spanish or Russian',
     description:
       'Reading is the easy part. Practise speaking English, Spanish or Russian out loud with an AI that will not switch back to English when you stall.',
   },

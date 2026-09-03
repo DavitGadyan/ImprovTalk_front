@@ -9,7 +9,7 @@ export const social: Persona = {
   slug: 'social',
   path: '/meeting-people/',
   meta: {
-    title: 'Practise starting a conversation with a stranger',
+    title: 'Practise talking to people you have not met',
     description:
       'The first line is the hard part. Practise how to start a conversation with a stranger on your phone, as often as you like, before it counts.',
   },
