@@ -432,7 +432,7 @@ An AI that talks back
 Free to start, no card
 Week six against week one
 Practise in private
-Not a beginners course
+You have done this before
 Say yes to things again
 Your circle got smaller
 ```
@@ -442,7 +442,7 @@ Your circle got smaller
 You used to be fine at this. A few short goes and most of it comes back.
 Nothing changed about you. Only how often you get to practise. Start there.
 Three minutes a day, in private. Watch week six against week one.
-Free to start, no card. Not a course, and not for beginners.
+Free to start, no card. This is practice, not tuition.
 ```
 
 **Never:** learn, beginner, basics, teach, improve yourself, fix.
