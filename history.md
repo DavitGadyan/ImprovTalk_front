@@ -101,6 +101,52 @@ email capture — see "Decisions" below.
 
 ---
 
+## Indexing: what was actually wrong, and what was not
+
+Search Console showed no indexed pages. Three things were real, one was not.
+
+**Not a fault:** the site was six days old when this was looked at. Serving is
+healthy — 200s on every route, HTTPS, `www` and bare-`http` both 301 to the
+canonical host, self-referential canonicals everywhere, server-rendered copy,
+and a clean `@graph` per page. Search Console's own panel still said *processing
+data*. A new `.vip` domain with no inbound links is simply slow to index; no
+amount of code fixes that.
+
+**Fixed:**
+
+1. **`/get/` was `Disallow`ed *and* `noindex`.** Those cancel out. A page Google
+   may not fetch is a page whose `noindex` Google never reads, so a URL linked
+   from the footer of all nineteen pages was on course for *Indexed, though
+   blocked by robots.txt* — the bare URL in the index, which is the exact
+   outcome the `Disallow` existed to prevent. `robots.ts` now disallows nothing
+   and lets the `noindex` do the work. Same for `/billing/*`. Crawl budget does
+   not apply at this size.
+
+2. **The persona landing pages were near-orphans.** `/out-of-practice/` had zero
+   internal links; `/second-language/` and `/speaking-up/` had one each, from a
+   blog post. They were reachable essentially only from the sitemap, which is
+   how a page ends up *Discovered — currently not indexed*. The footer now
+   carries a **Practise for** column linking all four, so each has a site-wide
+   link. Every URL in the sitemap now has at least four internal links, and the
+   footer grid runs `sm:grid-cols-3 lg:grid-cols-4` — verified 2×2 at 390px with
+   no overflow.
+
+3. **Every `lastmod` was the build timestamp.** That told Google all seventeen
+   pages changed on every deploy, which is how a sitemap stops being believed —
+   and the sitemap was the main thing pointing at the persona pages. `lib/lastmod.ts`
+   reads each page's real last-commit date from git. **This needs full history:
+   `deploy.yml` checks out with `fetch-depth: 0`,** and on a shallow clone every
+   date silently collapses back to the build timestamp. Blog posts keep their own
+   `post.date` — a change to shared prose styles is not a change to the article.
+
+**Still open, and not code:** `site.googleSiteVerification` and
+`site.socialProfiles` are both empty, so there is no verification meta tag in the
+HTML and no `sameAs` entity signal. IndexNow reaches Bing and Yandex only —
+Google retired sitemap ping in 2023, so Google is reached through Search Console
+or through links.
+
+---
+
 ## Decisions, and why
 
 - **No email capture.** It was removed: the mailto fallback errored where no mail
