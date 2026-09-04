@@ -12,6 +12,7 @@ export const shy: Persona = {
     description:
       'Practise real conversations out loud on your phone. Nobody hears you, you can try as often as you like, and it tells you what went wrong when you freeze.',
   },
+  nav: 'Feeling shy',
   hero: {
     eyebrow: 'Practise out loud',
     headline: { top: 'Practice makes', bottom: '', emphasis: 'perfect.' },

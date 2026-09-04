@@ -13,6 +13,7 @@ export const rusty: Persona = {
     description:
       'Out of practice at talking to people? It is a habit, and habits come back with use. Practise on your phone, in private, a few minutes at a time.',
   },
+  nav: 'Getting back in practice',
   hero: {
     eyebrow: 'Get back in practice',
     headline: { top: 'Like riding', bottom: 'a ', emphasis: 'bike.' },

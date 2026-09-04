@@ -30,6 +30,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history: app/sitemap.ts reads each page's real last-commit date
+          # from git. On the default shallow clone every lastmod would collapse
+          # back to the build timestamp — which is the thing that was wrong.
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:

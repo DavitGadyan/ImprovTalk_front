@@ -9,6 +9,7 @@ export const language: Persona = {
     description:
       'Reading is the easy part. Practise speaking English, Spanish or Russian out loud with an AI that will not switch back to English when you stall.',
   },
+  nav: 'A second language',
   hero: {
     eyebrow: 'Speak, do not translate',
     headline: { top: 'Keep calm', bottom: 'and ', emphasis: 'talk.' },

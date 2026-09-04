@@ -2,6 +2,19 @@ import Link from 'next/link'
 import { Logo, LogoMark, Wordmark } from '@/components/ui/logo'
 import { site } from '@/content/site'
 import { SUPPORT_EMAIL } from '@/content/links'
+import { allPersonas, DEFAULT, personas } from '@/content/personas'
+
+/**
+ * The four persona landing pages other than the canonical one.
+ *
+ * They are indexable pages, each written for a different search intent, and
+ * until this column existed they were reachable only from the sitemap and the
+ * odd blog link — /out-of-practice/ had no internal link at all. A page nothing
+ * links to is a page Google discovers and then declines to index, which is
+ * exactly where these four sat. A site-wide footer link fixes both the
+ * discovery and the internal weight in one place.
+ */
+const landingPages = allPersonas.filter((p) => p.path !== personas[DEFAULT].path)
 
 export function Footer() {
   return (
@@ -15,7 +28,7 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:grid-cols-4">
             <FooterCol title="Product">
               <FooterLink href="/#how">How it works</FooterLink>
               <FooterLink href="/#scoring">Scoring</FooterLink>
@@ -23,6 +36,13 @@ export function Footer() {
               <FooterLink href="/how-to-start-a-conversation/">How to start a conversation</FooterLink>
               <FooterLink href="/blog/">Blog</FooterLink>
               <FooterLink href="/get/">Get the app</FooterLink>
+            </FooterCol>
+            <FooterCol title="Practise for">
+              {landingPages.map((p) => (
+                <FooterLink key={p.slug} href={p.path}>
+                  {p.nav}
+                </FooterLink>
+              ))}
             </FooterCol>
             <FooterCol title="Legal">
               <FooterLink href="/privacy/">Privacy</FooterLink>

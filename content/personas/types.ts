@@ -22,6 +22,8 @@ export type Persona = {
   /** Trailing slash, matching the export's trailingSlash: true. */
   path: string
   meta: { title: string; description: string }
+  /** Short label for the footer link list. Not a headline — it has to fit a column. */
+  nav: string
   hero: {
     eyebrow: string
     /** Rendered as: top / bottom + emphasis, with the brand rule under emphasis. */

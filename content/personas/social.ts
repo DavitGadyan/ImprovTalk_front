@@ -13,6 +13,7 @@ export const social: Persona = {
     description:
       'The first line is the hard part. Practise how to start a conversation with a stranger on your phone, as often as you like, before it counts.',
   },
+  nav: 'Meeting new people',
   hero: {
     eyebrow: 'Practise the first line',
     headline: { top: 'Break the ice.', bottom: 'Practise ', emphasis: 'first.' },

@@ -13,8 +13,18 @@ export const dynamic = 'force-static'
  * still use the content. Naming it makes the intent explicit and reviewable.
  */
 export default function robots(): MetadataRoute.Robots {
-  /* Redirector and post-payment pages have no search or citation value. */
-  const disallow = ['/get/', '/billing/']
+  /*
+   * Nothing is disallowed, and that is deliberate.
+   *
+   * `/get/` (the store redirector) and `/billing/*` (post-payment) carry
+   * `noindex` in their metadata, which is the stronger and more precise signal —
+   * but only if the page can be fetched. Disallowing them meant Googlebot never
+   * read the noindex, and `/get/` is linked from the footer of every page, so
+   * Search Console reports it as "Indexed, though blocked by robots.txt": the
+   * bare URL in the index with no content behind it, which is the outcome the
+   * Disallow was meant to prevent. Crawl budget is not a consideration at
+   * seventeen pages.
+   */
 
   const aiCrawlers = [
     'GPTBot',
@@ -33,8 +43,8 @@ export default function robots(): MetadataRoute.Robots {
 
   return {
     rules: [
-      { userAgent: '*', allow: '/', disallow },
-      ...aiCrawlers.map((userAgent) => ({ userAgent, allow: '/', disallow })),
+      { userAgent: '*', allow: '/' },
+      ...aiCrawlers.map((userAgent) => ({ userAgent, allow: '/' })),
     ],
     sitemap: `${site.url}/sitemap.xml`,
     host: site.url,

@@ -9,6 +9,7 @@ export const speaking: Persona = {
     description:
       'Talking too fast, saying um, losing the room. Practise out loud and get real numbers: your words per minute, your pauses, your filler count.',
   },
+  nav: 'Speaking up at work',
   hero: {
     eyebrow: 'Say it clearly',
     headline: { top: 'Say what', bottom: 'you ', emphasis: 'mean.' },
