@@ -18,6 +18,7 @@ heavy scrim flattening the photograph. Everything below follows from that.
 | Dead zone | **y = 600 → 1320** — wordmark, tagline and stars sit here |
 | Format | WebP q80, **under 1 MB** — CI rejects larger |
 | Path | `apps/mobile/assets/intro/` |
+| Casting | **20–30 years old**, every subject, every frame |
 
 **Subjects sit in the upper or lower third — never the middle.** A frame that is
 correct on every other count and busy through the middle is a reject, because
@@ -36,6 +37,7 @@ Append to every prompt below.
 9:16 portrait, 1080x1920, photographic, natural unposed body language,
 shallow depth of field, real skin texture, no on-screen text, no captions,
 no logos, no watermark, no recognisable public figures.
+all subjects aged 20 to 30.
 cool blue-black shadows, warm amber highlights, one cool blue accent.
 no teal-and-orange grade, no green cast, no pure black, no HDR.
 ```
@@ -50,12 +52,11 @@ App Review sees this screen before it sees anything else in the app.
 
 ## 1 · `dating.webp`
 
-**Subjects** lower third · **Scrim** 0.55 · **Serves** the Dating family — Nadia,
-Jonas, Ethan
+**Subjects** lower third · **Scrim** 0.55 · **Serves** Dating — Ethan 25, Nadia 27, Kaia 28
 **Why it works** Warm tungsten interior, and the bokeh fills the top cleanly.
 
 ```
-Two people in their late twenties at a small café table at night, mid-laugh,
+Two people aged 20 to 30 at a small café table at night, mid-laugh,
 leaning in toward each other, both clearly enjoying it and neither performing.
 Shot from slightly above table height so both sit in the bottom third of a tall
 vertical frame. Above them the room falls away into warm tungsten bokeh —
@@ -65,12 +66,12 @@ middle of the frame.
 
 ## 2 · `group.webp`
 
-**Subjects** lower third, wide · **Scrim** 0.60 · **Serves** Tom, Oskar
+**Subjects** lower third, wide · **Scrim** 0.60 · **Serves** Social — Sam 24, Tom 26
 **Why it works** Five faces is busy — shoot wide, and let depth of field do the
 separating.
 
 ```
-Four or five friends standing in a loose circle in a bar, one of them mid-
+Four or five friends aged 20 to 30 standing in a loose circle in a bar, one of them mid-
 sentence with their hands moving, the rest laughing at what was just said. Shot
 wide and low so the whole group sits across the bottom third of a tall vertical
 frame. Above them the ceiling and warm pendant lights blur to soft bokeh, with
@@ -79,13 +80,13 @@ nothing sharp through the middle of the frame.
 
 ## 3 · `cultures.webp`
 
-**Subjects** upper third · **Scrim** 0.50 · **Serves** Andrés, Mei
+**Subjects** upper third · **Scrim** 0.50 · **Serves** Language — Andrés 29, Mei 30
 **Why it works** Blue hour is already dark, and an upper-third frame breaks the
 rhythm of the set.
 
 ```
-Two people talking on a city street at blue hour — a man in his late twenties
-and an Eastern European woman of about the same age, standing close, both
+Two people talking on a city street at blue hour — a man in his mid-twenties
+and an Eastern European woman of about the same age, both aged 20 to 30, standing close, both
 animated, both mid-conversation. Composed so their heads and shoulders sit in
 the top third of a tall vertical frame. Below them wet pavement and out-of-focus
 traffic lights recede into deep blue, nothing sharp in the middle of the frame.
@@ -93,12 +94,12 @@ traffic lights recede into deep blue, nothing sharp in the middle of the frame.
 
 ## 4 · `gym.webp`
 
-**Subjects** lower third · **Scrim** 0.60 · **Serves** Tom, Ben
+**Subjects** lower third · **Scrim** 0.60 · **Serves** Social — Tom 26
 **Why it works** Bright overheads, and the equipment draws hard lines — keep
 them out of the type.
 
 ```
-Two people talking between sets in a gym, one sitting on a bench with a towel
+Two people aged 20 to 30 talking between sets in a gym, one sitting on a bench with a towel
 over one shoulder, the other standing with a hand on the frame of a machine,
 both relaxed and mid-conversation. Bottom third of a tall vertical frame. Above
 them the gym recedes into blurred overhead lights and dark equipment, with
@@ -107,12 +108,12 @@ nothing sharp through the middle of the frame.
 
 ## 5 · `street.webp`
 
-**Subjects** upper third · **Scrim** 0.65 · **Serves** Kaia, Ethan
+**Subjects** upper third · **Scrim** 0.65 · **Serves** Dating / Social — Ethan 25, Kaia 28
 **Why it works** The brightest plate after the beach, so it carries the most
 scrim of the daylight set.
 
 ```
-Daytime on a city pavement, two people stopped mid-conversation that is clearly
+Daytime on a city pavement, two people aged 20 to 30 stopped mid-conversation that is clearly
 going well — one has just spoken, the other is smiling and answering, both with
 open posture and turned toward each other. Heads and shoulders in the top third
 of a tall vertical frame. Below them the pavement and blurred passers-by fall
@@ -121,12 +122,12 @@ away out of focus, nothing sharp in the middle of the frame.
 
 ## 6 · `beach.webp`
 
-**Subjects** lower third · **Scrim** 0.70 · **Serves** Claire, Marcus
+**Subjects** lower third · **Scrim** 0.70 · **Serves** Social — Sam 24, Tom 26
 **Why it works** Sky and sand wash out white type worse than anything else in
 the set — hence the heaviest scrim.
 
 ```
-Golden hour at the water's edge, two people barefoot at the shoreline, walking
+Golden hour at the water's edge, two people aged 20 to 30 barefoot at the shoreline, walking
 and talking, mid-stride and half-turned toward each other. Bottom third of a
 tall vertical frame. Above them an open sky graduating from warm gold to deep
 blue, completely clean — no hard-edged clouds, nothing sharp in the middle of
@@ -135,15 +136,14 @@ the frame.
 
 ## 7 · `speaking.webp`
 
-**Subjects** lower third · **Scrim** 0.50 · **Serves** the Work family — Arjun,
-Zoe, Amara, Ben
+**Subjects** lower third · **Scrim** 0.50 · **Serves** Work — Zoe 26
 **Why it works** The room behind the speaker is already dark, so the scrim only
 has to hold back one lit face. It is also the only frame in the set that is not
 social — it says the app is for the meeting and the interview too, which is half
 the personas.
 
 ```
-A person in their thirties speaking to a small audience in a warmly lit room,
+A person in their mid-twenties speaking to a small audience in a warmly lit room,
 standing at the front, mid-gesture and clearly mid-sentence, the listeners
 turned toward them. Shot from the third row so the speaker sits in the bottom
 third of a tall vertical frame, with a few dark out-of-focus heads and
@@ -153,6 +153,24 @@ of the frame.
 ```
 
 ---
+
+## What a 20–30 cap costs
+
+Capping every subject at 30 means **seven of the fifteen personas have nobody on
+this screen who looks like them** — Jonas 31, Arjun 33, Oskar 34, Ben 35, Marcus
+37, Claire 38, Amara 41. Two consequences worth deciding on rather than
+discovering later:
+
+- **The Reset family disappears entirely.** Claire and Oskar are 38 and 34, and
+  Claire's whole brief is that she is *not* starting out. A first screen of
+  twenty-somethings is the fastest way to tell her this is not for her.
+- **The Work family is down to Zoe.** Arjun, Ben and Amara are 33 to 41, and
+  between them they carry the clearest willingness to pay in the whole set.
+
+If the cap is a deliberate positioning call it holds — the intro screen sells to
+whoever is most likely to install, and the persona pages do the rest. If it is
+not, the cheapest correction is to let `speaking.webp` and `beach.webp` run
+30–40, which restores both families for the price of two frames.
 
 ## Carousel order
 
