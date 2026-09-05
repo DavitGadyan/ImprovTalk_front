@@ -1,15 +1,24 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import { PERSONAS } from './personas.mjs'
 import { GTM } from './gtm.mjs'
 
-const A = '/private/tmp/claude-501/-Users-dyada-Desktop-Github-ImprovTalk-front/fb3882e0-3b37-4385-93f8-6deb3d9e125e/scratchpad/assets/'
-const OUT = '/private/tmp/claude-501/-Users-dyada-Desktop-Github-ImprovTalk-front/fb3882e0-3b37-4385-93f8-6deb3d9e125e/scratchpad/html/'
+/*
+ * Every path resolves from this file. An earlier version pointed at a session
+ * scratchpad; when that was cleaned the generator could not be run again and
+ * the source photographs went with it. The portraits and scenes now live in
+ * ./assets/ under version control, and the fonts and icon are the site's own.
+ */
+const HERE = fileURLToPath(new URL('.', import.meta.url))
+const PUB = fileURLToPath(new URL('../../../public/', import.meta.url))
+const A = HERE + 'assets/'
+const OUT = HERE + 'html/'
 mkdirSync(OUT, { recursive: true })
 
-const b64 = (f) => readFileSync(A + f).toString('base64')
-const font = (f) => `data:font/woff2;base64,${b64(f)}`
-const img = (f) => `data:image/jpeg;base64,${b64(f)}`
-const png = (f) => `data:image/png;base64,${b64(f)}`
+const b64 = (path) => readFileSync(path).toString('base64')
+const font = (f) => `data:font/woff2;base64,${b64(PUB + 'fonts/' + f)}`
+const img = (f) => `data:image/jpeg;base64,${b64(A + f)}`
+const png = (f) => `data:image/png;base64,${b64(PUB + f)}`
 
 const TIGHT = font('InterTight-latin-var.woff2')
 const BODY = font('Inter-latin-var.woff2')

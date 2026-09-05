@@ -18,3 +18,7 @@ next-env.d.ts
 # Publishing them in this repo would redistribute someone else's portfolio,
 # and they are 12 MB that the site itself never uses.
 design_examples/
+
+# Persona one-pagers: generated HTML carries base64 images (~6MB) and is
+# rebuilt by gen.mjs. heights.json beside it is an input, so it stays tracked.
+docs/personas/src/html/*.html

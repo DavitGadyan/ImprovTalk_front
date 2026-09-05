@@ -11,6 +11,12 @@ plan (pain/barrier/solution, message, channels, funnel, landing page, video ad).
 node gen.mjs                     # writes html/ from personas.mjs + gtm.mjs
 ```
 
+Everything it reads is in the repo: the portraits and scenes in `./assets/`, the
+fonts and app icon from `public/`. An earlier version pointed `A` at a session
+scratchpad — when that was cleaned the generator could not be run at all and the
+source photographs were gone with it. They were recovered out of the committed
+PDFs with `pdfimages`. Do not point these paths outside the repo again.
+
 Then print each with headless Chrome:
 
 ```bash
@@ -29,6 +35,13 @@ To re-measure after a copy change: delete `heights.json`, run `gen.mjs`, serve
 `html/` over HTTP (Chrome blocks `file://` in Playwright), then for each page
 take `max(child.bottom) - page.top + 26 + 74` (26 = warn margin, 74 = footer)
 and write the `{slug: {p1, p2}}` map back to `heights.json`.
+
+**Skip absolutely-positioned children when taking that max.** The footer is
+pinned to the bottom of `.page`, so with the 6000px fallback in force it reports
+`bottom: 6000` and every page measures 6100 — which looks like a plausible
+number and is simply the fallback plus the constants. The `+ 74` in the formula
+*is* that footer. `heights.json` is committed so a clean checkout prints
+correctly without this pass.
 
 Per-page sizes come from CSS named pages (`@page pone` / `@page ptwo`), which
 Chrome supports in print.

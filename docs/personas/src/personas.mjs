@@ -22,7 +22,7 @@ export const PERSONAS = [
   objections: [
     ['Talking to an AI is embarrassing.', 'It is your phone, in your room. Nobody hears it.'],
     ['Another app I will open twice.', 'Three minutes a go. Free to start, no card.'],
-    ['Will it judge me?', 'It scores the conversation, not you. Recordings are deleted after 24 hours.'],
+    ['Will it judge me?', 'It scores the conversation, not you. The recording is never stored — it is read, measured and discarded.'],
   ],
   usage: {
     when: 'Sunday night, in bed, before a Monday he is dreading',
