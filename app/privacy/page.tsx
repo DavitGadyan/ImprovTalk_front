@@ -54,7 +54,7 @@ export default function PrivacyPage() {
           <tr>
             <td>Voice</td>
             <td>Recorded session audio</td>
-            <td><strong>24 hours after scoring</strong>, then hard-deleted</td>
+            <td><strong>Not stored.</strong> Held in memory to score, then discarded</td>
           </tr>
           <tr>
             <td>Transcripts</td>
@@ -116,16 +116,48 @@ export default function PrivacyPage() {
 
       <h2>How audio is handled</h2>
       <ol className="list-decimal space-y-2 pl-5">
-        <li>Audio is recorded locally on your device during a session.</li>
-        <li>It uploads to our storage only when the session ends.</li>
-        <li>A worker transcribes it and extracts acoustic features, which takes roughly 60–90 seconds.</li>
-        <li>The recording is marked for deletion 24 hours later.</li>
-        <li>A nightly job hard-deletes the file and clears its storage reference.</li>
+        <li>Audio is recorded on your device during a session.</li>
+        <li>
+          When the session ends it is sent to our server, transcribed, and measured for pace,
+          pauses, filler words, pitch and volume steadiness.
+        </li>
+        <li>
+          The recording is held in memory for that request only. It is not written to storage,
+          and there is no audio file on our servers to delete afterwards.
+        </li>
+        <li>What is kept is the transcript and the numbers derived from it.</li>
       </ol>
       <p>
-        Short clips from your weakest moments may be kept for up to 7 days so the replay screen can
-        play them back, then deleted; after that the replay degrades to transcript only. Paid users
-        can opt in to extended 30-day audio retention in Settings. It is off by default.
+        Transcription uses OpenAI as a processor, so the audio passes through their systems under
+        their terms as part of scoring. Transcripts and scores stay until you delete them or delete
+        your account, at which point they are removed.
+      </p>
+      <p>
+        One honest caveat: server request logs can contain transcript text and are kept for 14 days
+        on a rolling basis for debugging. They are not searchable by account and are not used for
+        anything else, but a deletion request does not reach them before they expire on their own.
+      </p>
+
+      <h2>The survey on this site</h2>
+      <p>
+        If you fill in the <a href="/survey/">survey</a>, we store what you told us: your goal,
+        which of the situations you picked as closest, the four-colour split you set, and — only if
+        you chose to answer — an age band, a gender, and a country. Plus the two free-text answers,
+        which are the ones we actually read. Your tips PDF is built in your own browser from those
+        answers; it is not generated on a server and no copy of it is kept.
+      </p>
+      <p>
+        We do not ask for your name or your email, and we do not store an IP address or any
+        identifier that would let us recognise you again. That is deliberate, and it has a
+        trade-off worth stating: <strong>we cannot look your answers up on request</strong>, because
+        there is nothing to look them up by. If you want a response removed, email{' '}
+        <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a> with roughly when you submitted it
+        and what you wrote, and we will find and delete it by hand.
+      </p>
+      <p>
+        Answers are stored in Supabase (EU region) and used to decide what to build and who the app
+        is for. They are not sold, not shared, and not used for advertising. Submitting is optional
+        and nothing on this site is gated behind it.
       </p>
 
       <h2>Your rights, in the app</h2>

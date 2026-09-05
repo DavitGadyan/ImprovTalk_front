@@ -66,6 +66,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     },
     {
+      url: `${site.url}/survey/`,
+      lastModified: lastModified(pageFile('/survey/'), 'content/survey.ts'),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
       url: `${site.url}/blog/`,
       lastModified: lastModified(pageFile('/blog/'), 'content/posts.ts'),
       changeFrequency: 'weekly',

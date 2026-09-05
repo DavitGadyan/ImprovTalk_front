@@ -209,6 +209,47 @@ Regeneration, the page-height mechanism and the traps are in
 `docs/personas/src/README.md`. The one that will bite: a `.two` class on `.page`
 collides with the two-column grid and scrambles the layout in the PDF only.
 
+## The survey (`/survey/`) and the generated PDF
+
+Seven goal categories, with **"Type your situation" always last**, then a second
+question that narrows to one of the fifteen personas in `docs/PERSONAS-15.md`.
+Families with a single persona (shyness, socialising) skip that question and
+assign it, so the `persona` column is populated either way.
+
+**The deliverable is generated in the browser, not pre-written.** `lib/pdf.ts` is
+a hand-rolled PDF writer — the 14 standard fonts, WinAnsi text, filled rects,
+about 5.5KB per file — and `lib/tips-pdf.ts` composes the sheet from the answers
+in memory. It is `import()`ed only from the result screen, so none of it is in
+the entry bundle.
+
+Why not the six static PDFs that were built first: the goal says which problem
+and the colour blend says which version of it, and a file per goal throws the
+second signal away. `docs/tips/` and `public/tips/*.pdf` were deleted when the
+generator replaced them — `content/tips.ts` is now the only copy of that text,
+which is the point.
+
+**Traps here:**
+
+1. **Word wrapping needs real font metrics.** The Helvetica and Helvetica-Bold
+   width tables in `lib/pdf.ts` are not decoration. Measuring with canvas would
+   measure whatever font the browser substituted, not the Helvetica the file
+   asks for.
+2. **The sheet must stay one page.** All 88 combinations (15 personas + 7
+   no-persona goals × 4 dominant colours) were checked with `pdfinfo`. Adding a
+   sentence to `COLOR_NOTE` or a persona `situation` can push the longest cases
+   onto a second page — regenerate and re-count before shipping copy changes.
+3. **Byte offsets, not character offsets.** The xref table is built from a
+   binary string and converted with `charCodeAt`. Building it as UTF-8 puts
+   every offset out and the file will not open.
+4. **Persona copy is written against the never-lists** in `docs/PERSONAS-15.md`.
+   Nobody in Reset or Language is told they are starting, learning or a
+   beginner; nobody in Dating is told they are behind.
+
+**Still the user's step:** create the Supabase project and add
+`NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`, then run the RLS
+check in `docs/SURVEY-SETUP.md`. Until then `submitEnabled` is false, the survey
+runs, and the PDF is still produced — only the write is skipped.
+
 ## The deploy that succeeds while the site serves a README
 
 **Symptom:** `improvtalk.vip/` returns 200 with the title

@@ -8,6 +8,7 @@ import { WhatsInside } from '@/components/sections/whats-inside'
 import { Faq } from '@/components/sections/faq'
 import { Footer } from '@/components/sections/footer'
 import { RelatedReading } from '@/components/sections/related-reading'
+import { SurveyPrompt } from '@/components/ui/survey-prompt'
 import { ScrollCta } from '@/components/ui/scroll-cta'
 import { VariantTag } from '@/components/variant-tag'
 import { homeJsonLd } from '@/lib/jsonld'
@@ -47,7 +48,14 @@ export function PersonaPage({ persona }: { persona: Persona }) {
           const S = SECTIONS[key]
           /* Chapter numbers follow the running order, so they read 01..06 in
              every variant even though the sections themselves are reordered. */
-          return <S key={key} persona={persona} index={i + 1} />
+          return (
+            <div key={key}>
+              <S persona={persona} index={i + 1} />
+              {/* After the first section: past the hero, before the argument
+                  has been made, and never in front of the install CTA. */}
+              {i === 0 && <div className="pb-4"><SurveyPrompt /></div>}
+            </div>
+          )
         })}
         <RelatedReading persona={persona} />
       </main>

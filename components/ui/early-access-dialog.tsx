@@ -139,6 +139,14 @@ export function EarlyAccessDialog({
         )}
 
         <p className="mt-7 border-t border-line pt-5 text-[12.5px] text-subtle">
+          While you are here —{' '}
+          <a href="/survey/" className="text-accent underline underline-offset-4">
+            ninety seconds on what you are working on
+          </a>
+          , and you get tips written for it.
+        </p>
+
+        <p className="mt-3 text-[12.5px] text-subtle">
           Trouble installing?{' '}
           <a
             href={`mailto:${SUPPORT_EMAIL}`}

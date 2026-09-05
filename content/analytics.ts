@@ -50,9 +50,22 @@ export const trackingEnabled = hasGA || hasAds
  *                     acquisition; useful as a denominator against the above.
  *   qr_reveal         The panel was opened.
  *   scenario_play     A scenario film was played.
+ *   survey_start      The persona survey was begun.
+ *   survey_step       A step was reached. `step` names which, so the funnel
+ *                     shows where people give up rather than only that they did.
+ *   survey_complete   Submitted. `goal` carries which persona they picked, so
+ *                     completion can be read per audience.
+ *   tips_download     They took the PDF. Separate from survey_complete because
+ *                     the two answer different questions: whether the exchange
+ *                     was worth finishing, and whether what we gave back was
+ *                     worth keeping.
  */
 export type TrackEvent =
   | 'testflight_click'
   | 'notify_click'
   | 'qr_reveal'
   | 'scenario_play'
+  | 'survey_start'
+  | 'survey_step'
+  | 'survey_complete'
+  | 'tips_download'
