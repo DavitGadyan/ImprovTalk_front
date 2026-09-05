@@ -29,21 +29,23 @@ stock-photo template.
 to nothing at the subject's end of the frame. The value per image is set by how
 bright the plate is: the beach needs 0.70, a blue-hour street needs 0.50.
 
-## Shared prompt tail
+## How to use these
 
-Append to every prompt below.
+Each prompt below is **complete**. Copy one whole and paste it into
+**Seedream 5 Pro** — scene, framing, casting, quality, light and negatives are
+all inline, with nothing to append.
 
-```
-9:16 portrait, 1080x1920, photographic, natural unposed body language,
-shallow depth of field, real skin texture, no on-screen text, no captions,
-no logos, no watermark, no recognisable public figures.
-all subjects aged 20 to 30.
-cool blue-black shadows, warm amber highlights, one cool blue accent.
-no teal-and-orange grade, no green cast, no pure black, no HDR.
-```
+Seedream for these stills; **Seedance** for the persona films in
+`personas/CASTING.md`. They are different models and the prompts are not
+interchangeable — a video prompt pasted into an image model loses every
+composition rule that matters here.
 
-The grade lines are the ones in [`BRAND-AND-VIDEO.md`](BRAND-AND-VIDEO.md), so
-the intro screen and the marketing films come from the same world.
+The light and negative blocks are the ones in
+[`BRAND-AND-VIDEO.md`](BRAND-AND-VIDEO.md), so the intro screen, the persona
+films and the site all come from the same world.
+
+**No logo in the plate.** The app draws the wordmark itself, in the dead zone.
+A generated one comes back subtly wrong and sits under a real one.
 
 **All seven stay PG-13.** Two adults, both with agency, nobody being worn down.
 App Review sees this screen before it sees anything else in the app.
@@ -56,12 +58,44 @@ App Review sees this screen before it sees anything else in the app.
 **Why it works** Warm tungsten interior, and the bokeh fills the top cleanly.
 
 ```
-Two people aged 20 to 30 at a small café table at night, mid-laugh,
-leaning in toward each other, both clearly enjoying it and neither performing.
-Shot from slightly above table height so both sit in the bottom third of a tall
-vertical frame. Above them the room falls away into warm tungsten bokeh —
-string lights and an out-of-focus bar back — with nothing sharp anywhere in the
-middle of the frame.
+SCENE
+Two people aged 20 to 30 at a small café table at night, mid-laugh, leaning in
+toward each other, both clearly enjoying it and neither performing. Coffee cups
+and a water glass crowd the small tabletop. Shot from slightly above table
+height so both sit in the bottom third of the frame. Above them the room falls
+away into warm tungsten bokeh — string lights and an out-of-focus bar back.
+
+FRAMING
+9:16 portrait, 1080 x 1920. Subjects occupy the bottom third of the frame,
+below y 1320 — nowhere else.
+Keep y 600 to 1320 completely clear: no faces, no hands, no signage, nothing
+sharp and nothing high-contrast. The wordmark, tagline and stars are composited
+into that band afterwards.
+Safe margins 150 px left and right, 120 px top and bottom. The composition must
+survive a centre crop to 1:2, which is taller than this frame.
+
+CASTING
+All subjects aged 20 to 30. Faces are composites — no recognisable public
+figures, no celebrity likeness.
+
+QUALITY
+4K still, hyperrealistic, indistinguishable from documentary photography.
+Visible skin pores, fine facial hair, natural asymmetry, real fabric weave,
+condensation on glassware. Anatomically correct hands at all times. No morphing,
+no warping, no extra fingers, no plastic skin, no CGI sheen, no beauty
+retouching.
+
+LIGHT
+Natural available light only, no stylised grade.
+Late evening interior. Warm tungsten practicals and string lights only, no fill.
+Cool blue-black shadows, warm amber highlights, skin tones true. The darkest
+areas of the frame sit at #070C17.
+
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no legible signage or lettering, no logos, no wordmarks, no
+watermarks.
 ```
 
 ## 2 · `group.webp`
@@ -71,11 +105,44 @@ middle of the frame.
 separating.
 
 ```
-Four or five friends aged 20 to 30 standing in a loose circle in a bar, one of them mid-
-sentence with their hands moving, the rest laughing at what was just said. Shot
-wide and low so the whole group sits across the bottom third of a tall vertical
-frame. Above them the ceiling and warm pendant lights blur to soft bokeh, with
-nothing sharp through the middle of the frame.
+SCENE
+Four or five friends aged 20 to 30 standing in a loose circle in a bar, one of
+them mid-sentence with their hands moving, the rest laughing at what was just
+said. Drinks held at chest height. Shot wide and low so the whole group sits
+across the bottom third of the frame. Above them the ceiling and warm pendant
+lights blur to soft bokeh.
+
+FRAMING
+9:16 portrait, 1080 x 1920. Subjects occupy the bottom third of the frame,
+below y 1320 — nowhere else.
+Keep y 600 to 1320 completely clear: no faces, no hands, no signage, nothing
+sharp and nothing high-contrast. The wordmark, tagline and stars are composited
+into that band afterwards.
+Safe margins 150 px left and right, 120 px top and bottom. The composition must
+survive a centre crop to 1:2, which is taller than this frame.
+
+CASTING
+All subjects aged 20 to 30. Faces are composites — no recognisable public
+figures, no celebrity likeness.
+
+QUALITY
+4K still, hyperrealistic, indistinguishable from documentary photography.
+Visible skin pores, fine facial hair, natural asymmetry, real fabric weave,
+condensation on glassware. Anatomically correct hands at all times. No morphing,
+no warping, no extra fingers, no plastic skin, no CGI sheen, no beauty
+retouching.
+
+LIGHT
+Natural available light only, no stylised grade.
+Bar interior, early evening. Warm pendant practicals, one cooler source behind.
+Cool blue-black shadows, warm amber highlights, skin tones true. The darkest
+areas of the frame sit at #070C17.
+
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no legible signage or lettering, no logos, no wordmarks, no
+watermarks.
 ```
 
 ## 3 · `cultures.webp`
@@ -85,11 +152,43 @@ nothing sharp through the middle of the frame.
 rhythm of the set.
 
 ```
-Two people talking on a city street at blue hour — a man in his mid-twenties
-and an Eastern European woman of about the same age, both aged 20 to 30, standing close, both
-animated, both mid-conversation. Composed so their heads and shoulders sit in
-the top third of a tall vertical frame. Below them wet pavement and out-of-focus
-traffic lights recede into deep blue, nothing sharp in the middle of the frame.
+SCENE
+Two people talking on a city street at blue hour — a man in his mid-twenties and
+an Eastern European woman of about the same age, both aged 20 to 30, standing
+close, both animated, both mid-conversation. Composed so their heads and
+shoulders sit in the top third of the frame. Below them wet pavement and
+out-of-focus traffic lights recede into deep blue.
+
+FRAMING
+9:16 portrait, 1080 x 1920. Subjects occupy the top third of the frame,
+above y 600 — nowhere else.
+Keep y 600 to 1320 completely clear: no faces, no hands, no signage, nothing
+sharp and nothing high-contrast. The wordmark, tagline and stars are composited
+into that band afterwards.
+Safe margins 150 px left and right, 120 px top and bottom. The composition must
+survive a centre crop to 1:2, which is taller than this frame.
+
+CASTING
+All subjects aged 20 to 30. Faces are composites — no recognisable public
+figures, no celebrity likeness.
+
+QUALITY
+4K still, hyperrealistic, indistinguishable from documentary photography.
+Visible skin pores, fine facial hair, natural asymmetry, real fabric weave.
+Anatomically correct hands at all times. No morphing, no warping, no extra
+fingers, no plastic skin, no CGI sheen, no beauty retouching.
+
+LIGHT
+Natural available light only, no stylised grade.
+Blue hour. Street lamps and shop windows just coming on, cool ambient sky.
+Cool blue-black shadows, warm amber highlights, skin tones true. The darkest
+areas of the frame sit at #070C17.
+
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no legible signage or lettering, no logos, no wordmarks, no
+watermarks.
 ```
 
 ## 4 · `gym.webp`
@@ -99,11 +198,42 @@ traffic lights recede into deep blue, nothing sharp in the middle of the frame.
 them out of the type.
 
 ```
-Two people aged 20 to 30 talking between sets in a gym, one sitting on a bench with a towel
-over one shoulder, the other standing with a hand on the frame of a machine,
-both relaxed and mid-conversation. Bottom third of a tall vertical frame. Above
-them the gym recedes into blurred overhead lights and dark equipment, with
-nothing sharp through the middle of the frame.
+SCENE
+Two people aged 20 to 30 talking between sets in a gym, one sitting on a bench
+with a towel over one shoulder, the other standing with a hand on the frame of a
+machine, both relaxed and mid-conversation. Bottom third of the frame. Above
+them the gym recedes into blurred overhead lights and dark equipment.
+
+FRAMING
+9:16 portrait, 1080 x 1920. Subjects occupy the bottom third of the frame,
+below y 1320 — nowhere else.
+Keep y 600 to 1320 completely clear: no faces, no hands, no signage, nothing
+sharp and nothing high-contrast. The wordmark, tagline and stars are composited
+into that band afterwards.
+Safe margins 150 px left and right, 120 px top and bottom. The composition must
+survive a centre crop to 1:2, which is taller than this frame.
+
+CASTING
+All subjects aged 20 to 30. Faces are composites — no recognisable public
+figures, no celebrity likeness.
+
+QUALITY
+4K still, hyperrealistic, indistinguishable from documentary photography.
+Visible skin pores, fine facial hair, natural asymmetry, real fabric weave.
+Anatomically correct hands at all times. No morphing, no warping, no extra
+fingers, no plastic skin, no CGI sheen, no beauty retouching.
+
+LIGHT
+Natural available light only, no stylised grade.
+Bright overhead practicals with one warm window source, shadows kept deep.
+Cool blue-black shadows, warm amber highlights, skin tones true. The darkest
+areas of the frame sit at #070C17.
+
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no legible signage or lettering, no logos, no wordmarks, no
+watermarks.
 ```
 
 ## 5 · `street.webp`
@@ -113,11 +243,43 @@ nothing sharp through the middle of the frame.
 scrim of the daylight set.
 
 ```
-Daytime on a city pavement, two people aged 20 to 30 stopped mid-conversation that is clearly
-going well — one has just spoken, the other is smiling and answering, both with
-open posture and turned toward each other. Heads and shoulders in the top third
-of a tall vertical frame. Below them the pavement and blurred passers-by fall
-away out of focus, nothing sharp in the middle of the frame.
+SCENE
+Daytime on a city pavement, two people aged 20 to 30 stopped mid-conversation
+that is clearly going well — one has just spoken, the other is smiling and
+answering, both with open posture and turned toward each other. Heads and
+shoulders in the top third of the frame. Below them the pavement and blurred
+passers-by fall away out of focus.
+
+FRAMING
+9:16 portrait, 1080 x 1920. Subjects occupy the top third of the frame,
+above y 600 — nowhere else.
+Keep y 600 to 1320 completely clear: no faces, no hands, no signage, nothing
+sharp and nothing high-contrast. The wordmark, tagline and stars are composited
+into that band afterwards.
+Safe margins 150 px left and right, 120 px top and bottom. The composition must
+survive a centre crop to 1:2, which is taller than this frame.
+
+CASTING
+All subjects aged 20 to 30. Faces are composites — no recognisable public
+figures, no celebrity likeness.
+
+QUALITY
+4K still, hyperrealistic, indistinguishable from documentary photography.
+Visible skin pores, fine facial hair, natural asymmetry, real fabric weave.
+Anatomically correct hands at all times. No morphing, no warping, no extra
+fingers, no plastic skin, no CGI sheen, no beauty retouching.
+
+LIGHT
+Natural available light only, no stylised grade.
+Mid-afternoon, low sun coming down the length of the street between buildings.
+Cool blue-black shadows, warm amber highlights, skin tones true. The darkest
+areas of the frame sit at #070C17.
+
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no legible signage or lettering, no logos, no wordmarks, no
+watermarks.
 ```
 
 ## 6 · `beach.webp`
@@ -127,11 +289,42 @@ away out of focus, nothing sharp in the middle of the frame.
 the set — hence the heaviest scrim.
 
 ```
-Golden hour at the water's edge, two people aged 20 to 30 barefoot at the shoreline, walking
-and talking, mid-stride and half-turned toward each other. Bottom third of a
-tall vertical frame. Above them an open sky graduating from warm gold to deep
-blue, completely clean — no hard-edged clouds, nothing sharp in the middle of
-the frame.
+SCENE
+Golden hour at the water's edge, two people aged 20 to 30 barefoot at the
+shoreline, walking and talking, mid-stride and half-turned toward each other.
+Bottom third of the frame. Above them an open sky graduating from warm gold to
+deep blue, completely clean — no hard-edged clouds.
+
+FRAMING
+9:16 portrait, 1080 x 1920. Subjects occupy the bottom third of the frame,
+below y 1320 — nowhere else.
+Keep y 600 to 1320 completely clear: no faces, no hands, no signage, nothing
+sharp and nothing high-contrast. The wordmark, tagline and stars are composited
+into that band afterwards.
+Safe margins 150 px left and right, 120 px top and bottom. The composition must
+survive a centre crop to 1:2, which is taller than this frame.
+
+CASTING
+All subjects aged 20 to 30. Faces are composites — no recognisable public
+figures, no celebrity likeness.
+
+QUALITY
+4K still, hyperrealistic, indistinguishable from documentary photography.
+Visible skin pores, fine facial hair, natural asymmetry, real fabric weave.
+Anatomically correct hands at all times. No morphing, no warping, no extra
+fingers, no plastic skin, no CGI sheen, no beauty retouching.
+
+LIGHT
+Natural available light only, no stylised grade.
+Golden hour, low sun across water, long soft shadows, no fill.
+Cool blue-black shadows, warm amber highlights, skin tones true. The darkest
+areas of the frame sit at #070C17.
+
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no legible signage or lettering, no logos, no wordmarks, no
+watermarks.
 ```
 
 ## 7 · `speaking.webp`
@@ -143,13 +336,43 @@ social — it says the app is for the meeting and the interview too, which is ha
 the personas.
 
 ```
+SCENE
 A person in their mid-twenties speaking to a small audience in a warmly lit room,
-standing at the front, mid-gesture and clearly mid-sentence, the listeners
-turned toward them. Shot from the third row so the speaker sits in the bottom
-third of a tall vertical frame, with a few dark out-of-focus heads and
-shoulders in the immediate foreground. Above the speaker the wall and ceiling
-fall into shadow with one soft pool of warm light, nothing sharp in the middle
-of the frame.
+standing at the front, mid-gesture and clearly mid-sentence, the listeners turned
+toward them. Shot from the third row so the speaker sits in the bottom third of
+the frame, with a few dark out-of-focus heads and shoulders in the immediate
+foreground. Above the speaker the wall and ceiling fall into shadow.
+
+FRAMING
+9:16 portrait, 1080 x 1920. Subjects occupy the bottom third of the frame,
+below y 1320 — nowhere else.
+Keep y 600 to 1320 completely clear: no faces, no hands, no signage, nothing
+sharp and nothing high-contrast. The wordmark, tagline and stars are composited
+into that band afterwards.
+Safe margins 150 px left and right, 120 px top and bottom. The composition must
+survive a centre crop to 1:2, which is taller than this frame.
+
+CASTING
+All subjects aged 20 to 30. Faces are composites — no recognisable public
+figures, no celebrity likeness.
+
+QUALITY
+4K still, hyperrealistic, indistinguishable from documentary photography.
+Visible skin pores, fine facial hair, natural asymmetry, real fabric weave.
+Anatomically correct hands at all times. No morphing, no warping, no extra
+fingers, no plastic skin, no CGI sheen, no beauty retouching.
+
+LIGHT
+Natural available light only, no stylised grade.
+Dark room, one warm pool of light on the speaker, everything else falling off.
+Cool blue-black shadows, warm amber highlights, skin tones true. The darkest
+areas of the frame sit at #070C17.
+
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no legible signage or lettering, no logos, no wordmarks, no
+watermarks.
 ```
 
 ---

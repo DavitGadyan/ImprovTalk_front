@@ -152,22 +152,85 @@ cinematic look, which is exactly the grade that clashes with this page:
 no teal-and-orange grade, no green cast, no pure black, no HDR
 ```
 
-### Paste-ready style prompt
+### The blocks every prompt carries
+
+Paste these under the scene description. They are what makes generated footage
+read as documentary rather than as a render, and they are identical on every
+prompt in `personas/CASTING.md`.
 
 ```
-A short cinematic scene in a modern coffee shop, two people in their late
-twenties talking easily while waiting in the queue. Warm practical lighting from
-window and pendant lamps. Shallow depth of field, slow handheld drift, natural
-unposed body language, one of them smiling mid-sentence.
-
-Colour grade: cool blue-black shadows (#070C17), warm amber highlights
-(#FF9500), one cool blue accent light around #0A84FF. Rec.709, no HDR, no
-teal-and-orange look, no green cast, no pure black.
-
-16:9, 1920x1080, 24fps, 12 seconds, seamless loop, no on-screen text,
-no captions, no logos, subject within the centre 80% of frame,
-edges falling off softly to near-black.
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
+
+Two of those matter more than the rest.
+
+**`LIGHT` forbids a stylised grade, and the per-scene light line is not one.**
+That line names the practicals actually in the room — a desk lamp, a window at
+dusk, a phone screen. Choosing the hour and the practicals is how the palette
+gets there. A LUT laid over the top is what makes footage look generated.
+
+**`NEGATIVE` forbids the logo.** The model produces the wash; the mark goes on
+in post. A generated wordmark comes back subtly wrong every time — letterforms
+close but not right — and subtly wrong is worse than absent.
+
+### End card — the post recipe
+
+The prompt above already renders the three-second wash. Everything below is
+composited on top of it.
+
+| From | Frames | What |
+|---|---|---|
+| +0.0s | — | Gradient fully covers, 100°: `#FF9500` → `#FF2D55` 36% → `#AF52DE` 68% → `#5856D6` |
+| +0.0s | 7 | `public/icon.png` fades up, centred, **22% of frame height**, the app's own corner radius |
+| +0.6s | — | Wordmark **ImprovTalk** fades in beneath — Inter Tight 600, `#F8FAFC`, letter-spacing `-0.02em`, gap = ⅓ the mark's height |
+| +1.3s | — | Optional line beneath, Inter 400, `#94A3B8`: *"Practice the conversation before you have it."* |
+| last | 8 | Gradient eases to `#070C17` — the final frame is exactly the band colour |
+
+**Audio carries through.** Room tone under the whole card, ducked 20% from the
+first frame of the wash. Never cut to silence — the street or the room carrying
+into the logo is the difference between an ending and a slide.
+
+### Subtitle plate
+
+For any clip with a line worth reading — a second language, a correction, a
+punchline that lands on wording.
+
+- **Keep the lower third clear** of faces, hands and high-contrast background
+  for the whole subtitle window. Composite the plate afterwards; never let the
+  model render text.
+- **Type** Inter 500 at 3.2% of frame height. Lead with the phrase in
+  `#F8FAFC`, then a middle dot, then the gloss in `#94A3B8`.
+- **Plate** centred, baseline at 88% of frame height, over a 60%-opacity
+  `#070C17` bar, 12px radius, padding of one line height, edges feathered 8px.
+  White text over sunlit pavement strobes without it.
+- **One card across a call and its answer.** If the joke is the gap between an
+  attempt and a correction, the viewer needs both on screen at once.
+- **Fade** in 4 frames, out 6.
+
 
 ---
 

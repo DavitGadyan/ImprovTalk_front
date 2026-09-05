@@ -24,6 +24,12 @@ should be captioned as a testimonial. Nothing here is a claim about results.
 frame, and feed it back as a reference image for B. Without that you get two
 strangers and the pairing collapses.
 
+**Never let the model render the logo.** Every prompt ends by forbidding text
+and marks. The wash it produces is the plate; the icon, the wordmark and the
+line are composited afterwards — see the end-card recipe in
+`../BRAND-AND-VIDEO.md`. A generated wordmark comes back subtly wrong every
+time, and wrong is worse than absent.
+
 **Never-lists are binding.** Each persona in `PERSONAS-15.md` carries words that
 end the relationship on contact — *beginner* to someone resuming, *confidence*
 to someone who has been sold confidence his whole life. They apply to captions
@@ -34,15 +40,42 @@ agency, nobody worn down. The honest differentiator is that *noticing a no early
 is the skill* — persona 5 is built on exactly that, and it is the one to film if
 you only film one.
 
-## The technical line
+## The blocks every prompt carries
 
-Identical on every prompt below, from `../BRAND-AND-VIDEO.md`:
+Identical on all thirty, straight from `../BRAND-AND-VIDEO.md`. They are already
+inline in each prompt below, so a prompt can be copied and pasted whole with
+nothing to append:
 
 ```
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions,
-no logos, subject within centre 80%, edges falling softly to near-black,
-no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
+
+A looping website hero is the one exception: drop the `END CARD` block, since a
+loop has no end to put a mark on.
 
 ## Distinctness grid
 
@@ -95,7 +128,31 @@ starting the same sentence over. Narrow shoulders, dark loose curls, oversized
 grey hoodie. Lit only by the phone screen and a lamp behind him. Slow push-in,
 shallow depth of field, unposed.
 midnight navy base, amber lamp light, electric blue screen glow
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 ```
@@ -106,7 +163,31 @@ table, then goes quiet and listens while the person opposite talks and laughs.
 His fidgeting hands come to rest. Slow handheld drift, shallow depth of field,
 two adults at ease.
 deep indigo shadows, warm cafe amber, single cool blue accent
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 **Never** anything that implies he is behind. No countdown, no "still".
@@ -131,7 +212,31 @@ standing in a kitchen at night with a phone in one hand, talking to it, stopping
 smiling at himself and going again. Worn brown leather jacket over a t-shirt.
 Warm overhead light, cool window behind. Medium shot, slow drift, unposed.
 low-key navy grade, warm skin tones, cold blue background separation
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 ```
@@ -141,7 +246,31 @@ same heavy-set man in the leather jacket talks with another dog owner and laughs
 properly at something they said, caught off guard. Relaxed stance, hands in
 pockets. Handheld, shallow depth of field, unposed, natural.
 cool blue-black shadows, warm amber highlights, deep navy background
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 **Never** beginner, learn, start over. He is resuming.
@@ -167,7 +296,31 @@ cross-legged on a sofa in a dim flat, phone in one hand, saying a sentence out
 loud, wincing, saying it again better. Minimal light streetwear, thin silver
 chain. Screen light on her face, warm lamp behind. Close-up to medium, slow push.
 midnight navy base, amber lamp light, electric blue screen glow
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 ```
@@ -177,7 +330,31 @@ woman with the high ponytail puts her phone face-down on the table, says
 something that makes the person opposite laugh, and visibly relaxes. Two adults
 talking easily. Shallow depth of field, slow handheld drift, unposed.
 dark blue-black palette, warm orange practicals, violet rim light
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 **Never** frame texting as cheating or lesser. It is a real skill that does not
@@ -204,7 +381,31 @@ alone at a kitchen table at night, phone propped against a mug, talking to it
 and pausing to listen. Denim jacket over a bright top, small sketchbook beside
 her. Warm kitchen light, cool blue from the phone. Medium close-up, slow drift.
 deep indigo shadows, warm cafe amber, single cool blue accent
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 ```
@@ -214,7 +415,31 @@ with long box braids leans in and asks a follow-up question, nodding, genuinely
 interested, while the person opposite keeps talking. Unhurried, comfortable
 silence between sentences. Shallow depth of field, slow handheld, unposed.
 deep indigo shadows, warm cafe amber, single cool blue accent
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 **Never** scripts and question lists. That is what she already tried.
@@ -240,7 +465,31 @@ glasses, sitting very still at a desk in a dim room, phone in hand, listening
 intently and then answering. Olive overshirt. Cool screen light on his glasses,
 one warm lamp off to the side. Close-up, static frame, minimal movement.
 low-key navy grade, warm skin tones, cold blue background separation
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 ```
@@ -251,7 +500,31 @@ through a conversation; the other person glances at their phone. He smiles,
 says something brief and friendly, and steps away easily. No tension, both
 relaxed, nobody embarrassed. Handheld, shallow depth of field, unposed.
 dark blue-black palette, warm orange practicals, violet rim light
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 **Never** the decoding framing. This is paying attention, not reading signals.
@@ -278,7 +551,31 @@ headphones round his neck, sitting on a bed in a dark flatshare bedroom at
 night, phone held close, speaking quietly and repeating the same opening line.
 Hoodie. Only light is the phone and a strip under the door. Close-up, slow push.
 midnight navy base, amber lamp light, electric blue screen glow
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 ```
@@ -288,7 +585,31 @@ semicircle for a standup. The same young man speaks up, shrugs slightly, and the
 others react easily — one of them nods, another half-laughs. He stays in it.
 Natural light through big windows, one cool monitor glow. Medium shot, unposed.
 cool blue-black shadows, warm amber highlights, deep navy background
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 **Never** confidence, charisma, transform. He has been sold confidence his whole
@@ -313,7 +634,31 @@ alone in a one-bed flat, pacing while talking into a phone, stopping, starting
 again. Half-zip top, work lanyard still on. Evening light through a window, warm
 lamp, cool screen. Medium shot, handheld follow, unposed.
 low-key navy grade, warm skin tones, cold blue background separation
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 ```
@@ -323,7 +668,31 @@ same sandy-haired man in a half-zip walks over to a small group, says something
 about the place they are all standing in, and is folded into the conversation.
 Easy, unforced, no bravado. Handheld drift, shallow depth of field.
 dark blue-black palette, warm orange practicals, violet rim light
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 **Never** the pickup vocabulary. Any of it.
@@ -351,7 +720,31 @@ beard, sitting at a small apartment table early in the morning with a coffee and
 a phone, speaking in a second language, hesitating, then continuing. Glasses
 pushed up on his head, expressive hands. Cool morning window light, warm lamp.
 deep indigo shadows, warm cafe amber, single cool blue accent
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 ```
@@ -361,7 +754,31 @@ behind. The same bearded man begins a sentence, adjusts it mid-flow with a small
 gesture, and the group follows him without pausing. One of them answers back. He
 registers that it worked. Natural light, medium shot, unposed.
 cool blue-black shadows, warm amber highlights, deep navy background
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 **Never** learn, beginner, course. He is not short of vocabulary.
@@ -386,7 +803,31 @@ tortoiseshell glasses, sitting by a window in a sparsely furnished flat in the
 evening, phone in hand, practising a conversation and smiling when it goes well.
 Neat quiet layers, canvas tote beside her. Warm lamp, cool blue dusk outside.
 low-key navy grade, warm skin tones, cold blue background separation
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 ```
@@ -396,7 +837,31 @@ group of neighbours with drinks. The same woman with the black bob asks the
 group a question, they all laugh and explain something to her, and she laughs
 with them. Warm, easy, welcoming. Handheld, shallow depth of field, unposed.
 deep indigo shadows, warm cafe amber, single cool blue accent
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 **Never** treat it as a language problem. It is a context problem, and saying so
@@ -423,7 +888,31 @@ alone in a home office late at night, sleeves rolled, speaking to a phone
 propped on a stack of books, then stopping to check something. One warm desk
 lamp, cool monitor glow behind. Medium shot, static frame, unposed.
 midnight navy base, amber lamp light, electric blue screen glow
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 ```
@@ -433,7 +922,31 @@ The same tall man with rolled sleeves says one short sentence and the room turns
 toward him — heads lift from laptops, someone nods. He continues, unhurried.
 Cool daylight, warm skin tones. Medium wide, slow drift, unposed.
 cool blue-black shadows, warm amber highlights, deep navy background
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 **Never** anxiety, shy, nervous. He is none of them.
@@ -458,7 +971,31 @@ sitting at a bedroom desk at night, blazer over a band t-shirt, answering out
 loud to a phone propped against a notebook, then writing something down. Warm
 desk lamp, cool screen light, dark room behind. Medium close-up, slow push-in.
 midnight navy base, amber lamp light, electric blue screen glow
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 ```
@@ -468,7 +1005,31 @@ The same auburn-haired woman in the blazer pauses mid-answer, holds the silence
 for a beat without filling it, then finishes her point clearly. The interviewer
 waits, then nods and writes. Calm, professional. Medium shot, static, unposed.
 low-key navy grade, warm skin tones, cold blue background separation
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 **Never** promise an outcome. We do not get anyone a job, and saying we might is
@@ -495,7 +1056,31 @@ sitting in a parked car in the daytime, phone to his ear, talking, stopping,
 laughing at himself, going again. Headset round his neck. Daylight through the
 windscreen, cool interior shadows. Medium close-up through the side window.
 cool blue-black shadows, warm amber highlights, deep navy background
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 ```
@@ -505,7 +1090,31 @@ call. The same broad blond man in the quarter-zip asks a question, then stops
 and waits, listening, not filling the pause. He nods slowly. Cool office light
 with one warm lamp. Medium shot, slow drift, unposed.
 low-key navy grade, warm skin tones, cold blue background separation
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 **Never** basics. He does this professionally.
@@ -529,7 +1138,31 @@ blazer, alone in a quiet room in the evening, reading glasses in one hand, phone
 in the other, saying a difficult sentence out loud, stopping, saying it more
 plainly. Warm side lamp, deep shadow behind. Medium close-up, static frame.
 low-key navy grade, warm skin tones, cold blue background separation
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 ```
@@ -539,7 +1172,31 @@ through a blind. The same woman with locs takes off her reading glasses, says on
 clear sentence, and waits. The other person thinks, then answers. Warm, direct,
 not cold. Medium two-shot, static, unposed.
 cool blue-black shadows, warm amber highlights, deep navy background
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 **Never** hacks, tricks, power moves.
@@ -568,7 +1225,31 @@ grey at the roots, standing in a suburban kitchen in the early evening holding a
 mug, phone propped against the kettle, talking to it and laughing at her own
 answer. Cardigan. Warm kitchen light, cool blue dusk through the window.
 deep indigo shadows, warm cafe amber, single cool blue accent
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 ```
@@ -578,7 +1259,31 @@ drinks. The same blonde woman in a cardigan turns to the person beside her at
 the bar and starts the conversation herself. They both laugh. She stays. Relaxed,
 warm, unforced. Handheld drift, shallow depth of field, unposed.
 dark blue-black palette, warm orange practicals, violet rim light
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 **Never** beginner, learn, basics. Nothing about her changed except how often she
@@ -605,7 +1310,31 @@ home standing desk in a spare room, hoodie on, talking to a phone propped agains
 a monitor, gesturing, restarting. Grey daylight through a window, warm desk lamp,
 cool screen glow. Medium shot, static frame, unposed.
 midnight navy base, amber lamp light, electric blue screen glow
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 ```
@@ -615,7 +1344,31 @@ coffee, daylight from a high window. The same bearded man in a beanie and lanyar
 steps into a conversation already running, adds something, and the group opens up
 to include him. Easy, natural, nobody introduces him. Handheld, medium wide.
 cool blue-black shadows, warm amber highlights, deep navy background
-16:9 1920x1080, 24fps, 10s, seamless loop, no on-screen text, no captions, no logos, subject within centre 80%, edges falling softly to near-black, no teal-and-orange grade, no green cast, no pure black, no HDR
+QUALITY
+4K, 24fps, 180° shutter. Hyperrealistic live action, indistinguishable from
+documentary footage. Visible skin pores, fine facial hair, natural asymmetry,
+real fabric weave. Anatomically correct hands at all times. Faces stay
+consistent for the whole clip. No morphing, no warping, no extra fingers, no
+plastic skin, no CGI sheen, no beauty retouching.
+FRAME
+16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
+the centre 80%, edges falling softly to near-black, seamless loop.
+LIGHT
+Natural available light only, no stylised grade — the light line above describes
+the practicals actually in the room, not a LUT. Skin tones stay true. The
+darkest areas of the frame sit at #070C17.
+END CARD, last 3 seconds
+The available light washes into a purple-to-blue gradient with a warm orange
+glow entering from the top left; the scene defocuses into the clean gradient and
+the room tone continues underneath, never cutting to silence. Gradient at 100°:
+#FF9500 to #FF2D55 at 36%, to #AF52DE at 68%, to #5856D6, settling to #070C17.
+Keep the centre of the frame completely uncluttered through the wash — no faces,
+no signage, no high-contrast detail in the middle third.
+NEGATIVE
+No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
+filter, no stylised LUT — colour must read as real light. No on-screen text, no
+captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
+mark is composited in post.
 ```
 
 **Never** imply that working remotely was a mistake.
