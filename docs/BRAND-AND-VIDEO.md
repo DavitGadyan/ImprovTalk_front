@@ -168,6 +168,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -184,6 +193,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 Two of those matter more than the rest.
@@ -192,6 +203,14 @@ Two of those matter more than the rest.
 That line names the practicals actually in the room — a desk lamp, a window at
 dusk, a phone screen. Choosing the hour and the practicals is how the palette
 gets there. A LUT laid over the top is what makes footage look generated.
+
+**`DEPTH` is what "make it more 3D" actually means.** The word *3D* in a prompt
+pulls these models toward CGI, animation and a game-engine look — the exact
+opposite of the documentary realism the `QUALITY` block asks for, and a direct
+fight with *no CGI sheen*. What makes a frame read as three-dimensional is
+separated planes, something crossing the near foreground, real focus falloff and
+visible air. All of that is photographic, so `NEGATIVE` names the render look
+explicitly and rules it out.
 
 **`NEGATIVE` forbids the logo.** The model produces the wash; the mark goes on
 in post. A generated wordmark comes back subtly wrong every time — letterforms

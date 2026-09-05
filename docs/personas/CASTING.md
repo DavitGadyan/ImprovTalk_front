@@ -56,6 +56,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -72,6 +81,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 A looping website hero is the one exception: drop the `END CARD` block, since a
@@ -137,6 +148,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -153,6 +173,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 ```
@@ -172,6 +194,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -188,6 +219,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 **Never** anything that implies he is behind. No countdown, no "still".
@@ -221,6 +254,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -237,6 +279,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 ```
@@ -255,6 +299,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -271,6 +324,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 **Never** beginner, learn, start over. He is resuming.
@@ -305,6 +360,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -321,6 +385,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 ```
@@ -339,6 +405,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -355,6 +430,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 **Never** frame texting as cheating or lesser. It is a real skill that does not
@@ -390,6 +467,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -406,6 +492,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 ```
@@ -424,6 +512,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -440,6 +537,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 **Never** scripts and question lists. That is what she already tried.
@@ -474,6 +573,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -490,6 +598,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 ```
@@ -509,6 +619,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -525,6 +644,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 **Never** the decoding framing. This is paying attention, not reading signals.
@@ -560,6 +681,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -576,6 +706,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 ```
@@ -594,6 +726,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -610,6 +751,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 **Never** confidence, charisma, transform. He has been sold confidence his whole
@@ -643,6 +786,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -659,6 +811,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 ```
@@ -677,6 +831,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -693,6 +856,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 **Never** the pickup vocabulary. Any of it.
@@ -729,6 +894,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -745,6 +919,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 ```
@@ -763,6 +939,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -779,6 +964,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 **Never** learn, beginner, course. He is not short of vocabulary.
@@ -812,6 +999,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -828,6 +1024,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 ```
@@ -846,6 +1044,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -862,6 +1069,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 **Never** treat it as a language problem. It is a context problem, and saying so
@@ -897,6 +1106,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -913,6 +1131,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 ```
@@ -931,6 +1151,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -947,6 +1176,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 **Never** anxiety, shy, nervous. He is none of them.
@@ -980,6 +1211,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -996,6 +1236,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 ```
@@ -1014,6 +1256,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -1030,6 +1281,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 **Never** promise an outcome. We do not get anyone a job, and saying we might is
@@ -1065,6 +1318,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -1081,6 +1343,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 ```
@@ -1099,6 +1363,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -1115,6 +1388,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 **Never** basics. He does this professionally.
@@ -1147,6 +1422,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -1163,6 +1447,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 ```
@@ -1181,6 +1467,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -1197,6 +1492,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 **Never** hacks, tricks, power moves.
@@ -1234,6 +1531,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -1250,6 +1556,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 ```
@@ -1268,6 +1576,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -1284,6 +1601,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 **Never** beginner, learn, basics. Nothing about her changed except how often she
@@ -1319,6 +1638,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -1335,6 +1663,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 ```
@@ -1353,6 +1683,15 @@ plastic skin, no CGI sheen, no beauty retouching.
 FRAME
 16:9, 1920x1080, 10 seconds, 35mm handheld with natural drift, subject within
 the centre 80%, edges falling softly to near-black, seamless loop.
+DEPTH
+Three clearly separated planes: something out of focus crossing the near
+foreground, the subject sharp in the middle distance, and a background falling
+well behind them. 35mm at a wide aperture so focus falls off naturally on both
+sides of the subject. The handheld drift is what makes the planes slide against
+each other — let a foreground element cross the frame at least once. Air in the
+room: faint haze catching the practicals, specular highlights on glass and wet
+surfaces, contact shadows where people and objects meet the floor and the table.
+Depth comes from real lens behaviour and real atmosphere, never from a render.
 LIGHT
 Natural available light only, no stylised grade — the light line above describes
 the practicals actually in the room, not a LUT. Skin tones stay true. The
@@ -1369,6 +1708,8 @@ No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no logos, no wordmarks, no lettering of any kind, no watermarks: the
 mark is composited in post.
+No 3D render, no CGI, no game-engine look, no animation, no illustration — this
+is a photograph of real people.
 ```
 
 **Never** imply that working remotely was a mistake.

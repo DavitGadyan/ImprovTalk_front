@@ -85,6 +85,16 @@ condensation on glassware. Anatomically correct hands at all times. No morphing,
 no warping, no extra fingers, no plastic skin, no CGI sheen, no beauty
 retouching.
 
+DEPTH
+Three clearly separated planes: an out-of-focus element at the near edge of the
+frame, the subjects sharp in the middle distance, and a background falling well
+behind them. 35mm at a wide aperture so focus falls off naturally on both sides.
+Air in the scene: faint haze catching the light, specular highlights on glass
+and wet surfaces, contact shadows grounding everyone to the floor. Foreground
+elements stay at the frame edges and inside the subjects' own third — nothing
+may cross the clear band. Depth comes from real lens behaviour, never from a
+render.
+
 LIGHT
 Natural available light only, no stylised grade.
 Late evening interior. Warm tungsten practicals and string lights only, no fill.
@@ -95,7 +105,8 @@ NEGATIVE
 No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no legible signage or lettering, no logos, no wordmarks, no
-watermarks.
+watermarks. No 3D render, no CGI, no game-engine look, no animation, no
+illustration — this is a photograph of real people.
 ```
 
 ## 2 · `group.webp`
@@ -132,6 +143,16 @@ condensation on glassware. Anatomically correct hands at all times. No morphing,
 no warping, no extra fingers, no plastic skin, no CGI sheen, no beauty
 retouching.
 
+DEPTH
+Three clearly separated planes: an out-of-focus element at the near edge of the
+frame, the subjects sharp in the middle distance, and a background falling well
+behind them. 35mm at a wide aperture so focus falls off naturally on both sides.
+Air in the scene: faint haze catching the light, specular highlights on glass
+and wet surfaces, contact shadows grounding everyone to the floor. Foreground
+elements stay at the frame edges and inside the subjects' own third — nothing
+may cross the clear band. Depth comes from real lens behaviour, never from a
+render.
+
 LIGHT
 Natural available light only, no stylised grade.
 Bar interior, early evening. Warm pendant practicals, one cooler source behind.
@@ -142,7 +163,8 @@ NEGATIVE
 No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no legible signage or lettering, no logos, no wordmarks, no
-watermarks.
+watermarks. No 3D render, no CGI, no game-engine look, no animation, no
+illustration — this is a photograph of real people.
 ```
 
 ## 3 · `cultures.webp`
@@ -178,6 +200,16 @@ Visible skin pores, fine facial hair, natural asymmetry, real fabric weave.
 Anatomically correct hands at all times. No morphing, no warping, no extra
 fingers, no plastic skin, no CGI sheen, no beauty retouching.
 
+DEPTH
+Three clearly separated planes: an out-of-focus element at the near edge of the
+frame, the subjects sharp in the middle distance, and a background falling well
+behind them. 35mm at a wide aperture so focus falls off naturally on both sides.
+Air in the scene: faint haze catching the light, specular highlights on glass
+and wet surfaces, contact shadows grounding everyone to the floor. Foreground
+elements stay at the frame edges and inside the subjects' own third — nothing
+may cross the clear band. Depth comes from real lens behaviour, never from a
+render.
+
 LIGHT
 Natural available light only, no stylised grade.
 Blue hour. Street lamps and shop windows just coming on, cool ambient sky.
@@ -188,7 +220,8 @@ NEGATIVE
 No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no legible signage or lettering, no logos, no wordmarks, no
-watermarks.
+watermarks. No 3D render, no CGI, no game-engine look, no animation, no
+illustration — this is a photograph of real people.
 ```
 
 ## 4 · `gym.webp`
@@ -223,6 +256,16 @@ Visible skin pores, fine facial hair, natural asymmetry, real fabric weave.
 Anatomically correct hands at all times. No morphing, no warping, no extra
 fingers, no plastic skin, no CGI sheen, no beauty retouching.
 
+DEPTH
+Three clearly separated planes: an out-of-focus element at the near edge of the
+frame, the subjects sharp in the middle distance, and a background falling well
+behind them. 35mm at a wide aperture so focus falls off naturally on both sides.
+Air in the scene: faint haze catching the light, specular highlights on glass
+and wet surfaces, contact shadows grounding everyone to the floor. Foreground
+elements stay at the frame edges and inside the subjects' own third — nothing
+may cross the clear band. Depth comes from real lens behaviour, never from a
+render.
+
 LIGHT
 Natural available light only, no stylised grade.
 Bright overhead practicals with one warm window source, shadows kept deep.
@@ -233,7 +276,8 @@ NEGATIVE
 No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no legible signage or lettering, no logos, no wordmarks, no
-watermarks.
+watermarks. No 3D render, no CGI, no game-engine look, no animation, no
+illustration — this is a photograph of real people.
 ```
 
 ## 5 · `street.webp`
@@ -269,6 +313,16 @@ Visible skin pores, fine facial hair, natural asymmetry, real fabric weave.
 Anatomically correct hands at all times. No morphing, no warping, no extra
 fingers, no plastic skin, no CGI sheen, no beauty retouching.
 
+DEPTH
+Three clearly separated planes: an out-of-focus element at the near edge of the
+frame, the subjects sharp in the middle distance, and a background falling well
+behind them. 35mm at a wide aperture so focus falls off naturally on both sides.
+Air in the scene: faint haze catching the light, specular highlights on glass
+and wet surfaces, contact shadows grounding everyone to the floor. Foreground
+elements stay at the frame edges and inside the subjects' own third — nothing
+may cross the clear band. Depth comes from real lens behaviour, never from a
+render.
+
 LIGHT
 Natural available light only, no stylised grade.
 Mid-afternoon, low sun coming down the length of the street between buildings.
@@ -279,7 +333,8 @@ NEGATIVE
 No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no legible signage or lettering, no logos, no wordmarks, no
-watermarks.
+watermarks. No 3D render, no CGI, no game-engine look, no animation, no
+illustration — this is a photograph of real people.
 ```
 
 ## 6 · `beach.webp`
@@ -314,6 +369,16 @@ Visible skin pores, fine facial hair, natural asymmetry, real fabric weave.
 Anatomically correct hands at all times. No morphing, no warping, no extra
 fingers, no plastic skin, no CGI sheen, no beauty retouching.
 
+DEPTH
+Three clearly separated planes: an out-of-focus element at the near edge of the
+frame, the subjects sharp in the middle distance, and a background falling well
+behind them. 35mm at a wide aperture so focus falls off naturally on both sides.
+Air in the scene: faint haze catching the light, specular highlights on glass
+and wet surfaces, contact shadows grounding everyone to the floor. Foreground
+elements stay at the frame edges and inside the subjects' own third — nothing
+may cross the clear band. Depth comes from real lens behaviour, never from a
+render.
+
 LIGHT
 Natural available light only, no stylised grade.
 Golden hour, low sun across water, long soft shadows, no fill.
@@ -324,7 +389,8 @@ NEGATIVE
 No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no legible signage or lettering, no logos, no wordmarks, no
-watermarks.
+watermarks. No 3D render, no CGI, no game-engine look, no animation, no
+illustration — this is a photograph of real people.
 ```
 
 ## 7 · `speaking.webp`
@@ -362,6 +428,16 @@ Visible skin pores, fine facial hair, natural asymmetry, real fabric weave.
 Anatomically correct hands at all times. No morphing, no warping, no extra
 fingers, no plastic skin, no CGI sheen, no beauty retouching.
 
+DEPTH
+Three clearly separated planes: an out-of-focus element at the near edge of the
+frame, the subjects sharp in the middle distance, and a background falling well
+behind them. 35mm at a wide aperture so focus falls off naturally on both sides.
+Air in the scene: faint haze catching the light, specular highlights on glass
+and wet surfaces, contact shadows grounding everyone to the floor. Foreground
+elements stay at the frame edges and inside the subjects' own third — nothing
+may cross the clear band. Depth comes from real lens behaviour, never from a
+render.
+
 LIGHT
 Natural available light only, no stylised grade.
 Dark room, one warm pool of light on the speaker, everything else falling off.
@@ -372,7 +448,8 @@ NEGATIVE
 No teal-and-orange grade, no green cast, no pure black, no HDR, no colour
 filter, no stylised LUT — colour must read as real light. No on-screen text, no
 captions, no legible signage or lettering, no logos, no wordmarks, no
-watermarks.
+watermarks. No 3D render, no CGI, no game-engine look, no animation, no
+illustration — this is a photograph of real people.
 ```
 
 ---
