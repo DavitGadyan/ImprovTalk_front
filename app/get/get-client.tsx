@@ -109,7 +109,7 @@ export function GetClient() {
       {platform === 'other' && (
         <div className="mt-12 flex flex-col items-center gap-3">
           <div className="rounded-2xl bg-white p-3">
-            <Image src="/qr-get.svg" alt="" width={132} height={132} className="size-32" unoptimized />
+            <Image src="/qr-get.svg" alt="QR code linking to improvtalk.vip/get" width={132} height={132} className="size-32" unoptimized />
           </div>
           <p className="max-w-[15rem] text-[13px] leading-relaxed text-subtle">
             Scan this with your phone to open this page there.

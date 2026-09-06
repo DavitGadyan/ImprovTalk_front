@@ -24,6 +24,7 @@ export default function SurveyPage() {
 
   return (
     <PageShell
+      bare
       title={TITLE}
       breadcrumb={[['Home', '/']]}
       intro="Ninety seconds, six questions, no email address. Your result appears at the end — we are not going to send it to you later."
@@ -32,7 +33,7 @@ export default function SurveyPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
       />
-      <div className="not-prose mt-4">
+      <div className="mt-4">
         <SurveyClient />
       </div>
     </PageShell>

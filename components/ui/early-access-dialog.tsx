@@ -111,7 +111,7 @@ export function EarlyAccessDialog({
             <div className="shrink-0 rounded-xl bg-white p-2.5">
               <Image
                 src="/qr-get.svg"
-                alt=""
+                alt="QR code linking to improvtalk.vip/get"
                 width={112}
                 height={112}
                 className="size-28"

@@ -14,7 +14,7 @@ export function PostFilm({ slug }: { slug: string }) {
   if (!s) return null
 
   return (
-    <figure className="not-prose my-10">
+    <figure className="my-10">
       <div className="overflow-hidden rounded-2xl border border-line bg-surface">
         <video
           className="block aspect-video w-full"

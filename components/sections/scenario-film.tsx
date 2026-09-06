@@ -122,16 +122,19 @@ export function ScenarioFilm() {
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewportOnce}>
           <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
             <p className="eyebrow">Pick somewhere to walk into</p>
-            <div role="tablist" aria-label="Scenario location" className="flex flex-wrap gap-2">
+            {/* Not a tablist. role="tab" promises aria-controls, a tabpanel,
+                roving tabindex and arrow keys; none of that was here, so a
+                screen reader announced "tab 1 of 4" and the arrows did nothing.
+                Four toggle buttons is what this actually is. */}
+            <div role="group" aria-label="Scenario location" className="flex flex-wrap gap-2">
               {scenarios.map((s, i) => (
                 <button
                   key={s.slug}
-                  role="tab"
                   type="button"
-                  aria-selected={i === active}
+                  aria-pressed={i === active}
                   onClick={() => goTo(i)}
                   className={cn(
-                    'rounded-full border px-3.5 py-1.5 text-[12.5px] transition-colors',
+                    'rounded-full border px-3.5 py-2 text-[12.5px] transition-colors',
                     i === active
                       ? 'border-transparent bg-ink font-medium text-canvas'
                       : 'border-line-strong text-muted hover:border-ink/40 hover:text-ink',
@@ -179,10 +182,14 @@ export function ScenarioFilm() {
 
               {/* Click anywhere on the picture to play or pause. A real button,
                   so it is reachable by keyboard and announced properly. */}
+              {/* The click-anywhere layer duplicates the Play control below it,
+                  so it is a mouse affordance only. Two buttons with the same
+                  name, back to back, is a worse keyboard experience than one. */}
               <button
                 type="button"
+                tabIndex={-1}
+                aria-hidden="true"
                 onClick={togglePlay}
-                aria-label={playing ? 'Pause the scene' : 'Play the scene'}
                 className={cn(
                   'absolute inset-0 flex items-center justify-center transition-colors',
                   playing ? 'bg-transparent hover:bg-[#070c17]/20' : 'bg-[#070c17]/45',

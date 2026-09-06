@@ -470,6 +470,29 @@ the retake did not reset `started` so `survey_start` never fired a second time,
 and the popup and menu chrome still shipped in all 22 pages because both gates
 sat below the header rather than around it.
 
+## `not-prose` was doing nothing, and PageShell was restyling the survey
+
+`@tailwindcss/typography` is not installed, so `not-prose` compiles to no CSS —
+`grep -c not-prose` against the built stylesheet returns 0. PageShell's
+`[&_h2]`, `[&_a]` and `[&_ul]` descendant selectors therefore reached straight
+into `/survey/`: question headings were pulled to `text-xl mt-12` over their own
+`display-md`, and the "See the app" outline button, an `<a>` via `asChild`,
+rendered as an underlined accent-blue link inside a bordered pill.
+
+PageShell now takes `bare` for pages whose body is a form rather than an
+article. Do not reach for `not-prose` here; it is not a real class in this build.
+
+## Roles the markup could not keep
+
+`role="tablist"` with `role="tab"` promises `aria-controls`, a `tabpanel`,
+roving tabindex and arrow keys. None of that existed, so a screen reader
+announced "tab, 1 of 4" and the arrow keys did nothing. Four toggle buttons with
+`aria-pressed` is what the scenario picker actually is.
+
+The film also had **two buttons named "Play the scene"** back to back in the tab
+order: the full-bleed click layer and the control-bar button. The click layer is
+a mouse affordance, so it is `aria-hidden` and `tabIndex={-1}` now.
+
 ## Learn, and where its numbers come from
 
 The Learn hub is `apps/mobile/app/learn.tsx`. Counted, not estimated:

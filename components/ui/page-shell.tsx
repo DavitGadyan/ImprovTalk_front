@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Header } from '@/components/sections/header'
 import { Footer } from '@/components/sections/footer'
+import { cn } from '@/lib/utils'
 
 /**
  * Shell for the prose pages (legal, support, billing).
@@ -14,6 +15,7 @@ export function PageShell({
   updated,
   intro,
   breadcrumb,
+  bare = false,
   children,
 }: {
   title: string
@@ -21,6 +23,8 @@ export function PageShell({
   intro?: string
   /** [label, href] pairs, excluding the current page. Renders a visible trail. */
   breadcrumb?: readonly (readonly [string, string])[]
+  /** Skip the prose styling. For pages whose body is a form, not an article. */
+  bare?: boolean
   children: React.ReactNode
 }) {
   return (
@@ -54,7 +58,16 @@ export function PageShell({
           {intro && <p className="mt-6 text-[15px] leading-relaxed text-muted">{intro}</p>}
 
           <div
-            className="mt-10 space-y-6 text-[15px] leading-relaxed text-muted
+            className={cn(
+              'mt-10',
+              /* `not-prose` was doing nothing here — @tailwindcss/typography is
+                 not installed, so the class compiles to no CSS and these
+                 descendant selectors reached into the survey form, restyling
+                 its headings and turning its outline button into a blue
+                 underlined link. */
+              bare
+                ? ''
+                : `space-y-6 text-[15px] leading-relaxed text-muted
               [&_a]:text-accent [&_a]:underline [&_a]:underline-offset-4
               [&_h2]:mb-3 [&_h2]:mt-12 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-ink
               [&_h3]:mb-2 [&_h3]:mt-8 [&_h3]:text-base [&_h3]:font-semibold [&_h3]:text-ink-soft
@@ -64,7 +77,8 @@ export function PageShell({
               [&_td]:border-t [&_td]:border-line [&_td]:py-2.5 [&_td]:pr-4 [&_td]:align-top
               [&_th]:border-b [&_th]:border-line-strong [&_th]:pb-2.5 [&_th]:pr-4 [&_th]:text-left
               [&_th]:text-[11px] [&_th]:font-semibold [&_th]:uppercase [&_th]:tracking-[0.12em] [&_th]:text-subtle
-              [&_ul]:list-disc [&_ul]:pl-5"
+              [&_ul]:list-disc [&_ul]:pl-5`,
+            )}
           >
             {children}
           </div>
