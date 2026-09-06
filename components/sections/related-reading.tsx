@@ -23,7 +23,6 @@ export function RelatedReading({ persona }: { persona: Persona }) {
   return (
     <Section
       id="reading"
-      tone="raised"
       label="Read first"
       title="How to actually do it"
       intro="Openers, what to notice, and how long you have."
@@ -33,21 +32,21 @@ export function RelatedReading({ persona }: { persona: Persona }) {
           <Link
             key={p.slug}
             href={p.path}
-            className="group block rounded-2xl border border-line bg-canvas p-6 transition-colors hover:border-line-strong"
+            className="group block rounded-card border border-line bg-surface p-6 transition-colors hover:border-muted"
           >
-            <h3 className="font-[family-name:var(--font-display)] text-[17px] font-semibold leading-snug tracking-[-0.02em] text-ink transition-colors group-hover:text-accent">
+            <h3 className="text-body font-semibold leading-snug text-ink transition-colors group-hover:text-accent-text">
               {p.title}
             </h3>
-            <p className="mt-2.5 text-[13.5px] leading-relaxed text-muted">{p.excerpt}</p>
+            <p className="mt-2.5 text-small text-muted">{p.excerpt}</p>
           </Link>
         ))}
       </div>
 
-      <p className="mt-8 text-[15px] text-muted">
+      <p className="mt-8 text-small text-muted">
         Or start with{' '}
         <Link
           href="/how-to-start-a-conversation/"
-          className="text-accent underline underline-offset-4"
+          className="text-accent-text underline underline-offset-4"
         >
           the method in four moves
         </Link>

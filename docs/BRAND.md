@@ -41,14 +41,22 @@ and for Meeting people it is also an App Review risk.
 
 ## Visual system for social
 
-- **Background:** `#0B1220` canvas, or `#070C17` for video bands. Never white.
-- **One accent per topic**, borrowed from the app's own palette — the same hues
-  the blog cards use: openers `#FF2D55`, attention `#FF9F0A`, nerves `#BF5AF2`,
-  languages `#0A84FF`, delivery `#30D158`.
-- **The brand gradient appears three times as chrome and no more.** On social
-  that means the end card only.
-- **Type:** Inter Tight for anything large, Inter for body. Both are in
-  `public/fonts/`.
+- **Background:** `#000000`. The one lifted surface is `#1F1F1F`, the one
+  hairline `#313131`. Never navy, never white. Design system B, exactly as the
+  app ships it (`ImprovTalk/apps/mobile/src/ui/theme.ts`).
+- **One accent, as a fill:** violet `#849CFF` with black text on it — the pill,
+  the active tab, a filled bar. Violet as words only for links. Text is white
+  `#FFFFFF` with one muted level `#8E8E93`; eyebrows are muted, never coloured.
+- **Colour on data, never on chrome:** danger `#FF6B6B`, warn `#FFD166`,
+  success `#7DE2A6`, gold `#E0B84A`. A category or a personality colour is a
+  dot beside grey text, not a tinted card. Blog categories: openers danger,
+  attention warn, nerves gold, languages accent, delivery success.
+- **The brand gradient is not a CSS value on the site.** It appears in the app
+  icon and inside the app renders (the Hold-to-speak disc). On social that
+  means the end card only.
+- **Type:** Satoshi Variable for everything — display at 700, body at 400/500.
+  `public/fonts/Satoshi-Variable.woff2` and the italic. Icons are the app's
+  Material Symbols Rounded subset (`npm run gen:icons`).
 - **Safe areas:** keep text out of the bottom 20% and right 15% of a 9:16 frame
   — TikTok's caption and button rail sit there. On-screen text under 60
   characters per card, which the script validator enforces.
@@ -173,7 +181,7 @@ advert costs you the hook.
 
 ### Text, thumbnails, and stills
 
-- On-screen text: Inter Tight, white on a soft dark scrim if the plate is busy.
+- On-screen text: Satoshi Bold, white on a soft dark scrim if the plate is busy.
   Under 60 characters a card, out of the bottom 20% and right 15%.
 - Never put text over a face.
 - Thumbnails and covers: pull a frame from the video itself, do not generate a

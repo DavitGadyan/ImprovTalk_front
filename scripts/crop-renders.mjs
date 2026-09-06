@@ -1,0 +1,137 @@
+/**
+ * Cut the app renders out of the portfolio composites.
+ *
+ * The sources in assets/renders/ are the finished bento images from the case
+ * study — the only real screenshots of design system B that exist. Each panel
+ * is found by scanning for pixels that differ from the ground colour, so no
+ * coordinate is typed by hand and a re-export of the composite re-crops itself.
+ *
+ * Output: public/app/<name>-1400.webp and -700.webp, plus lib/renders.ts with
+ * the real dimensions so every <img> carries width and height.
+ *
+ * Run: npm run gen:renders
+ */
+import sharp from 'sharp'
+import { mkdir, writeFile } from 'node:fs/promises'
+
+/* Row bands top to bottom, panels left to right within each. Must match what
+   the composite actually contains — the script refuses to guess. */
+const LAYOUT = {
+  '01-hero.png': [['intro', 'home'], ['setup-blend', 'score-disc']],
+  '02-bento.png': [
+    ['tab-bar'],
+    ['live-session', 'score-screen'],
+    ['icon-strip'],
+    ['setup-rows', 'choice-list', 'plan-max'],
+  ],
+}
+
+/* Alt text is content, not decoration: it says what the screen shows. */
+const ALT = {
+  intro: 'The ImprovTalk intro screen: a couple talking on a beach behind the wordmark.',
+  home: 'The Home screen: streak, charisma and closed rate, then six destinations — Simulate, Practice, Learn, Solo Drills, Stats, History.',
+  'setup-blend': 'The setup blend: streak, charisma and closed rate above four personality sliders — red, blue, yellow, green — each at 25%.',
+  'score-disc': 'A Charisma Score of 74 out of 100, up 6 on baseline, above the Hold-to-speak disc.',
+  'tab-bar': 'The app tab bar: Home, Practice, Learn, History.',
+  'live-session': 'A live session in a coffee shop: the persona’s portrait, the Hold-to-speak disc, a hint, and End & score.',
+  'score-screen': 'The score screen: Charisma Score 74, what worked, what to work on, and six voice and delivery bars.',
+  'icon-strip': 'The ImprovTalk app icon beside three other apps on an iPhone home screen.',
+  'setup-rows': 'Setup rows: Language, Disposition, Mood, Guard, and a Jealous friends stepper.',
+  'choice-list': 'A disposition choice list: Surprise me, Open, Neutral (selected), Guarded, Cold.',
+  'plan-max': 'The Max plan card, marked Recommended, with three inclusions and a Choose Max button.',
+}
+
+const TOL = 6 /* per-channel distance from the ground colour that counts as content */
+const MIN = 120 /* a band narrower than this is noise, not a panel */
+const WIDTHS = [1400, 700]
+
+const runs = (flags) => {
+  const out = []
+  let start = -1
+  for (let i = 0; i <= flags.length; i++) {
+    const on = i < flags.length && flags[i]
+    if (on && start < 0) start = i
+    if (!on && start >= 0) {
+      if (i - start >= MIN) out.push([start, i])
+      start = -1
+    }
+  }
+  return out
+}
+
+await mkdir('public/app', { recursive: true })
+const manifest = {}
+
+for (const [file, rows] of Object.entries(LAYOUT)) {
+  const img = sharp(`assets/renders/${file}`)
+  const { width, height } = await img.metadata()
+  const raw = await img.raw().toBuffer()
+  const ch = raw.length / (width * height)
+  const [gr, gg, gb] = [raw[0], raw[1], raw[2]]
+  const isContent = (i) =>
+    Math.abs(raw[i] - gr) > TOL || Math.abs(raw[i + 1] - gg) > TOL || Math.abs(raw[i + 2] - gb) > TOL
+
+  const rowHas = new Array(height).fill(false)
+  for (let y = 0; y < height; y++) {
+    const base = y * width * ch
+    for (let x = 0; x < width; x++) {
+      if (isContent(base + x * ch)) { rowHas[y] = true; break }
+    }
+  }
+  const rowBands = runs(rowHas)
+  if (rowBands.length !== rows.length)
+    throw new Error(`${file}: found ${rowBands.length} row bands, layout expects ${rows.length}`)
+
+  for (const [r, [y0, y1]] of rowBands.entries()) {
+    const colHas = new Array(width).fill(false)
+    for (let x = 0; x < width; x++) {
+      for (let y = y0; y < y1; y++) {
+        if (isContent((y * width + x) * ch)) { colHas[x] = true; break }
+      }
+    }
+    const colBands = runs(colHas)
+    if (colBands.length !== rows[r].length)
+      throw new Error(`${file} row ${r}: found ${colBands.length} panels, layout expects ${rows[r].length}`)
+
+    for (const [c, [x0, x1]] of colBands.entries()) {
+      const name = rows[r][c]
+      const box = { left: x0, top: y0, width: x1 - x0, height: y1 - y0 }
+      const entry = { alt: ALT[name], sources: {} }
+      for (const w of WIDTHS) {
+        const out = `public/app/${name}-${w}.webp`
+        const info = await sharp(`assets/renders/${file}`)
+          .extract(box)
+          .resize({ width: Math.min(w, box.width), withoutEnlargement: true })
+          .webp({ quality: 82 })
+          .toFile(out)
+        entry.sources[w] = { src: `/app/${name}-${w}.webp`, width: info.width, height: info.height }
+        console.log(`✓ ${out} ${info.width}×${info.height} ${(info.size / 1024).toFixed(0)}KB`)
+      }
+      manifest[name] = entry
+    }
+  }
+}
+
+const ts = `/* Generated by scripts/crop-renders.mjs — do not edit; re-run npm run gen:renders. */
+export type RenderName = ${Object.keys(manifest).map((n) => `'${n}'`).join(' | ')}
+
+export type Render = {
+  src: string
+  srcSet: string
+  width: number
+  height: number
+  alt: string
+}
+
+export const RENDERS: Record<RenderName, Render> = {
+${Object.entries(manifest)
+  .map(([n, e]) => {
+    const big = e.sources[1400]
+    const set = Object.values(e.sources).map((s) => `${s.src} ${s.width}w`).join(', ')
+    return `  '${n}': {\n    src: '${big.src}',\n    srcSet: '${set}',\n    width: ${big.width},\n    height: ${big.height},\n    alt: ${JSON.stringify(e.alt)},\n  },`
+  })
+  .join('\n')}
+}
+`
+await writeFile('lib/renders.ts', ts)
+console.log(`✓ lib/renders.ts (${Object.keys(manifest).length} renders)`)

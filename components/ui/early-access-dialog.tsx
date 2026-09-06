@@ -1,7 +1,8 @@
 'use client'
 
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useId, useRef } from 'react'
 import Image from 'next/image'
+import { Icon } from '@/components/ui/icon'
 import { LogoMark } from '@/components/ui/logo'
 import { Button } from '@/components/ui/button'
 import { isLive, iosHref, SUPPORT_EMAIL } from '@/content/links'
@@ -31,6 +32,10 @@ export function EarlyAccessDialog({
 }) {
   const ref = useRef<HTMLDialogElement>(null)
   const platform = usePlatform()
+  /* The panel is mounted twice on a persona page — hero and closing band — so
+     the title id has to be unique per instance or aria-labelledby is ambiguous
+     and the document carries a duplicate id. */
+  const titleId = useId()
 
   useEffect(() => {
     const el = ref.current
@@ -58,11 +63,11 @@ export function EarlyAccessDialog({
       ref={ref}
       onClose={onClose}
       onClick={onBackdrop}
-      aria-labelledby="ea-title"
+      aria-labelledby={titleId}
       /* m-auto is not decoration: the UA stylesheet centres a modal <dialog>
          with margin:auto, and Tailwind's preflight resets margin to 0, which
          pins it to the top-left corner. */
-      className="m-auto max-h-[calc(100dvh-2rem)] w-[min(32rem,calc(100vw-2rem))] overflow-y-auto rounded-2xl border border-line bg-surface p-0 text-ink backdrop:bg-black/70 backdrop:backdrop-blur-sm"
+      className="m-auto max-h-[calc(100dvh-2rem)] w-[min(32rem,calc(100vw-2rem))] overflow-y-auto rounded-card border border-line bg-surface p-0 text-ink backdrop:bg-black/70 backdrop:backdrop-blur-sm"
     >
       <div className="p-7 md:p-9">
         <div className="flex items-start justify-between gap-6">
@@ -75,10 +80,10 @@ export function EarlyAccessDialog({
                 a crawler reads the page's opening heading as "Get early access".
                 aria-labelledby still names the dialog, so nothing is lost.
               */}
-              <p id="ea-title" className="text-lg font-semibold text-ink">
+              <p id={titleId} className="text-lg font-semibold text-ink">
                 {isAndroid ? 'iPhone first' : 'Get early access'}
               </p>
-              <p className="mt-0.5 text-[13px] text-subtle">
+              <p className="mt-0.5 text-small text-muted">
                 {isAndroid ? 'iPhone only for now' : 'Free, on TestFlight'}
               </p>
             </div>
@@ -87,28 +92,20 @@ export function EarlyAccessDialog({
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="-m-2 shrink-0 rounded-full p-2 text-subtle transition-colors hover:text-ink"
+            className="-m-2 shrink-0 rounded-full p-2 text-muted transition-colors hover:text-ink"
           >
-            <svg viewBox="0 0 16 16" className="size-4" aria-hidden="true">
-              <path
-                d="m3.5 3.5 9 9m0-9-9 9"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                fill="none"
-              />
-            </svg>
+            <Icon name="close" className="text-xl" />
           </button>
         </div>
 
         {isAndroid ? (
-          <p className="mt-7 text-[15px] leading-relaxed text-muted">
+          <p className="mt-7 text-small leading-relaxed text-muted">
             ImprovTalk is on iPhone for now. Open improvtalk.vip on an iPhone and the beta
             installs from there in about a minute.
           </p>
         ) : (
           <div className="mt-7 flex items-center gap-5">
-            <div className="shrink-0 rounded-xl bg-white p-2.5">
+            <div className="shrink-0 rounded-2xl bg-white p-2.5">
               <Image
                 src="/qr-get.svg"
                 alt="QR code linking to improvtalk.vip/get"
@@ -119,8 +116,8 @@ export function EarlyAccessDialog({
               />
             </div>
             <div>
-              <p className="text-[15px] font-medium text-ink">Scan with your iPhone</p>
-              <p className="mt-2 text-[13px] leading-relaxed text-subtle">
+              <p className="text-small font-medium text-ink">Scan with your iPhone</p>
+              <p className="mt-2 text-small leading-relaxed text-muted">
                 TestFlight installs on the phone itself, so the code opens the page there. About
                 a minute, and it is free.
               </p>
@@ -138,19 +135,19 @@ export function EarlyAccessDialog({
           </div>
         )}
 
-        <p className="mt-7 border-t border-line pt-5 text-[12.5px] text-subtle">
+        <p className="mt-7 border-t border-line pt-5 text-caption text-muted">
           While you are here —{' '}
-          <a href="/survey/" className="text-accent underline underline-offset-4">
+          <a href="/survey/" className="text-accent-text underline underline-offset-4">
             ninety seconds on what you are working on
           </a>
           , and you get tips written for it.
         </p>
 
-        <p className="mt-3 text-[12.5px] text-subtle">
+        <p className="mt-3 text-caption text-muted">
           Trouble installing?{' '}
           <a
             href={`mailto:${SUPPORT_EMAIL}`}
-            className="text-accent underline underline-offset-4"
+            className="text-accent-text underline underline-offset-4"
           >
             {SUPPORT_EMAIL}
           </a>

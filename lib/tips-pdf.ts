@@ -21,6 +21,7 @@ import {
   ranked,
   situationFor,
   type Blend,
+  type ColorKey,
   type GoalSlug,
 } from '@/content/survey'
 
@@ -109,6 +110,19 @@ function layout(doc: Doc, hue: Rgb) {
   }
 }
 
+/*
+ * The blend bars, in ink that survives paper. The site's four data colours are
+ * chosen for a black ground and two of them (yellow, mint) all but disappear on
+ * white; these are the hues the sheet was tuned with, kept here so a change to
+ * the screen palette never silently changes the print.
+ */
+const BLEND_INK: Record<ColorKey, string> = {
+  red: '#ff375f',
+  blue: '#0a84ff',
+  yellow: '#ff9f0a',
+  green: '#30d158',
+}
+
 export type TipsInput = {
   goal: GoalSlug
   personaId: string | null
@@ -153,7 +167,7 @@ export function buildTipsPdf({ goal, personaId, blend }: TipsInput): Uint8Array 
   let x = MARGIN
   for (const c of ranked(blend)) {
     const w = (blend[c.key] / 100) * COL
-    doc.rect(x, barY, w, 9, rgb(c.hex))
+    doc.rect(x, barY, w, 9, rgb(BLEND_INK[c.key]))
     x += w
   }
   L.move(24)

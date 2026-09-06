@@ -1,5 +1,7 @@
 import { Header } from '@/components/sections/header'
 import { Hero } from '@/components/sections/hero'
+import { ProductBento } from '@/components/sections/product-bento'
+import { CtaBand } from '@/components/sections/cta-band'
 import { Problem } from '@/components/sections/problem'
 import { Learnable } from '@/components/sections/learnable'
 import { HowItWorks } from '@/components/sections/how-it-works'
@@ -44,6 +46,10 @@ export function PersonaPage({ persona }: { persona: Persona }) {
       <Header />
       <main id="main">
         <Hero persona={persona} />
+        {/* The product itself, straight after the promise. Not part of the
+            persona running order: every reader gets the screens before the
+            argument, whichever section that argument leads with. */}
+        <ProductBento />
         {persona.order.map((key, i) => {
           const S = SECTIONS[key]
           /* Chapter numbers follow the running order, so they read 01..06 in
@@ -58,6 +64,7 @@ export function PersonaPage({ persona }: { persona: Persona }) {
           )
         })}
         <RelatedReading persona={persona} />
+        <CtaBand persona={persona} />
       </main>
       <Footer />
       <ScrollCta />

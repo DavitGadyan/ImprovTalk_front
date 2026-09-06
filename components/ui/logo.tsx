@@ -9,7 +9,9 @@ import { cn } from '@/lib/utils'
  * icon rather than a redrawn approximation means the browser tab, the install
  * badge and the icon on the user's home screen are visibly the same product.
  *
- * It carries the brand gradient itself, which is gradient place 3 of 3.
+ * It carries the brand gradient — one of the two places design B allows it,
+ * the other being the Hold-to-speak disc inside the app renders. The site's own
+ * CSS never draws it.
  */
 export function LogoMark({ className, size = 28 }: { className?: string; size?: number }) {
   return (
@@ -30,7 +32,7 @@ export function Wordmark({ className }: { className?: string }) {
   return (
     <span
       className={cn(
-        'font-[family-name:var(--font-display)] text-[17px] font-semibold tracking-[-0.035em] text-ink',
+        'font-[family-name:var(--font-display)] text-body font-bold tracking-[-0.02em] text-ink',
         className,
       )}
     >

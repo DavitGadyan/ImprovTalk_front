@@ -1,69 +1,72 @@
 # ImprovTalk — colour palette & video integration spec
 
-Everything here is the live value from [`app/globals.css`](../app/globals.css).
-If a token changes there, change it here too.
+Everything here is the live value from [`app/globals.css`](../app/globals.css),
+which mirrors the app's `theme.ts`. If a token changes there, change it here too.
 
 ---
 
 ## 1. Core palette
 
-### Surfaces — the page is built from four dark bands
+Design system B, exactly as the app ships it (`ImprovTalk/apps/mobile/src/ui/
+theme.ts`). The site's `@theme` block in `app/globals.css` carries the same
+values and nothing else.
 
-These are the important ones for video. **The video's background must match the
-band it sits on exactly**, or its edges will show as a lighter/darker rectangle.
+### Surfaces — one ground, one card, one hairline
 
-| Band | Hex | RGB | Where it's used |
+**The video's card sits on the page ground.** It is framed by the hairline, so
+its edges are drawn for it; the footage no longer has to match a band exactly.
+
+| Token | Hex | RGB | Where it's used |
 |---|---|---|---|
-| `deep` | **`#070C17`** | 7, 12, 23 | **← the video band.** Live practice, progress |
-| `canvas` | `#0B1220` | 11, 18, 32 | Page default, hero, how it works, library |
-| `surface` / `raised` | `#111827` | 17, 24, 39 | The gap, drills, FAQ |
-| `brand` | `#171034` | 23, 16, 52 | Scoring section, final CTA |
-| Closing bar | `#05080F` | 5, 8, 15 | Footer bottom, phone bezels |
+| `canvas` | **`#000000`** | 0, 0, 0 | The page. Every section starts here — no navy, no charcoal |
+| `surface` | `#1F1F1F` | 31, 31, 31 | Cards, panels, the header when scrolled, dialogs |
+| `surface-elev` | `#2A2A2A` | 42, 42, 42 | A chip on a card, an empty bar track |
+| `line` | `#313131` | 49, 49, 49 | The only hairline: borders, dividers, section edges |
 
-### Text
+### Text — two levels
 
-| Role | Hex | Contrast on `#0B1220` |
+| Role | Hex | On `#000000` | On `#1F1F1F` |
+|---|---|---|---|
+| Ink | `#FFFFFF` | 21.0:1 | 16.5:1 |
+| Muted | `#8E8E93` | 6.4:1 | 5.1:1 |
+
+Eyebrows and captions are muted. There is no third, fainter level.
+
+### The one accent, and the data colours
+
+| Name | Hex | Rule |
 |---|---|---|
-| Primary | `#F8FAFC` | 17.2:1 |
-| Secondary | `#CBD5E1` | 11.4:1 |
-| Muted body | `#94A3B8` | 6.7:1 |
-| Captions | `#7C8BA1` | 5.0:1 |
+| Accent | **`#849CFF`** | A **fill** with black text on it (8.2:1): the pill, the active tab, a filled bar, the focus ring. As words, only for links and the active nav label |
+| Danger | `#FF6B6B` | Numbers, dots, glyphs, the required mark. Never a card tint |
+| Warn | `#FFD166` | Same rule |
+| Success | `#7DE2A6` | The score delta, a full bar |
+| Gold | `#E0B84A` | The Max tier |
 
-Hairlines: `#1F2937` (normal), `#334155` (strong).
-
-### Accent + feature hues
-
-Taken from the app's own dark-mode set. All clear 4.5:1 on the canvas.
-
-| Name | Hex | Meaning in the product |
-|---|---|---|
-| Accent | **`#0A84FF`** | Primary blue — links, eyebrows, live hints |
-| Practice | **`#FF375F`** | Live practice / recording |
-| Learn | **`#FF9F0A`** | Library, learning |
-| Simulate | **`#BF5AF2`** | AI-vs-AI simulator |
-| Stats | **`#30D158`** | Progress, positive delta |
+Blog categories: openers danger, attention warn, nerves gold, languages accent,
+delivery success. The personality blend red/blue/yellow/green maps to
+danger/accent/warn/success — the same four the app's sliders use.
 
 ### Brand gradient
 
 ```
-linear-gradient(100deg, #FF9500 0%, #FF2D55 36%, #AF52DE 68%, #5856D6 100%)
+linear-gradient(90deg, #F0912F, #E6455F, #A95ACC)
 ```
 
-Orange → pink → violet → indigo, at 100°. It comes from the app icon.
-
-**Use it sparingly in the video too.** On the site it appears in exactly three
-places (hero rule, primary button, logo). In a 15-second film, one gradient
-moment is plenty — a glowing record button, a light sweep, the end card. A
-gradient-washed background will look like a different product.
+Orange → rose → purple: the logo's own sweep. **It is not a CSS value on the
+site.** It appears inside the app icon and inside the app renders — the
+Hold-to-speak disc — which is where the app confines it too. In a film, one
+gradient moment is plenty: the disc, a light sweep, the end card. A
+gradient-washed background looks like a different product.
 
 ### Typography
 
-- Display / headings: **Inter Tight**, weight 400–600, tracking `-0.04em`
-- Body: **Inter**, weight 400–600
-- Eyebrows: Inter, 600, **UPPERCASE**, tracking `0.16em`, in an accent colour
-
-Do not use a weight above 600 — the licensed variable font tops out there and
-anything heavier gets synthetically bolded, which smears at large sizes.
+- Everything: **Satoshi Variable**, one file for 300–900 plus an italic cut
+  (`public/fonts/`). Display at 700, body at 400/500; the hero's emphasis word
+  is the italic, as the app's own hero style is.
+- Eyebrows: Satoshi 700, **UPPERCASE**, tracking `0.12em`, muted.
+- Icons: Material Symbols Rounded, the same per-name subset the app bakes
+  (`npm run gen:icons`). Outlined at rest, filled when active, white unless the
+  colour is a signal.
 
 ---
 
@@ -80,7 +83,7 @@ like to use?" is being asked.
 
 | Setting | Value | Why |
 |---|---|---|
-| **Background** | **`#070C17`** | Must match the band. Any other dark grey reads as a pasted-in rectangle. |
+| **Background** | **`#000000`** | The page ground. The film sits in a hairline-framed card, so a shadow tone near black (`#070C17` in the existing films) still reads as part of the page. |
 | Aspect ratio | **16:9** | Full-bleed band. Use 4:5 or 9:16 only if you want it inset beside text instead. |
 | Resolution | 1920×1080 (2560×1440 max) | Beyond 1440p is wasted bytes on a marketing page. |
 | Duration | **8–15 s** | It autoplays muted and loops. Longer than ~15 s and nobody sees the end. |
@@ -99,7 +102,7 @@ like to use?" is being asked.
   readable by screen readers. Headline and caption live on the page, not in the
   file.
 - **Edges should fall off to the background colour** rather than ending on a hard
-  frame. A vignette to `#070C17` makes it read as part of the page.
+  frame. A vignette toward black makes it read as part of the page.
 - **First frame is the poster.** It is what everyone on reduced-motion, slow
   connections, or a paused tab sees. Compose it as a still you'd be happy to
   publish on its own, and export it separately as a JPEG.
@@ -108,14 +111,15 @@ like to use?" is being asked.
 
 - **Let the scene be warm.** A café is warm — and warmth is on-brand here,
   because `#FF9500` and `#FF375F` are already two of the four gradient stops.
-- **Push shadows toward `#070C17`,** i.e. cool blue-black, not neutral grey and
-  not brown. This is the single change that makes footage feel like it belongs
-  on this page.
-- **Keep one cool accent in frame** — a phone screen glow around `#0A84FF`, for
+- **Push shadows toward black** — cool blue-black down to `#000000`, not neutral
+  grey and not brown. The page ground is pure black now; the card's hairline
+  frames the film, so the shadows need to sit near it, not match it.
+- **Keep one cool accent in frame** — a phone screen glow around `#849CFF`, for
   instance — to tie back to the UI.
-- **Avoid:** teal-and-orange blockbuster grading, green casts, pure `#000000`
-  blacks, blown highlights, and any saturated colour outside the palette above
-  (no reds outside the `#FF375F`/`#FF2D55` family, no yellows outside `#FF9F0A`).
+- **Avoid:** teal-and-orange blockbuster grading, green casts, crushed blacks
+  with no detail, blown highlights, and any saturated colour outside the palette
+  above (no reds outside the `#E6455F`/`#FF6B6B` family, no yellows outside
+  `#FFD166`).
 
 ### Which scenario to shoot
 

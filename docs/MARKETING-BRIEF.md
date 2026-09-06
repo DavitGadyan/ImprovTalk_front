@@ -202,11 +202,12 @@ is trusted before it is finished.
 - **Off-brand.** A post about the app's features. Nobody on social wants a feature list; they want the moment they recognise.
 
 ### Visual system
-- **Background:** `#0B1220` canvas, `#070C17` for video bands. **Never white.**
-- **Brand gradient** (`100°: #FF9500 → #FF2D55 at 36% → #AF52DE at 68% → #5856D6`) appears **exactly three times** as site chrome: hero rule, primary button, logo. On social: **the end card only.** A fourth use is what makes a page look like a template.
-- **CTA gradient is a different token** (`--gradient-brand-cta`) — the orange stop is dropped because white text on it measures 2.20:1. The CTA ramp's worst point is 4.60:1.
-- **One accent per topic:** openers `#FF2D55`, attention `#FF9F0A`, nerves `#BF5AF2`, languages `#0A84FF`, delivery `#30D158`.
-- **Type:** Inter Tight for anything large, Inter for body.
+- **Design system B, as the app ships it:** ground `#000000`, one surface `#1F1F1F`, one hairline `#313131`, text `#FFFFFF` with a single muted level `#8E8E93`. **Never navy, never white.**
+- **One accent, as a fill:** violet `#849CFF` with black text on it (pill, active tab, filled bar); violet as words only for links. Eyebrows are muted, not coloured.
+- **Data colours, never chrome:** danger `#FF6B6B`, warn `#FFD166`, success `#7DE2A6`, gold `#E0B84A`. Blog categories: openers danger, attention warn, nerves gold, languages accent, delivery success. Personality blend red/blue/yellow/green → danger/accent/warn/success.
+- **The brand gradient is not a CSS value on the site.** It lives in the app icon and inside the app renders (the Hold-to-speak disc). On social: **the end card only.**
+- **Type:** Satoshi Variable throughout — display 700, body 400/500. Icons: the app's Material Symbols Rounded subset.
+- **Imagery:** real app renders cropped from the case-study composites (`assets/renders/` → `public/app/`), never drawn mockups and never a device frame added around them.
 - **Safe areas:** keep text out of the bottom 20% and right 15% of a 9:16 frame. On-screen text under 60 characters per card.
 - **Logo:** never redraw, never on a light background, never let a generative model render the wordmark.
 

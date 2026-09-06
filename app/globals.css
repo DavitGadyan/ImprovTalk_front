@@ -3,91 +3,83 @@
 /* ============================================================================
    ImprovTalk — design tokens.
 
-   Ported from the app's own dark theme (ImprovTalk/apps/mobile/src/ui/theme.ts)
-   so the site and the product read as one thing. Dark editorial: a near-black
-   indigo canvas, oversized tight display type doing the work, and the brand
-   gradient rationed to three places on the entire site.
+   Design system B, exactly as the app ships it (ImprovTalk/apps/mobile/src/ui/
+   theme.ts, `darkColors`): an OLED-black ground, one grey for cards, one
+   hairline, white text with a single muted level, and ONE accent — a violet
+   that is a fill with black text, never a text colour except for links. Four
+   data colours live on numbers, icons, dots and bars and never on chrome.
 
-   Where the app's light-mode hex would fail contrast on this canvas, the value
-   below is the app's OWN dark-mode variant of the same colour, not an invention
-   — e.g. accent #007aff becomes #0a84ff, exactly as theme.ts does.
+   The brand gradient is not a CSS value on this site. It appears inside the app
+   icon raster and inside the app renders (the Hold-to-speak disc), which is
+   where B confines it in the app too. Primary actions are the flat violet pill.
+
+   Every colour on the site comes from this block. If a component needs a hex,
+   the answer is a token here, not a literal there.
    ========================================================================== */
 
 @theme {
-  /* Surfaces */
-  --color-canvas: #0b1220;
-  --color-surface: #111827;
-  --color-raised: #1f2937;
-  --color-line: #1f2937;
-  --color-line-strong: #334155;
+  /* Surfaces — two levels, plus the one nested step the app kept. */
+  --color-canvas: #000000;
+  --color-surface: #1f1f1f;
+  --color-surface-elev: #2a2a2a;
+  --color-line: #313131;
 
-  /*
-   * Ink. Contrast measured against --color-canvas (#0b1220).
-   * --color-subtle was #64748b in the app, which measures 3.6:1 here and fails
-   * AA for small text — it is used for captions and legal micro-copy, exactly
-   * the text that must stay readable. #7c8ba1 measures 5.0:1.
-   */
-  --color-ink: #f8fafc;        /* 17.2:1 */
-  --color-ink-soft: #cbd5e1;   /* 11.4:1 */
-  --color-muted: #94a3b8;      /*  6.7:1 */
-  --color-subtle: #7c8ba1;     /*  5.0:1 */
+  /* Text — two levels. Muted is 5.1:1 on surface, 6.4:1 on black (AA). */
+  --color-ink: #ffffff;
+  --color-muted: #8e8e93;
 
-  /* Accent + feature hues — the app's dark-mode set, all >= 4.5:1 on canvas. */
-  --color-accent: #0a84ff;
-  --color-accent-ink: #b8ddff;
-  --color-practice: #ff375f;
-  --color-learn: #ff9f0a;
-  --color-simulate: #bf5af2;
-  --color-stats: #30d158;
+  /* The one accent. 8.2:1 with black text on it; 8.2:1 as text on black. */
+  --color-accent: #849cff;
+  --color-on-accent: #000000;
+  --color-accent-text: #849cff;
 
-  /* Radii — from the app's radius scale. */
-  --radius-xs: 8px;
-  --radius-sm: 12px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
+  /* Data colours. On numbers, icons, bars, dots — never on chrome. */
+  --color-danger: #ff6b6b;
+  --color-warn: #ffd166;
+  --color-success: #7de2a6;
+  --color-gold: #e0b84a;
 
-  /* Type */
-  --font-display: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* One card radius, the app's `radius.xl`. */
+  --radius-card: 1.5rem;
+
+  /* Type — one family. Satoshi carries display and body, as it does in the app. */
+  --font-sans: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+
+  /* Body scale. Replaces sixty arbitrary pixel sizes with four names. */
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.5;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.45;
+  --text-micro: 0.6875rem;
+  --text-micro--line-height: 1.3;
 
   /* Motion */
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /*
- * The brand gradient, taken from the app icon and IntroOverlay.tsx.
- *
- * As site chrome it appears in exactly THREE places: the hero rule
- * (@utility rule-brand), the primary CTA fill (Button variant="brand"), and the
- * logo mark — which carries it as the app icon raster rather than via this
- * variable. Never on card borders, section backgrounds or body text. That
- * restraint is the whole difference between this and the gradient-washed
- * template look, so please don't add a fourth.
- *
- * Three other gradient-ish things exist and are deliberately NOT this:
- *   - two low-opacity blurred radial blooms (hero, final CTA) that read as
- *     light rather than as colour;
- *   - the gradients inside the phone mockups, which reproduce the app's real UI;
- *   - a canvas-coloured scrim fading the one photographic plate into the page.
+ * The icon font: Google's Material Symbols Rounded, subset to the names the site
+ * draws (scripts/bake-icons.mjs) — the same family, weight and pipeline as the
+ * app, so a mic here is the mic there. Two cuts: outlined at rest, filled when
+ * active. Glyphs are addressed by codepoint (lib/icons.ts), not by ligature, so
+ * the subset needs no name table and the text never falls back to a word.
  */
-:root {
-  --gradient-brand: linear-gradient(100deg, #ff9500 0%, #ff2d55 36%, #af52de 68%, #5856d6 100%);
-
-  /*
-   * The same ramp, but safe to put white text on.
-   *
-   * White on --gradient-brand measures 2.20:1 at the orange stop, 3.65:1 at the
-   * pink and 4.13:1 at the violet — three of four stops below AA for the
-   * button's own 15px text. brand-pan then sweeps the label across all of them
-   * every six seconds, so the primary CTA on every page spends part of its
-   * cycle at 2.2:1.
-   *
-   * This drops the orange (darkening it to pass turns it brown, which is worse
-   * than losing it) and takes the other two down just far enough. Worst point
-   * across the whole ramp, sampled every 1%: 4.60:1. The full brand gradient is
-   * unchanged and still carries the hero rule and the logo.
-   */
-  --gradient-brand-cta: linear-gradient(100deg, #df274a 0%, #a44dd1 55%, #5856d6 100%);
+@font-face {
+  font-family: 'Material Symbols Rounded';
+  src: url('/fonts/MaterialSymbolsRounded-subset.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Material Symbols Rounded Filled';
+  src: url('/fonts/MaterialSymbolsRounded-subset-filled.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
 }
 
 @layer base {
@@ -112,15 +104,17 @@
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.035em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     text-wrap: balance;
   }
 
   p { text-wrap: pretty; }
 
+  /* The accent as a fill, black on it — the same rule as the pill. */
   ::selection {
-    background-color: #af52de;
-    color: #fff;
+    background-color: var(--color-accent);
+    color: var(--color-on-accent);
   }
 
   :focus-visible {
@@ -132,6 +126,29 @@
   input, textarea, select {
     font-family: inherit;
     font-size: 16px; /* prevents iOS zoom-on-focus */
+  }
+}
+
+@layer components {
+  .ms {
+    font-family: 'Material Symbols Rounded';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.25em;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    white-space: nowrap;
+    direction: ltr;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    overflow: hidden;
+    vertical-align: -0.2em;
+    -webkit-font-smoothing: antialiased;
+  }
+  .ms[data-filled] {
+    font-family: 'Material Symbols Rounded Filled';
   }
 }
 
@@ -147,73 +164,57 @@
 }
 
 /*
- * Display type. The Inter Tight file is a variable font declared 400..600, so
- * 600 is the real ceiling — asking for 700/800 would either clamp or trigger
- * synthetic bolding, which smears the letterforms at these sizes.
- */
-/*
- * The lower bound is what decides whether a headline wraps on a phone. At 2.5rem
- * a 390px screen fits roughly sixteen characters per line, so any headline
- * longer than that silently became three lines and pushed the CTA off screen.
- * 2rem fits about twenty-two and still reads as a display size.
+ * Display type. Satoshi Variable is declared 300..900, so 700 is a real cut —
+ * the synthetic-bold warning that came with the Inter subset no longer applies.
+ *
+ * The lower bound is what decides whether a headline wraps on a phone. At 2rem
+ * a 390px screen fits roughly twenty characters per line in Satoshi Bold, which
+ * keeps every persona headline on two lines. Measure, do not eyeball.
  */
 @utility display-xl {
   font-family: var(--font-display);
   font-size: clamp(2rem, 1.1rem + 4.1vw, 4.75rem);
-  line-height: 0.98;
-  letter-spacing: -0.045em;
-  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  font-weight: 700;
 }
 
 @utility display-lg {
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 1.1rem + 2.7vw, 4rem);
-  line-height: 1.0;
-  letter-spacing: -0.04em;
-  font-weight: 600;
+  font-size: clamp(1.75rem, 1.1rem + 2.7vw, 3.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  font-weight: 700;
 }
 
 @utility display-md {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 1.15rem + 1.5vw, 2.25rem);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  font-weight: 700;
 }
 
 /*
- * The app's signature device: every Learn row leads with a tiny uppercase
- * accent-coloured label (START HERE, BE MORE CONFIDENT, GUESS THEIR COUNTRY).
- * Carrying it to the site is the single strongest tie between the two.
+ * Section labels. Muted, not coloured: B retires the blue eyebrow — the case
+ * study sets its own eyebrows in grey, and colour on the site is spent on the
+ * thing you press and on data.
  */
 @utility eyebrow {
   display: inline-block;
   font-family: var(--font-sans);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-size: var(--text-micro);
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-muted);
 }
 
-/* Gradient place 1 of 3 — a hairline rule under a hero headline. */
-@utility rule-brand {
-  display: block;
-  height: 3px;
-  border-radius: 999px;
-  background: var(--gradient-brand);
-}
-
-/*
- * Flat panel. Deliberately NOT glass — no blur, no saturation trick — but the
- * fill is a translucent white rather than a fixed hex so the panel lifts by the
- * same amount on every section band. A solid #111827 would vanish entirely
- * against the raised band.
- */
+/* A card: the one lifted surface, the one hairline, the one radius. */
 @utility panel {
-  background-color: rgb(255 255 255 / 0.035);
-  border: 1px solid rgb(255 255 255 / 0.07);
-  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
 }
 
 @utility hairline-top {
@@ -227,51 +228,14 @@
 }
 
 /*
- * The primary CTA's gradient drifts slowly across itself. It is the one element
- * on the page allowed to move on its own, and it is small — a button-sized
- * composite, not the full-viewport blurred layer that got removed earlier for
- * burning battery on mobile.
- *
- * The reduced-motion block below collapses it to a still frame.
- */
-/*
- * Attention ring on the primary CTA — a halo that expands out of the button and
- * fades, roughly every three seconds.
- *
- * Driven by box-shadow rather than a scaled pseudo-element: the button's own
- * gradient background sits on the element itself, so anything stacked behind it
- * is simply covered. A spreading shadow escapes the box without needing an extra
- * node, which also keeps <Button asChild> working unchanged.
- *
- * The rest colour is the practice pink from the app palette, so the halo reads
- * as part of the brand rather than a generic glow.
+ * Attention ring on the install CTA — a halo that expands out of the pill and
+ * fades, roughly every three seconds. Violet, because the pill is; opt in per
+ * call site, never on a consent button.
  */
 @keyframes cta-pulse {
-  0% {
-    box-shadow:
-      0 10px 34px -12px rgb(175 82 222 / 0.7),
-      0 0 0 0 rgb(255 55 95 / 0.55);
-  }
-  70% {
-    box-shadow:
-      0 10px 34px -12px rgb(175 82 222 / 0.7),
-      0 0 0 18px rgb(255 55 95 / 0);
-  }
-  100% {
-    box-shadow:
-      0 10px 34px -12px rgb(175 82 222 / 0.7),
-      0 0 0 0 rgb(255 55 95 / 0);
-  }
-}
-
-@keyframes brand-pan {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
+  0%   { box-shadow: 0 0 0 0 rgb(132 156 255 / 0.5); }
+  70%  { box-shadow: 0 0 0 16px rgb(132 156 255 / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(132 156 255 / 0); }
 }
 
 /* --------------------------------------------------- the tips popup ---- */
@@ -293,12 +257,6 @@
   to   { opacity: 1; transform: none; }
 }
 
-/* The check draws itself rather than fading in — it reads as confirmation. */
-@keyframes tick-draw {
-  from { stroke-dashoffset: 22; }
-  to   { stroke-dashoffset: 0; }
-}
-
 @keyframes result-rise {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: none; }
@@ -310,11 +268,6 @@
 .tick-row {
   animation: tick-in 0.4s var(--ease-out-soft) both;
   animation-delay: calc(var(--i) * 90ms + 120ms);
-}
-.tick-row svg path {
-  stroke-dasharray: 22;
-  animation: tick-draw 0.4s var(--ease-out-soft) both;
-  animation-delay: calc(var(--i) * 90ms + 260ms);
 }
 
 .result-rise { animation: result-rise 0.5s var(--ease-out-soft) both; }

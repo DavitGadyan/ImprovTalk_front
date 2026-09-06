@@ -47,7 +47,7 @@ export const PERSONAS = [
 },
 {
   slug: 'language', n: '02', role: 'Challenger · noindex · in the live split',
-  url: 'improvtalk.vip/second-language', path: '/second-language/',
+  url: 'improvtalk.vip/second-language/', path: '/second-language/',
   archetype: 'Fluent on paper',
   name: 'Andrés', age: 29, pronouns: 'he / him',
   tagline: 'Can read a contract in English. Rehearses before ordering a coffee.',
@@ -93,7 +93,7 @@ export const PERSONAS = [
 },
 {
   slug: 'social', n: '03', role: 'Campaign landing page · noindex',
-  url: 'improvtalk.vip/meeting-people', path: '/meeting-people/',
+  url: 'improvtalk.vip/meeting-people/', path: '/meeting-people/',
   archetype: 'One shot at the first line',
   name: 'Tom', age: 26, pronouns: 'he / him',
   tagline: 'Fine once it is running. It is the first thirty seconds that end him.',
@@ -139,7 +139,7 @@ export const PERSONAS = [
 },
 {
   slug: 'speaking', n: '04', role: 'Campaign landing page · noindex',
-  url: 'improvtalk.vip/speaking-up', path: '/speaking-up/',
+  url: 'improvtalk.vip/speaking-up/', path: '/speaking-up/',
   archetype: 'Loses the room',
   name: 'Arjun', age: 33, pronouns: 'he / him',
   tagline: 'Senior enough to present. Not senior enough to be listened to automatically.',
@@ -185,7 +185,7 @@ export const PERSONAS = [
 },
 {
   slug: 'rusty', n: '05', role: 'Campaign landing page · noindex',
-  url: 'improvtalk.vip/out-of-practice', path: '/out-of-practice/',
+  url: 'improvtalk.vip/out-of-practice/', path: '/out-of-practice/',
   archetype: 'It went quiet',
   name: 'Claire', age: 38, pronouns: 'she / her',
   tagline: 'Not shy. Used to be the one who talked to everyone.',

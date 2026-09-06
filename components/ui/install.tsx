@@ -46,14 +46,14 @@ function StoreBadge({
     <>
       {glyph}
       <span className="text-left leading-tight">
-        <span className="block text-[10px] uppercase tracking-wider text-subtle">{top}</span>
-        <span className="block text-[13px] font-medium text-ink">{bottom}</span>
+        <span className="block text-micro uppercase tracking-wider text-muted">{top}</span>
+        <span className="block text-small font-medium text-ink">{bottom}</span>
       </span>
     </>
   )
 
   const base =
-    'inline-flex items-center gap-2.5 rounded-xl border border-line-strong px-4 py-2.5 text-ink transition-colors'
+    'inline-flex items-center gap-2.5 rounded-xl border border-line px-4 py-2.5 text-ink transition-colors'
 
   if (!live) {
     return (
@@ -66,7 +66,7 @@ function StoreBadge({
     <a
       href={href}
       onClick={onClick}
-      className={cn(base, 'hover:border-ink/40 hover:bg-raised/50')}
+      className={cn(base, 'hover:border-ink/40 hover:bg-surface-elev/50')}
     >
       {inner}
     </a>
@@ -82,8 +82,7 @@ export function InstallBlock({
   className?: string
   compact?: boolean
   align?: 'left' | 'center'
-  /** Drops the primary button — for places that already have their own CTA,
-      like the final section, where the email form is the action. */
+  /** Drops the primary button — for places that already have their own CTA. */
   badgesOnly?: boolean
 }) {
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -138,7 +137,7 @@ export function InstallBlock({
               size="lg"
               /* The attention halo lives here, on the one action the page is
                  actually asking for — not on every gradient button. */
-              className="animate-[brand-pan_6s_ease-in-out_infinite,cta-pulse_3s_cubic-bezier(0.22,1,0.36,1)_infinite]"
+              className="animate-[cta-pulse_3s_cubic-bezier(0.22,1,0.36,1)_infinite]"
               onClick={() => {
                 track('notify_click', { target: 'install_panel' })
                 setDialogOpen(true)

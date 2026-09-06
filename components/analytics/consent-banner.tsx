@@ -71,9 +71,9 @@ export function ConsentBanner() {
           on mobile — the metric was being set by a cookie notice rather than by
           the hero. Fewer words is a smaller paint area and a better banner.
         */}
-        <p className="max-w-md text-[13px] leading-relaxed text-muted">
+        <p className="max-w-md text-small leading-relaxed text-muted">
           Analytics and ads cookies. Nothing loads until you accept.{' '}
-          <a href="/privacy/" className="text-accent underline underline-offset-4">
+          <a href="/privacy/" className="text-accent-text underline underline-offset-4">
             How we handle data
           </a>
         </p>

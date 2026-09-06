@@ -23,12 +23,12 @@ export function Footer() {
         <div className="flex flex-col justify-between gap-10 md:flex-row">
           <div className="max-w-xs">
             <Logo />
-            <p className="mt-4 text-sm leading-relaxed text-subtle">
+            <p className="mt-4 text-sm leading-relaxed text-muted">
               A voice-first AI communication coach. Practise out loud, get scored on the evidence.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-10 lg:grid-cols-4">
             <FooterCol title="Product">
               <FooterLink href="/#how">How it works</FooterLink>
               <FooterLink href="/#scoring">Scoring</FooterLink>
@@ -58,20 +58,18 @@ export function Footer() {
 
       </div>
 
-      {/*
-        Closing band. Every reference layout in design_examples/ ends on one —
-        a dark bar carrying the wordmark and the URL — which gives the page a
-        definite bottom edge instead of trailing off into link columns.
-      */}
-      <div className="mt-14 bg-[#05080f] py-7">
+      {/* Closing band: a hairline and the wordmark, so the page has a definite
+          bottom edge instead of trailing off into link columns. Same ground as
+          the page — B has no darker grey to end on. */}
+      <div className="mt-14 border-t border-line py-7">
         <div className="container-page flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="text-xs text-subtle">
+          <p className="text-xs text-muted">
             © {new Date().getFullYear()} {site.legalEntity}. All rights reserved.
           </p>
           <span className="flex items-center gap-2.5">
             <LogoMark size={22} />
-            <Wordmark className="text-[15px]" />
-            <span className="text-[15px] text-subtle">· improvtalk.vip</span>
+            <Wordmark className="text-small" />
+            <span className="text-small text-muted">· improvtalk.vip</span>
           </span>
         </div>
       </div>
@@ -82,7 +80,7 @@ export function Footer() {
 function FooterCol({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-subtle">
+      <h3 className="mb-4 text-micro font-semibold uppercase tracking-[0.16em] text-muted">
         {title}
       </h3>
       <ul className="space-y-1">{children}</ul>

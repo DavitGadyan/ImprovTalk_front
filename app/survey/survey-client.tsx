@@ -372,12 +372,12 @@ export function SurveyClient({
             <Checkbox id="consent" checked={consent} onChange={setConsent}>
               I am happy for ImprovTalk to store these answers to help build the app. No
               name, no email, nothing that identifies me.{' '}
-              <Link href="/privacy/" className="text-accent underline underline-offset-4">
+              <Link href="/privacy/" className="text-accent-text underline underline-offset-4">
                 How we handle data
               </Link>
             </Checkbox>
             {!submitEnabled && (
-              <p className="mt-4 text-[13px] text-subtle">
+              <p className="mt-4 text-small text-muted">
                 Storage is not configured in this build, so nothing will be recorded — you
                 will still get your tips.
               </p>
@@ -405,7 +405,7 @@ export function SurveyClient({
           <button
             type="button"
             onClick={() => go(step + 1)}
-            className="ml-auto text-[13px] text-subtle underline underline-offset-4 hover:text-ink"
+            className="ml-auto text-small text-muted underline underline-offset-4 hover:text-ink"
           >
             Skip
           </button>
@@ -418,7 +418,7 @@ export function SurveyClient({
 function Progress({ step, steps }: { step: number; steps: readonly string[] }) {
   return (
     <div>
-      <div className="flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.14em] text-subtle">
+      <div className="flex items-center justify-between text-micro font-semibold uppercase tracking-[0.14em] text-muted">
         <span>
           Step {step + 1} of {steps.length}
         </span>
@@ -483,13 +483,14 @@ function Result({
   return (
     <div className={cn('mx-auto max-w-[42rem]', inDialog && 'result-rise')}>
       {inDialog && <Confetti />}
+      {/* A grey card with a red mark, not a tinted one — B never tints a surface. */}
       {saveError && (
-        <p
-          role="alert"
-          className="mb-6 rounded-2xl border border-practice/40 bg-practice/10 px-5 py-4 text-[14px] leading-relaxed text-ink-soft"
-        >
-          Your tips are ready, but we could not save your answers ({saveError}).
-          Nothing is lost on your side — download the PDF below.
+        <p role="alert" className="panel mb-6 flex items-start gap-3 px-5 py-4 text-small text-ink">
+          <span aria-hidden="true" className="mt-1.5 size-2 shrink-0 rounded-full bg-danger" />
+          <span>
+            Your tips are ready, but we could not save your answers ({saveError}).
+            Nothing is lost on your side — download the PDF below.
+          </span>
         </p>
       )}
       <p className="eyebrow" style={{ color: top.hex }}>
@@ -504,13 +505,13 @@ function Result({
       </div>
 
       <p
-        className="mt-8 border-l-2 pl-5 text-[17px] leading-relaxed text-ink-soft"
+        className="mt-8 border-l-2 pl-5 text-body leading-relaxed text-ink"
         style={{ borderColor: top.hex }}
       >
         {persona ? persona.situation : situationFor(goal, blend)}
       </p>
       {persona && (
-        <p className="mt-4 pl-5 text-[15px] leading-relaxed text-muted">
+        <p className="mt-4 pl-5 text-small leading-relaxed text-muted">
           {situationFor(goal, blend)}
         </p>
       )}
@@ -519,25 +520,24 @@ function Result({
         {ranked(blend)
           .slice(0, 2)
           .map((c) => (
-            <div key={c.key} className="rounded-2xl border border-line p-5">
-              <p className="text-[15px] font-medium" style={{ color: c.hex }}>
+            <div key={c.key} className="panel p-5">
+              <p className="text-small font-medium" style={{ color: c.hex }}>
                 {blend[c.key]}% {c.label}
               </p>
-              <p className="mt-2 text-[14px] leading-relaxed text-muted">{c.you}</p>
-              <p className="mt-2 text-[13px] text-subtle">
+              <p className="mt-2 text-small leading-relaxed text-muted">{c.you}</p>
+              <p className="mt-2 text-small text-muted">
                 Works with: {c.wants}. Struggles with: {c.hates}.
               </p>
             </div>
           ))}
       </div>
 
-      <div className="mt-10 overflow-hidden rounded-2xl border border-line-strong bg-surface">
-        <div className="h-1 w-full" style={{ background: top.hex }} />
+      <div className="panel mt-10 overflow-hidden">
         <div className="p-7">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-subtle">
+          <p className="text-micro font-semibold uppercase tracking-[0.16em] text-muted">
             Your tips
           </p>
-          <p className="mt-3 text-[15.5px] leading-relaxed text-ink-soft">
+          <p className="mt-3 text-body text-ink">
             Three pages, written for how you come across. Four moves for{' '}
             {g.label.toLowerCase()}, the one to start with, and three scenarios to
             practise in, in order.
@@ -553,7 +553,7 @@ function Result({
             )}
           </div>
           {pdfError && (
-            <p role="alert" className="mt-4 text-[13px] leading-relaxed text-practice">
+            <p role="alert" className="mt-4 text-small leading-relaxed text-danger">
               The tips file did not build. Reload the page and press it again — your
               answers are saved on this device.
             </p>
@@ -565,7 +565,7 @@ function Result({
         <button
           type="button"
           onClick={onRetake}
-          className="mt-8 text-[13px] text-subtle underline underline-offset-4 hover:text-ink"
+          className="mt-8 text-small text-muted underline underline-offset-4 hover:text-ink"
         >
           Take it again
         </button>

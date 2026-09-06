@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { LogoMark } from '@/components/ui/logo'
 import { Button } from '@/components/ui/button'
+import { Icon } from '@/components/ui/icon'
 import { SurveyClient } from '@/app/survey/survey-client'
 import { STORAGE_KEY } from '@/content/survey'
 import { clearDwell, dwellSoFar, watchDwell } from '@/lib/dwell'
@@ -263,8 +264,12 @@ export function TipsPopup() {
       aria-labelledby="tips-dialog-title"
       /* m-auto is not decoration: the UA stylesheet centres a modal <dialog>
          with margin:auto, and Tailwind's preflight resets margin to 0, which
-         pins it to the top-left corner. */
-      className="pop-in relative m-auto max-h-[calc(100dvh-2rem)] w-[min(40rem,calc(100vw-2rem))] overflow-y-auto rounded-2xl border border-line bg-surface p-0 text-ink backdrop:bg-black/70 backdrop:backdrop-blur-sm"
+         pins it to the top-left corner. No `relative` either: a modal dialog is
+         position:fixed in the top layer, and overriding that put the card in
+         normal flow at the top of the document — open it after scrolling and
+         you saw a blurred page with no dialog on it. The confetti canvas is
+         absolutely positioned against the dialog, which fixed still provides. */
+      className="pop-in m-auto max-h-[calc(100dvh-2rem)] w-[min(40rem,calc(100vw-2rem))] overflow-y-auto rounded-card border border-line bg-surface p-0 text-ink backdrop:bg-black/70 backdrop:backdrop-blur-sm"
     >
       {/* Nothing at all until it opens. The gate used to sit below the header,
           so the logo, the close button and the accessible-name heading still
@@ -281,7 +286,7 @@ export function TipsPopup() {
         <div className="flex items-start justify-between gap-6">
           <div className="flex items-center gap-3.5">
             <LogoMark size={38} />
-            <span className="text-[15px] font-medium text-ink">ImprovTalk</span>
+            <span className="text-small font-medium text-ink">ImprovTalk</span>
           </div>
           <button
             type="button"
@@ -290,10 +295,12 @@ export function TipsPopup() {
               requestClose()
             }}
             aria-label="Close"
-            className="-mr-2 -mt-2 flex size-9 shrink-0 items-center justify-center rounded-full text-[22px] leading-none text-[#ff375f] transition-colors hover:bg-[#ff375f]/12 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff375f]"
+            className="-mr-2 -mt-2 flex size-9 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:bg-surface-elev hover:text-ink"
           >
-            {/* A multiplication sign, not a letter x — it has even arms. */}
-            &times;
+            {/* Quiet, not red. Closing is the normal way out, and a red x made
+                people hesitate over it — the same reason the app's End & score
+                stopped being a red link. */}
+            <Icon name="close" className="text-xl" />
           </button>
         </div>
 
@@ -305,7 +312,7 @@ export function TipsPopup() {
             <h2 className="display-md text-ink">
               Discard your answers?
             </h2>
-            <p className="mt-4 text-[15.5px] leading-relaxed text-ink-soft">
+            <p className="mt-4 text-body text-ink">
               You have already answered some questions. Closing now throws them away,
               and this will not open again.
             </p>
@@ -319,7 +326,7 @@ export function TipsPopup() {
                   track('tips_popup_dismiss')
                   close()
                 }}
-                className="rounded-full border border-line-strong px-5 py-2.5 text-[13.5px] font-medium text-muted transition-colors hover:border-muted hover:text-ink"
+                className="rounded-full border border-line px-5 py-2.5 text-small font-medium text-muted transition-colors hover:border-muted hover:text-ink"
               >
                 Discard
               </button>
@@ -348,7 +355,7 @@ export function TipsPopup() {
             <h2 className="display-md text-ink">
               You have been selected for a personal assessment
             </h2>
-            <p className="mt-3 text-[15.5px] leading-relaxed text-ink-soft">
+            <p className="mt-3 text-body text-ink">
               Specialised hints for your situation.
             </p>
 
@@ -356,25 +363,13 @@ export function TipsPopup() {
               {['No email', 'No sign-up', 'Free PDF with your hints'].map((line, i) => (
                 <li
                   key={line}
-                  className="tick-row flex items-center gap-3 text-[15px] text-ink-soft"
+                  className="tick-row flex items-center gap-3 text-small text-ink"
                   style={{ '--i': i } as React.CSSProperties}
                 >
-                  {/* A bare check, not a badge. The tinted bubble read as an
-                      app sticker; the glyph on its own reads as a spec sheet. */}
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="size-[18px] shrink-0"
-                    fill="none"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M4 12.5l5.2 5.2L20 6.8"
-                      stroke="#30d158"
-                      strokeWidth="2.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  {/* A bare check in the success colour, not a badge. The tinted
+                      bubble read as an app sticker; the glyph on its own reads
+                      as a spec sheet. */}
+                  <Icon name="check" className="shrink-0 text-lg text-success" />
                   {line}
                 </li>
               ))}

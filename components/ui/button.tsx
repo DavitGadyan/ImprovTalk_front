@@ -9,36 +9,25 @@ type Size = 'sm' | 'md' | 'lg'
 
 const variants: Record<Variant, string> = {
   /*
-   * Gradient place 2 of 3. This is the only element on the site that gets a
-   * gradient fill, which is what keeps it reading as the primary action rather
-   * than as decoration.
+   * The primary action: the flat violet pill with black text, exactly the
+   * app's PrimaryButton. No gradient, no glow — when the accent appears on one
+   * thing per view it says "press this"; on every button it was decoration.
+   * Pressed state is opacity, as it is on every Pressable in the app.
+   *
+   * The attention halo is deliberately NOT here: this variant is also used by
+   * the consent banner's Accept button, and a pulsing Accept is a consent dark
+   * pattern. Opt into the halo per call site instead.
    */
-  /*
-   * Gradient place 2 of 3, and the only thing on the page that animates
-   * unprompted. Background-position is animated rather than transitioned on
-   * hover, because the two would fight over the same property; hover lifts and
-   * brightens instead.
-   */
-  brand:
-    'text-white [background-image:var(--gradient-brand-cta)] bg-[length:200%_100%] ' +
-    // The gradient drifts across itself. The attention halo is deliberately NOT
-    // here: this variant is also used by the consent banner's Accept button, and
-    // a pulsing Accept is a consent dark pattern — visual pressure on a choice
-    // that has to be freely given. Opt into the halo per call site instead.
-    'animate-[brand-pan_6s_ease-in-out_infinite] ' +
-    'shadow-[0_8px_30px_-10px_rgba(175,82,222,0.6)] ' +
-    'transition-transform duration-300 ' +
-    'hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.985]',
-  solid: 'bg-ink text-canvas hover:bg-white active:scale-[0.985]',
-  outline:
-    'border border-line-strong text-ink hover:border-ink/45 hover:bg-raised/50 active:scale-[0.985]',
-  ghost: 'text-ink-soft hover:text-ink hover:bg-raised/50',
+  brand: 'bg-accent text-on-accent hover:opacity-90 active:opacity-80 active:scale-[0.985]',
+  solid: 'bg-ink text-canvas hover:opacity-90 active:scale-[0.985]',
+  outline: 'border border-line text-ink hover:border-muted hover:bg-surface active:scale-[0.985]',
+  ghost: 'text-muted hover:bg-surface hover:text-ink',
 }
 
 const sizes: Record<Size, string> = {
-  sm: 'h-10 px-4 text-sm',
-  md: 'h-12 px-6 text-[15px]',
-  lg: 'h-14 px-8 text-base',
+  sm: 'h-10 px-4 text-small',
+  md: 'h-12 px-6 text-small',
+  lg: 'h-14 px-8 text-body',
 }
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -56,7 +45,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     <Comp
       ref={ref}
       className={cn(
-        'inline-flex items-center justify-center gap-2 rounded-full font-medium whitespace-nowrap',
+        'inline-flex items-center justify-center gap-2 rounded-full font-semibold whitespace-nowrap',
         'transition-all duration-200 ease-[var(--ease-out-soft)]',
         'disabled:cursor-not-allowed disabled:opacity-55 disabled:active:scale-100',
         variants[variant],

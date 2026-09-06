@@ -15,7 +15,7 @@ export function Legend({ children, hint }: { children: React.ReactNode; hint?: s
   return (
     <div className="mb-6">
       <h2 className="display-md text-ink">{children}</h2>
-      {hint && <p className="mt-3 text-[15px] leading-relaxed text-muted">{hint}</p>}
+      {hint && <p className="mt-3 text-small leading-relaxed text-muted">{hint}</p>}
     </div>
   )
 }
@@ -45,11 +45,11 @@ export function ChoiceGroup<T extends string>({
             <label
               key={o.value}
               className={cn(
-                'flex cursor-pointer flex-col rounded-2xl border px-5 py-4 transition-colors',
+                'flex cursor-pointer flex-col rounded-card border px-5 py-4 transition-colors',
                 'focus-within:border-accent focus-within:ring-1 focus-within:ring-accent',
                 active
-                  ? 'border-ink bg-raised/60'
-                  : 'border-line-strong hover:border-ink/40 hover:bg-raised/30',
+                  ? 'border-ink bg-surface-elev/60'
+                  : 'border-line hover:border-ink/40 hover:bg-surface-elev/30',
               )}
             >
               <input
@@ -60,10 +60,10 @@ export function ChoiceGroup<T extends string>({
                 onChange={() => onChange(o.value)}
                 className="sr-only"
               />
-              <span className={cn('text-[15px] font-medium', active ? 'text-ink' : 'text-ink-soft')}>
+              <span className={cn('text-small font-medium', active ? 'text-ink' : 'text-ink')}>
                 {o.label}
               </span>
-              {o.hint && <span className="mt-1 text-[13px] leading-relaxed text-subtle">{o.hint}</span>}
+              {o.hint && <span className="mt-1 text-small leading-relaxed text-muted">{o.hint}</span>}
             </label>
           )
         })}
@@ -89,16 +89,16 @@ export function Slider({
 }) {
   const id = `slider-${label.toLowerCase()}`
   return (
-    <div className="rounded-2xl border border-line-strong p-5">
+    <div className="panel p-5">
       <div className="flex items-baseline justify-between gap-4">
-        <label htmlFor={id} className="text-[15px] font-medium text-ink">
+        <label htmlFor={id} className="text-small font-medium text-ink">
           {label}
         </label>
-        <span className="numeric text-[15px] font-semibold" style={{ color: hex }}>
+        <span className="numeric text-small font-semibold" style={{ color: hex }}>
           {percent}%
         </span>
       </div>
-      <p className="mt-1.5 text-[13px] leading-relaxed text-subtle">{hint}</p>
+      <p className="mt-1.5 text-small leading-relaxed text-muted">{hint}</p>
       <input
         id={id}
         type="range"
@@ -136,7 +136,7 @@ export function TextArea({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-[15px] font-medium text-ink">
+      <label htmlFor={id} className="mb-2 block text-small font-medium text-ink">
         {label}
       </label>
       <textarea
@@ -146,9 +146,9 @@ export function TextArea({
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-2xl border border-line-strong bg-white/[0.04] px-5 py-4 text-[16px] leading-relaxed text-ink placeholder:text-subtle focus:border-accent"
+        className="w-full rounded-card border border-line bg-surface px-5 py-4 text-body text-ink placeholder:text-muted focus:border-accent"
       />
-      <p className="mt-2 text-right text-[12px] text-subtle">
+      <p className="mt-2 text-right text-caption text-muted">
         {value.length} / {maxLength}
       </p>
     </div>
@@ -172,14 +172,14 @@ export function Select({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-[15px] font-medium text-ink">
+      <label htmlFor={id} className="mb-2 block text-small font-medium text-ink">
         {label}
       </label>
       <select
         id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="h-14 w-full rounded-2xl border border-line-strong bg-white/[0.04] px-5 text-[16px] text-ink focus:border-accent"
+        className="h-14 w-full rounded-card border border-line bg-surface px-5 text-body text-ink focus:border-accent"
       >
         {placeholder && <option value="">{placeholder}</option>}
         {options.map((o) => (
@@ -206,7 +206,7 @@ export function Checkbox({
   return (
     <label
       htmlFor={id}
-      className="flex cursor-pointer items-start gap-3.5 rounded-2xl border border-line-strong p-5 focus-within:border-accent"
+      className="flex cursor-pointer items-start gap-3.5 rounded-card border border-line p-5 focus-within:border-accent"
     >
       <input
         id={id}
@@ -215,7 +215,7 @@ export function Checkbox({
         onChange={(e) => onChange(e.target.checked)}
         className="mt-0.5 size-5 shrink-0 cursor-pointer accent-[var(--color-accent)]"
       />
-      <span className="text-[13.5px] leading-relaxed text-muted">{children}</span>
+      <span className="text-small leading-relaxed text-muted">{children}</span>
     </label>
   )
 }

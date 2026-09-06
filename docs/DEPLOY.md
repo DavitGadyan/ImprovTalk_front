@@ -131,7 +131,7 @@ a 30-day cache on `/scenarios/`.
   and `/terms/`. This needs a mobile release, and App Review will check that the
   privacy URL resolves.
 - **Stripe return URLs**, `services/api/app/deps/settings.py:74-75`, should
-  become `https://improvtalk.vip/billing/success` and `/billing/cancel`. Lower
+  become `https://improvtalk.vip/billing/success/` and `/billing/cancel/`. Lower
   priority — Stripe keys are currently empty so checkout is not live.
 - **API CORS**, `services/api/deploy/docker-compose.yml`, currently allows
   `https://improvtalk.s1mpleai.org`. Add `https://improvtalk.vip` if you wire

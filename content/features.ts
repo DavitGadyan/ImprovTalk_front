@@ -47,8 +47,8 @@ export const deliveryMeters = [
 /** The three pillars and their real weights from services/api/app/services/rubric.py */
 export const pillars = [
   { name: 'Fluency', weight: 0.4, value: 82, hue: 'var(--color-accent)' },
-  { name: 'Confidence', weight: 0.35, value: 74, hue: 'var(--color-practice)' },
-  { name: 'Improvisation', weight: 0.25, value: 69, hue: 'var(--color-simulate)' },
+  { name: 'Confidence', weight: 0.35, value: 74, hue: 'var(--color-danger)' },
+  { name: 'Improvisation', weight: 0.25, value: 69, hue: 'var(--color-gold)' },
 ] as const
 
 export const venues = [

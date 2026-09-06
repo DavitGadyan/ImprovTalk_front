@@ -7,9 +7,9 @@ import type { Persona } from '@/content/personas'
 
 const hues = [
   'var(--color-accent)',
-  'var(--color-practice)',
-  'var(--color-learn)',
-  'var(--color-simulate)',
+  'var(--color-danger)',
+  'var(--color-warn)',
+  'var(--color-gold)',
 ]
 
 /**
@@ -29,13 +29,14 @@ export function Learnable({ persona, index }: { persona: Persona; index: number 
       >
         {points.map((p, i) => (
           <motion.li key={p.title} variants={fadeUp}>
+            {/* Colour on a dot, not a bar: a signal, not chrome. */}
             <span
               aria-hidden="true"
-              className="mb-4 block h-0.5 w-9 rounded-full"
+              className="mb-4 block size-2 rounded-full"
               style={{ backgroundColor: hues[i % hues.length] }}
             />
-            <h3 className="text-[17px] font-semibold text-ink">{p.title}</h3>
-            <p className="mt-2.5 text-[15px] leading-relaxed text-muted">{p.body}</p>
+            <h3 className="text-body font-semibold text-ink">{p.title}</h3>
+            <p className="mt-2.5 text-small text-muted">{p.body}</p>
           </motion.li>
         ))}
       </motion.ul>

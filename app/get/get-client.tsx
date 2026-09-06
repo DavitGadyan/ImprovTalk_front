@@ -43,6 +43,13 @@ export function GetClient() {
     const p = detect()
     setPlatform(p)
 
+    /* Never auto-forward a crawler. Googlebot reports Android and stops at the
+       platform check below, but AdsBot-Google-Mobile identifies as an iPhone
+       and was being sent straight to TestFlight — which Ads reads as a landing
+       page that redirects. The page is noindex; a bot sees the same button a
+       person does, and nothing else. */
+    if (/bot|crawl|spider|slurp|inspectiontool/i.test(navigator.userAgent)) return
+
     const target =
       p === 'ios' && (isLive.ios || isLive.testflight)
         ? iosHref()
@@ -66,13 +73,13 @@ export function GetClient() {
       id="main"
       className="container-page flex min-h-dvh flex-col items-center justify-center py-16 text-center"
     >
-      <LogoMark size={72} className="rounded-[22.5%] shadow-[0_16px_44px_-14px_rgba(175,82,222,0.75)]" />
+      <LogoMark size={72} />
 
       <h1 className="display-md mt-7 text-ink">
         {redirecting ? 'Taking you there…' : 'Get ImprovTalk'}
       </h1>
 
-      <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-muted">
+      <p className="mt-4 max-w-sm text-small leading-relaxed text-muted">
         {redirecting
           ? 'If nothing happens, use the button below.'
           : 'A voice-first AI communication coach. Practise out loud, get scored on the evidence.'}
@@ -80,7 +87,7 @@ export function GetClient() {
 
       <div className="mt-9 flex w-full max-w-xs flex-col gap-3">
         {platform === 'android' ? (
-          <p className="text-[14px] leading-relaxed text-muted">
+          <p className="text-small leading-relaxed text-muted">
             ImprovTalk is on iPhone for now. Open this page on an iPhone to install the beta.
           </p>
         ) : (
@@ -108,18 +115,18 @@ export function GetClient() {
       {/* Desktop visitors scan with the phone they will install on. */}
       {platform === 'other' && (
         <div className="mt-12 flex flex-col items-center gap-3">
-          <div className="rounded-2xl bg-white p-3">
+          <div className="rounded-card bg-white p-3">
             <Image src="/qr-get.svg" alt="QR code linking to improvtalk.vip/get" width={132} height={132} className="size-32" unoptimized />
           </div>
-          <p className="max-w-[15rem] text-[13px] leading-relaxed text-subtle">
+          <p className="max-w-[15rem] text-small leading-relaxed text-muted">
             Scan this with your phone to open this page there.
           </p>
         </div>
       )}
 
-      <p className="mt-14 text-[13px] text-subtle">
+      <p className="mt-14 text-small text-muted">
         Trouble installing?{' '}
-        <a href={`mailto:${SUPPORT_EMAIL}`} className="text-accent underline underline-offset-4">
+        <a href={`mailto:${SUPPORT_EMAIL}`} className="text-accent-text underline underline-offset-4">
           {SUPPORT_EMAIL}
         </a>
       </p>

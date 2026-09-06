@@ -3,15 +3,19 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { Button } from '@/components/ui/button'
+import { Icon } from '@/components/ui/icon'
 import { Logo } from '@/components/ui/logo'
 import { nav } from '@/content/site'
+import { track } from '@/lib/analytics'
 import { cn } from '@/lib/utils'
 
 /**
- * Below `md` there was no navigation at all — no menu, no links, just the logo —
- * so a phone visitor had to scroll the whole landing page to reach the footer.
- * The menu is a native <dialog>, which brings the focus trap, the Escape key and
- * an inert background with it rather than reimplementing all three.
+ * Sticky, with the one call to action in it from `md` up — the same violet pill
+ * the hero uses, pointing at /get/, which is the install page on every route.
+ * Below `md` the menu is a native <dialog>, which brings the focus trap, the
+ * Escape key and an inert background with it rather than reimplementing all
+ * three; the pill sits at the bottom of that menu.
  */
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -48,6 +52,14 @@ export function Header() {
    */
   const isCurrent = (href: string) => !href.startsWith('/#') && pathname === href
 
+  const cta = (
+    <Button asChild size="sm">
+      <Link href="/get/" onClick={() => track('notify_click', { target: 'header' })}>
+        Get early access
+      </Link>
+    </Button>
+  )
+
   return (
     <header
       className={cn(
@@ -60,21 +72,24 @@ export function Header() {
           <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
-          {nav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              aria-current={isCurrent(item.href) ? 'page' : undefined}
-              className={cn(
-                'py-2 text-sm transition-colors hover:text-ink',
-                isCurrent(item.href) ? 'text-ink' : 'text-muted',
-              )}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+        <div className="hidden items-center gap-8 md:flex">
+          <nav className="flex items-center gap-8" aria-label="Main">
+            {nav.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                aria-current={isCurrent(item.href) ? 'page' : undefined}
+                className={cn(
+                  'py-2 text-small transition-colors hover:text-ink',
+                  isCurrent(item.href) ? 'text-accent-text' : 'text-muted',
+                )}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+          {cta}
+        </div>
 
         <button
           ref={toggleRef}
@@ -82,16 +97,9 @@ export function Header() {
           onClick={() => setOpen(true)}
           aria-label="Open menu"
           aria-expanded={open}
-          className="-mr-2 flex size-11 items-center justify-center rounded-full text-ink transition-colors hover:bg-raised/50 md:hidden"
+          className="-mr-2 flex size-11 items-center justify-center rounded-full text-ink transition-colors hover:bg-surface md:hidden"
         >
-          <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
-            <path
-              d="M4 7h16M4 12h16M4 17h16"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-            />
-          </svg>
+          <Icon name="menu" className="text-2xl" />
         </button>
       </div>
 
@@ -104,47 +112,47 @@ export function Header() {
         aria-label="Menu"
         /* m-auto is not decoration: the UA centres a modal <dialog> with
            margin:auto, and Tailwind's preflight resets it to 0. */
-        className="m-auto w-[min(22rem,calc(100vw-2rem))] rounded-2xl border border-line bg-surface p-0 text-ink backdrop:bg-black/70 backdrop:backdrop-blur-sm md:hidden"
+        className="m-auto w-[min(22rem,calc(100vw-2rem))] rounded-card border border-line bg-surface p-0 text-ink backdrop:bg-black/70 backdrop:backdrop-blur-sm md:hidden"
       >
         {/* Gated for the same reason as the tips popup: a closed <dialog> still
             ships its children into the exported HTML of every page. */}
         {open && (
-        <>
-        <div className="flex items-center justify-between border-b border-line px-6 py-4">
-          <Logo />
-          <button
-            type="button"
-            onClick={close}
-            aria-label="Close menu"
-            className="-mr-2 flex size-11 items-center justify-center rounded-full text-subtle transition-colors hover:text-ink"
-          >
-            <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
-              <path
-                d="M6 6l12 12M18 6L6 18"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-              />
-            </svg>
-          </button>
-        </div>
-        <nav className="grid p-2" aria-label="Main">
-          {nav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={close}
-              aria-current={isCurrent(item.href) ? 'page' : undefined}
-              className={cn(
-                'rounded-xl px-4 py-3.5 text-[15px] transition-colors hover:bg-raised/50',
-                isCurrent(item.href) ? 'text-ink' : 'text-ink-soft',
-              )}
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-        </>
+          <>
+            <div className="flex items-center justify-between border-b border-line px-6 py-4">
+              <Logo />
+              <button
+                type="button"
+                onClick={close}
+                aria-label="Close menu"
+                className="-mr-2 flex size-11 items-center justify-center rounded-full text-muted transition-colors hover:text-ink"
+              >
+                <Icon name="close" className="text-2xl" />
+              </button>
+            </div>
+            <nav className="grid p-2" aria-label="Main">
+              {nav.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={close}
+                  aria-current={isCurrent(item.href) ? 'page' : undefined}
+                  className={cn(
+                    'rounded-xl px-4 py-3.5 text-small transition-colors hover:bg-surface-elev',
+                    isCurrent(item.href) ? 'text-accent-text' : 'text-ink',
+                  )}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+            <div className="border-t border-line p-4">
+              <Button asChild size="md" className="w-full">
+                <Link href="/get/" onClick={() => track('notify_click', { target: 'menu' })}>
+                  Get early access
+                </Link>
+              </Button>
+            </div>
+          </>
         )}
       </dialog>
     </header>

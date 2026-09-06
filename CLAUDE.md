@@ -21,7 +21,11 @@ sharing one set of components; two of them in a live A/B split.
 5. **Consent defaults run `beforeInteractive`,** before the gtag library.
 6. **Enhanced Conversions stays off** in Google Ads.
 7. **Headlines fit two lines at 390px.** Measure, do not eyeball.
-8. **The brand gradient appears three times** as site chrome. Not four.
+8. **The brand gradient is not a CSS value on this site.** It lives in the app
+   icon and inside the app renders (the Hold-to-speak disc). Primary actions are
+   the flat violet pill with black text — design system B, as the app ships it.
+9. **Renders come from `assets/renders/` via `npm run gen:renders`,** never
+   hand-cropped. Every `<img>` of one carries `width`, `height` and real `alt`.
 
 ## Verify before claiming done
 

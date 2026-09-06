@@ -7,22 +7,18 @@ import { fadeUp, stagger, viewportOnce } from '@/lib/motion'
 /**
  * The shell every block on the page uses.
  *
- * Structure follows the reference case-study layouts in design_examples/:
- * alternating full-bleed bands, a numbered chapter pill beside each heading,
- * and a curved lip where one band meets the next. The horizontal banding is
- * what stops a long page reading as one undifferentiated scroll — it was the
- * single biggest difference between those references and a flat page.
+ * Two band tones only — the page ground and the one lifted surface — separated
+ * by a hairline, with a numbered chapter pill beside each heading. The curved
+ * band tops and the tinted "brand" band are gone: B has exactly two surfaces,
+ * and a third grey or a saturated wash is the thing that made the page look
+ * like a template.
  */
 
-export type Tone = 'canvas' | 'raised' | 'deep' | 'brand'
+export type Tone = 'canvas' | 'surface'
 
 const tones: Record<Tone, string> = {
   canvas: 'bg-canvas',
-  raised: 'bg-surface',
-  deep: 'bg-[#070c17]',
-  /* The one saturated band. Solid, not a gradient — the references use flat
-     brand colour for these, and a wash would fight the rationing rule. */
-  brand: 'bg-[#171034]',
+  surface: 'bg-surface',
 }
 
 export function Section({
@@ -34,12 +30,10 @@ export function Section({
   children,
   className,
   align = 'left',
-  hue,
   tone = 'canvas',
-  curved = false,
 }: {
   id?: string
-  /** Chapter number shown in the pill, as in the reference layouts. */
+  /** Chapter number shown in the pill. */
   index?: number
   label?: string
   title?: React.ReactNode
@@ -47,20 +41,12 @@ export function Section({
   children?: React.ReactNode
   className?: string
   align?: 'center' | 'left'
-  hue?: string
   tone?: Tone
-  /** Rounds the top of the band so it overlaps the one above it. */
-  curved?: boolean
 }) {
   return (
     <section
       id={id}
-      className={cn(
-        'relative py-20 md:py-28 lg:py-32',
-        tones[tone],
-        curved && 'rounded-t-[2.5rem] md:rounded-t-[4rem]',
-        className,
-      )}
+      className={cn('relative border-t border-line py-20 md:py-28 lg:py-32', tones[tone], className)}
     >
       <div className="container-page">
         {(label || title || intro) && (
@@ -82,17 +68,13 @@ export function Section({
                   align === 'center' && 'justify-center',
                 )}
               >
-                {label && (
-                  <span className="eyebrow" style={hue ? { color: hue } : undefined}>
-                    {label}
-                  </span>
-                )}
+                {label && <span className="eyebrow">{label}</span>}
                 {index !== undefined && (
                   <>
-                    <span aria-hidden="true" className="h-px flex-1 bg-line-strong/70" />
+                    <span aria-hidden="true" className="h-px flex-1 bg-line" />
                     <span
                       aria-hidden="true"
-                      className="numeric rounded-full border border-line-strong px-2.5 py-0.5 text-[11px] font-semibold text-subtle"
+                      className="numeric rounded-full border border-line px-2.5 py-0.5 text-micro font-semibold text-muted"
                     >
                       {String(index).padStart(2, '0')}
                     </span>
@@ -108,7 +90,7 @@ export function Section({
             {intro && (
               <motion.p
                 variants={fadeUp}
-                className="mt-5 max-w-2xl text-base leading-relaxed text-muted md:text-lg"
+                className="mt-5 max-w-2xl text-body text-muted md:text-lg"
               >
                 {intro}
               </motion.p>

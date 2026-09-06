@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Header } from '@/components/sections/header'
 import { Footer } from '@/components/sections/footer'
+import { Icon } from '@/components/ui/icon'
 import { PostFilm } from '@/components/ui/post-film'
 import { PROSE } from '@/components/ui/prose'
 import { allVideosLd, breadcrumbLd, howToLd, pageJsonLd } from '@/lib/jsonld'
@@ -80,7 +81,7 @@ export default function Page() {
 
         <article className="container-page relative z-10 -mt-24 pb-24 md:-mt-32 md:pb-32">
           <div className="mx-auto max-w-[46rem]">
-            <nav aria-label="Breadcrumb" className="mb-6 text-[13px] text-subtle">
+            <nav aria-label="Breadcrumb" className="mb-6 text-small text-muted">
               <ol className="flex flex-wrap items-center gap-x-2">
                 <li>
                   <Link href="/" className="transition-colors hover:text-ink">
@@ -93,15 +94,16 @@ export default function Page() {
             </nav>
 
             <div className="flex flex-wrap items-center gap-3">
-              <span className="rounded-full border border-practice/40 px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-[0.13em] text-practice">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-line px-2.5 py-1 text-micro font-semibold uppercase tracking-[0.13em] text-muted">
+                <span aria-hidden="true" className="size-1.5 rounded-full bg-danger" />
                 The method
               </span>
-              <span className="text-[12.5px] text-subtle">4 moves · 6 min read</span>
+              <span className="text-caption text-muted">4 moves · 6 min read</span>
             </div>
 
             <h1 className="display-md mt-5 text-ink">How to start a conversation</h1>
 
-            <p className="mt-6 border-l-2 border-line-strong pl-5 text-[18px] leading-relaxed text-muted">
+            <p className="mt-6 border-l-2 border-line pl-5 text-lg leading-relaxed text-muted">
               People go looking for a line. The line is the wrong unit. What actually happens
               is four moves, each small enough to practise on its own.
             </p>
@@ -234,21 +236,20 @@ export default function Page() {
       </p>
             </div>
 
-            <aside className="mt-16 overflow-hidden rounded-2xl border border-line-strong bg-surface">
-              <div className="h-1 w-full bg-practice" />
+            <aside className="panel mt-16 overflow-hidden">
               <div className="p-7">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-subtle">
+                <p className="text-micro font-semibold uppercase tracking-[0.16em] text-muted">
                   Practise this
                 </p>
-                <p className="mt-3 text-[15.5px] leading-relaxed text-ink-soft">
+                <p className="mt-3 text-body text-ink">
                   Twenty reps of an opener costs you nothing here. In a bar it costs you
                   the evening.
                 </p>
                 <Link
                   href="/meeting-people/"
-                  className="mt-5 inline-block text-sm font-medium text-accent underline underline-offset-4"
+                  className="mt-5 inline-flex items-center gap-1 text-small font-medium text-accent-text underline underline-offset-4"
                 >
-                  Practise the first line →
+                  Practise the first line <Icon name="arrow_forward" />
                 </Link>
               </div>
             </aside>

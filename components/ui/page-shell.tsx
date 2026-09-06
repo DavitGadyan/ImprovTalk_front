@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Header } from '@/components/sections/header'
 import { Footer } from '@/components/sections/footer'
+import { Icon } from '@/components/ui/icon'
 import { cn } from '@/lib/utils'
 
 /**
@@ -33,7 +34,7 @@ export function PageShell({
       <main id="main" className="container-page py-16 md:py-24">
         <div className="max-w-2xl">
           {breadcrumb ? (
-            <nav aria-label="Breadcrumb" className="text-sm text-subtle">
+            <nav aria-label="Breadcrumb" className="text-small text-muted">
               <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 pl-0">
                 {breadcrumb.map(([label, href]) => (
                   <li key={href} className="flex items-center gap-2">
@@ -47,15 +48,18 @@ export function PageShell({
               </ol>
             </nav>
           ) : (
-            <Link href="/" className="text-sm text-subtle transition-colors hover:text-ink">
-              ← Back
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1 text-small text-muted transition-colors hover:text-ink"
+            >
+              <Icon name="arrow_back" /> Back
             </Link>
           )}
           <h1 className="display-md mt-6 text-ink">{title}</h1>
           {updated && (
-            <p className="mt-3 text-[13px] text-subtle">Last updated {updated}</p>
+            <p className="mt-3 text-small text-muted">Last updated {updated}</p>
           )}
-          {intro && <p className="mt-6 text-[15px] leading-relaxed text-muted">{intro}</p>}
+          {intro && <p className="mt-6 text-small leading-relaxed text-muted">{intro}</p>}
 
           <div
             className={cn(
@@ -67,16 +71,16 @@ export function PageShell({
                  underlined link. */
               bare
                 ? ''
-                : `space-y-6 text-[15px] leading-relaxed text-muted
-              [&_a]:text-accent [&_a]:underline [&_a]:underline-offset-4
+                : `space-y-6 text-small leading-relaxed text-muted
+              [&_a]:text-accent-text [&_a]:underline [&_a]:underline-offset-4
               [&_h2]:mb-3 [&_h2]:mt-12 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-ink
-              [&_h3]:mb-2 [&_h3]:mt-8 [&_h3]:text-base [&_h3]:font-semibold [&_h3]:text-ink-soft
+              [&_h3]:mb-2 [&_h3]:mt-8 [&_h3]:text-base [&_h3]:font-semibold [&_h3]:text-ink
               [&_li]:mb-2
-              [&_strong]:font-medium [&_strong]:text-ink-soft
-              [&_table]:w-full [&_table]:border-collapse [&_table]:text-[13.5px]
+              [&_strong]:font-medium [&_strong]:text-ink
+              [&_table]:w-full [&_table]:border-collapse [&_table]:text-small
               [&_td]:border-t [&_td]:border-line [&_td]:py-2.5 [&_td]:pr-4 [&_td]:align-top
-              [&_th]:border-b [&_th]:border-line-strong [&_th]:pb-2.5 [&_th]:pr-4 [&_th]:text-left
-              [&_th]:text-[11px] [&_th]:font-semibold [&_th]:uppercase [&_th]:tracking-[0.12em] [&_th]:text-subtle
+              [&_th]:border-b [&_th]:border-line [&_th]:pb-2.5 [&_th]:pr-4 [&_th]:text-left
+              [&_th]:text-micro [&_th]:font-semibold [&_th]:uppercase [&_th]:tracking-[0.12em] [&_th]:text-muted
               [&_ul]:list-disc [&_ul]:pl-5`,
             )}
           >

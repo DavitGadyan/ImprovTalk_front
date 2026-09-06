@@ -19,6 +19,11 @@ const KEY = 'improvtalk-variant'
  * Storage is first-party and functional, covered by functionality_storage in the
  * consent defaults. It deliberately does not wait on analytics consent, which
  * starts denied — gating on that would make most visitors flash on every load.
+ *
+ * There is no `?v=` override. Every persona is its own URL, so forcing one is a
+ * matter of opening it — and the override was the last client-side redirect
+ * left on `/` once the split was paused: any `/?v=language` link on the web was
+ * a "Page with redirect" in Search Console, with no bot exclusion to stop it.
  */
 export function VariantAssign() {
   const paths: Record<string, string> = Object.fromEntries(
@@ -37,22 +42,15 @@ export function VariantAssign() {
     // ad, or a shared link — must never be redirected away from it.
     if (location.pathname !== HOME) return;
 
-    var qs = new URLSearchParams(location.search);
-    var forced = qs.get('v');
-
     var chosen;
-    if (forced && PATHS[forced]) {
-      chosen = forced;                     // ?v= overrides everything, incl. personas outside the split
+    var stored = null;
+    try { stored = localStorage.getItem(KEY); } catch (e) {}
+    // A stored choice only counts while that persona is still in the split.
+    if (stored && SPLIT.indexOf(stored) !== -1) {
+      chosen = stored;
     } else {
-      var stored = null;
-      try { stored = localStorage.getItem(KEY); } catch (e) {}
-      // A stored choice only counts while that persona is still in the split.
-      if (stored && SPLIT.indexOf(stored) !== -1) {
-        chosen = stored;
-      } else {
-        chosen = SPLIT[Math.floor(Math.random() * SPLIT.length)];
-        try { localStorage.setItem(KEY, chosen); } catch (e) {}
-      }
+      chosen = SPLIT[Math.floor(Math.random() * SPLIT.length)];
+      try { localStorage.setItem(KEY, chosen); } catch (e) {}
     }
 
     var target = PATHS[chosen];

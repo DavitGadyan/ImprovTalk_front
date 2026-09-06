@@ -1,20 +1,19 @@
 import type { NextConfig } from 'next'
 
 /**
- * Static export.
- *
- * The site is served from a Cloud Storage bucket behind the existing Google
- * Cloud load balancer, so there is no Node process at runtime: no SSR, no route
- * handlers, no middleware, no image optimizer.
+ * Static export, served by GitHub Pages (.github/workflows/deploy.yml). There
+ * is no Node process at runtime: no SSR, no route handlers, no middleware, no
+ * image optimizer.
  *
  * `trailingSlash: true` makes the export emit `out/privacy/index.html` rather
- * than `out/privacy.html`. GCLB backend buckets resolve a request for
- * `/privacy/` to `privacy/index.html` via the bucket's MainPageSuffix, which is
- * the only directory-index behaviour that works reliably there. See
- * docs/DEPLOY.md — this is verified right after the first deploy.
+ * than `out/privacy.html`, which is the only shape Pages serves as a directory
+ * index. The cost is that Pages answers `/privacy` (no slash) with a 301 to
+ * `/privacy/` — so every internal link, sitemap entry and canonical carries
+ * the slash, and the smoke job in deploy.yml asserts that the canonical URLs
+ * answer 200 with no redirect at all. A slashless URL is a "Page with
+ * redirect" in Search Console, never a fault in the site.
  *
- * `headers()` is a no-op under static export, so security headers are set as
- * object metadata on the bucket instead (also in docs/DEPLOY.md).
+ * `headers()` is a no-op under static export; Pages sets its own.
  */
 const nextConfig: NextConfig = {
   output: 'export',

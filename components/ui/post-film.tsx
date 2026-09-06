@@ -28,8 +28,8 @@ export function PostFilm({ slug }: { slug: string }) {
           <source src={videoSrc(s.slug)} type="video/mp4" />
         </video>
       </div>
-      <figcaption className="mt-3 text-[13px] leading-relaxed text-subtle">
-        <span className="font-medium text-ink-soft">{s.label}.</span> {s.caption}
+      <figcaption className="mt-3 text-small leading-relaxed text-muted">
+        <span className="font-medium text-ink">{s.label}.</span> {s.caption}
       </figcaption>
     </figure>
   )

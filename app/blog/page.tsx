@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Header } from '@/components/sections/header'
 import { Footer } from '@/components/sections/footer'
+import { Icon } from '@/components/ui/icon'
 import { posts, type Post } from '@/content/posts'
 import { blogLd, breadcrumbLd, pageJsonLd } from '@/lib/jsonld'
 
@@ -20,13 +21,13 @@ export const metadata: Metadata = {
 function Meta({ post }: { post: Post }) {
   return (
     <div className="flex items-center gap-3">
-      <span
-        className="rounded-full border px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-[0.13em]"
-        style={{ color: post.hue, borderColor: `color-mix(in srgb, ${post.hue} 40%, transparent)` }}
-      >
+      {/* A grey pill with a coloured dot: the category's hue is a signal on a
+          glyph, not a text colour — the same rule the app's rows follow. */}
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-line px-2.5 py-1 text-micro font-semibold uppercase tracking-[0.13em] text-muted">
+        <span aria-hidden="true" className="size-1.5 rounded-full" style={{ background: post.hue }} />
         {post.category}
       </span>
-      <span className="text-[12px] text-subtle">{post.minutes} min read</span>
+      <span className="text-caption text-muted">{post.minutes} min read</span>
     </div>
   )
 }
@@ -37,7 +38,7 @@ function Featured({ post }: { post: Post }) {
   return (
     <Link
       href={post.path}
-      className="group grid overflow-hidden rounded-3xl border border-line bg-surface transition-colors hover:border-line-strong md:grid-cols-[1.05fr_1fr]"
+      className="group grid overflow-hidden rounded-card border border-line bg-surface transition-colors hover:border-muted md:grid-cols-[1.05fr_1fr]"
     >
       <div className="relative aspect-[16/10] overflow-hidden md:aspect-auto md:min-h-[300px]">
         <Image
@@ -54,11 +55,13 @@ function Featured({ post }: { post: Post }) {
 
       <div className="flex flex-col justify-center gap-4 p-7 md:p-10">
         <Meta post={post} />
-        <h2 className="display-md text-ink transition-colors group-hover:text-accent">
+        <h2 className="display-md text-ink transition-colors group-hover:text-accent-text">
           {post.title}
         </h2>
-        <p className="text-[15px] leading-relaxed text-muted">{post.excerpt}</p>
-        <span className="mt-1 text-sm font-medium text-accent">Read it →</span>
+        <p className="text-small leading-relaxed text-muted">{post.excerpt}</p>
+        <span className="mt-1 inline-flex items-center gap-1 text-small font-medium text-accent-text">
+          Read it <Icon name="arrow_forward" />
+        </span>
       </div>
     </Link>
   )
@@ -68,7 +71,7 @@ function Card({ post }: { post: Post }) {
   return (
     <Link
       href={post.path}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-colors hover:border-line-strong"
+      className="group flex flex-col overflow-hidden rounded-card border border-line bg-surface transition-colors hover:border-muted"
     >
       <div className="relative aspect-[16/9] overflow-hidden">
         <Image
@@ -84,10 +87,10 @@ function Card({ post }: { post: Post }) {
 
       <div className="flex flex-1 flex-col gap-3 p-6">
         <Meta post={post} />
-        <h3 className="font-[family-name:var(--font-display)] text-[19px] font-semibold leading-snug tracking-[-0.025em] text-ink transition-colors group-hover:text-accent">
+        <h3 className="text-lg font-semibold leading-snug text-ink transition-colors group-hover:text-accent-text">
           {post.title}
         </h3>
-        <p className="text-[14px] leading-relaxed text-muted">{post.excerpt}</p>
+        <p className="text-small leading-relaxed text-muted">{post.excerpt}</p>
       </div>
     </Link>
   )
@@ -107,12 +110,7 @@ export default function BlogIndex() {
       <main id="main" className="container-page pb-24 pt-16 md:pb-32 md:pt-24">
         <div className="max-w-3xl">
           <p className="eyebrow">The method</p>
-          <h1 className="display-lg mt-4 text-ink">
-            How to actually{' '}
-            <span className="bg-[image:var(--gradient-brand)] bg-clip-text text-transparent">
-              talk to people
-            </span>
-          </h1>
+          <h1 className="display-lg mt-4 text-ink">How to actually talk to people</h1>
           <p className="mt-5 text-base leading-relaxed text-muted md:text-lg">
             How to open, what to notice, how long you have, and how to hear a no.
             No scripts — scripts are what make people sound like they are reading.
@@ -129,15 +127,15 @@ export default function BlogIndex() {
           ))}
         </div>
 
-        <div className="mt-16 rounded-2xl border border-line-strong bg-surface p-8 text-center">
-          <p className="text-[15px] leading-relaxed text-ink-soft">
+        <div className="panel mt-16 p-8 text-center">
+          <p className="text-small leading-relaxed text-ink">
             All four moves in one place, with the films.
           </p>
           <Link
             href="/how-to-start-a-conversation/"
-            className="mt-4 inline-block text-sm font-medium text-accent underline underline-offset-4"
+            className="mt-4 inline-flex items-center gap-1 text-small font-medium text-accent-text underline underline-offset-4"
           >
-            How to start a conversation →
+            How to start a conversation <Icon name="arrow_forward" />
           </Link>
         </div>
       </main>

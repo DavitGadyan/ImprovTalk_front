@@ -1,9 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Section, Reveal } from '@/components/ui/section'
 import { AnimatedNumber } from '@/components/ui/animated-number'
+import { RENDERS } from '@/lib/renders'
 import { KNOWLEDGE, catalogs, stats, TOTAL_LIBRARY_ITEMS } from '@/content/catalogs'
 import { fadeUp, staggerFast, viewportOnce } from '@/lib/motion'
 import type { Persona } from '@/content/personas'
@@ -38,7 +38,7 @@ const learn = [
   {
     title: `${KNOWLEDGE.principles} techniques, one at a time`,
     body: `Distilled from ${KNOWLEDGE.sources} sources on conversation, rapport, humour and reading a room. You get the core of a shelf of books without reading the shelf, and each one arrives in the scene where you would actually use it.`,
-    hue: 'var(--color-learn)',
+    hue: 'var(--color-warn)',
   },
   {
     title: 'Art, music, film, places, people',
@@ -48,67 +48,67 @@ const learn = [
   {
     title: 'Read the room, on purpose',
     body: 'Deduction, gestures, accents, insider terms, what different countries do differently. The observation half of a conversation, which is the half nobody teaches.',
-    hue: 'var(--color-simulate)',
+    hue: 'var(--color-gold)',
   },
 ]
 
 export function WhatsInside({ persona, index }: { persona: Persona; index: number }) {
   const { label, title, intro } = persona.inside
+  const r = RENDERS['home']
   return (
-    <Section id="inside" index={index} tone="canvas" label={label} hue="var(--color-learn)" title={title} intro={intro}>
-      <Reveal>
-        <div className="relative mb-14 overflow-hidden rounded-2xl border border-line">
-          <Image
-            src="/hero-minds.jpg"
-            alt="Two figures in profile facing each other, a glowing outline of a brain between them"
-            width={1536}
-            height={1024}
-            className="h-44 w-full object-cover object-center md:h-56"
+    <Section id="inside" index={index} label={label} title={title} intro={intro}>
+      {/* The Home screen beside the numbers: six destinations, and how much sits
+          behind each. The render is the app's, not a drawing of it. */}
+      <div className="mb-14 grid items-center gap-10 lg:grid-cols-[0.55fr_1.45fr] lg:gap-16">
+        <Reveal className="mx-auto w-full max-w-[16rem] lg:mx-0">
+          <img
+            src={r.src}
+            srcSet={r.srcSet}
+            sizes="(min-width: 1024px) 16rem, 60vw"
+            width={r.width}
+            height={r.height}
+            alt={r.alt}
+            loading="lazy"
+            decoding="async"
+            className="h-auto w-full rounded-card"
           />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0"
-            style={{
-              background:
-                'linear-gradient(to top, var(--color-canvas) 2%, transparent 55%), linear-gradient(to right, var(--color-canvas) 0%, transparent 28%, transparent 72%, var(--color-canvas) 100%)',
-            }}
-          />
-        </div>
-      </Reveal>
+        </Reveal>
 
-      <motion.dl
-        variants={staggerFast}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewportOnce}
-        className="mb-14 grid grid-cols-2 gap-8 lg:grid-cols-4"
-      >
-        {headline.map((h) => (
-          <motion.div key={h.label} variants={fadeUp}>
-            <dd className="numeric font-[family-name:var(--font-display)] text-4xl font-semibold text-ink md:text-5xl">
-              <AnimatedNumber value={h.value} />
-            </dd>
-            <dt className="mt-2 text-[13px] text-subtle">{h.label}</dt>
-          </motion.div>
-        ))}
-      </motion.dl>
+        <motion.dl
+          variants={staggerFast}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="grid grid-cols-2 gap-8"
+        >
+          {headline.map((h) => (
+            <motion.div key={h.label} variants={fadeUp}>
+              <dd className="numeric text-4xl font-bold text-ink md:text-5xl">
+                <AnimatedNumber value={h.value} />
+              </dd>
+              <dt className="mt-2 text-small text-muted">{h.label}</dt>
+            </motion.div>
+          ))}
+        </motion.dl>
+      </div>
 
       <motion.div
         variants={staggerFast}
         initial="hidden"
         whileInView="visible"
         viewport={viewportOnce}
-        className="mb-14 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3"
+        className="mb-14 grid gap-px overflow-hidden rounded-card border border-line bg-line md:grid-cols-3"
       >
         {learn.map((l) => (
           <motion.div key={l.title} variants={fadeUp} className="bg-canvas p-6">
+            {/* Colour on a dot, not a bar: a signal, not chrome. */}
             <span
               aria-hidden="true"
-              className="mb-4 block h-0.5 w-9 rounded-full"
+              className="mb-4 block size-2 rounded-full"
               style={{ background: l.hue }}
             />
-            <h3 className="text-[17px] font-semibold text-ink">{l.title}</h3>
-            <p className="mt-2.5 text-[14.5px] leading-relaxed text-muted">{l.body}</p>
+            <h3 className="text-body font-semibold text-ink">{l.title}</h3>
+            <p className="mt-2.5 text-small text-muted">{l.body}</p>
           </motion.div>
         ))}
       </motion.div>
@@ -118,16 +118,16 @@ export function WhatsInside({ persona, index }: { persona: Persona; index: numbe
         initial="hidden"
         whileInView="visible"
         viewport={viewportOnce}
-        className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3"
+        className="grid gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-2 lg:grid-cols-3"
       >
         {catalogs.map((c) => (
           <motion.li
             key={c.name}
             variants={fadeUp}
-            className="flex items-baseline justify-between gap-4 bg-canvas px-5 py-4 transition-colors duration-300 hover:bg-white/[0.025]"
+            className="flex items-baseline justify-between gap-4 bg-canvas px-5 py-4 transition-colors duration-300 hover:bg-surface"
           >
-            <span className="truncate text-[14px] text-ink">{c.name}</span>
-            <span className="numeric shrink-0 font-[family-name:var(--font-display)] text-lg font-semibold text-ink-soft">
+            <span className="truncate text-small text-ink">{c.name}</span>
+            <span className="numeric shrink-0 text-lg font-bold text-ink">
               <AnimatedNumber value={c.count} duration={900} />
             </span>
           </motion.li>

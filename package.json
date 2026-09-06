@@ -13,10 +13,13 @@
     "lint": "next lint",
     "serve:out": "npx --yes serve out -l 3001",
     "verify:tracking": "node scripts/verify-tracking.mjs",
-    "gen:icons": "node scripts/gen-icons.mjs",
-    "gen:assets": "npm run gen:icons && npm run gen:qr",
+    "gen:icons": "node scripts/bake-icons.mjs",
+    "gen:assets": "npm run gen:favicons && npm run gen:icons && npm run gen:renders && npm run gen:og && npm run gen:qr",
     "gen:qr": "node scripts/gen-qr.mjs",
-    "submit:indexnow": "node scripts/submit-indexnow.mjs"
+    "submit:indexnow": "node scripts/submit-indexnow.mjs",
+    "gen:renders": "node scripts/crop-renders.mjs",
+    "gen:og": "node scripts/gen-og.mjs",
+    "gen:favicons": "node scripts/gen-icons.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.1",
@@ -34,6 +37,7 @@
     "@types/react-dom": "^19.0.3",
     "jsqr": "^1.4.0",
     "qrcode": "^1.5.4",
+    "satori": "^0.33.4",
     "sharp": "^0.33.5",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.3"

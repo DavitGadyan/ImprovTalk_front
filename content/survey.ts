@@ -46,7 +46,7 @@ export const GOALS: Goal[] = [
     hint: 'Getting there, holding it, or telling how it is going.',
     family: 'Dating',
     tips: 'dating',
-    hue: '#ff6482',
+    hue: 'var(--color-danger)',
   },
   {
     slug: 'shyness',
@@ -55,7 +55,7 @@ export const GOALS: Goal[] = [
     family: 'Social',
     tips: 'shyness',
     page: '/',
-    hue: 'var(--color-practice)',
+    hue: 'var(--color-danger)',
   },
   {
     slug: 'socialising',
@@ -64,7 +64,7 @@ export const GOALS: Goal[] = [
     family: 'Social',
     tips: 'socialising',
     page: '/meeting-people/',
-    hue: 'var(--color-learn)',
+    hue: 'var(--color-warn)',
   },
   {
     slug: 'language',
@@ -82,7 +82,7 @@ export const GOALS: Goal[] = [
     family: 'Work',
     tips: 'practice',
     page: '/speaking-up/',
-    hue: 'var(--color-stats)',
+    hue: 'var(--color-success)',
   },
   {
     slug: 'reset',
@@ -91,7 +91,7 @@ export const GOALS: Goal[] = [
     family: 'Reset',
     tips: 'reset',
     page: '/out-of-practice/',
-    hue: 'var(--color-simulate)',
+    hue: 'var(--color-gold)',
   },
   {
     slug: 'other',
@@ -126,7 +126,7 @@ export const COLORS: Color[] = [
     you: 'You decide quickly and get to the point. You would rather be told the thing than walked to it.',
     wants: 'directness, brevity, getting to the point',
     hates: 'filler, hedging, slow ramps',
-    hex: '#ff375f',
+    hex: '#ff6b6b',
   },
   {
     key: 'blue',
@@ -134,7 +134,7 @@ export const COLORS: Color[] = [
     you: 'You want the real reason and the specifics. You open slowly and you notice when someone is performing.',
     wants: 'accuracy, specifics, the real reason',
     hates: 'hype, charm without substance',
-    hex: '#0a84ff',
+    hex: '#849cff',
   },
   {
     key: 'yellow',
@@ -142,7 +142,7 @@ export const COLORS: Color[] = [
     you: 'You run on energy and story. You light up when someone laughs with you and you build on what they give you.',
     wants: 'energy, story, being seen',
     hates: 'flatness, judgment, transactional talk',
-    hex: '#ff9f0a',
+    hex: '#ffd166',
   },
   {
     key: 'green',
@@ -150,7 +150,7 @@ export const COLORS: Color[] = [
     you: 'You take your time and consider people. Slow to open, and you walk away from anyone who rushes you.',
     wants: 'patience, consideration, time to warm up',
     hates: 'pressure, urgency, being pushed',
-    hex: '#30d158',
+    hex: '#7de2a6',
   },
 ]
 

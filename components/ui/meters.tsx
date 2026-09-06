@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import { viewportOnce } from '@/lib/motion'
-import { cn } from '@/lib/utils'
 
 /**
  * Score bars and delivery meters.
@@ -30,12 +29,12 @@ export function ScoreBar({
         <span className="text-sm font-medium text-ink">
           {name}
           {weight !== undefined && (
-            <span className="numeric ml-2 text-xs text-subtle">{Math.round(weight * 100)}%</span>
+            <span className="numeric ml-2 text-xs text-muted">{Math.round(weight * 100)}%</span>
           )}
         </span>
         <span className="numeric text-sm font-semibold text-ink">{value}</span>
       </div>
-      <div className="h-1.5 overflow-hidden rounded-full bg-raised">
+      <div className="h-1.5 overflow-hidden rounded-full bg-surface-elev">
         <motion.div
           className="h-full rounded-full"
           style={{ backgroundColor: hue }}
@@ -54,12 +53,12 @@ export function Meter({ name, note, value }: { name: string; note: string; value
     <div className="flex items-center gap-3">
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline justify-between gap-2">
-          <span className="truncate text-[13px] font-medium text-ink-soft">{name}</span>
-          <span className="shrink-0 text-[11px] text-subtle">{note}</span>
+          <span className="truncate text-small font-medium text-ink">{name}</span>
+          <span className="shrink-0 text-micro text-muted">{note}</span>
         </div>
-        <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-raised">
+        <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-surface-elev">
           <motion.div
-            className="h-full rounded-full bg-ink-soft/70"
+            className="h-full rounded-full bg-accent"
             initial={{ width: 0 }}
             whileInView={{ width: `${value}%` }}
             viewport={viewportOnce}
@@ -67,29 +66,6 @@ export function Meter({ name, note, value }: { name: string; note: string; value
           />
         </div>
       </div>
-    </div>
-  )
-}
-
-/** A static waveform. Bars are deterministic so server and client markup match. */
-export function Waveform({ bars = 28, className }: { bars?: number; className?: string }) {
-  return (
-    <div className={cn('flex h-8 items-center gap-[3px]', className)} aria-hidden="true">
-      {Array.from({ length: bars }, (_, i) => {
-        // Deterministic height — no Math.random, which would differ between the
-        // static export and the browser. Rounded to an integer on purpose:
-        // React serialises the raw float differently on server and client
-        // (42.1631% vs 42.16307132302113%), which is itself a hydration
-        // mismatch even though the value is deterministic.
-        const h = Math.round(18 + Math.abs(Math.sin(i * 1.7) * 82))
-        return (
-          <span
-            key={i}
-            className="w-[3px] rounded-full bg-accent/60"
-            style={{ height: `${h}%` }}
-          />
-        )
-      })}
     </div>
   )
 }

@@ -15,8 +15,9 @@ import { useEffect, useRef } from 'react'
  * is exactly what that setting exists to stop.
  */
 
-/** The brand's own feature hues. */
-const COLORS = ['#ff375f', '#ff9f0a', '#30d158', '#0a84ff', '#bf5af2', '#ff6482']
+/* The four data colours and white — the same values as the tokens in
+   globals.css, spelled out because a canvas cannot read a CSS variable. */
+const COLORS = ['#ff6b6b', '#ffd166', '#7de2a6', '#849cff', '#e0b84a', '#ffffff']
 
 type Piece = {
   x: number

@@ -16,7 +16,7 @@ import type { Persona } from '@/content/personas'
 export function HowItWorks({ persona, index }: { persona: Persona; index: number }) {
   const { label, title, intro, steps } = persona.how
   return (
-    <Section id="how" index={index} tone="deep" curved label={label} title={title} intro={intro}>
+    <Section id="how" index={index} label={label} title={title} intro={intro}>
       <motion.div
         variants={stagger}
         initial="hidden"
@@ -26,15 +26,11 @@ export function HowItWorks({ persona, index }: { persona: Persona; index: number
       >
         {steps.map((s, i) => (
           <motion.div key={s.title} variants={fadeUp}>
-            <span
-              className="numeric block font-[family-name:var(--font-display)] text-5xl font-semibold leading-none text-transparent"
-              style={{ WebkitTextStroke: '1px var(--color-line-strong)' }}
-              aria-hidden="true"
-            >
+            <span className="numeric block text-5xl font-bold leading-none text-muted" aria-hidden="true">
               0{i + 1}
             </span>
             <h3 className="mt-5 text-xl font-semibold text-ink">{s.title}</h3>
-            <p className="mt-3 text-[15px] leading-relaxed text-muted">{s.body}</p>
+            <p className="mt-3 text-small text-muted">{s.body}</p>
           </motion.div>
         ))}
       </motion.div>

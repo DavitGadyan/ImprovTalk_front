@@ -31,19 +31,19 @@ export function SurveyPrompt() {
 
   return (
     <div className="container-page">
-      <div className="flex flex-col gap-4 rounded-2xl border border-line bg-surface p-6 sm:flex-row sm:items-center">
+      <div className="panel flex flex-col gap-4 p-6 sm:flex-row sm:items-center">
         <div className="min-w-0 flex-1">
-          <p className="text-[15px] font-medium text-ink">
+          <p className="text-small font-medium text-ink">
             Ninety seconds, and you get a one-page PDF written for how you come across.
           </p>
-          <p className="mt-1.5 text-[13.5px] leading-relaxed text-subtle">
+          <p className="mt-1.5 text-small leading-relaxed text-muted">
             Six questions, no email address. It also tells us who the app is actually for.
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-4">
           <Link
             href="/survey/"
-            className="text-sm font-medium text-accent underline underline-offset-4"
+            className="text-small font-medium text-accent-text underline underline-offset-4"
           >
             Take it
           </Link>
@@ -57,7 +57,7 @@ export function SurveyPrompt() {
                 /* not fatal — it reappears next visit */
               }
             }}
-            className="text-sm text-subtle transition-colors hover:text-ink"
+            className="text-small text-muted transition-colors hover:text-ink"
           >
             No thanks
           </button>

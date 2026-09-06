@@ -17,13 +17,15 @@ Static Next.js 15 export → GitHub Pages → **improvtalk.vip**.
 
 | Persona | URL | In the A/B split? |
 |---|---|---|
-| Shy *(default, canonical)* | `https://improvtalk.vip/` | yes |
-| Second language | `/second-language/` | yes |
-| Meeting people | `/meeting-people/` | campaign only |
-| Speaking up | `/speaking-up/` | campaign only |
-| Out of practice | `/out-of-practice/` | campaign only |
+| Shy *(default, canonical)* | `https://improvtalk.vip/` | the only arm — split paused |
+| Second language | `/second-language/` | no — indexable landing page |
+| Meeting people | `/meeting-people/` | no — indexable landing page |
+| Speaking up | `/speaking-up/` | no — indexable landing page |
+| Out of practice | `/out-of-practice/` | no — indexable landing page |
 
-Force any variant with `?v=shy|language|social|speaking|rusty`.
+Every persona is its own URL — open it directly. The `?v=` override is gone
+(see *The redirect report* below); `ACTIVE_SPLIT` is `['shy']`, so nothing on
+`/` redirects.
 
 ---
 
@@ -155,7 +157,9 @@ or through links.
 - **Two variants in the split, not five.** Each arm needs ~1,500–3,000 visitors;
   five arms need 10–15k and one would win by chance. `ACTIVE_SPLIT` in
   `content/personas/index.ts` rotates the challenger.
-- **Variants are `noindex` + canonical to `/`** and excluded from the sitemap.
+- **Variants were `noindex` + canonical to `/` while the split ran.** Since
+  `65831ba` (2 Sep 2026) all four are indexable, self-canonical and in the
+  sitemap, and the split is paused at one arm.
 - **Headlines are familiar sayings** — "Practice makes perfect", "Keep calm and
   talk", "Break the ice", "Say what you mean", "Like riding a bike". A known line
   is trusted before it is finished.

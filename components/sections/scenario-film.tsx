@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { scenarios, videoSrc, posterSrc, hasScenarioFilms } from '@/content/media'
+import { FILM_HEIGHT, FILM_WIDTH, scenarios, videoSrc, posterSrc, hasScenarioFilms } from '@/content/media'
+import { Icon } from '@/components/ui/icon'
 import { fadeUp, viewportOnce } from '@/lib/motion'
 import { cn } from '@/lib/utils'
 import { track } from '@/lib/analytics'
@@ -134,10 +135,10 @@ export function ScenarioFilm() {
                   aria-pressed={i === active}
                   onClick={() => goTo(i)}
                   className={cn(
-                    'rounded-full border px-3.5 py-2 text-[12.5px] transition-colors',
+                    'rounded-full border px-3.5 py-2 text-caption transition-colors',
                     i === active
-                      ? 'border-transparent bg-ink font-medium text-canvas'
-                      : 'border-line-strong text-muted hover:border-ink/40 hover:text-ink',
+                      ? 'border-accent bg-accent font-semibold text-on-accent'
+                      : 'border-line text-muted hover:border-muted hover:text-ink',
                   )}
                 >
                   {s.label}
@@ -146,7 +147,7 @@ export function ScenarioFilm() {
             </div>
           </div>
 
-          <div className="relative overflow-hidden rounded-2xl border border-line bg-[#05080f]">
+          <div className="relative overflow-hidden rounded-card border border-line bg-canvas">
             {/* Fixed 16:9 box, so switching clips never shifts the page. */}
             <div className="relative aspect-video">
               {inView ? (
@@ -174,6 +175,8 @@ export function ScenarioFilm() {
                 <img
                   src={posterSrc(current.slug)}
                   alt={current.alt}
+                  width={FILM_WIDTH}
+                  height={FILM_HEIGHT}
                   className="absolute inset-0 size-full object-cover"
                   loading="lazy"
                   decoding="async"
@@ -192,12 +195,12 @@ export function ScenarioFilm() {
                 onClick={togglePlay}
                 className={cn(
                   'absolute inset-0 flex items-center justify-center transition-colors',
-                  playing ? 'bg-transparent hover:bg-[#070c17]/20' : 'bg-[#070c17]/45',
+                  playing ? 'bg-transparent hover:bg-canvas/20' : 'bg-canvas/45',
                 )}
               >
                 {!playing && (
-                  <span className="flex items-center gap-2.5 rounded-full bg-ink px-5 py-3 text-sm font-medium text-canvas">
-                    <PlayIcon />
+                  <span className="flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-small font-semibold text-on-accent">
+                    <Icon name="play_arrow" filled className="text-xl" />
                     Play the scene
                   </span>
                 )}
@@ -209,7 +212,7 @@ export function ScenarioFilm() {
                   onClick={togglePlay}
                   label={playing ? 'Pause the scene' : 'Play the scene'}
                 >
-                  {playing ? <PauseIcon /> : <PlayIcon />}
+                  <Icon name={playing ? 'pause' : 'play_arrow'} filled className="text-lg" />
                   <span>{playing ? 'Pause' : 'Play'}</span>
                 </ControlButton>
 
@@ -217,7 +220,7 @@ export function ScenarioFilm() {
                   onClick={toggleMute}
                   label={muted ? 'Unmute the scene' : 'Mute the scene'}
                 >
-                  {muted ? <MutedIcon /> : <SoundIcon />}
+                  <Icon name={muted ? 'volume_off' : 'volume_up'} className="text-lg" />
                   <span>{muted ? 'Unmute' : 'Mute'}</span>
                 </ControlButton>
               </div>
@@ -225,8 +228,8 @@ export function ScenarioFilm() {
           </div>
 
           <div className="mt-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-            <p className="max-w-xl text-sm leading-relaxed text-subtle">{current.caption}</p>
-            <p className="text-[12px] text-subtle/80">
+            <p className="max-w-xl text-small text-muted">{current.caption}</p>
+            <p className="text-caption text-muted/80">
               {active + 1} of {scenarios.length} · plays the next one automatically
             </p>
           </div>
@@ -250,47 +253,9 @@ function ControlButton({
       type="button"
       onClick={onClick}
       aria-label={label}
-      className="pointer-events-auto inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#05080f]/75 px-3.5 py-2 text-[12px] font-medium text-ink backdrop-blur-sm transition-colors hover:bg-[#05080f]/95"
+      className="pointer-events-auto inline-flex items-center gap-1.5 rounded-full border border-line bg-canvas/75 px-3.5 py-2 text-caption font-medium text-ink backdrop-blur-sm transition-colors hover:bg-canvas/95"
     >
       {children}
     </button>
-  )
-}
-
-/* Inline icons — four small glyphs do not justify a dependency. */
-const ic = 'size-3.5 shrink-0'
-
-function PlayIcon() {
-  return (
-    <svg viewBox="0 0 16 16" className={ic} fill="currentColor" aria-hidden="true">
-      <path d="M4.5 2.6v10.8c0 .5.6.8 1 .5l8.2-5.4c.4-.2.4-.8 0-1L5.5 2.1c-.4-.3-1 0-1 .5z" />
-    </svg>
-  )
-}
-
-function PauseIcon() {
-  return (
-    <svg viewBox="0 0 16 16" className={ic} fill="currentColor" aria-hidden="true">
-      <rect x="3.5" y="2.5" width="3.5" height="11" rx="1.1" />
-      <rect x="9" y="2.5" width="3.5" height="11" rx="1.1" />
-    </svg>
-  )
-}
-
-function SoundIcon() {
-  return (
-    <svg viewBox="0 0 16 16" className={ic} fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-      <path d="M8.5 2.5 4.8 5.5H2.5v5h2.3l3.7 3z" fill="currentColor" stroke="none" />
-      <path d="M11 5.5a3.4 3.4 0 0 1 0 5M13 3.5a6.2 6.2 0 0 1 0 9" strokeLinecap="round" />
-    </svg>
-  )
-}
-
-function MutedIcon() {
-  return (
-    <svg viewBox="0 0 16 16" className={ic} fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-      <path d="M8.5 2.5 4.8 5.5H2.5v5h2.3l3.7 3z" fill="currentColor" stroke="none" />
-      <path d="m11 6 3.5 4M14.5 6 11 10" strokeLinecap="round" />
-    </svg>
   )
 }

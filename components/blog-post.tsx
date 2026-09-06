@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Header } from '@/components/sections/header'
 import { Footer } from '@/components/sections/footer'
+import { Icon } from '@/components/ui/icon'
 import { PostFilm } from '@/components/ui/post-film'
 import { scenarios } from '@/content/media'
 import { posts, type Post } from '@/content/posts'
@@ -48,7 +49,7 @@ export function BlogPost({ post, children }: { post: Post; children: React.React
 
         <article className="container-page relative z-10 -mt-24 pb-24 md:-mt-32 md:pb-32">
           <div className="mx-auto max-w-[46rem]">
-            <nav aria-label="Breadcrumb" className="mb-6 text-[13px] text-subtle">
+            <nav aria-label="Breadcrumb" className="mb-6 text-small text-muted">
               <ol className="flex flex-wrap items-center gap-x-2">
                 <li>
                   <Link href="/" className="transition-colors hover:text-ink">
@@ -65,27 +66,22 @@ export function BlogPost({ post, children }: { post: Post; children: React.React
             </nav>
 
             <div className="flex flex-wrap items-center gap-3">
-              <span
-                className="rounded-full border px-2.5 py-1 text-[10.5px] font-semibold uppercase tracking-[0.13em]"
-                style={{
-                  color: post.hue,
-                  borderColor: `color-mix(in srgb, ${post.hue} 40%, transparent)`,
-                }}
-              >
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-line px-2.5 py-1 text-micro font-semibold uppercase tracking-[0.13em] text-muted">
+                <span aria-hidden="true" className="size-1.5 rounded-full" style={{ background: post.hue }} />
                 {post.category}
               </span>
-              <span className="text-[12.5px] text-subtle">{post.minutes} min read</span>
-              <span className="text-[12.5px] text-subtle" aria-hidden="true">
+              <span className="text-caption text-muted">{post.minutes} min read</span>
+              <span className="text-caption text-muted" aria-hidden="true">
                 ·
               </span>
-              <time dateTime={post.date} className="text-[12.5px] text-subtle">
+              <time dateTime={post.date} className="text-caption text-muted">
                 {longDate(post.date)}
               </time>
             </div>
 
             <h1 className="display-md mt-5 text-ink">{post.title}</h1>
 
-            <p className="mt-6 border-l-2 border-line-strong pl-5 text-[18px] leading-relaxed text-muted">
+            <p className="mt-6 border-l-2 border-line pl-5 text-lg leading-relaxed text-muted">
               {post.excerpt}
             </p>
 
@@ -93,39 +89,36 @@ export function BlogPost({ post, children }: { post: Post; children: React.React
 
             <div className={PROSE}>{children}</div>
 
-            <aside className="mt-16 overflow-hidden rounded-2xl border border-line-strong bg-surface">
-              {/* The post's own category hue, not the brand gradient — that is
-                  rationed to three places as site chrome and this would be a fourth. */}
-              <div className="h-1 w-full" style={{ background: post.hue }} />
+            <aside className="panel mt-16 overflow-hidden">
               <div className="p-7">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-subtle">
+                <p className="text-micro font-semibold uppercase tracking-[0.16em] text-muted">
                   Practise this
                 </p>
-                <p className="mt-3 text-[15.5px] leading-relaxed text-ink-soft">
+                <p className="mt-3 text-body text-ink">
                   Reading an opener and saying one out loud are different skills.
                   Practise it on your phone, as often as you like. Nobody hears you.
                 </p>
                 <Link
                   href={post.personaPath}
-                  className="mt-5 inline-block text-sm font-medium text-accent underline underline-offset-4"
+                  className="mt-5 inline-flex items-center gap-1 text-small font-medium text-accent-text underline underline-offset-4"
                 >
-                  {post.personaLabel} →
+                  {post.personaLabel} <Icon name="arrow_forward" />
                 </Link>
               </div>
             </aside>
 
             <Link
               href={next.path}
-              className="group mt-6 flex items-center gap-5 rounded-2xl border border-line bg-surface p-5 transition-colors hover:border-line-strong"
+              className="group mt-6 flex items-center gap-5 rounded-card border border-line bg-surface p-5 transition-colors hover:border-muted"
             >
               <div className="relative size-16 shrink-0 overflow-hidden rounded-xl">
                 <Image src={next.image} alt="" fill sizes="64px" className="object-cover" unoptimized />
               </div>
               <div className="min-w-0">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-subtle">
+                <p className="text-micro font-semibold uppercase tracking-[0.16em] text-muted">
                   Read next
                 </p>
-                <p className="mt-1.5 font-[family-name:var(--font-display)] text-[16px] font-semibold leading-snug tracking-[-0.02em] text-ink transition-colors group-hover:text-accent">
+                <p className="mt-1.5 text-body font-semibold leading-snug text-ink transition-colors group-hover:text-accent-text">
                   {next.title}
                 </p>
               </div>

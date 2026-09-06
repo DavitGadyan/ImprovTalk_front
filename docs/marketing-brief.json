@@ -2,17 +2,21 @@
   "$schema": "https://improvtalk.vip/schemas/marketing-brief.v1.json",
   "meta": {
     "brand": "ImprovTalk",
-    "generated": "2026-09-06",
+    "generated": "2026-09-07",
     "source": "improvtalk_front repo + app repo, counted from data files",
     "companion": "docs/MARKETING-BRIEF.md",
     "usage": "Feed `product`, `facts`, `guardrails` as system context to any generator. Never emit a number absent from facts.verified."
   },
-
   "product": {
     "name": "ImprovTalk",
     "tagline": "Talk like you have done this before.",
     "category": "conversation practice / communication coaching",
-    "not_category": ["improv comedy", "public speaking training", "dating app", "therapy"],
+    "not_category": [
+      "improv comedy",
+      "public speaking training",
+      "dating app",
+      "therapy"
+    ],
     "one_liner": "A voice-first AI communication coach. Practise real conversations out loud and get scored on what you said and how you said it.",
     "elevator": "Pick a scene, hold a button and talk out loud. An AI partner answers in real time over WebRTC, in voice. When you stop you get a Charisma Score that opens up to show its own working.",
     "platform": "iOS (iPhone)",
@@ -23,57 +27,132 @@
     "ios_app_id": "6774918599",
     "pricing_model": "Free to start with 3 AI conversations a week; paid tiers raise the limit and unlock more capable models. Final pricing confirmed at launch.",
     "publish_a_price": false,
-
     "how_it_works": [
-      { "step": "01", "title": "Pick a scene", "body": "A cafe, a queue at the airport, a networking room. Set who you are talking to - their mood, how guarded they are, how much they give you back." },
-      { "step": "02", "title": "Talk out loud", "body": "Hold the button and speak. It answers in real time, in voice, and it interrupts and hesitates the way people do. Ask for a hint mid-scene if you stall." },
-      { "step": "03", "title": "Get scored", "body": "A Charisma Score with the working shown, the moments that landed, the ones that did not, and a better line for each." }
+      {
+        "step": "01",
+        "title": "Pick a scene",
+        "body": "A cafe, a queue at the airport, a networking room. Set who you are talking to - their mood, how guarded they are, how much they give you back."
+      },
+      {
+        "step": "02",
+        "title": "Talk out loud",
+        "body": "Hold the button and speak. It answers in real time, in voice, and it interrupts and hesitates the way people do. Ask for a hint mid-scene if you stall."
+      },
+      {
+        "step": "03",
+        "title": "Get scored",
+        "body": "A Charisma Score with the working shown, the moments that landed, the ones that did not, and a better line for each."
+      }
     ],
-
     "scoring": {
       "formula": "Charisma = (Fluency*0.40 + Confidence*0.35 + Improvisation*0.25) * 0.75 + measured_delivery * 0.25",
       "pillars": [
-        { "name": "Fluency", "weight": 0.40 },
-        { "name": "Confidence", "weight": 0.35 },
-        { "name": "Improvisation", "weight": 0.25 }
+        {
+          "name": "Fluency",
+          "weight": 0.4
+        },
+        {
+          "name": "Confidence",
+          "weight": 0.35
+        },
+        {
+          "name": "Improvisation",
+          "weight": 0.25
+        }
       ],
       "voice_weight": 0.25,
-      "delivery_meters": ["Depth", "Intonation", "Pace", "Pauses", "Fewer fillers", "Steady volume"],
+      "delivery_meters": [
+        "Depth",
+        "Intonation",
+        "Pace",
+        "Pauses",
+        "Fewer fillers",
+        "Steady volume"
+      ],
       "measurement_stack": "Praat/Parselmouth pitch, WPM from Whisper timestamps, pause ratio, filler density per 100 words, loudness steadiness. Lexical diversity via MATTR and MTLD.",
       "determinism": "The delivery quarter is rule-based DSP and deterministic for the same audio. The rubric three-quarters is a model judgement at temperature 0.2 seed 42 - best-effort reproducibility, NOT determinism. Never claim the same session always gets the same score.",
       "honesty_claim": "We say which half is measured and which half is judged. That is the positioning."
     },
-
-    "ways_to_be_scored": ["live practice", "AI-vs-AI simulator", "upload a real recording", "describe a conversation in text"],
-
+    "ways_to_be_scored": [
+      "live practice",
+      "AI-vs-AI simulator",
+      "upload a real recording",
+      "describe a conversation in text"
+    ],
     "ai_partner": {
       "pronoun": "she",
       "note": "The AI partner is 'she' in all copy. This is not a persona pronoun.",
-      "tunable": ["mood", "disposition", "defensiveness", "DISC colour blend", "nationality (195)", "accent (29)"],
+      "tunable": [
+        "mood",
+        "disposition",
+        "defensiveness",
+        "DISC colour blend",
+        "nationality (195)",
+        "accent (29)"
+      ],
       "agency": "She can be guarded, uninterested, or done. A soft or hard no is a scored outcome, not a failure state. This is a product fact, not a disclaimer."
     },
-
     "languages": {
-      "conversation": ["English", "Spanish", "Russian"],
-      "interface": ["English"],
+      "conversation": [
+        "English",
+        "Spanish",
+        "Russian"
+      ],
+      "interface": [
+        "English"
+      ],
       "warning": "The app interface is English only with no i18n. 195 nationalities and 29 accents change her ENGLISH ACCENT, not the conversation language, and accent is disabled unless the conversation is English."
     },
-
     "solo_drills": [
-      { "id": "interview.behavioral", "name": "Behavioural interview", "note": "Tell me about a time you..." },
-      { "id": "networking.event", "name": "Networking room", "note": "Enter, open, exit gracefully" },
-      { "id": "storytelling.anecdote", "name": "Storytelling", "note": "Land an anecdote without rambling" },
-      { "id": "tough.feedback", "name": "Tough feedback", "note": "Say the hard thing, keep the person" },
-      { "id": "debate.light", "name": "Light debate", "note": "Disagree without it going cold" },
-      { "id": "explain.clearly", "name": "Explain clearly", "note": "Make the complicated thing land" },
-      { "id": "rejection.recovery", "name": "Rejection recovery", "note": "Take the no, keep your footing" },
-      { "id": "improv.yesand", "name": "Yes, and", "note": "Build instead of blocking" }
+      {
+        "id": "interview.behavioral",
+        "name": "Behavioural interview",
+        "note": "Tell me about a time you..."
+      },
+      {
+        "id": "networking.event",
+        "name": "Networking room",
+        "note": "Enter, open, exit gracefully"
+      },
+      {
+        "id": "storytelling.anecdote",
+        "name": "Storytelling",
+        "note": "Land an anecdote without rambling"
+      },
+      {
+        "id": "tough.feedback",
+        "name": "Tough feedback",
+        "note": "Say the hard thing, keep the person"
+      },
+      {
+        "id": "debate.light",
+        "name": "Light debate",
+        "note": "Disagree without it going cold"
+      },
+      {
+        "id": "explain.clearly",
+        "name": "Explain clearly",
+        "note": "Make the complicated thing land"
+      },
+      {
+        "id": "rejection.recovery",
+        "name": "Rejection recovery",
+        "note": "Take the no, keep your footing"
+      },
+      {
+        "id": "improv.yesand",
+        "name": "Yes, and",
+        "note": "Build instead of blocking"
+      }
     ]
   },
-
   "facts": {
     "verified": {
-      "charisma_weights": { "fluency": 0.40, "confidence": 0.35, "improvisation": 0.25 },
+      "charisma_weights": {
+        "fluency": 0.4,
+        "confidence": 0.35,
+        "improvisation": 0.25
+      },
       "delivery_share_of_score": 0.25,
       "conversation_languages": 3,
       "free_conversations_per_week": 3,
@@ -95,34 +174,96 @@
       "sitemap_urls": 17
     },
     "disputed_do_not_publish": [
-      { "claim": "live practice scenarios", "values": ["70 / 13 venues (catalogs.ts, llms.txt, history.md)", "16 files / 11 categories counted (content/scenarios.ts)", "111 (COMPETITIVE-CHARMXP.md)"], "action": "recount from packages/shared/scenarios/*.json before use" },
-      { "claim": "reference catalogues", "values": ["22 (llms.txt)", "23 (catalogs.ts array length)", "25 (COMPETITIVE-CHARMXP.md)", "26 (history.md, Learn hub)"], "action": "recount from packages/shared/reference/*.json before use" }
+      {
+        "claim": "live practice scenarios",
+        "values": [
+          "70 / 13 venues (catalogs.ts, llms.txt, history.md)",
+          "16 files / 11 categories counted (content/scenarios.ts)",
+          "111 (COMPETITIVE-CHARMXP.md)"
+        ],
+        "action": "recount from packages/shared/scenarios/*.json before use"
+      },
+      {
+        "claim": "reference catalogues",
+        "values": [
+          "22 (llms.txt)",
+          "23 (catalogs.ts array length)",
+          "25 (COMPETITIVE-CHARMXP.md)",
+          "26 (history.md, Learn hub)"
+        ],
+        "action": "recount from packages/shared/reference/*.json before use"
+      }
     ]
   },
-
   "positioning": {
     "statement": "ImprovTalk is a voice-first conversation coach for iPhone. It is for people who are fine on paper and stuck out loud - someone who freezes at the lunch table, blanks in a second language, or watches a meeting stop listening. Unlike apps that score you on a model's impression of how you sounded, half of our score is measured from the recording itself - pace in words per minute, pause length, filler density - and we say which half is which.",
     "differentiators": [
-      { "claim": "Measured, not guessed", "evidence": "Real DSP at 25% of the headline score, raw inputs exposed on tap" },
-      { "claim": "Three conversation languages", "evidence": "English, Spanish, Russian, traced end to end in code. Menus are English and we say so." },
-      { "claim": "A partner with agency", "evidence": "She can decline; a no is a scored outcome" }
+      {
+        "claim": "Measured, not guessed",
+        "evidence": "Real DSP at 25% of the headline score, raw inputs exposed on tap"
+      },
+      {
+        "claim": "Three conversation languages",
+        "evidence": "English, Spanish, Russian, traced end to end in code. Menus are English and we say so."
+      },
+      {
+        "claim": "A partner with agency",
+        "evidence": "She can decline; a no is a scored outcome"
+      }
     ],
     "competitor": {
       "name": "CharmXP",
       "researched": "2026-09-02",
       "verdict": "Ahead on technology, behind on distribution.",
-      "they_have": ["App Store + Google Play", "4.4 stars, 2.3K ratings", "XP / levels / streaks / courses", "reminders", "weekly + monthly + annual pricing"],
-      "we_have": ["three conversation languages vs their English only", "DSP-measured delivery vs LLM-inferred", "2766 reference items vs none", "four ways to be scored vs roleplay only", "a partner who can decline", "FAQPage schema they lack"],
-      "do_not_copy": ["their gamification (not why they win)", "Day 1 to Day 30 transformation panels", "their unsourced statistics block", "dating-forward rizz-app positioning"],
+      "they_have": [
+        "App Store + Google Play",
+        "4.4 stars, 2.3K ratings",
+        "XP / levels / streaks / courses",
+        "reminders",
+        "weekly + monthly + annual pricing"
+      ],
+      "we_have": [
+        "three conversation languages vs their English only",
+        "DSP-measured delivery vs LLM-inferred",
+        "2766 reference items vs none",
+        "four ways to be scored vs roleplay only",
+        "a partner who can decline",
+        "FAQPage schema they lack"
+      ],
+      "do_not_copy": [
+        "their gamification (not why they win)",
+        "Day 1 to Day 30 transformation panels",
+        "their unsourced statistics block",
+        "dating-forward rizz-app positioning"
+      ],
       "strategy": "Turn our real measurement into their retention loop. 'Fillers: 7 per 100 words, down from 11' is the same dopamine as a streak, except it is true. Gamify only the measured quarter - never the LLM half, which drifts."
     }
   },
-
   "voice": {
     "person": "second person, present tense, short sentences",
     "reader": "competent and stuck, not broken",
-    "say": ["practise", "reps", "out loud", "measured", "the specific moment (the lift, the lunch table, the standup)", "numbers we counted", "nobody hears you", "what we do not claim"],
-    "never": ["confidence", "charisma", "transform", "cure", "overcome", "social anxiety", "overcome your fear", "become the person who", "numbers we did not count", "testimonials we do not have"],
+    "say": [
+      "practise",
+      "reps",
+      "out loud",
+      "measured",
+      "the specific moment (the lift, the lunch table, the standup)",
+      "numbers we counted",
+      "nobody hears you",
+      "what we do not claim"
+    ],
+    "never": [
+      "confidence",
+      "charisma",
+      "transform",
+      "cure",
+      "overcome",
+      "social anxiety",
+      "overcome your fear",
+      "become the person who",
+      "numbers we did not count",
+      "testimonials we do not have"
+    ],
     "no_exclamation_marks": true,
     "no_emoji": true,
     "headline_device": "familiar sayings - 'Practice makes perfect', 'Keep calm and talk', 'Break the ice', 'Say what you mean', 'Like riding a bike'. A known line is trusted before it is finished.",
@@ -136,196 +277,549 @@
       "A post about the app's features. Nobody on social wants a feature list; they want the moment they recognise."
     ]
   },
-
   "visual": {
-    "background": "#0B1220",
-    "video_band_background": "#070C17",
-    "never_white_background": true,
-    "brand_gradient": "linear-gradient(100deg, #FF9500 0%, #FF2D55 36%, #AF52DE 68%, #5856D6 100%)",
-    "brand_gradient_uses": ["hero rule", "primary button", "logo"],
-    "brand_gradient_max_uses": 3,
+    "design_system": "B — exactly the app's darkColors (apps/mobile/src/ui/theme.ts)",
+    "background": "#000000",
+    "surface": "#1F1F1F",
+    "surface_elev": "#2A2A2A",
+    "line": "#313131",
+    "ink": "#FFFFFF",
+    "muted": "#8E8E93",
+    "accent": "#849CFF",
+    "on_accent": "#000000",
+    "accent_text": "#849CFF (links and the active nav label only)",
+    "data_colours": {
+      "danger": "#FF6B6B",
+      "warn": "#FFD166",
+      "success": "#7DE2A6",
+      "gold": "#E0B84A"
+    },
+    "never_navy_or_white_background": true,
+    "brand_gradient": "linear-gradient(90deg, #f0912f, #e6455f, #a95acc)",
+    "brand_gradient_on_site": "zero CSS — appears only in the app icon and inside the app renders (Hold-to-speak disc)",
     "brand_gradient_on_social": "end card only",
-    "cta_gradient_note": "The CTA uses a separate ramp with the orange stop dropped. White on the full gradient measures 2.20:1; the CTA ramp's worst point is 4.60:1.",
-    "topic_accents": { "openers": "#FF2D55", "attention": "#FF9F0A", "nerves": "#BF5AF2", "languages": "#0A84FF", "delivery": "#30D158" },
-    "type": { "display": "Inter Tight", "body": "Inter" },
+    "eyebrows": "muted, never coloured",
+    "colour_rule": "colour on data (numbers, dots, bars, glyphs), never on chrome; no tinted surfaces",
+    "topic_accents": {
+      "openers": "danger #FF6B6B",
+      "attention": "warn #FFD166",
+      "nerves": "gold #E0B84A",
+      "languages": "accent #849CFF",
+      "delivery": "success #7DE2A6"
+    },
+    "personality_blend": {
+      "red": "#ff6b6b",
+      "blue": "#849cff",
+      "yellow": "#ffd166",
+      "green": "#7de2a6"
+    },
+    "type": {
+      "family": "Satoshi Variable (300-900) + italic",
+      "display_weight": 700,
+      "body_weight": "400/500"
+    },
+    "icons": "Material Symbols Rounded subset, baked by scripts/bake-icons.mjs",
+    "imagery": "real app renders cropped from the case-study composites via scripts/crop-renders.mjs; no drawn mockups, no added device frames",
     "safe_areas_9x16": "keep text out of the bottom 20% and right 15%",
     "max_onscreen_chars_per_card": 60,
-    "logo_rules": ["never redraw", "never on a light background", "never let a generative model render the wordmark or any text"]
+    "logo_rules": [
+      "never redraw",
+      "never on a light background",
+      "never let a generative model render the wordmark or any text"
+    ]
   },
-
   "personas": [
     {
-      "slug": "shy", "n": "01", "name": "Sam", "age": 24, "pronouns": "he/him",
+      "slug": "shy",
+      "n": "01",
+      "name": "Sam",
+      "age": 24,
+      "pronouns": "he/him",
       "archetype": "The one who freezes",
       "role": "champion, indexed, canonical",
-      "page": "/", "hue": "#ff2d55",
+      "page": "/",
+      "hue": "#ff2d55",
       "tagline": "Knows exactly what he should have said. Knows it an hour too late.",
       "quote": "I plan the whole thing in my head. Then they say something I did not expect and I am just gone.",
-      "bio": { "location": "Manchester, UK - city centre", "household": "Flatshare, two housemates", "education": "BSc, first job out of university", "occupation": "Junior developer", "already_tried": "Books, videos, 'just be confident'", "trigger": "The Monday standup he has to speak in", "on_phone": "In bed, 23:00-01:00" },
+      "bio": {
+        "location": "Manchester, UK - city centre",
+        "household": "Flatshare, two housemates",
+        "education": "BSc, first job out of university",
+        "occupation": "Junior developer",
+        "already_tried": "Books, videos, 'just be confident'",
+        "trigger": "The Monday standup he has to speak in",
+        "on_phone": "In bed, 23:00-01:00"
+      },
       "belief": "He thinks conversation is a personality he was not issued. Everything he has read confirms it - the advice is all 'be more confident', which is the outcome, not the method.",
       "turn_line": "It is not a trait, it is reps. And reps need somewhere nobody is watching.",
       "pains": [
-        { "title": "You plan it in your head", "body": "Where it always goes well." },
-        { "title": "Real life is faster", "body": "They say something you did not expect, and you go blank." },
-        { "title": "Nobody tells you why", "body": "The chat dies. You never find out what you did wrong." }
+        {
+          "title": "You plan it in your head",
+          "body": "Where it always goes well."
+        },
+        {
+          "title": "Real life is faster",
+          "body": "They say something you did not expect, and you go blank."
+        },
+        {
+          "title": "Nobody tells you why",
+          "body": "The chat dies. You never find out what you did wrong."
+        }
       ],
       "objections": [
-        { "q": "Talking to an AI is embarrassing.", "a": "It is your phone, in your room. Nobody hears it." },
-        { "q": "Another app I will open twice.", "a": "Three minutes a go. Free to start, no card." },
-        { "q": "Will it judge me?", "a": "It scores the conversation, not you." }
+        {
+          "q": "Talking to an AI is embarrassing.",
+          "a": "It is your phone, in your room. Nobody hears it."
+        },
+        {
+          "q": "Another app I will open twice.",
+          "a": "Three minutes a go. Free to start, no card."
+        },
+        {
+          "q": "Will it judge me?",
+          "a": "It scores the conversation, not you."
+        }
       ],
-      "usage": { "when": "Sunday night, in bed, before a Monday he is dreading", "what": "The cafe scene. The same opener eight times.", "watches": "The filler count coming down" },
-      "hero": { "eyebrow": "Practise out loud", "headline": "Practice makes perfect.", "sub": "Talk to an AI on your phone. Nobody hears you. Try as often as you like.", "note": "Free to start. No card." },
-      "section_order": ["problem", "learnable", "how", "scoring", "inside", "faq"],
+      "usage": {
+        "when": "Sunday night, in bed, before a Monday he is dreading",
+        "what": "The cafe scene. The same opener eight times.",
+        "watches": "The filler count coming down"
+      },
+      "hero": {
+        "eyebrow": "Practise out loud",
+        "headline": "Practice makes perfect.",
+        "sub": "Talk to an AI on your phone. Nobody hears you. Try as often as you like.",
+        "note": "Free to start. No card."
+      },
+      "section_order": [
+        "problem",
+        "learnable",
+        "how",
+        "scoring",
+        "inside",
+        "faq"
+      ],
       "order_why": "Problem first. He has to feel recognised before he will believe anything else on the page.",
       "channels": [
-        { "channel": "Organic search", "note": "how to not freeze in conversation, what to say when your mind goes blank" },
-        { "channel": "TikTok / Reels", "note": "Short, first-person, no bravado. Bravado is what he is running from." },
-        { "channel": "Reddit", "note": "r/socialskills, r/socialanxiety - where he already goes for this." }
+        {
+          "channel": "Organic search",
+          "note": "how to not freeze in conversation, what to say when your mind goes blank"
+        },
+        {
+          "channel": "TikTok / Reels",
+          "note": "Short, first-person, no bravado. Bravado is what he is running from."
+        },
+        {
+          "channel": "Reddit",
+          "note": "r/socialskills, r/socialanxiety - where he already goes for this."
+        }
       ],
       "best_time": "21:00-01:00. He is scrolling at the hour the feeling is live.",
       "metric": "testflight_click per visitor. He is the champion; every other variant is measured against him.",
-      "never": ["confidence", "charisma", "cure", "transform", "overcome", "anxiety"],
+      "never": [
+        "confidence",
+        "charisma",
+        "cure",
+        "transform",
+        "overcome",
+        "anxiety"
+      ],
       "warning": "Never sell him confidence. He has been sold confidence his whole life and it is the reason he does not trust pages like this one."
     },
     {
-      "slug": "language", "n": "02", "name": "Andres", "age": 29, "pronouns": "he/him",
+      "slug": "language",
+      "n": "02",
+      "name": "Andres",
+      "age": 29,
+      "pronouns": "he/him",
       "archetype": "Fluent on paper",
       "role": "challenger",
-      "page": "/second-language/", "hue": "#0a84ff",
+      "page": "/second-language/",
+      "hue": "#0a84ff",
       "tagline": "Can read a contract in English. Rehearses before ordering a coffee.",
       "quote": "By the time I have the sentence ready in my head, they have already moved on to something else.",
-      "bio": { "location": "Berlin - relocated from Valencia", "household": "Lives with his partner", "education": "MSc Engineering, taught in Spanish", "occupation": "Engineer on an English-speaking team", "already_tried": "A 400-day vocabulary streak", "trigger": "The daily standup, held in English", "level": "C1 on paper. Out loud, three-word answers." },
+      "bio": {
+        "location": "Berlin - relocated from Valencia",
+        "household": "Lives with his partner",
+        "education": "MSc Engineering, taught in Spanish",
+        "occupation": "Engineer on an English-speaking team",
+        "already_tried": "A 400-day vocabulary streak",
+        "trigger": "The daily standup, held in English",
+        "level": "C1 on paper. Out loud, three-word answers."
+      },
       "belief": "He does not have a vocabulary problem and he knows it. What he has never had is a single hour of low-stakes speaking - every app teaches words and then leaves him to find the reps himself.",
       "turn_line": "Everyone sells vocabulary. Nobody sells reps at speaking.",
       "pains": [
-        { "title": "You translate first", "body": "By the time the sentence is ready, they have moved on." },
-        { "title": "So you keep it short", "body": "You answer in three words to be safe. You sound like less than you are." },
-        { "title": "So you talk less", "body": "Less talking means less practice. The next one is harder." }
+        {
+          "title": "You translate first",
+          "body": "By the time the sentence is ready, they have moved on."
+        },
+        {
+          "title": "So you keep it short",
+          "body": "You answer in three words to be safe. You sound like less than you are."
+        },
+        {
+          "title": "So you talk less",
+          "body": "Less talking means less practice. The next one is harder."
+        }
       ],
       "objections": [
-        { "q": "Will it switch to English when I struggle?", "a": "No. She stays in the language you picked. That is the point." },
-        { "q": "Will it fix my grammar?", "a": "It tells you what worked and gives you a better way to say it." },
-        { "q": "Is the app in Spanish?", "a": "The conversation is. The menus are English - say so plainly, he will find out anyway." }
+        {
+          "q": "Will it switch to English when I struggle?",
+          "a": "No. She stays in the language you picked. That is the point."
+        },
+        {
+          "q": "Will it fix my grammar?",
+          "a": "It tells you what worked and gives you a better way to say it."
+        },
+        {
+          "q": "Is the app in Spanish?",
+          "a": "The conversation is. The menus are English - say so plainly, he will find out anyway."
+        }
       ],
-      "usage": { "when": "Ten minutes before the standup he has to speak in", "what": "A cafe in Barcelona. Spanish or English, whichever he is weakest in.", "watches": "His pauses getting shorter" },
-      "hero": { "eyebrow": "Speak, do not translate", "headline": "Keep calm and talk.", "sub": "English, Spanish or Russian. Practise out loud, as often as you like.", "note": "Free to start. No card." },
-      "section_order": ["learnable", "problem", "how", "scoring", "inside", "faq"],
+      "usage": {
+        "when": "Ten minutes before the standup he has to speak in",
+        "what": "A cafe in Barcelona. Spanish or English, whichever he is weakest in.",
+        "watches": "His pauses getting shorter"
+      },
+      "hero": {
+        "eyebrow": "Speak, do not translate",
+        "headline": "Keep calm and talk.",
+        "sub": "English, Spanish or Russian. Practise out loud, as often as you like.",
+        "note": "Free to start. No card."
+      },
+      "section_order": [
+        "learnable",
+        "problem",
+        "how",
+        "scoring",
+        "inside",
+        "faq"
+      ],
       "order_why": "The languages lead. He is not looking for sympathy, he is looking for whether it does his language.",
       "channels": [
-        { "channel": "Google Search", "note": "practice speaking english out loud, english speaking practice app" },
-        { "channel": "YouTube", "note": "Pre-roll on language-learning channels. High intent, cheap." },
-        { "channel": "TikTok", "note": "Language-learning is one of its biggest organic niches." }
+        {
+          "channel": "Google Search",
+          "note": "practice speaking english out loud, english speaking practice app"
+        },
+        {
+          "channel": "YouTube",
+          "note": "Pre-roll on language-learning channels. High intent, cheap."
+        },
+        {
+          "channel": "TikTok",
+          "note": "Language-learning is one of its biggest organic niches."
+        }
       ],
       "best_time": "Evenings, and Sunday. Subtitles always - he may be watching in his second language.",
       "metric": "testflight_click against shy, head to head.",
-      "never": ["learn", "beginner", "course", "lesson", "native speaker", "basics", "fluency guaranteed"],
+      "never": [
+        "learn",
+        "beginner",
+        "course",
+        "lesson",
+        "native speaker",
+        "basics",
+        "fluency guaranteed"
+      ],
       "warning": "Three conversation languages is real and verified. A translated app interface is not - the menus are English. Never imply otherwise."
     },
     {
-      "slug": "social", "n": "03", "name": "Tom", "age": 26, "pronouns": "he/him",
+      "slug": "social",
+      "n": "03",
+      "name": "Tom",
+      "age": 26,
+      "pronouns": "he/him",
       "archetype": "One shot at the first line",
       "role": "campaign landing page",
-      "page": "/meeting-people/", "hue": "#ff9f0a",
+      "page": "/meeting-people/",
+      "hue": "#ff9f0a",
       "tagline": "Fine once it is running. It is the first thirty seconds that end him.",
       "quote": "I think of the perfect thing to say about four minutes after they have gone.",
-      "bio": { "location": "Bristol, UK - moved six months ago", "household": "Lives alone, one-bed rental", "education": "BA, non-specialist", "occupation": "Junior sales, target-driven", "already_tried": "Going out more and hoping", "trigger": "Friday night with people he barely knows" },
+      "bio": {
+        "location": "Bristol, UK - moved six months ago",
+        "household": "Lives alone, one-bed rental",
+        "education": "BA, non-specialist",
+        "occupation": "Junior sales, target-driven",
+        "already_tried": "Going out more and hoping",
+        "trigger": "Friday night with people he barely knows"
+      },
       "belief": "He believes the people who are good at this were born knowing what to say. He has never once rehearsed a first minute, and it has never occurred to him that it could be rehearsed.",
       "turn_line": "It is a first minute you have never practised, not a personality you were not born with.",
       "pains": [
-        { "title": "You think too long", "body": "By the time you have a line, the moment has gone." },
-        { "title": "It comes out flat", "body": "You say it, it lands badly, and you think about it all evening." },
-        { "title": "You learn nothing", "body": "You never find out which bit was the problem. So you do it again." }
+        {
+          "title": "You think too long",
+          "body": "By the time you have a line, the moment has gone."
+        },
+        {
+          "title": "It comes out flat",
+          "body": "You say it, it lands badly, and you think about it all evening."
+        },
+        {
+          "title": "You learn nothing",
+          "body": "You never find out which bit was the problem. So you do it again."
+        }
       ],
       "objections": [
-        { "q": "Is this a pick-up thing?", "a": "No. She can say no, and sometimes she does. It never tells you to push." },
-        { "q": "Will it make me sound scripted?", "a": "The scene changes every time. You cannot memorise your way through it." },
-        { "q": "I do not need an app to talk to people.", "a": "You need reps. This is where you get them before it counts." }
+        {
+          "q": "Is this a pick-up thing?",
+          "a": "No. She can say no, and sometimes she does. It never tells you to push."
+        },
+        {
+          "q": "Will it make me sound scripted?",
+          "a": "The scene changes every time. You cannot memorise your way through it."
+        },
+        {
+          "q": "I do not need an app to talk to people.",
+          "a": "You need reps. This is where you get them before it counts."
+        }
       ],
-      "usage": { "when": "Twenty minutes before he goes out", "what": "Beach, festival, bar. Two goes, warm-up not study.", "watches": "Whether the opener lands without the four-minute delay" },
-      "hero": { "eyebrow": "Practise the first line", "headline": "Break the ice. Practise first.", "sub": "Try the first minute on your phone, twenty times if you want, before it counts.", "note": "Free to start. No card." },
-      "section_order": ["problem", "how", "learnable", "inside", "scoring", "faq"],
+      "usage": {
+        "when": "Twenty minutes before he goes out",
+        "what": "Beach, festival, bar. Two goes, warm-up not study.",
+        "watches": "Whether the opener lands without the four-minute delay"
+      },
+      "hero": {
+        "eyebrow": "Practise the first line",
+        "headline": "Break the ice. Practise first.",
+        "sub": "Try the first minute on your phone, twenty times if you want, before it counts.",
+        "note": "Free to start. No card."
+      },
+      "section_order": [
+        "problem",
+        "how",
+        "learnable",
+        "inside",
+        "scoring",
+        "faq"
+      ],
       "order_why": "The films come second, straight after the problem. For him the scenes are the pitch - he needs to see it, not read about it.",
       "channels": [
-        { "channel": "TikTok / Reels", "note": "His native platform. Show the scene, not the score screen." },
-        { "channel": "YouTube Shorts", "note": "Same creative, second placement." },
-        { "channel": "Instagram", "note": "Travel and nightlife interest targeting." }
+        {
+          "channel": "TikTok / Reels",
+          "note": "His native platform. Show the scene, not the score screen."
+        },
+        {
+          "channel": "YouTube Shorts",
+          "note": "Same creative, second placement."
+        },
+        {
+          "channel": "Instagram",
+          "note": "Travel and nightlife interest targeting."
+        }
       ],
       "best_time": "Thursday and Friday, 19:00-22:00 - before he goes out, not after.",
       "metric": "Message-match, not significance.",
-      "never": ["flirt", "attract", "seduce", "rizz", "pickup", "pick up", "game", "dating", "get her", "girlfriend", "lines that work"],
+      "never": [
+        "flirt",
+        "attract",
+        "seduce",
+        "rizz",
+        "pickup",
+        "pick up",
+        "game",
+        "dating",
+        "get her",
+        "girlfriend",
+        "lines that work"
+      ],
       "warning": "APP REVIEW RISK. Keep every ad PG-13. The app declines coercive pushes, the site is linked from the app, and App Review reads both."
     },
     {
-      "slug": "speaking", "n": "04", "name": "Arjun", "age": 33, "pronouns": "he/him",
+      "slug": "speaking",
+      "n": "04",
+      "name": "Arjun",
+      "age": 33,
+      "pronouns": "he/him",
       "archetype": "Loses the room",
       "role": "campaign landing page",
-      "page": "/speaking-up/", "hue": "#30d158",
+      "page": "/speaking-up/",
+      "hue": "#30d158",
       "tagline": "Senior enough to present. Not senior enough to be listened to automatically.",
       "quote": "Nobody has ever told me I talk too fast. I just watch people stop listening.",
-      "bio": { "location": "London, UK", "household": "Married, one child under five", "education": "MBA", "occupation": "Product manager, presents to leadership", "feedback_received": "None. Everyone is too polite.", "trigger": "The monthly leadership review", "budget": "Has one. This is career spend." },
+      "bio": {
+        "location": "London, UK",
+        "household": "Married, one child under five",
+        "education": "MBA",
+        "occupation": "Product manager, presents to leadership",
+        "feedback_received": "None. Everyone is too polite.",
+        "trigger": "The monthly leadership review",
+        "budget": "Has one. This is career spend."
+      },
       "belief": "He does not need convincing that it is a skill - he already believes that. What he has never had is a measurement. Everything he has been told is a feeling somebody had about him.",
       "turn_line": "He is the persona the product is most literally built for: the delivery half of the score is measured from the recording, not guessed.",
       "pains": [
-        { "title": "You speed up", "body": "When you are nervous you talk faster, and the room stops following." },
-        { "title": "You fill the gaps", "body": "Um, so, basically. You do not hear it. Everyone else does." },
-        { "title": "Nothing changes", "body": "The meeting ends, nobody says anything, and you do it again next week." }
+        {
+          "title": "You speed up",
+          "body": "When you are nervous you talk faster, and the room stops following."
+        },
+        {
+          "title": "You fill the gaps",
+          "body": "Um, so, basically. You do not hear it. Everyone else does."
+        },
+        {
+          "title": "Nothing changes",
+          "body": "The meeting ends, nobody says anything, and you do it again next week."
+        }
       ],
       "objections": [
-        { "q": "Is the score just an opinion?", "a": "The delivery half is measured. Tap any score to see the numbers." },
-        { "q": "I do not have time for a course.", "a": "Three minutes the night before the meeting." },
-        { "q": "Will it actually change anything?", "a": "'Seven ums in three minutes' is something you can work on. 'Be more confident' is not." }
+        {
+          "q": "Is the score just an opinion?",
+          "a": "The delivery half is measured. Tap any score to see the numbers."
+        },
+        {
+          "q": "I do not have time for a course.",
+          "a": "Three minutes the night before the meeting."
+        },
+        {
+          "q": "Will it actually change anything?",
+          "a": "'Seven ums in three minutes' is something you can work on. 'Be more confident' is not."
+        }
       ],
-      "usage": { "when": "The night before the meeting", "what": "Hard feedback, a job interview, explaining the tricky thing.", "watches": "Words per minute, pause length, filler count" },
-      "hero": { "eyebrow": "Say it clearly", "headline": "Say what you mean.", "sub": "Practise the hard conversation on your phone first, and see how you actually sound.", "note": "Free to start. No card." },
-      "section_order": ["problem", "learnable", "scoring", "how", "inside", "faq"],
+      "usage": {
+        "when": "The night before the meeting",
+        "what": "Hard feedback, a job interview, explaining the tricky thing.",
+        "watches": "Words per minute, pause length, filler count"
+      },
+      "hero": {
+        "eyebrow": "Say it clearly",
+        "headline": "Say what you mean.",
+        "sub": "Practise the hard conversation on your phone first, and see how you actually sound.",
+        "note": "Free to start. No card."
+      },
+      "section_order": [
+        "problem",
+        "learnable",
+        "scoring",
+        "how",
+        "inside",
+        "faq"
+      ],
       "order_why": "The numbers come third, early and before the mechanism. The measurement is the product for him.",
       "channels": [
-        { "channel": "LinkedIn", "note": "The only persona where it is worth the CPM. Job-title targeting." },
-        { "channel": "Google Search", "note": "how to stop saying um, how to speak more clearly at work" },
-        { "channel": "Podcast reads", "note": "Career and management shows. He listens on the commute." }
+        {
+          "channel": "LinkedIn",
+          "note": "The only persona where it is worth the CPM. Job-title targeting."
+        },
+        {
+          "channel": "Google Search",
+          "note": "how to stop saying um, how to speak more clearly at work"
+        },
+        {
+          "channel": "Podcast reads",
+          "note": "Career and management shows. He listens on the commute."
+        }
       ],
       "best_time": "Weekday mornings and Sunday evening - before the week, not during it.",
       "metric": "Watch revenue, not just installs. Most likely of the five to pay, because he can expense the reason.",
-      "never": ["anxiety", "shy", "nervous", "fear", "confidence", "stage fright"],
+      "never": [
+        "anxiety",
+        "shy",
+        "nervous",
+        "fear",
+        "confidence",
+        "stage fright"
+      ],
       "warning": "Never frame this as social anxiety. He does not think he has a problem with people - he thinks he has a problem being heard."
     },
     {
-      "slug": "rusty", "n": "05", "name": "Claire", "age": 38, "pronouns": "she/her",
+      "slug": "rusty",
+      "n": "05",
+      "name": "Claire",
+      "age": 38,
+      "pronouns": "she/her",
       "archetype": "It went quiet",
       "role": "campaign landing page",
-      "page": "/out-of-practice/", "hue": "#bf5af2",
+      "page": "/out-of-practice/",
+      "hue": "#bf5af2",
       "tagline": "Not shy. Used to be the one who talked to everyone.",
       "quote": "I used to be good at this. I do not know exactly when that stopped being true.",
-      "bio": { "location": "Leeds, UK - suburbs", "household": "Lives alone, recently separated", "education": "BA", "occupation": "Operations manager, fully remote", "not": "Shy. Never was.", "trigger": "A work drinks she left after forty minutes", "needs": "Reassurance, not tuition" },
+      "bio": {
+        "location": "Leeds, UK - suburbs",
+        "household": "Lives alone, recently separated",
+        "education": "BA",
+        "occupation": "Operations manager, fully remote",
+        "not": "Shy. Never was.",
+        "trigger": "A work drinks she left after forty minutes",
+        "needs": "Reassurance, not tuition"
+      },
       "belief": "She is the only one of the five who is not a beginner, and she will close the page the moment it treats her like one. She does not need to learn this. She needs to use it again.",
       "turn_line": "Reassurance leads, and the frame is 'it comes back' - never 'you can learn it'.",
       "pains": [
-        { "title": "The circle got smaller", "body": "A move, a break-up, working from home. Fewer chats, without choosing it." },
-        { "title": "So it takes effort", "body": "The thing that used to be automatic now needs thinking about." },
-        { "title": "And you notice", "body": "Which is the bit that makes it feel awkward." }
+        {
+          "title": "The circle got smaller",
+          "body": "A move, a break-up, working from home. Fewer chats, without choosing it."
+        },
+        {
+          "title": "So it takes effort",
+          "body": "The thing that used to be automatic now needs thinking about."
+        },
+        {
+          "title": "And you notice",
+          "body": "Which is the bit that makes it feel awkward."
+        }
       ],
       "objections": [
-        { "q": "I am not shy, this is not for me.", "a": "Correct. It is not about shyness, it is about practice you stopped getting." },
-        { "q": "Is this going to be patronising?", "a": "The page opens with the good news, not with what is wrong with you." },
-        { "q": "Will I stick with it?", "a": "Three minutes a day. Less than the drink you would have had first." }
+        {
+          "q": "I am not shy, this is not for me.",
+          "a": "Correct. It is not about shyness, it is about practice you stopped getting."
+        },
+        {
+          "q": "Is this going to be patronising?",
+          "a": "The page opens with the good news, not with what is wrong with you."
+        },
+        {
+          "q": "Will I stick with it?",
+          "a": "Three minutes a day. Less than the drink you would have had first."
+        }
       ],
-      "usage": { "when": "Three minutes a day, and twice before she goes out", "what": "Cafe, gym, party. Nothing exotic.", "watches": "Week six against week one - a number, not a feeling" },
-      "hero": { "eyebrow": "Get back in practice", "headline": "Like riding a bike.", "sub": "You used to be fine at this. A few short goes and most of it comes back.", "note": "Free to start. No card." },
-      "section_order": ["learnable", "problem", "how", "scoring", "inside", "faq"],
+      "usage": {
+        "when": "Three minutes a day, and twice before she goes out",
+        "what": "Cafe, gym, party. Nothing exotic.",
+        "watches": "Week six against week one - a number, not a feeling"
+      },
+      "hero": {
+        "eyebrow": "Get back in practice",
+        "headline": "Like riding a bike.",
+        "sub": "You used to be fine at this. A few short goes and most of it comes back.",
+        "note": "Free to start. No card."
+      },
+      "section_order": [
+        "learnable",
+        "problem",
+        "how",
+        "scoring",
+        "inside",
+        "faq"
+      ],
       "order_why": "Reassurance first, and the problem section is renamed 'What happened' - it is about circumstances, not about her.",
       "channels": [
-        { "channel": "Facebook / Instagram", "note": "The one persona whose age actually sits on Facebook." },
-        { "channel": "Google Search", "note": "getting back into socialising, out of practice talking to people" },
-        { "channel": "Reddit", "note": "r/socialskills skews younger - target the life-change subs instead." }
+        {
+          "channel": "Facebook / Instagram",
+          "note": "The one persona whose age actually sits on Facebook."
+        },
+        {
+          "channel": "Google Search",
+          "note": "getting back into socialising, out of practice talking to people"
+        },
+        {
+          "channel": "Reddit",
+          "note": "r/socialskills skews younger - target the life-change subs instead."
+        }
       ],
       "best_time": "Evenings, 20:00-22:30. Reels first for this persona, not TikTok.",
       "metric": "Watch retention over installs. If it works for her it works for weeks.",
-      "never": ["beginner", "learn", "basics", "teach", "improve yourself", "fix"],
+      "never": [
+        "beginner",
+        "learn",
+        "basics",
+        "teach",
+        "improve yourself",
+        "fix"
+      ],
       "warning": "Never use the word beginner, and never offer to teach her. She could do this five years ago and she knows it."
     }
   ],
-
   "persona_map_15": {
     "note": "Hypotheses from product, competitive and persona research - not from respondents. /survey/ exists to replace them with answers.",
     "dating_rule": "Framed around reading the other person, never technique applied to them. No lines that work, no closing, no push-pull, nothing about getting a number.",
@@ -333,57 +827,254 @@
       {
         "family": "Dating",
         "personas": [
-          { "n": 1, "id": "late-starter", "label": "The late starter", "desc": "Little or no dating history, often 20s. The gap is not technique - everyone else got a decade of low-stakes reps and he did not.", "trigger": "A friend's relationship, a birthday, a dating app installed and deleted twice", "searches": ["how to start dating with no experience", "never been on a date"], "blend": "high blue, low yellow", "never": ["still single?", "anything implying he is behind"] },
-          { "n": 2, "id": "back-after-relationship", "label": "Back after a long relationship", "desc": "Was fine at this once, inside a relationship for years, and the rules appear to have changed.", "trigger": "The end of a long relationship; the first time a friend suggests an app", "searches": ["dating after a long relationship", "how to date again at 35"], "blend": "green-dominant", "never": ["beginner", "learn", "start over"] },
-          { "n": 3, "id": "apps-not-in-person", "label": "Great on apps, silent in person", "desc": "Witty in text, flat in the room. The most common modern shape.", "trigger": "A third date that went nowhere after brilliant messaging", "searches": ["good at texting bad in person", "awkward in person but not online"], "blend": "yellow in writing, blue under pressure", "never": ["framing texting as cheating or lesser"] },
-          { "n": 4, "id": "first-date-freeze", "label": "First-date freeze", "desc": "Can get the date. Cannot hold the middle of it.", "trigger": "A specific date in the calendar this week", "searches": ["what to talk about on a first date", "first date awkward silence"], "blend": "balanced, low green", "never": ["scripts", "question lists"] },
-          { "n": 5, "id": "reading-interest", "label": "Reading interest", "desc": "Cannot tell how it is going, so over-corrects. The persona the product is most uniquely built for - the partner's disposition and guard are separately tunable.", "trigger": "A misread that was embarrassing afterwards", "searches": ["how to tell if someone is interested", "am I being too much"], "blend": "high blue, high green", "never": ["signals she's into you listicle framing"] }
+          {
+            "n": 1,
+            "id": "late-starter",
+            "label": "The late starter",
+            "desc": "Little or no dating history, often 20s. The gap is not technique - everyone else got a decade of low-stakes reps and he did not.",
+            "trigger": "A friend's relationship, a birthday, a dating app installed and deleted twice",
+            "searches": [
+              "how to start dating with no experience",
+              "never been on a date"
+            ],
+            "blend": "high blue, low yellow",
+            "never": [
+              "still single?",
+              "anything implying he is behind"
+            ]
+          },
+          {
+            "n": 2,
+            "id": "back-after-relationship",
+            "label": "Back after a long relationship",
+            "desc": "Was fine at this once, inside a relationship for years, and the rules appear to have changed.",
+            "trigger": "The end of a long relationship; the first time a friend suggests an app",
+            "searches": [
+              "dating after a long relationship",
+              "how to date again at 35"
+            ],
+            "blend": "green-dominant",
+            "never": [
+              "beginner",
+              "learn",
+              "start over"
+            ]
+          },
+          {
+            "n": 3,
+            "id": "apps-not-in-person",
+            "label": "Great on apps, silent in person",
+            "desc": "Witty in text, flat in the room. The most common modern shape.",
+            "trigger": "A third date that went nowhere after brilliant messaging",
+            "searches": [
+              "good at texting bad in person",
+              "awkward in person but not online"
+            ],
+            "blend": "yellow in writing, blue under pressure",
+            "never": [
+              "framing texting as cheating or lesser"
+            ]
+          },
+          {
+            "n": 4,
+            "id": "first-date-freeze",
+            "label": "First-date freeze",
+            "desc": "Can get the date. Cannot hold the middle of it.",
+            "trigger": "A specific date in the calendar this week",
+            "searches": [
+              "what to talk about on a first date",
+              "first date awkward silence"
+            ],
+            "blend": "balanced, low green",
+            "never": [
+              "scripts",
+              "question lists"
+            ]
+          },
+          {
+            "n": 5,
+            "id": "reading-interest",
+            "label": "Reading interest",
+            "desc": "Cannot tell how it is going, so over-corrects. The persona the product is most uniquely built for - the partner's disposition and guard are separately tunable.",
+            "trigger": "A misread that was embarrassing afterwards",
+            "searches": [
+              "how to tell if someone is interested",
+              "am I being too much"
+            ],
+            "blend": "high blue, high green",
+            "never": [
+              "signals she's into you listicle framing"
+            ]
+          }
         ]
       },
       {
         "family": "Social",
         "personas": [
-          { "n": 6, "id": "freeze-and-replay", "label": "Overcome shyness", "full_brief": "shy" },
-          { "n": 7, "id": "first-thirty-seconds", "label": "Meeting new people", "full_brief": "social" }
+          {
+            "n": 6,
+            "id": "freeze-and-replay",
+            "label": "Overcome shyness",
+            "full_brief": "shy"
+          },
+          {
+            "n": 7,
+            "id": "first-thirty-seconds",
+            "label": "Meeting new people",
+            "full_brief": "social"
+          }
         ]
       },
       {
         "family": "Language",
         "personas": [
-          { "n": 8, "id": "fluent-on-paper", "label": "Fluent on paper", "full_brief": "language" },
-          { "n": 9, "id": "newly-relocated", "label": "Newly relocated", "desc": "Language is adequate; the cultural context is not. Misses the joke, answers the literal question, cannot tell when small talk is finished.", "trigger": "Three months in, still no local friends", "searches": ["how to make friends in a new country", "small talk in [country]"], "blend": "green with high blue", "never": ["treating it as a language problem - it is a context problem and saying so is the whole hook"] }
+          {
+            "n": 8,
+            "id": "fluent-on-paper",
+            "label": "Fluent on paper",
+            "full_brief": "language"
+          },
+          {
+            "n": 9,
+            "id": "newly-relocated",
+            "label": "Newly relocated",
+            "desc": "Language is adequate; the cultural context is not. Misses the joke, answers the literal question, cannot tell when small talk is finished.",
+            "trigger": "Three months in, still no local friends",
+            "searches": [
+              "how to make friends in a new country",
+              "small talk in [country]"
+            ],
+            "blend": "green with high blue",
+            "never": [
+              "treating it as a language problem - it is a context problem and saying so is the whole hook"
+            ]
+          }
         ]
       },
       {
         "family": "Work",
         "personas": [
-          { "n": 10, "id": "being-heard", "label": "Being heard", "full_brief": "speaking" },
-          { "n": 11, "id": "interviews", "label": "Interviews and job search", "desc": "One performance, high stakes, no second attempt. The sharpest deadline of any persona and the highest willingness to pay per week.", "trigger": "An interview booked for next week", "searches": ["how to answer tell me about yourself", "interview practice out loud"], "blend": "blue-dominant, wants structure", "never": ["promising outcomes - we do not get anyone a job"] },
-          { "n": 12, "id": "client-facing", "label": "Client-facing and sales", "desc": "Talks for a living and knows delivery costs deals. Measures things already, so the delivery numbers land immediately.", "trigger": "A lost deal, a quota conversation", "searches": ["sound more confident on sales calls", "stop rambling on calls"], "blend": "red-yellow", "never": ["basics - this person does this professionally"] },
-          { "n": 13, "id": "leading-a-team", "label": "Leading a team", "desc": "Presence rather than persuasion. Difficult feedback, disagreement without it going cold.", "trigger": "A performance conversation they are dreading", "searches": ["how to give difficult feedback", "executive presence"], "blend": "red-green", "never": ["hacks", "tricks", "power moves"] }
+          {
+            "n": 10,
+            "id": "being-heard",
+            "label": "Being heard",
+            "full_brief": "speaking"
+          },
+          {
+            "n": 11,
+            "id": "interviews",
+            "label": "Interviews and job search",
+            "desc": "One performance, high stakes, no second attempt. The sharpest deadline of any persona and the highest willingness to pay per week.",
+            "trigger": "An interview booked for next week",
+            "searches": [
+              "how to answer tell me about yourself",
+              "interview practice out loud"
+            ],
+            "blend": "blue-dominant, wants structure",
+            "never": [
+              "promising outcomes - we do not get anyone a job"
+            ]
+          },
+          {
+            "n": 12,
+            "id": "client-facing",
+            "label": "Client-facing and sales",
+            "desc": "Talks for a living and knows delivery costs deals. Measures things already, so the delivery numbers land immediately.",
+            "trigger": "A lost deal, a quota conversation",
+            "searches": [
+              "sound more confident on sales calls",
+              "stop rambling on calls"
+            ],
+            "blend": "red-yellow",
+            "never": [
+              "basics - this person does this professionally"
+            ]
+          },
+          {
+            "n": 13,
+            "id": "leading-a-team",
+            "label": "Leading a team",
+            "desc": "Presence rather than persuasion. Difficult feedback, disagreement without it going cold.",
+            "trigger": "A performance conversation they are dreading",
+            "searches": [
+              "how to give difficult feedback",
+              "executive presence"
+            ],
+            "blend": "red-green",
+            "never": [
+              "hacks",
+              "tricks",
+              "power moves"
+            ]
+          }
         ]
       },
       {
         "family": "Reset",
         "personas": [
-          { "n": 14, "id": "out-of-practice", "label": "Out of practice", "full_brief": "rusty" },
-          { "n": 15, "id": "remote-isolation", "label": "Remote-work isolation", "desc": "Two years of video calls and no unplanned conversation. Fine one-to-one on a scheduled call, lost in a room. The circle did not shrink; the unstructured part of it vanished.", "trigger": "A return-to-office week, a conference, a work social", "searches": ["lost social skills working from home", "awkward after remote work"], "blend": "blue-green", "never": ["implying working remotely was a mistake"] }
+          {
+            "n": 14,
+            "id": "out-of-practice",
+            "label": "Out of practice",
+            "full_brief": "rusty"
+          },
+          {
+            "n": 15,
+            "id": "remote-isolation",
+            "label": "Remote-work isolation",
+            "desc": "Two years of video calls and no unplanned conversation. Fine one-to-one on a scheduled call, lost in a room. The circle did not shrink; the unstructured part of it vanished.",
+            "trigger": "A return-to-office week, a conference, a work social",
+            "searches": [
+              "lost social skills working from home",
+              "awkward after remote work"
+            ],
+            "blend": "blue-green",
+            "never": [
+              "implying working remotely was a mistake"
+            ]
+          }
         ]
       }
     ]
   },
-
   "colour_model": {
     "note": "Not invented for marketing - it is the product's own COLOR_TRAITS, the same four colours that drive the AI partner's behaviour and are stored per user.",
     "use": "The goal says which problem. The dominant colour says which version of it.",
     "colours": [
-      { "key": "red", "label": "Direct", "you": "You decide quickly and get to the point. You would rather be told the thing than walked to it.", "wants": "directness, brevity, getting to the point", "hates": "filler, hedging, slow ramps", "hex": "#ff375f" },
-      { "key": "blue", "label": "Analytical", "you": "You want the real reason and the specifics. You open slowly and you notice when someone is performing.", "wants": "accuracy, specifics, the real reason", "hates": "hype, charm without substance", "hex": "#0a84ff" },
-      { "key": "yellow", "label": "Expressive", "you": "You run on energy and story. You light up when someone laughs with you and you build on what they give you.", "wants": "energy, story, being seen", "hates": "flatness, judgment, transactional talk", "hex": "#ff9f0a" },
-      { "key": "green", "label": "Steady", "you": "You take your time and consider people. Slow to open, and you walk away from anyone who rushes you.", "wants": "patience, consideration, time to warm up", "hates": "pressure, urgency, being pushed", "hex": "#30d158" }
+      {
+        "key": "red",
+        "label": "Direct",
+        "you": "You decide quickly and get to the point. You would rather be told the thing than walked to it.",
+        "wants": "directness, brevity, getting to the point",
+        "hates": "filler, hedging, slow ramps",
+        "hex": "#ff375f"
+      },
+      {
+        "key": "blue",
+        "label": "Analytical",
+        "you": "You want the real reason and the specifics. You open slowly and you notice when someone is performing.",
+        "wants": "accuracy, specifics, the real reason",
+        "hates": "hype, charm without substance",
+        "hex": "#0a84ff"
+      },
+      {
+        "key": "yellow",
+        "label": "Expressive",
+        "you": "You run on energy and story. You light up when someone laughs with you and you build on what they give you.",
+        "wants": "energy, story, being seen",
+        "hates": "flatness, judgment, transactional talk",
+        "hex": "#ff9f0a"
+      },
+      {
+        "key": "green",
+        "label": "Steady",
+        "you": "You take your time and consider people. Slow to open, and you walk away from anyone who rushes you.",
+        "wants": "patience, consideration, time to warm up",
+        "hates": "pressure, urgency, being pushed",
+        "hex": "#30d158"
+      }
     ]
   },
-
   "seo": {
     "rules": [
       "The query goes in the title first and the brand goes last. The layout appends ' - ImprovTalk'.",
@@ -393,23 +1084,119 @@
       "Content must render server-side. No gating on in-view state - crawlers and answer engines read the exported HTML."
     ],
     "keyword_map": [
-      { "page": "/", "primary": "practise conversations out loud", "also": ["conversation practice app", "how to get better at talking to people", "AI conversation practice"], "priority": 1.0 },
-      { "page": "/how-to-start-a-conversation/", "primary": "how to start a conversation", "also": ["conversation openers", "how to approach someone"], "priority": 0.9 },
-      { "page": "/second-language/", "primary": "practice speaking english out loud", "also": ["english speaking practice app", "how to stop translating in my head", "speak a second language fluently"], "priority": 0.8 },
-      { "page": "/meeting-people/", "primary": "how to start a conversation with a stranger", "also": ["how to talk to new people", "what to say when you meet someone"], "priority": 0.8 },
-      { "page": "/speaking-up/", "primary": "how to stop saying um", "also": ["how to speak more clearly at work", "why do I talk too fast when nervous"], "priority": 0.8 },
-      { "page": "/out-of-practice/", "primary": "out of practice talking to people", "also": ["getting back into socialising", "how to be social again"], "priority": 0.8 }
+      {
+        "page": "/",
+        "primary": "practise conversations out loud",
+        "also": [
+          "conversation practice app",
+          "how to get better at talking to people",
+          "AI conversation practice"
+        ],
+        "priority": 1.0
+      },
+      {
+        "page": "/how-to-start-a-conversation/",
+        "primary": "how to start a conversation",
+        "also": [
+          "conversation openers",
+          "how to approach someone"
+        ],
+        "priority": 0.9
+      },
+      {
+        "page": "/second-language/",
+        "primary": "practice speaking english out loud",
+        "also": [
+          "english speaking practice app",
+          "how to stop translating in my head",
+          "speak a second language fluently"
+        ],
+        "priority": 0.8
+      },
+      {
+        "page": "/meeting-people/",
+        "primary": "how to start a conversation with a stranger",
+        "also": [
+          "how to talk to new people",
+          "what to say when you meet someone"
+        ],
+        "priority": 0.8
+      },
+      {
+        "page": "/speaking-up/",
+        "primary": "how to stop saying um",
+        "also": [
+          "how to speak more clearly at work",
+          "why do I talk too fast when nervous"
+        ],
+        "priority": 0.8
+      },
+      {
+        "page": "/out-of-practice/",
+        "primary": "out of practice talking to people",
+        "also": [
+          "getting back into socialising",
+          "how to be social again"
+        ],
+        "priority": 0.8
+      }
     ],
     "blog_cluster": [
-      { "path": "/blog/how-to-start-a-conversation-with-a-stranger/", "title": "The excuse, or straight in: two ways to open", "query": "how to start a conversation with a stranger", "links_to": "/meeting-people/", "category": "Openers" },
-      { "path": "/blog/how-to-break-the-ice/", "title": "Break the ice: say hello in their language", "query": "how to break the ice", "links_to": "/meeting-people/", "category": "Openers" },
-      { "path": "/blog/what-to-say-to-someone-you-just-met/", "title": "Notice one thing: the observation opener", "query": "what to say to someone you just met", "links_to": "/", "category": "Attention" },
-      { "path": "/blog/why-your-mind-goes-blank-in-conversation/", "title": "Why you go blank, and what actually fixes it", "query": "mind goes blank in conversation", "links_to": "/", "category": "Nerves" },
-      { "path": "/blog/practise-speaking-a-language-out-loud/", "title": "How to practise speaking a language alone", "query": "practice speaking english out loud", "links_to": "/second-language/", "category": "Languages" },
-      { "path": "/blog/how-to-stop-saying-um/", "title": "How to stop saying 'um'", "query": "how to stop saying um", "links_to": "/speaking-up/", "category": "Delivery" }
+      {
+        "path": "/blog/how-to-start-a-conversation-with-a-stranger/",
+        "title": "The excuse, or straight in: two ways to open",
+        "query": "how to start a conversation with a stranger",
+        "links_to": "/meeting-people/",
+        "category": "Openers"
+      },
+      {
+        "path": "/blog/how-to-break-the-ice/",
+        "title": "Break the ice: say hello in their language",
+        "query": "how to break the ice",
+        "links_to": "/meeting-people/",
+        "category": "Openers"
+      },
+      {
+        "path": "/blog/what-to-say-to-someone-you-just-met/",
+        "title": "Notice one thing: the observation opener",
+        "query": "what to say to someone you just met",
+        "links_to": "/",
+        "category": "Attention"
+      },
+      {
+        "path": "/blog/why-your-mind-goes-blank-in-conversation/",
+        "title": "Why you go blank, and what actually fixes it",
+        "query": "mind goes blank in conversation",
+        "links_to": "/",
+        "category": "Nerves"
+      },
+      {
+        "path": "/blog/practise-speaking-a-language-out-loud/",
+        "title": "How to practise speaking a language alone",
+        "query": "practice speaking english out loud",
+        "links_to": "/second-language/",
+        "category": "Languages"
+      },
+      {
+        "path": "/blog/how-to-stop-saying-um/",
+        "title": "How to stop saying 'um'",
+        "query": "how to stop saying um",
+        "links_to": "/speaking-up/",
+        "category": "Delivery"
+      }
     ],
-    "schema": ["Organization", "WebSite", "SoftwareApplication", "FAQPage", "HowTo", "BlogPosting", "VideoObject"],
-    "schema_forbidden": ["AggregateRating"],
+    "schema": [
+      "Organization",
+      "WebSite",
+      "SoftwareApplication",
+      "FAQPage",
+      "HowTo",
+      "BlogPosting",
+      "VideoObject"
+    ],
+    "schema_forbidden": [
+      "AggregateRating"
+    ],
     "technical_lessons": [
       "Never Disallow a noindex page - they cancel out and the result is 'Indexed, though blocked by robots.txt'.",
       "Near-orphan pages do not get indexed. Every sitemap URL needs at least four internal links.",
@@ -418,13 +1205,33 @@
     ],
     "aeo": {
       "llms_txt": "/llms.txt is maintained as a canonical machine summary. Keep it in sync with facts.verified.",
-      "allowed_ai_crawlers": ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-User", "PerplexityBot", "Perplexity-User", "Google-Extended", "Applebot-Extended", "CCBot", "Bytespider", "meta-externalagent"],
+      "allowed_ai_crawlers": [
+        "GPTBot",
+        "OAI-SearchBot",
+        "ChatGPT-User",
+        "ClaudeBot",
+        "Claude-User",
+        "PerplexityBot",
+        "Perplexity-User",
+        "Google-Extended",
+        "Applebot-Extended",
+        "CCBot",
+        "Bytespider",
+        "meta-externalagent"
+      ],
       "indexnow": "Reaches Bing and Yandex only. Google retired sitemap ping in 2023."
     },
-    "not_doing": ["meta keywords tag", "location or doorway pages", "competitor comparison pages", "AggregateRating schema"],
-    "open": ["site.googleSiteVerification is empty", "site.socialProfiles is empty - no sameAs entity signal, which blocks a knowledge panel"]
+    "not_doing": [
+      "meta keywords tag",
+      "location or doorway pages",
+      "competitor comparison pages",
+      "AggregateRating schema"
+    ],
+    "open": [
+      "site.googleSiteVerification is empty",
+      "site.socialProfiles is empty - no sameAs entity signal, which blocks a knowledge panel"
+    ]
   },
-
   "sem": {
     "preconditions": [
       "TestFlight must be accepting testers - otherwise every click lands on a dead end.",
@@ -432,77 +1239,463 @@
     ],
     "brand_risk": "ImprovTalk, Inc. (Chicago) owns improvtalk.com with Instagram, Facebook and YouTube profiles. improvetalk.com also ranks. 'improv' pulls comedy-class intent. Verify in the search terms report in week one.",
     "brand_campaign": {
-      "exact": ["[improvtalk vip]", "[improvtalk app]", "[improv talk app]"],
-      "phrase": ["\"improvtalk conversation\"", "\"improvtalk practice\""],
-      "negatives": ["chicago", "inc", "podcast", "improvetalk", "comedy", "class", "classes", "theatre", "theater", "troupe", "workshop", "show", "tickets", "near me"]
+      "exact": [
+        "[improvtalk vip]",
+        "[improvtalk app]",
+        "[improv talk app]"
+      ],
+      "phrase": [
+        "\"improvtalk conversation\"",
+        "\"improvtalk practice\""
+      ],
+      "negatives": [
+        "chicago",
+        "inc",
+        "podcast",
+        "improvetalk",
+        "comedy",
+        "class",
+        "classes",
+        "theatre",
+        "theater",
+        "troupe",
+        "workshop",
+        "show",
+        "tickets",
+        "near me"
+      ]
     },
     "account_negatives": {
-      "freeloaders": ["free", "crack", "cracked", "apk", "mod", "modded", "torrent", "hack", "unlimited", "no subscription", "without paying"],
-      "jobs_and_study": ["job", "jobs", "career", "careers", "salary", "hiring", "vacancy", "internship", "thesis", "dissertation", "research paper", "journal", "pdf", "ppt", "worksheet", "curriculum", "lesson plan"],
-      "wrong_platform": ["android", "windows", "pc", "desktop", "chromebook", "web version", "online free"],
-      "wrong_product": ["improv class", "improv comedy", "improv theatre", "improv games", "standup", "stand up comedy", "toastmasters", "debate club", "voice over", "singing", "accent reduction", "elocution"],
-      "clinical": ["therapy", "therapist", "counselling", "counseling", "psychiatrist", "medication", "meds", "diagnosis", "disorder", "cbt", "autism", "asperger", "stutter", "stammer", "speech therapy", "selective mutism"],
-      "coercive": ["pickup artist", "pua", "rizz", "seduction", "seduce", "get laid", "manipulate", "mind games", "how to get a girlfriend", "tinder openers", "dating app openers"]
+      "freeloaders": [
+        "free",
+        "crack",
+        "cracked",
+        "apk",
+        "mod",
+        "modded",
+        "torrent",
+        "hack",
+        "unlimited",
+        "no subscription",
+        "without paying"
+      ],
+      "jobs_and_study": [
+        "job",
+        "jobs",
+        "career",
+        "careers",
+        "salary",
+        "hiring",
+        "vacancy",
+        "internship",
+        "thesis",
+        "dissertation",
+        "research paper",
+        "journal",
+        "pdf",
+        "ppt",
+        "worksheet",
+        "curriculum",
+        "lesson plan"
+      ],
+      "wrong_platform": [
+        "android",
+        "windows",
+        "pc",
+        "desktop",
+        "chromebook",
+        "web version",
+        "online free"
+      ],
+      "wrong_product": [
+        "improv class",
+        "improv comedy",
+        "improv theatre",
+        "improv games",
+        "standup",
+        "stand up comedy",
+        "toastmasters",
+        "debate club",
+        "voice over",
+        "singing",
+        "accent reduction",
+        "elocution"
+      ],
+      "clinical": [
+        "therapy",
+        "therapist",
+        "counselling",
+        "counseling",
+        "psychiatrist",
+        "medication",
+        "meds",
+        "diagnosis",
+        "disorder",
+        "cbt",
+        "autism",
+        "asperger",
+        "stutter",
+        "stammer",
+        "speech therapy",
+        "selective mutism"
+      ],
+      "coercive": [
+        "pickup artist",
+        "pua",
+        "rizz",
+        "seduction",
+        "seduce",
+        "get laid",
+        "manipulate",
+        "mind games",
+        "how to get a girlfriend",
+        "tinder openers",
+        "dating app openers"
+      ]
     },
     "campaigns": [
       {
-        "name": "IT · Speaking up", "ad_group": "Fillers and pace", "landing": "/speaking-up/", "persona": "speaking", "budget_share": 0.30,
+        "name": "IT · Speaking up",
+        "ad_group": "Fillers and pace",
+        "landing": "/speaking-up/",
+        "persona": "speaking",
+        "budget_share": 0.3,
         "why": "The only persona who can expense the outcome, and the one with genuinely commercial intent.",
-        "phrase": ["\"how to stop saying um\"", "\"how to speak more clearly\"", "\"filler words when speaking\"", "\"how to stop talking too fast\"", "\"practice for a presentation\"", "\"how to be more articulate\""],
-        "exact": ["[how to stop saying um]", "[how to stop saying like]", "[how to speak more clearly at work]"],
-        "negatives": ["shy", "social anxiety", "glossophobia", "fear of public speaking", "stage fright", "toastmasters", "speech therapy", "stutter", "elocution", "accent"],
-        "headlines": ["Seven ums in three minutes", "Stop saying um", "Hear how you actually sound", "Practise the hard meeting", "Your pace, measured", "Not a rating. A number.", "Practise before the meeting", "Filler words, counted", "Nobody at work will tell you", "Say what you mean", "Words per minute, measured", "Rehearse difficult feedback", "Free to start, no card", "Fix it before Monday", "Measured, not guessed"],
-        "descriptions": ["Your speed, your pauses and your filler count, measured from the recording.", "Practise the hard conversation on your phone first, and hear how you sound.", "Not a mark out of ten. Real numbers, with the working shown for each one.", "Free to start, no card. Three minutes the night before the meeting."]
+        "phrase": [
+          "\"how to stop saying um\"",
+          "\"how to speak more clearly\"",
+          "\"filler words when speaking\"",
+          "\"how to stop talking too fast\"",
+          "\"practice for a presentation\"",
+          "\"how to be more articulate\""
+        ],
+        "exact": [
+          "[how to stop saying um]",
+          "[how to stop saying like]",
+          "[how to speak more clearly at work]"
+        ],
+        "negatives": [
+          "shy",
+          "social anxiety",
+          "glossophobia",
+          "fear of public speaking",
+          "stage fright",
+          "toastmasters",
+          "speech therapy",
+          "stutter",
+          "elocution",
+          "accent"
+        ],
+        "headlines": [
+          "Seven ums in three minutes",
+          "Stop saying um",
+          "Hear how you actually sound",
+          "Practise the hard meeting",
+          "Your pace, measured",
+          "Not a rating. A number.",
+          "Practise before the meeting",
+          "Filler words, counted",
+          "Nobody at work will tell you",
+          "Say what you mean",
+          "Words per minute, measured",
+          "Rehearse difficult feedback",
+          "Free to start, no card",
+          "Fix it before Monday",
+          "Measured, not guessed"
+        ],
+        "descriptions": [
+          "Your speed, your pauses and your filler count, measured from the recording.",
+          "Practise the hard conversation on your phone first, and hear how you sound.",
+          "Not a mark out of ten. Real numbers, with the working shown for each one.",
+          "Free to start, no card. Three minutes the night before the meeting."
+        ]
       },
       {
-        "name": "IT · Second language", "ad_group": "Speaking practice", "landing": "/second-language/", "persona": "language", "budget_share": 0.25,
+        "name": "IT · Second language",
+        "ad_group": "Speaking practice",
+        "landing": "/second-language/",
+        "persona": "language",
+        "budget_share": 0.25,
         "why": "Large, well-defined query space and a differentiator no competitor matches.",
-        "phrase": ["\"practice speaking english out loud\"", "\"english speaking practice app\"", "\"how to stop translating in my head\"", "\"speaking practice partner\"", "\"practice speaking spanish out loud\"", "\"ai to practice speaking english\""],
-        "exact": ["[english speaking practice app]", "[practice speaking english out loud]", "[app to practice speaking a language]"],
-        "negatives": ["beginner", "for beginners", "basics", "a1", "a2", "alphabet", "grammar test", "ielts", "toefl", "cambridge", "exam", "certificate", "translate", "translation", "dictionary", "kids", "children", "free course"],
+        "phrase": [
+          "\"practice speaking english out loud\"",
+          "\"english speaking practice app\"",
+          "\"how to stop translating in my head\"",
+          "\"speaking practice partner\"",
+          "\"practice speaking spanish out loud\"",
+          "\"ai to practice speaking english\""
+        ],
+        "exact": [
+          "[english speaking practice app]",
+          "[practice speaking english out loud]",
+          "[app to practice speaking a language]"
+        ],
+        "negatives": [
+          "beginner",
+          "for beginners",
+          "basics",
+          "a1",
+          "a2",
+          "alphabet",
+          "grammar test",
+          "ielts",
+          "toefl",
+          "cambridge",
+          "exam",
+          "certificate",
+          "translate",
+          "translation",
+          "dictionary",
+          "kids",
+          "children",
+          "free course"
+        ],
         "competitor_terms_note": "Decide deliberately on duolingo, babbel, busuu. Legal, sometimes sensible, expensive, strong brand defence. Default to excluding until the account has data.",
-        "headlines": ["Practise speaking out loud", "English, Spanish or Russian", "She won't switch to English", "Speak, don't translate", "Speaking practice, any time", "Your grammar is fine", "The gap is speaking, not words", "Practise with no one around", "An AI that waits for you", "Free to start, no card", "Say it wrong 20 times", "Keep calm and talk", "Stop rehearsing in your head", "Fluent on paper, stuck aloud", "Get your speed back"],
-        "descriptions": ["Reading is the easy part. Practise speaking out loud, as often as you like.", "An AI that stays in your language even when you stall. That is the point.", "English, Spanish or Russian. Your pace and pauses measured from the recording.", "Free to start, no card. The app menus are English; the conversation is not."]
+        "headlines": [
+          "Practise speaking out loud",
+          "English, Spanish or Russian",
+          "She won't switch to English",
+          "Speak, don't translate",
+          "Speaking practice, any time",
+          "Your grammar is fine",
+          "The gap is speaking, not words",
+          "Practise with no one around",
+          "An AI that waits for you",
+          "Free to start, no card",
+          "Say it wrong 20 times",
+          "Keep calm and talk",
+          "Stop rehearsing in your head",
+          "Fluent on paper, stuck aloud",
+          "Get your speed back"
+        ],
+        "descriptions": [
+          "Reading is the easy part. Practise speaking out loud, as often as you like.",
+          "An AI that stays in your language even when you stall. That is the point.",
+          "English, Spanish or Russian. Your pace and pauses measured from the recording.",
+          "Free to start, no card. The app menus are English; the conversation is not."
+        ]
       },
       {
-        "name": "IT · Shy", "ad_group": "Freezing", "landing": "/", "persona": "shy", "budget_share": 0.20,
+        "name": "IT · Shy",
+        "ad_group": "Freezing",
+        "landing": "/",
+        "persona": "shy",
+        "budget_share": 0.2,
         "why": "Broadest audience, weakest commercial intent.",
-        "phrase": ["\"conversation practice app\"", "\"practice talking to people\"", "\"how to not freeze in conversation\"", "\"what to say when your mind goes blank\"", "\"social skills practice app\"", "\"practice conversations with ai\""],
-        "exact": ["[conversation practice app]", "[how to stop freezing in conversations]", "[app to practice talking to people]"],
-        "negatives": ["anxiety medication", "social anxiety disorder", "panic attacks", "support group", "quiz", "test", "am i shy"],
-        "headlines": ["Practise talking, in private", "Nobody hears you practise", "Say it out loud first", "Conversation practice app", "Practice makes perfect", "Try the same line 20 times", "Free to start, no card", "An AI that talks back", "Three minutes a night", "Find out what went wrong", "Your phone, your room", "Practise before it counts", "Rehearse the hard bit", "Not advice. Reps.", "Talk to an AI, not a person"],
-        "descriptions": ["Talk to an AI on your phone. Nobody hears you. Try as often as you like.", "Hold a button and speak. It answers back, then shows you what actually landed.", "Free to start, no card. Three minutes is enough to feel the difference.", "Practise the conversation before you have it, as many times as you need."]
+        "phrase": [
+          "\"conversation practice app\"",
+          "\"practice talking to people\"",
+          "\"how to not freeze in conversation\"",
+          "\"what to say when your mind goes blank\"",
+          "\"social skills practice app\"",
+          "\"practice conversations with ai\""
+        ],
+        "exact": [
+          "[conversation practice app]",
+          "[how to stop freezing in conversations]",
+          "[app to practice talking to people]"
+        ],
+        "negatives": [
+          "anxiety medication",
+          "social anxiety disorder",
+          "panic attacks",
+          "support group",
+          "quiz",
+          "test",
+          "am i shy"
+        ],
+        "headlines": [
+          "Practise talking, in private",
+          "Nobody hears you practise",
+          "Say it out loud first",
+          "Conversation practice app",
+          "Practice makes perfect",
+          "Try the same line 20 times",
+          "Free to start, no card",
+          "An AI that talks back",
+          "Three minutes a night",
+          "Find out what went wrong",
+          "Your phone, your room",
+          "Practise before it counts",
+          "Rehearse the hard bit",
+          "Not advice. Reps.",
+          "Talk to an AI, not a person"
+        ],
+        "descriptions": [
+          "Talk to an AI on your phone. Nobody hears you. Try as often as you like.",
+          "Hold a button and speak. It answers back, then shows you what actually landed.",
+          "Free to start, no card. Three minutes is enough to feel the difference.",
+          "Practise the conversation before you have it, as many times as you need."
+        ]
       },
       {
-        "name": "IT · Meeting people", "ad_group": "First line", "landing": "/meeting-people/", "persona": "social", "budget_share": 0.15,
+        "name": "IT · Meeting people",
+        "ad_group": "First line",
+        "landing": "/meeting-people/",
+        "persona": "social",
+        "budget_share": 0.15,
         "why": "Cheap clicks, but the strictest negatives and the youngest audience.",
-        "phrase": ["\"how to start a conversation with a stranger\"", "\"how to break the ice\"", "\"what to say to someone you just met\"", "\"how to talk to new people\"", "\"conversation starters with strangers\""],
-        "exact": ["[how to start a conversation with a stranger]", "[how to break the ice with someone]"],
-        "negatives": ["flirt", "flirting", "pickup", "pick up line", "pickup lines", "rizz", "game", "dating", "tinder", "hinge", "bumble", "date", "girlfriend", "boyfriend", "attract", "seduce", "texting", "dm", "opener for girls"],
-        "headlines": ["Practise the first line", "Break the ice, in private", "Say it before it counts", "The first 30 seconds", "Try an opener 20 times", "Warm up before you go out", "An AI that answers back", "She can say no", "Free to start, no card", "Practise talking to strangers", "Not a script. Reps.", "Two goes before you leave", "Read the room better", "Openers you can rehearse", "Nobody hears you practise"],
-        "descriptions": ["Try the first minute on your phone, twenty times if you want, before it counts.", "She answers back, and sometimes she is not interested. Noticing that is the skill.", "Free to start, no card. Two goes before you head out is enough to feel it.", "Practise the opener, the exit, and everything awkward in between."]
+        "phrase": [
+          "\"how to start a conversation with a stranger\"",
+          "\"how to break the ice\"",
+          "\"what to say to someone you just met\"",
+          "\"how to talk to new people\"",
+          "\"conversation starters with strangers\""
+        ],
+        "exact": [
+          "[how to start a conversation with a stranger]",
+          "[how to break the ice with someone]"
+        ],
+        "negatives": [
+          "flirt",
+          "flirting",
+          "pickup",
+          "pick up line",
+          "pickup lines",
+          "rizz",
+          "game",
+          "dating",
+          "tinder",
+          "hinge",
+          "bumble",
+          "date",
+          "girlfriend",
+          "boyfriend",
+          "attract",
+          "seduce",
+          "texting",
+          "dm",
+          "opener for girls"
+        ],
+        "headlines": [
+          "Practise the first line",
+          "Break the ice, in private",
+          "Say it before it counts",
+          "The first 30 seconds",
+          "Try an opener 20 times",
+          "Warm up before you go out",
+          "An AI that answers back",
+          "She can say no",
+          "Free to start, no card",
+          "Practise talking to strangers",
+          "Not a script. Reps.",
+          "Two goes before you leave",
+          "Read the room better",
+          "Openers you can rehearse",
+          "Nobody hears you practise"
+        ],
+        "descriptions": [
+          "Try the first minute on your phone, twenty times if you want, before it counts.",
+          "She answers back, and sometimes she is not interested. Noticing that is the skill.",
+          "Free to start, no card. Two goes before you head out is enough to feel it.",
+          "Practise the opener, the exit, and everything awkward in between."
+        ]
       },
       {
-        "name": "IT · Out of practice", "ad_group": "Getting it back", "landing": "/out-of-practice/", "persona": "rusty", "budget_share": 0.05,
+        "name": "IT · Out of practice",
+        "ad_group": "Getting it back",
+        "landing": "/out-of-practice/",
+        "persona": "rusty",
+        "budget_share": 0.05,
         "why": "Smallest query volume; treat as a test.",
-        "phrase": ["\"out of practice talking to people\"", "\"how to be social again\"", "\"getting back into socialising\"", "\"lost my social skills\"", "\"how to make conversation again\""],
-        "exact": ["[how to be social again]", "[out of practice talking to people]"],
-        "negatives": ["beginner", "for beginners", "learn to talk", "basics", "101", "teach me", "how to talk to people for beginners", "kids", "teenager", "student"],
-        "headlines": ["It comes back quickly", "You did not lose it", "Get back in practice", "Like riding a bike", "Three minutes a day", "You used to be fine at this", "Warm up before you go out", "Nothing changed about you", "An AI that talks back", "Free to start, no card", "Week six against week one", "Practise in private", "You have done this before", "Say yes to things again", "Your circle got smaller"],
-        "descriptions": ["You used to be fine at this. A few short goes and most of it comes back.", "Nothing changed about you. Only how often you get to practise. Start there.", "Three minutes a day, in private. Watch week six against week one.", "Free to start, no card. This is practice, not tuition."]
+        "phrase": [
+          "\"out of practice talking to people\"",
+          "\"how to be social again\"",
+          "\"getting back into socialising\"",
+          "\"lost my social skills\"",
+          "\"how to make conversation again\""
+        ],
+        "exact": [
+          "[how to be social again]",
+          "[out of practice talking to people]"
+        ],
+        "negatives": [
+          "beginner",
+          "for beginners",
+          "learn to talk",
+          "basics",
+          "101",
+          "teach me",
+          "how to talk to people for beginners",
+          "kids",
+          "teenager",
+          "student"
+        ],
+        "headlines": [
+          "It comes back quickly",
+          "You did not lose it",
+          "Get back in practice",
+          "Like riding a bike",
+          "Three minutes a day",
+          "You used to be fine at this",
+          "Warm up before you go out",
+          "Nothing changed about you",
+          "An AI that talks back",
+          "Free to start, no card",
+          "Week six against week one",
+          "Practise in private",
+          "You have done this before",
+          "Say yes to things again",
+          "Your circle got smaller"
+        ],
+        "descriptions": [
+          "You used to be fine at this. A few short goes and most of it comes back.",
+          "Nothing changed about you. Only how often you get to practise. Start there.",
+          "Three minutes a day, in private. Watch week six against week one.",
+          "Free to start, no card. This is practice, not tuition."
+        ]
       },
-      { "name": "IT · Brand", "ad_group": "Brand", "landing": "/", "persona": null, "budget_share": 0.05, "why": "Defensive only. Kept separate so cheap clicks never distort the reported CPA of the others." }
+      {
+        "name": "IT · Brand",
+        "ad_group": "Brand",
+        "landing": "/",
+        "persona": null,
+        "budget_share": 0.05,
+        "why": "Defensive only. Kept separate so cheap clicks never distort the reported CPA of the others."
+      }
     ],
     "extensions": {
       "sitelinks": [
-        { "text": "How it works", "url": "/#how" },
-        { "text": "How the score works", "url": "/about/" },
-        { "text": "How to start a chat", "url": "/how-to-start-a-conversation/" },
-        { "text": "Privacy", "url": "/privacy/" }
+        {
+          "text": "How it works",
+          "url": "/#how"
+        },
+        {
+          "text": "How the score works",
+          "url": "/about/"
+        },
+        {
+          "text": "How to start a chat",
+          "url": "/how-to-start-a-conversation/"
+        },
+        {
+          "text": "Privacy",
+          "url": "/privacy/"
+        }
       ],
-      "callouts": ["Free to start", "No card needed", "Nobody hears you", "Three languages", "Recordings not stored", "iPhone"],
-      "structured_snippet": { "type": "Features", "values": ["Live practice", "Scenario simulator", "Delivery scoring", "Solo drills", "Reference library"] },
-      "forbidden": ["price", "promotion", "location"]
+      "callouts": [
+        "Free to start",
+        "No card needed",
+        "Nobody hears you",
+        "Three languages",
+        "Recordings not stored",
+        "iPhone"
+      ],
+      "structured_snippet": {
+        "type": "Features",
+        "values": [
+          "Live practice",
+          "Scenario simulator",
+          "Delivery scoring",
+          "Solo drills",
+          "Reference library"
+        ]
+      },
+      "forbidden": [
+        "price",
+        "promotion",
+        "location"
+      ]
     },
     "launch_sequence": [
       "Do not launch while the beta is closed.",
@@ -514,15 +1707,60 @@
     ],
     "watch": "testflight_click per campaign, not clicks and not CTR. The search terms report is the whole job in month one."
   },
-
   "social": {
     "platforms": [
-      { "platform": "TikTok", "role": "primary", "personas": ["shy", "social", "language"], "why": "The only place an unknown account still gets distribution without followers" },
-      { "platform": "Instagram Reels", "role": "repost, clean export", "personas": ["rusty", "shy"], "why": "Never cross-post with the TikTok watermark" },
-      { "platform": "Facebook", "role": "Reels + feed", "personas": ["rusty"], "why": "The one persona whose age genuinely sits there, and the cheapest CPMs" },
-      { "platform": "YouTube Shorts", "role": "week 5+", "personas": ["language"], "why": "Shorts rewards repetition - start with a format that already works" },
-      { "platform": "LinkedIn", "role": "later", "personas": ["speaking"], "why": "Different asset (1:1, burned-in captions) and a different habit" },
-      { "platform": "Reddit", "role": "ongoing", "personas": ["shy", "rusty"], "why": "r/socialskills and r/socialanxiety for Sam; life-change subs for Claire, not r/socialskills" }
+      {
+        "platform": "TikTok",
+        "role": "primary",
+        "personas": [
+          "shy",
+          "social",
+          "language"
+        ],
+        "why": "The only place an unknown account still gets distribution without followers"
+      },
+      {
+        "platform": "Instagram Reels",
+        "role": "repost, clean export",
+        "personas": [
+          "rusty",
+          "shy"
+        ],
+        "why": "Never cross-post with the TikTok watermark"
+      },
+      {
+        "platform": "Facebook",
+        "role": "Reels + feed",
+        "personas": [
+          "rusty"
+        ],
+        "why": "The one persona whose age genuinely sits there, and the cheapest CPMs"
+      },
+      {
+        "platform": "YouTube Shorts",
+        "role": "week 5+",
+        "personas": [
+          "language"
+        ],
+        "why": "Shorts rewards repetition - start with a format that already works"
+      },
+      {
+        "platform": "LinkedIn",
+        "role": "later",
+        "personas": [
+          "speaking"
+        ],
+        "why": "Different asset (1:1, burned-in captions) and a different habit"
+      },
+      {
+        "platform": "Reddit",
+        "role": "ongoing",
+        "personas": [
+          "shy",
+          "rusty"
+        ],
+        "why": "r/socialskills and r/socialanxiety for Sam; life-change subs for Claire, not r/socialskills"
+      }
     ],
     "cadence": "4-5 posts a week, all under 15 seconds. Post 20:00-23:00 local, then per-persona times.",
     "profiles": {
@@ -532,90 +1770,553 @@
       "link": "improvtalk.vip/?utm_source=<platform>&utm_medium=bio&utm_campaign=awareness",
       "category": "Education / App"
     },
-    "structures": ["Problem recognition", "Contrarian", "Open loop", "Demonstration", "Pattern interrupt"],
+    "structures": [
+      "Problem recognition",
+      "Contrarian",
+      "Open loop",
+      "Demonstration",
+      "Pattern interrupt"
+    ],
     "scripts": [
-      { "id": "S1", "persona": "shy", "structure": "Problem recognition", "duration": "10s", "hook": "You will think of the perfect reply at 1am.", "utm_content": "shy_1am", "onscreen": [["0.0s", "(hold on the face - no text)"], ["4.5s", "You thought of the perfect reply."], ["7.0s", "Four hours late."]], "vo": "none - the silence is the point", "end_card": "Brand gradient · 'Practice makes perfect.' · Get early access", "prompt": "Cinematic close-up, 9:16 vertical. A man in his early twenties lies awake in a dark bedroom, the only light a phone screen face-down beside him throwing a faint glow across the ceiling. He stares upward, eyes open, replaying something. Very slow push-in. Muted blue-grey palette, shallow depth of field, 35mm, soft film grain. Still camera, no shake. Room tone only - no music, no speech." },
-      { "id": "S2", "persona": "shy", "structure": "Contrarian", "duration": "12s", "hook": "You are not bad at talking. You have never practised.", "utm_content": "shy_never_practised", "onscreen": [["0.5s", "You are not bad at this."], ["3.5s", "You have just never practised it."], ["8.0s", "Nobody does. That is the whole problem."]], "vo": "none", "end_card": "Brand gradient · 'Practice makes perfect.' · Get early access", "prompt": "Cinematic 9:16 vertical. A house party kitchen, warm low light, four people mid-conversation and laughing. A man in his early twenties stands half a step outside the group holding a drink, following the conversation closely. He opens his mouth to speak, then closes it and looks down at the glass. Handheld with small natural movement, shallow focus - the group slightly soft, him sharp. 35mm, realistic. Party ambience, no intelligible dialogue." },
-      { "id": "S3", "persona": "shy", "structure": "Open loop", "duration": "12s", "hook": "There is a reason the words come back at 1am.", "utm_content": "shy_two_jobs", "onscreen": [["1.0s", "The words were never missing."], ["5.0s", "Your attention was doing two jobs."], ["9.0s", "One of them was watching you."]], "vo": "none", "end_card": "Brand gradient · 'Practice makes perfect.' · Get early access", "prompt": "Cinematic 9:16 vertical, two shots. First: extreme close-up of a man in his early twenties mid-conversation, eyes flicking, the half-second of going blank, warm indoor light. Cut to: the same man alone later on a dark street walking home, mouth moving, saying the sentence perfectly to nobody. Handheld, shallow depth of field, 35mm, filmic grain. Ambient street tone on the second shot, no dialogue." },
-      { "id": "L1", "persona": "language", "structure": "Problem recognition", "duration": "12s", "hook": "He had the answer. In his head. In time.", "utm_content": "lang_lunch_table", "onscreen": [["1.0s", "He understood every word."], ["5.0s", "He had an answer."], ["8.5s", "By the time it was ready, they had moved on."]], "vo": "none - subtitles always, he may be watching in his second language", "end_card": "Brand gradient · 'Keep calm and talk.' · Get early access", "prompt": "Cinematic 9:16 vertical. An office lunch table, five colleagues mid-conversation in warm daylight, easy overlapping laughter. A man in his late twenties sits fractionally back from the group, following every word closely, forming a sentence he never says. Handheld with small natural movement, shallow focus - the group slightly soft, him sharp. Documentary realism, 35mm. Ambient chatter and cutlery, no intelligible dialogue." },
-      { "id": "L2", "persona": "language", "structure": "Demonstration", "duration": "13s", "hook": "C1 on paper. Three words out loud.", "utm_content": "lang_c1_three_words", "onscreen": [["0.5s", "Reading is recognition."], ["5.0s", "Speaking is production."], ["9.5s", "Different muscle. No one trains it."]], "vo": "none", "end_card": "Brand gradient · 'Keep calm and talk.' · Get early access", "prompt": "Cinematic 9:16 vertical, two shots. First: a man in his late twenties at a desk reading a dense English document, calm and fluent, natural window light, close on his eyes moving across the page. Cut to: the same man in an office lift, another person turns and asks him something, he answers in two or three words and looks at the floor. Cool even lighting, static tripod on the first shot, handheld on the second, 50mm. Ambient office tone." },
-      { "id": "L3", "persona": "language", "structure": "Contrarian", "duration": "12s", "hook": "400 days of vocabulary. Zero hours of talking.", "utm_content": "lang_400_days", "onscreen": [["1.0s", "400 days. Every day."], ["5.5s", "And still three words in the lift."], ["9.0s", "The streak was never the gap."]], "vo": "none", "end_card": "Brand gradient · 'Keep calm and talk.' · Get early access", "prompt": "Cinematic 9:16 vertical. Extreme close-up of a phone screen showing a long daily streak counter, thumb hovering. Pull back slowly to reveal a man in his late twenties alone at a cafe table, mouthing a sentence to himself, stopping halfway. Warm afternoon light through a window, shallow depth of field, 35mm, gentle grain. Cafe ambience, no dialogue." },
-      { "id": "T1", "persona": "social", "structure": "Open loop", "duration": "9s", "hook": "Four minutes after they walk away, you will know what to say.", "utm_content": "social_four_minutes", "onscreen": [["0.5s", "The moment is about four seconds long."], ["5.0s", "You will have the line in four minutes."]], "vo": "none, music bed only", "end_card": "Brand gradient · 'Break the ice. Practise first.' · Get early access", "prompt": "Cinematic 9:16 vertical, golden hour at a busy beach bar. A man in his mid twenties stands at the edge of a group, drink in hand, watching a conversation he has not joined. He shifts his weight, begins to step forward, hesitates, and stops. Warm amber backlight, handheld with natural movement, shallow depth of field, 35mm, filmic grain. Crowd ambience and a low music bed. No dialogue." },
-      { "id": "T2", "persona": "social", "structure": "Pattern interrupt", "duration": "10s", "hook": "Opens on him walking over confidently - then reveals he never moved.", "utm_content": "social_rewind", "onscreen": [["0.5s", "The version in your head."], ["5.0s", "The version that happened."], ["8.0s", "The gap is practice, not nerve."]], "vo": "none", "end_card": "Brand gradient · 'Break the ice. Practise first.' · Get early access", "prompt": "Cinematic 9:16 vertical, festival at dusk, string lights and a crowd. A man in his mid twenties walks with purpose toward a small group, relaxed and open. Mid-step the motion reverses smoothly and he returns to where he began, standing still at the edge holding a drink, exactly as before. One continuous take, handheld, warm practical lighting, 35mm, filmic grain. Crowd ambience and distant music." },
-      { "id": "T3", "persona": "social", "structure": "Problem recognition", "duration": "10s", "hook": "You get one go. Nobody practises the one go.", "utm_content": "social_one_go", "onscreen": [["1.0s", "Twenty seconds, once."], ["5.0s", "No second attempt. No feedback."], ["8.0s", "Every other skill gets practice."]], "vo": "none", "end_card": "Brand gradient · 'Break the ice. Practise first.' · Get early access", "prompt": "Cinematic 9:16 vertical. A gym between sets, cool overhead light. A man in his mid twenties sits on a bench near someone else resting; there is a clear open moment where either could speak. He glances over, says nothing, puts his headphones back in and looks at his phone. Static tripod with a very slow push-in, 50mm, realistic. Gym ambience - plates, distant treadmill, no dialogue." },
-      { "id": "A1", "persona": "speaking", "structure": "Demonstration", "duration": "15s", "hook": "Seven 'um's in three minutes. Now you know.", "utm_content": "speak_seven_ums", "onscreen": [["1.0s", "um"], ["3.0s", "um · um"], ["6.0s", "um · um · um · um"], ["9.5s", "Seven. In three minutes."], ["12.0s", "Nobody was ever going to tell you."]], "vo": "none - the counter is the whole idea", "end_card": "Brand gradient · 'Say what you mean.' · Get early access", "prompt": "Cinematic 9:16 vertical. A glass-walled meeting room, six people around a pale table in cool daylight. A man in his early thirties presents at the head of the table, speaking quickly and gesturing more than he needs to. Static tripod with a very slow push-in. Clean corporate palette, realistic, 50mm. Muffled speech and room tone, no intelligible dialogue." },
-      { "id": "A2", "persona": "speaking", "structure": "Contrarian", "duration": "12s", "hook": "You did not lose the argument. You lost the room.", "utm_content": "speak_lost_the_room", "onscreen": [["1.0s", "The idea was fine."], ["5.0s", "You were 40 words a minute too fast."], ["9.0s", "That is a fixable number."]], "vo": "none", "end_card": "Brand gradient · 'Say what you mean.' · Get early access", "prompt": "Cinematic 9:16 vertical. A meeting room in cool daylight. A man in his early thirties is making a point at the head of the table. Slow pan across the faces around him: a phone turned face up, a glance at a laptop, someone looking out of the window, a polite nod with no attention behind it. Static tripod, then a slow horizontal pan, 50mm, clean corporate palette. Muffled speech and room tone." },
-      { "id": "A3", "persona": "speaking", "structure": "Problem recognition", "duration": "11s", "hook": "Nobody at work will ever tell you how you sound.", "utm_content": "speak_nobody_tells_you", "onscreen": [["1.5s", "'Good job.'"], ["5.0s", "Too small to mention."], ["8.0s", "Too awkward to raise. So nobody does."]], "vo": "none", "end_card": "Brand gradient · 'Say what you mean.' · Get early access", "prompt": "Cinematic 9:16 vertical. The end of a meeting - people gathering laptops and filing out of a glass-walled room. A man in his early thirties stays at the screen. A colleague pats him on the shoulder on the way past, says something brief and pleasant, and leaves. He is alone in the frame. Handheld, cool daylight, 35mm, realistic. Room tone and receding footsteps." },
-      { "id": "C1", "persona": "rusty", "structure": "Pattern interrupt", "duration": "12s", "hook": "Opens on a loud party. Cuts to a silent flat.", "utm_content": "rusty_room_got_quiet", "onscreen": [["0.5s", "You used to be the one who talked to everyone."], ["6.5s", "Then the room got quieter."], ["9.5s", "Not all at once."]], "vo": "none - the audio cut does the work, do not score over it", "end_card": "Brand gradient · 'Like riding a bike.' · Get early access", "prompt": "Cinematic 9:16 vertical, two shots. First: a warm crowded living-room party, people laughing, handheld, golden lamplight, energetic. Hard cut to: a woman in her late thirties alone in a quiet, warmly lit flat holding a mug, standing at a window at early evening. The room is comfortable and completely still. Static shot with an almost imperceptible push-in, 35mm, gentle grain. Party ambience cuts to near-silence - only distant traffic." },
-      { "id": "C2", "persona": "rusty", "structure": "Contrarian", "duration": "15s", "hook": "You did not lose it. You just stopped using it.", "utm_content": "rusty_stopped_using_it", "onscreen": [["2.0s", "It did not go anywhere."], ["6.0s", "You just stopped using it."], ["11.0s", "It comes back faster than you think."]], "vo": "none", "end_card": "Brand gradient · 'Like riding a bike.' · Get early access", "prompt": "Cinematic 4:5 or 9:16. A woman in her late thirties stands in a warm, comfortable, quiet flat holding a mug, looking out of a window at early evening light. The room is well kept and completely silent. She glances at her phone; there is nothing on it. She looks back out. Soft warm practical lighting, muted autumnal palette, static shot with an almost imperceptible push-in. Realistic, 35mm, gentle grain. Quiet room tone, distant traffic, no music, no dialogue." },
-      { "id": "C3", "persona": "rusty", "structure": "Open loop", "duration": "13s", "hook": "Nothing changed about you. Something else did.", "utm_content": "rusty_fewer_chances", "onscreen": [["1.0s", "Nothing changed about you."], ["5.0s", "A move. A break-up. Working from home."], ["9.5s", "Just fewer chances to practise."]], "vo": "none", "end_card": "Brand gradient · 'Like riding a bike.' · Get early access", "prompt": "Cinematic 9:16 vertical. A woman in her late thirties walks alone through a familiar street at dusk, passing lit shopfronts and people in conversation. She passes a cafe, glances in, and keeps walking. Handheld following shot from behind and slightly to the side, warm streetlight and shop glow, shallow depth of field, 35mm, filmic grain. Street ambience, no dialogue." }
+      {
+        "id": "S1",
+        "persona": "shy",
+        "structure": "Problem recognition",
+        "duration": "10s",
+        "hook": "You will think of the perfect reply at 1am.",
+        "utm_content": "shy_1am",
+        "onscreen": [
+          [
+            "0.0s",
+            "(hold on the face - no text)"
+          ],
+          [
+            "4.5s",
+            "You thought of the perfect reply."
+          ],
+          [
+            "7.0s",
+            "Four hours late."
+          ]
+        ],
+        "vo": "none - the silence is the point",
+        "end_card": "Brand gradient · 'Practice makes perfect.' · Get early access",
+        "prompt": "Cinematic close-up, 9:16 vertical. A man in his early twenties lies awake in a dark bedroom, the only light a phone screen face-down beside him throwing a faint glow across the ceiling. He stares upward, eyes open, replaying something. Very slow push-in. Muted blue-grey palette, shallow depth of field, 35mm, soft film grain. Still camera, no shake. Room tone only - no music, no speech."
+      },
+      {
+        "id": "S2",
+        "persona": "shy",
+        "structure": "Contrarian",
+        "duration": "12s",
+        "hook": "You are not bad at talking. You have never practised.",
+        "utm_content": "shy_never_practised",
+        "onscreen": [
+          [
+            "0.5s",
+            "You are not bad at this."
+          ],
+          [
+            "3.5s",
+            "You have just never practised it."
+          ],
+          [
+            "8.0s",
+            "Nobody does. That is the whole problem."
+          ]
+        ],
+        "vo": "none",
+        "end_card": "Brand gradient · 'Practice makes perfect.' · Get early access",
+        "prompt": "Cinematic 9:16 vertical. A house party kitchen, warm low light, four people mid-conversation and laughing. A man in his early twenties stands half a step outside the group holding a drink, following the conversation closely. He opens his mouth to speak, then closes it and looks down at the glass. Handheld with small natural movement, shallow focus - the group slightly soft, him sharp. 35mm, realistic. Party ambience, no intelligible dialogue."
+      },
+      {
+        "id": "S3",
+        "persona": "shy",
+        "structure": "Open loop",
+        "duration": "12s",
+        "hook": "There is a reason the words come back at 1am.",
+        "utm_content": "shy_two_jobs",
+        "onscreen": [
+          [
+            "1.0s",
+            "The words were never missing."
+          ],
+          [
+            "5.0s",
+            "Your attention was doing two jobs."
+          ],
+          [
+            "9.0s",
+            "One of them was watching you."
+          ]
+        ],
+        "vo": "none",
+        "end_card": "Brand gradient · 'Practice makes perfect.' · Get early access",
+        "prompt": "Cinematic 9:16 vertical, two shots. First: extreme close-up of a man in his early twenties mid-conversation, eyes flicking, the half-second of going blank, warm indoor light. Cut to: the same man alone later on a dark street walking home, mouth moving, saying the sentence perfectly to nobody. Handheld, shallow depth of field, 35mm, filmic grain. Ambient street tone on the second shot, no dialogue."
+      },
+      {
+        "id": "L1",
+        "persona": "language",
+        "structure": "Problem recognition",
+        "duration": "12s",
+        "hook": "He had the answer. In his head. In time.",
+        "utm_content": "lang_lunch_table",
+        "onscreen": [
+          [
+            "1.0s",
+            "He understood every word."
+          ],
+          [
+            "5.0s",
+            "He had an answer."
+          ],
+          [
+            "8.5s",
+            "By the time it was ready, they had moved on."
+          ]
+        ],
+        "vo": "none - subtitles always, he may be watching in his second language",
+        "end_card": "Brand gradient · 'Keep calm and talk.' · Get early access",
+        "prompt": "Cinematic 9:16 vertical. An office lunch table, five colleagues mid-conversation in warm daylight, easy overlapping laughter. A man in his late twenties sits fractionally back from the group, following every word closely, forming a sentence he never says. Handheld with small natural movement, shallow focus - the group slightly soft, him sharp. Documentary realism, 35mm. Ambient chatter and cutlery, no intelligible dialogue."
+      },
+      {
+        "id": "L2",
+        "persona": "language",
+        "structure": "Demonstration",
+        "duration": "13s",
+        "hook": "C1 on paper. Three words out loud.",
+        "utm_content": "lang_c1_three_words",
+        "onscreen": [
+          [
+            "0.5s",
+            "Reading is recognition."
+          ],
+          [
+            "5.0s",
+            "Speaking is production."
+          ],
+          [
+            "9.5s",
+            "Different muscle. No one trains it."
+          ]
+        ],
+        "vo": "none",
+        "end_card": "Brand gradient · 'Keep calm and talk.' · Get early access",
+        "prompt": "Cinematic 9:16 vertical, two shots. First: a man in his late twenties at a desk reading a dense English document, calm and fluent, natural window light, close on his eyes moving across the page. Cut to: the same man in an office lift, another person turns and asks him something, he answers in two or three words and looks at the floor. Cool even lighting, static tripod on the first shot, handheld on the second, 50mm. Ambient office tone."
+      },
+      {
+        "id": "L3",
+        "persona": "language",
+        "structure": "Contrarian",
+        "duration": "12s",
+        "hook": "400 days of vocabulary. Zero hours of talking.",
+        "utm_content": "lang_400_days",
+        "onscreen": [
+          [
+            "1.0s",
+            "400 days. Every day."
+          ],
+          [
+            "5.5s",
+            "And still three words in the lift."
+          ],
+          [
+            "9.0s",
+            "The streak was never the gap."
+          ]
+        ],
+        "vo": "none",
+        "end_card": "Brand gradient · 'Keep calm and talk.' · Get early access",
+        "prompt": "Cinematic 9:16 vertical. Extreme close-up of a phone screen showing a long daily streak counter, thumb hovering. Pull back slowly to reveal a man in his late twenties alone at a cafe table, mouthing a sentence to himself, stopping halfway. Warm afternoon light through a window, shallow depth of field, 35mm, gentle grain. Cafe ambience, no dialogue."
+      },
+      {
+        "id": "T1",
+        "persona": "social",
+        "structure": "Open loop",
+        "duration": "9s",
+        "hook": "Four minutes after they walk away, you will know what to say.",
+        "utm_content": "social_four_minutes",
+        "onscreen": [
+          [
+            "0.5s",
+            "The moment is about four seconds long."
+          ],
+          [
+            "5.0s",
+            "You will have the line in four minutes."
+          ]
+        ],
+        "vo": "none, music bed only",
+        "end_card": "Brand gradient · 'Break the ice. Practise first.' · Get early access",
+        "prompt": "Cinematic 9:16 vertical, golden hour at a busy beach bar. A man in his mid twenties stands at the edge of a group, drink in hand, watching a conversation he has not joined. He shifts his weight, begins to step forward, hesitates, and stops. Warm amber backlight, handheld with natural movement, shallow depth of field, 35mm, filmic grain. Crowd ambience and a low music bed. No dialogue."
+      },
+      {
+        "id": "T2",
+        "persona": "social",
+        "structure": "Pattern interrupt",
+        "duration": "10s",
+        "hook": "Opens on him walking over confidently - then reveals he never moved.",
+        "utm_content": "social_rewind",
+        "onscreen": [
+          [
+            "0.5s",
+            "The version in your head."
+          ],
+          [
+            "5.0s",
+            "The version that happened."
+          ],
+          [
+            "8.0s",
+            "The gap is practice, not nerve."
+          ]
+        ],
+        "vo": "none",
+        "end_card": "Brand gradient · 'Break the ice. Practise first.' · Get early access",
+        "prompt": "Cinematic 9:16 vertical, festival at dusk, string lights and a crowd. A man in his mid twenties walks with purpose toward a small group, relaxed and open. Mid-step the motion reverses smoothly and he returns to where he began, standing still at the edge holding a drink, exactly as before. One continuous take, handheld, warm practical lighting, 35mm, filmic grain. Crowd ambience and distant music."
+      },
+      {
+        "id": "T3",
+        "persona": "social",
+        "structure": "Problem recognition",
+        "duration": "10s",
+        "hook": "You get one go. Nobody practises the one go.",
+        "utm_content": "social_one_go",
+        "onscreen": [
+          [
+            "1.0s",
+            "Twenty seconds, once."
+          ],
+          [
+            "5.0s",
+            "No second attempt. No feedback."
+          ],
+          [
+            "8.0s",
+            "Every other skill gets practice."
+          ]
+        ],
+        "vo": "none",
+        "end_card": "Brand gradient · 'Break the ice. Practise first.' · Get early access",
+        "prompt": "Cinematic 9:16 vertical. A gym between sets, cool overhead light. A man in his mid twenties sits on a bench near someone else resting; there is a clear open moment where either could speak. He glances over, says nothing, puts his headphones back in and looks at his phone. Static tripod with a very slow push-in, 50mm, realistic. Gym ambience - plates, distant treadmill, no dialogue."
+      },
+      {
+        "id": "A1",
+        "persona": "speaking",
+        "structure": "Demonstration",
+        "duration": "15s",
+        "hook": "Seven 'um's in three minutes. Now you know.",
+        "utm_content": "speak_seven_ums",
+        "onscreen": [
+          [
+            "1.0s",
+            "um"
+          ],
+          [
+            "3.0s",
+            "um · um"
+          ],
+          [
+            "6.0s",
+            "um · um · um · um"
+          ],
+          [
+            "9.5s",
+            "Seven. In three minutes."
+          ],
+          [
+            "12.0s",
+            "Nobody was ever going to tell you."
+          ]
+        ],
+        "vo": "none - the counter is the whole idea",
+        "end_card": "Brand gradient · 'Say what you mean.' · Get early access",
+        "prompt": "Cinematic 9:16 vertical. A glass-walled meeting room, six people around a pale table in cool daylight. A man in his early thirties presents at the head of the table, speaking quickly and gesturing more than he needs to. Static tripod with a very slow push-in. Clean corporate palette, realistic, 50mm. Muffled speech and room tone, no intelligible dialogue."
+      },
+      {
+        "id": "A2",
+        "persona": "speaking",
+        "structure": "Contrarian",
+        "duration": "12s",
+        "hook": "You did not lose the argument. You lost the room.",
+        "utm_content": "speak_lost_the_room",
+        "onscreen": [
+          [
+            "1.0s",
+            "The idea was fine."
+          ],
+          [
+            "5.0s",
+            "You were 40 words a minute too fast."
+          ],
+          [
+            "9.0s",
+            "That is a fixable number."
+          ]
+        ],
+        "vo": "none",
+        "end_card": "Brand gradient · 'Say what you mean.' · Get early access",
+        "prompt": "Cinematic 9:16 vertical. A meeting room in cool daylight. A man in his early thirties is making a point at the head of the table. Slow pan across the faces around him: a phone turned face up, a glance at a laptop, someone looking out of the window, a polite nod with no attention behind it. Static tripod, then a slow horizontal pan, 50mm, clean corporate palette. Muffled speech and room tone."
+      },
+      {
+        "id": "A3",
+        "persona": "speaking",
+        "structure": "Problem recognition",
+        "duration": "11s",
+        "hook": "Nobody at work will ever tell you how you sound.",
+        "utm_content": "speak_nobody_tells_you",
+        "onscreen": [
+          [
+            "1.5s",
+            "'Good job.'"
+          ],
+          [
+            "5.0s",
+            "Too small to mention."
+          ],
+          [
+            "8.0s",
+            "Too awkward to raise. So nobody does."
+          ]
+        ],
+        "vo": "none",
+        "end_card": "Brand gradient · 'Say what you mean.' · Get early access",
+        "prompt": "Cinematic 9:16 vertical. The end of a meeting - people gathering laptops and filing out of a glass-walled room. A man in his early thirties stays at the screen. A colleague pats him on the shoulder on the way past, says something brief and pleasant, and leaves. He is alone in the frame. Handheld, cool daylight, 35mm, realistic. Room tone and receding footsteps."
+      },
+      {
+        "id": "C1",
+        "persona": "rusty",
+        "structure": "Pattern interrupt",
+        "duration": "12s",
+        "hook": "Opens on a loud party. Cuts to a silent flat.",
+        "utm_content": "rusty_room_got_quiet",
+        "onscreen": [
+          [
+            "0.5s",
+            "You used to be the one who talked to everyone."
+          ],
+          [
+            "6.5s",
+            "Then the room got quieter."
+          ],
+          [
+            "9.5s",
+            "Not all at once."
+          ]
+        ],
+        "vo": "none - the audio cut does the work, do not score over it",
+        "end_card": "Brand gradient · 'Like riding a bike.' · Get early access",
+        "prompt": "Cinematic 9:16 vertical, two shots. First: a warm crowded living-room party, people laughing, handheld, golden lamplight, energetic. Hard cut to: a woman in her late thirties alone in a quiet, warmly lit flat holding a mug, standing at a window at early evening. The room is comfortable and completely still. Static shot with an almost imperceptible push-in, 35mm, gentle grain. Party ambience cuts to near-silence - only distant traffic."
+      },
+      {
+        "id": "C2",
+        "persona": "rusty",
+        "structure": "Contrarian",
+        "duration": "15s",
+        "hook": "You did not lose it. You just stopped using it.",
+        "utm_content": "rusty_stopped_using_it",
+        "onscreen": [
+          [
+            "2.0s",
+            "It did not go anywhere."
+          ],
+          [
+            "6.0s",
+            "You just stopped using it."
+          ],
+          [
+            "11.0s",
+            "It comes back faster than you think."
+          ]
+        ],
+        "vo": "none",
+        "end_card": "Brand gradient · 'Like riding a bike.' · Get early access",
+        "prompt": "Cinematic 4:5 or 9:16. A woman in her late thirties stands in a warm, comfortable, quiet flat holding a mug, looking out of a window at early evening light. The room is well kept and completely silent. She glances at her phone; there is nothing on it. She looks back out. Soft warm practical lighting, muted autumnal palette, static shot with an almost imperceptible push-in. Realistic, 35mm, gentle grain. Quiet room tone, distant traffic, no music, no dialogue."
+      },
+      {
+        "id": "C3",
+        "persona": "rusty",
+        "structure": "Open loop",
+        "duration": "13s",
+        "hook": "Nothing changed about you. Something else did.",
+        "utm_content": "rusty_fewer_chances",
+        "onscreen": [
+          [
+            "1.0s",
+            "Nothing changed about you."
+          ],
+          [
+            "5.0s",
+            "A move. A break-up. Working from home."
+          ],
+          [
+            "9.5s",
+            "Just fewer chances to practise."
+          ]
+        ],
+        "vo": "none",
+        "end_card": "Brand gradient · 'Like riding a bike.' · Get early access",
+        "prompt": "Cinematic 9:16 vertical. A woman in her late thirties walks alone through a familiar street at dusk, passing lit shopfronts and people in conversation. She passes a cafe, glances in, and keeps walking. Handheld following shot from behind and slightly to the side, warm streetlight and shop glow, shallow depth of field, 35mm, filmic grain. Street ambience, no dialogue."
+      }
     ],
     "generation": {
       "prompt_skeleton": "Cinematic [ASPECT]. [SUBJECT - age, what they are doing, what they are not doing]. [SETTING and LIGHT]. [CAMERA - handheld / static / slow push-in]. [LENS and GRADE - 35mm or 50mm, palette, grain]. [AUDIO - ambience, no dialogue].",
-      "do": ["Natural and practical light - windows, lamps, screens", "35mm for intimate, 50mm for rooms", "Handheld with small movement, or a slow push-in"],
-      "never": ["Studio key light, ring light, flat product lighting", "Wide-angle distortion, drone, whip pans", "Fast cuts, zooms, speed ramps, motion graphics", "Let the model render the logo or any text"],
+      "do": [
+        "Natural and practical light - windows, lamps, screens",
+        "35mm for intimate, 50mm for rooms",
+        "Handheld with small movement, or a slow push-in"
+      ],
+      "never": [
+        "Studio key light, ring light, flat product lighting",
+        "Wide-angle distortion, drone, whip pans",
+        "Fast cuts, zooms, speed ramps, motion graphics",
+        "Let the model render the logo or any text"
+      ],
       "end_card": "Last 3 seconds: the available light washes into the brand gradient at 100 degrees, settling to #070C17, room tone continuing underneath - never cutting to silence. Keep the centre third uncluttered through the wash.",
       "casting": "Every persona gets two clips - A: the rep (alone, phone in hand, practising) and B: the real thing (same person in the setting they care about). Keep the same face across both: generate A, keep the best frame, feed it back as a reference for B. These are fictional composites and no clip is ever captioned as a testimonial."
     }
   },
-
   "measurement": {
     "conversion_definition": "Leaving the site for TestFlight. That is the whole model. There is no email capture.",
     "why_no_email": "A signup form is a promise to answer an inbox nobody was going to answer. It cost a conversion to acquire an obligation, and an iPhone visitor can install in about a minute.",
-    "ids": { "ga4": "G-TQHK0W81XE", "google_ads": "AW-18052428576", "primary_conversion_label": "AW-18052428576/4jb2CJySoescEKDmiKBD" },
+    "ids": {
+      "ga4": "G-TQHK0W81XE",
+      "google_ads": "AW-18052428576",
+      "primary_conversion_label": "AW-18052428576/4jb2CJySoescEKDmiKBD"
+    },
     "funnel": [
-      { "step": "Sees the page", "event": "page_view", "counts_as": "traffic" },
-      { "step": "Watches a scenario", "event": "scenario_play", "counts_as": "engagement" },
-      { "step": "Opens the install panel", "event": "notify_click / qr_reveal", "counts_as": "interest" },
-      { "step": "Leaves for TestFlight", "event": "testflight_click", "counts_as": "THE CONVERSION" },
-      { "step": "Actually installs", "event": null, "counts_as": "not measurable from the website" }
+      {
+        "step": "Sees the page",
+        "event": "page_view",
+        "counts_as": "traffic"
+      },
+      {
+        "step": "Watches a scenario",
+        "event": "scenario_play",
+        "counts_as": "engagement"
+      },
+      {
+        "step": "Opens the install panel",
+        "event": "notify_click / qr_reveal",
+        "counts_as": "interest"
+      },
+      {
+        "step": "Leaves for TestFlight",
+        "event": "testflight_click",
+        "counts_as": "THE CONVERSION"
+      },
+      {
+        "step": "Actually installs",
+        "event": null,
+        "counts_as": "not measurable from the website"
+      }
     ],
-    "events": ["testflight_click", "notify_click", "qr_reveal", "scenario_play", "survey_start", "survey_step", "survey_complete", "tips_popup_shown", "tips_popup_start", "tips_popup_dismiss", "tips_download"],
+    "events": [
+      "testflight_click",
+      "notify_click",
+      "qr_reveal",
+      "scenario_play",
+      "survey_start",
+      "survey_step",
+      "survey_complete",
+      "tips_popup_shown",
+      "tips_popup_start",
+      "tips_popup_dismiss",
+      "tips_download"
+    ],
     "every_event_carries": "variant (also a GA4 user property)",
     "ads_settings": {
-      "primary": { "action": "Early access signup", "fires_on": "testflight_click", "category": "Sign-up" },
-      "secondary": { "action": "Install intent", "fires_on": "notify_click", "category": "Engagement", "status": "not yet created" },
+      "primary": {
+        "action": "Early access signup",
+        "fires_on": "testflight_click",
+        "category": "Sign-up"
+      },
+      "secondary": {
+        "action": "Install intent",
+        "fires_on": "notify_click",
+        "category": "Engagement",
+        "status": "not yet created"
+      },
       "conversion_values": "leave equal - an invented value distorts bidding toward the fiction",
       "enhanced_conversions": "OFF. Automatic mode scraped the support email off the page and hashed it as every visitor's identity.",
       "transaction_id": "required - Count:One dedupes only per ad click, which does nothing for organic traffic"
     },
     "utm": {
-      "params": { "utm_source": "which platform (lowercase)", "utm_medium": "social | cpc | email | bio", "utm_campaign": "which push", "utm_content": "which specific post or ad" },
-      "rules": ["lowercase everything - GA4 cannot merge Instagram and instagram later", "underscores, not spaces", "never tag Google Ads links - auto-tagging gclid gets overwritten and attribution breaks", "never tag internal links - starts a new session and destroys the original attribution", "do not tag organic search"],
+      "params": {
+        "utm_source": "which platform (lowercase)",
+        "utm_medium": "social | cpc | email | bio",
+        "utm_campaign": "which push",
+        "utm_content": "which specific post or ad"
+      },
+      "rules": [
+        "lowercase everything - GA4 cannot merge Instagram and instagram later",
+        "underscores, not spaces",
+        "never tag Google Ads links - auto-tagging gclid gets overwritten and attribution breaks",
+        "never tag internal links - starts a new session and destroys the original attribution",
+        "do not tag organic search"
+      ],
       "variant_urls_keep_their_page": true
     },
     "ab_testing": {
       "status": "paused at one arm on purpose",
-      "reasons": ["the redirect had no bot exclusion, so Googlebot had a 50% chance of being bounced from / to a noindex page", "separating two arms needs 1500-3000 visitors each; traffic is two orders of magnitude below that"],
+      "reasons": [
+        "the redirect had no bot exclusion, so Googlebot had a 50% chance of being bounced from / to a noindex page",
+        "separating two arms needs 1500-3000 visitors each; traffic is two orders of magnitude below that"
+      ],
       "note": "Message match, not significance, is what the four campaign pages are for. One ad group per persona pointing at its own page pays off immediately."
     }
   },
-
   "content_engine": {
     "lead_magnet": {
       "url": "/survey/",
-      "questions": ["goal family (7 options, 'Type your situation' always last)", "persona inside the family", "four-colour blend sliders", "age band, gender, country"],
+      "questions": [
+        "goal family (7 options, 'Type your situation' always last)",
+        "persona inside the family",
+        "four-colour blend sliders",
+        "age band, gender, country"
+      ],
       "deliverable": "a three-page PDF generated in the browser from the answers",
-      "pages": ["the situation said back to them plus four moves", "a practice plan - three real app scenarios in order, with difficulty and tier, plus the opener and steering angle", "four principles for their dominant colour, the presence/power/warmth core, and where they are in a conversation"],
+      "pages": [
+        "the situation said back to them plus four moves",
+        "a practice plan - three real app scenarios in order, with difficulty and tier, plus the opener and steering angle",
+        "four principles for their dominant colour, the presence/power/warmth core, and where they are in a conversation"
+      ],
       "why_generated": "The goal says which problem and the colour says which version of it. A file per goal throws the second signal away.",
-      "withheld": ["no source names - the distillation is ours, the material is not", "two of the eleven opener strategies are withheld-tease patterns built on backhanded compliments about appearance; weight 0 in the app and not on the site at all"],
+      "withheld": [
+        "no source names - the distillation is ours, the material is not",
+        "two of the eleven opener strategies are withheld-tease patterns built on backhanded compliments about appearance; weight 0 in the app and not on the site at all"
+      ],
       "free_text_value": "Read the 'Type your situation' answers monthly - they are where persona sixteen comes from."
     },
     "timed_popup": {
       "trigger": "50 seconds of visible reading accumulated ACROSS pages, once, ever",
       "offer_screen_length": "157 characters",
-      "rules": ["never on /survey/", "never over another dialog - the install panel is the conversion", "a backdrop click only closes the offer screen, never a started form"],
+      "rules": [
+        "never on /survey/",
+        "never over another dialog - the install panel is the conversion",
+        "a backdrop click only closes the offer screen, never a started form"
+      ],
       "flagged": "The heading says 'you have been selected'. Everyone who reads for 50 seconds sees it. Changing one word to 'You are invited' makes it true."
     },
     "scenario_films": [
-      { "slug": "coffee-shop", "caption": "The queue. Thirty seconds of shared waiting, and an opening if you take it." },
-      { "slug": "bali-beach", "caption": "Somewhere nobody knows you. The easiest place to practise and the easiest to freeze." },
-      { "slug": "barcelona-beach", "caption": "A busy shoreline, a group, and the problem of joining a conversation already running." },
-      { "slug": "gym", "caption": "Between sets. Short windows, high stakes, and the worst place to be long-winded." }
+      {
+        "slug": "coffee-shop",
+        "caption": "The queue. Thirty seconds of shared waiting, and an opening if you take it."
+      },
+      {
+        "slug": "bali-beach",
+        "caption": "Somewhere nobody knows you. The easiest place to practise and the easiest to freeze."
+      },
+      {
+        "slug": "barcelona-beach",
+        "caption": "A busy shoreline, a group, and the problem of joining a conversation already running."
+      },
+      {
+        "slug": "gym",
+        "caption": "Between sets. Short windows, high stakes, and the worst place to be long-winded."
+      }
     ],
     "films_self_hosted_why": "No cookies, no third-party data transfer, so no consent banner and nothing to add to the privacy policy. An embedded YouTube player would send the visitor's IP to Google on page load, which in the EU needs prior consent."
   },
-
   "guardrails": {
     "never_claim": [
       "any price, in any currency, for any period",
@@ -640,17 +2341,56 @@
       "The pulse animation is on the install CTA only - never on a consent Accept button, which would be a consent dark pattern."
     ]
   },
-
   "open_items": [
-    { "n": 1, "item": "Beta App Review is the launch blocker. Test Information needs a demo account - reviewers cannot pass the sign-in without one.", "owner": "product" },
-    { "n": 2, "item": "Register `variant` as a GA4 custom dimension (Admin, Custom definitions, scope User). Only applies to data collected after creation.", "owner": "analytics" },
-    { "n": 3, "item": "Create the 'Install intent' conversion action (Engagement, Secondary). CONVERSIONS.notifyClick is empty and guarded.", "owner": "ads" },
-    { "n": 4, "item": "site.googleSiteVerification is empty - no verification meta tag in the HTML.", "owner": "seo" },
-    { "n": 5, "item": "site.socialProfiles is empty - no sameAs entity signal, and no social accounts exist yet. The largest unclaimed SEO and brand asset.", "owner": "seo/social" },
-    { "n": 6, "item": "Recount the disputed numbers before any campaign uses them.", "owner": "product" },
-    { "n": 7, "item": "Fix the paywall '/day' label on weekly SKUs - a refund complaint and an App Review risk.", "owner": "product" },
-    { "n": 8, "item": "No push notifications at all. Notify on each persona's own rhythm, not a daily nag.", "owner": "product" },
-    { "n": 9, "item": "The share button on the score result is a disabled stub - the only viral loop available.", "owner": "product" },
-    { "n": 10, "item": "No onboarding questionnaire. Two questions would pick the starting track and the notification rhythm.", "owner": "product" }
+    {
+      "n": 1,
+      "item": "Beta App Review is the launch blocker. Test Information needs a demo account - reviewers cannot pass the sign-in without one.",
+      "owner": "product"
+    },
+    {
+      "n": 2,
+      "item": "Register `variant` as a GA4 custom dimension (Admin, Custom definitions, scope User). Only applies to data collected after creation.",
+      "owner": "analytics"
+    },
+    {
+      "n": 3,
+      "item": "Create the 'Install intent' conversion action (Engagement, Secondary). CONVERSIONS.notifyClick is empty and guarded.",
+      "owner": "ads"
+    },
+    {
+      "n": 4,
+      "item": "site.googleSiteVerification is empty - no verification meta tag in the HTML.",
+      "owner": "seo"
+    },
+    {
+      "n": 5,
+      "item": "site.socialProfiles is empty - no sameAs entity signal, and no social accounts exist yet. The largest unclaimed SEO and brand asset.",
+      "owner": "seo/social"
+    },
+    {
+      "n": 6,
+      "item": "Recount the disputed numbers before any campaign uses them.",
+      "owner": "product"
+    },
+    {
+      "n": 7,
+      "item": "Fix the paywall '/day' label on weekly SKUs - a refund complaint and an App Review risk.",
+      "owner": "product"
+    },
+    {
+      "n": 8,
+      "item": "No push notifications at all. Notify on each persona's own rhythm, not a daily nag.",
+      "owner": "product"
+    },
+    {
+      "n": 9,
+      "item": "The share button on the score result is a disabled stub - the only viral loop available.",
+      "owner": "product"
+    },
+    {
+      "n": 10,
+      "item": "No onboarding questionnaire. Two questions would pick the starting track and the notification rhythm.",
+      "owner": "product"
+    }
   ]
 }

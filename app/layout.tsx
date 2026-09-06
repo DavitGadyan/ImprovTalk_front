@@ -9,40 +9,31 @@ import { site } from '@/content/site'
 import './globals.css'
 
 /**
- * Fonts are self-hosted rather than pulled from Google.
+ * The typeface is self-hosted rather than pulled from Google.
  *
  * It keeps a third-party origin off the critical path for LCP, works in CI and
  * offline, and means no visitor IP is handed to another company just to render
- * a headline. Both files are latin-subset variable woff2, ~93KB for the pair.
+ * a headline.
  *
- * The declared range is 400..600 — Inter Tight's upper bound here. Asking for
- * 700+ anywhere in the CSS would trigger synthetic bolding, which smears the
- * letterforms badly at display sizes.
+ * One family: Satoshi Variable, the face the app ships (theme.ts FONT). Display
+ * and body are the same cut, as they are in the app. The upright file carries
+ * every weight 300..900, so 700 is a real bold; the italic is a second file
+ * because a variable font cannot slant itself.
  */
-const interTight = localFont({
-  src: '../public/fonts/InterTight-latin-var.woff2',
-  weight: '400 600',
-  style: 'normal',
+const satoshi = localFont({
+  src: [
+    { path: '../public/fonts/Satoshi-Variable.woff2', weight: '300 900', style: 'normal' },
+    { path: '../public/fonts/Satoshi-VariableItalic.woff2', weight: '300 900', style: 'italic' },
+  ],
   display: 'swap',
-  variable: '--font-inter-tight',
+  variable: '--font-satoshi',
   /*
-   * Not preloaded. Both faces total ~91KB gzipped and were being fetched at the
-   * very top of the critical path, competing with the CSS and the first JS chunk
-   * on a slow connection. display:'swap' means text paints immediately in the
+   * Not preloaded. Both files total ~84KB and would be fetched at the very top
+   * of the critical path, competing with the CSS and the first JS chunk on a
+   * slow connection. display:'swap' means text paints immediately in the
    * fallback either way, and adjustFontFallback keeps the swap from shifting
    * layout — so the preload was buying nothing and costing first paint.
    */
-  preload: false,
-  fallback: ['ui-sans-serif', 'system-ui', 'sans-serif'],
-  adjustFontFallback: 'Arial',
-})
-
-const inter = localFont({
-  src: '../public/fonts/Inter-latin-var.woff2',
-  weight: '400 600',
-  style: 'normal',
-  display: 'swap',
-  variable: '--font-inter',
   preload: false,
   fallback: ['ui-sans-serif', 'system-ui', 'sans-serif'],
   adjustFontFallback: 'Arial',
@@ -83,13 +74,13 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#0b1220',
+  themeColor: '#000000',
   colorScheme: 'dark',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${interTight.variable} ${inter.variable}`}>
+    <html lang="en" className={satoshi.variable}>
       <body className="min-h-dvh antialiased">
         <a
           href="#main"
