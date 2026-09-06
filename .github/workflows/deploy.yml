@@ -45,6 +45,17 @@ jobs:
 
       - name: Build static export
         run: npm run build
+        env:
+          # NEXT_PUBLIC_* is inlined at build time, so these have to exist HERE.
+          # A build without them still succeeds: the survey renders, hands over
+          # the PDF, and skips the write — which is why a missing secret is
+          # invisible until you go looking for rows that never arrived.
+          #
+          # The anon key is meant to be public. It is safe only because the
+          # table has no RLS policy at all and both RPCs are security definer —
+          # see docs/SURVEY-SETUP.md. Never put service_role here or anywhere.
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
 
       - name: Verify tracking invariants
         # The money path breaks silently: a removed id or a renamed label still
