@@ -265,11 +265,17 @@ total lives in `localStorage`, and only *visible* time counts — a tab left ope
 in the background has not been reading, and firing a modal into it means
 returning to a dialog over a forgotten page.
 
-**"No" is final, and written twice.** `localStorage` keeps it for good and
-`sessionStorage` holds it for the visit if the first throws — private windows
-and blocked site data are exactly where a popup that will not take no becomes a
-complaint. Every exit is final: the No button, Close, Escape and a backdrop
-click all suppress it permanently.
+**Two strengths of no.** Closing it — the Close button, Escape, a backdrop
+click — writes `sessionStorage` only: quiet for the rest of the visit, offered
+again next time, because a closed dialog is not a refusal. The **No, don't ask
+again** button and a completed survey write `localStorage` as well and are
+permanent. `sessionStorage` is written on both paths, so the visit stays quiet
+even where `localStorage` throws — a private window is exactly where a popup
+that keeps coming back becomes a complaint.
+
+**`AFTER_MS` is currently 15 seconds for testing.** Restore it to `150_000`
+before production. `?dwell=<seconds>` overrides it per page load, so testing
+never needs a code change.
 
 **Rules it must not break:**
 

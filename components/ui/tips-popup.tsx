@@ -10,8 +10,24 @@ import { clearDwell, watchDwell } from '@/lib/dwell'
 import { alreadySubmitted } from '@/lib/supabase'
 import { track } from '@/lib/analytics'
 
-/** 2.5 minutes of visible reading, accumulated across pages. */
-const AFTER_MS = 150_000
+/**
+ * Visible reading time before the offer opens, accumulated across pages.
+ *
+ * TEMPORARILY 15 SECONDS FOR TESTING — restore to 150_000 (2.5 minutes) before
+ * this goes anywhere near production.
+ *
+ * `?dwell=<seconds>` overrides it for one page load, so the next round of
+ * testing does not need a code change at all: /?dwell=5 fires almost at once,
+ * and the production value stays untouched.
+ */
+const AFTER_MS = 15_000
+
+function threshold(): number {
+  if (typeof window === 'undefined') return AFTER_MS
+  const raw = new URLSearchParams(window.location.search).get('dwell')
+  const secs = raw ? Number(raw) : NaN
+  return Number.isFinite(secs) && secs > 0 ? secs * 1000 : AFTER_MS
+}
 
 const DISMISS_KEY = 'improvtalk-tips-popup-dismissed'
 
@@ -35,16 +51,30 @@ function refused(): boolean {
   return false
 }
 
-function remember() {
-  try {
-    localStorage.setItem(DISMISS_KEY, '1')
-  } catch {
-    /* no permanent record — the session one below still stops this visit */
-  }
+/**
+ * Two strengths of no.
+ *
+ * `'session'` — they closed it. Not now, and not again this visit, but a
+ * closed dialog is not a refusal and should not cost us the visitor for good.
+ * `'forever'` — they pressed the button that says "don't ask again", or they
+ * finished the survey. That one is permanent.
+ *
+ * Either way sessionStorage is written, so the visit is quiet even when
+ * localStorage throws — a private window is exactly where a popup that keeps
+ * coming back becomes a complaint.
+ */
+function remember(scope: 'session' | 'forever') {
   try {
     sessionStorage.setItem(DISMISS_KEY, '1')
   } catch {
-    /* nothing to do */
+    /* nothing persists here; the in-memory guard below still holds the page */
+  }
+  if (scope === 'forever') {
+    try {
+      localStorage.setItem(DISMISS_KEY, '1')
+    } catch {
+      /* the session record above still stops this visit */
+    }
   }
 }
 
@@ -73,7 +103,7 @@ export function TipsPopup() {
 
     if (refused()) return
 
-    return watchDwell(AFTER_MS, async () => {
+    return watchDwell(threshold(), async () => {
       /* Someone mid-install is not someone to interrupt. Try again on the
          next page, where the dwell total is already past the threshold. */
       if (document.querySelector('dialog[open]')) return
@@ -82,7 +112,7 @@ export function TipsPopup() {
          runs here rather than on mount so it costs nothing for the many
          visitors who never reach the threshold. */
       if (await alreadySubmitted()) {
-        remember()
+        remember('forever')
         return
       }
 
@@ -98,12 +128,13 @@ export function TipsPopup() {
     else if (!open && el.open) el.close()
   }, [open])
 
-  /* Every route out of this dialog is final — the No button, the Close button,
-     Escape, and a backdrop click. It opens once per visitor or not at all. */
-  const close = useCallback(() => {
+  /* Closing by any route — the Close button, Escape, a backdrop click — ends it
+     for this visit. Only the explicit No button ends it for good. The dwell
+     counter is wiped either way, so nothing can restart it mid-visit. */
+  const close = useCallback((scope: 'session' | 'forever' = 'session') => {
     setOpen(false)
     clearDwell()
-    remember()
+    remember(scope)
   }, [])
 
   const onBackdrop = useCallback(
@@ -112,7 +143,7 @@ export function TipsPopup() {
          questions to a stray click is the worst thing this component could do. */
       if (e.target === ref.current && !started) {
         track('tips_popup_dismiss')
-        close()
+        close('session')
       }
     },
     [close, started],
@@ -121,7 +152,7 @@ export function TipsPopup() {
   return (
     <dialog
       ref={ref}
-      onClose={close}
+      onClose={() => close('session')}
       onClick={onBackdrop}
       aria-labelledby="tips-title"
       /* m-auto is not decoration: the UA stylesheet centres a modal <dialog>
@@ -139,7 +170,7 @@ export function TipsPopup() {
             type="button"
             onClick={() => {
               if (!started) track('tips_popup_dismiss')
-              close()
+              close('session')
             }}
             aria-label="Close"
             className="-mr-2 -mt-1 rounded-full px-3 py-1.5 text-[13px] text-subtle transition-colors hover:text-ink"
@@ -190,7 +221,7 @@ export function TipsPopup() {
                 type="button"
                 onClick={() => {
                   track('tips_popup_dismiss')
-                  close()
+                  close('forever')
                 }}
                 className="rounded-full border border-line-strong px-5 py-2.5 text-[13.5px] font-medium text-muted transition-colors hover:border-muted hover:text-ink"
               >
