@@ -13,11 +13,15 @@ import { track } from '@/lib/analytics'
 /**
  * Visible reading time before the offer opens, accumulated across pages.
  *
- * 2.5 minutes. `?dwell=<seconds>` overrides it for one page load, so testing
- * never needs a code change: /?dwell=5 fires almost at once and this value
- * stays where it is.
+ * 50 seconds — long enough that they have actually read something, short enough
+ * that a normal session reaches it. 2.5 minutes was the first value and almost
+ * nobody got there: measured on the live site, the counter needs ~155s of
+ * visible time from landing, which is longer than most sessions last.
+ *
+ * `?dwell=<seconds>` overrides it for one page load, so testing never needs a
+ * code change: /?dwell=5 fires almost at once and this value stays put.
  */
-const AFTER_MS = 150_000
+const AFTER_MS = 50_000
 
 function threshold(): number {
   if (typeof window === 'undefined') return AFTER_MS

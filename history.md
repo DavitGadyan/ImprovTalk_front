@@ -252,7 +252,7 @@ runs, and the PDF is still produced — only the write is skipped.
 
 ## The tips popup
 
-Opens **once**, after **2.5 minutes of visible reading accumulated across pages**
+Opens **once**, after **50 seconds of visible reading accumulated across pages**
 (`lib/dwell.ts`), and carries the whole exchange itself: the offer, the six-step
 form, and the personalised PDF. It renders `<SurveyClient>` inside a native
 `<dialog>` rather than reimplementing the form, so there is one form in the
@@ -273,9 +273,10 @@ permanent. `sessionStorage` is written on both paths, so the visit stays quiet
 even where `localStorage` throws — a private window is exactly where a popup
 that keeps coming back becomes a complaint.
 
-**`AFTER_MS` is 150_000 — 2.5 minutes.** Do not commit a test value here;
-`?dwell=<seconds>` overrides it per page load instead, so testing never needs a
-code change.
+**`AFTER_MS` is 50_000.** It started at 150_000 and almost nobody reached it —
+measured live, the counter needs ~155s of visible time from landing because it
+starts at hydration, which outlasts most sessions. Do not commit a test value
+here; `?dwell=<seconds>` overrides it per page load instead.
 
 **Rules it must not break:**
 
