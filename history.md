@@ -282,13 +282,24 @@ fall under 3:1 on paper — bars and rules keep the true colour, anything set as
 type takes a 0.72 shade. The top accent is inset to the margin, because most
 printers cannot reach the paper edge.
 
-**Two strengths of no.** Closing it — the x, Escape, a backdrop
-click — writes `sessionStorage` only: quiet for the rest of the visit, offered
-again next time, because a closed dialog is not a refusal. The **No, don't ask
-again** button and a completed survey write `localStorage` as well and are
-permanent. `sessionStorage` is written on both paths, so the visit stays quiet
-even where `localStorage` throws — a private window is exactly where a popup
-that keeps coming back becomes a complaint.
+**Closing it is permanent.** The x, Escape and a backdrop click all write
+`localStorage`, so it survives closing the laptop. Someone who shuts the dialog
+on sight has answered the question, and asking again next week is how a popup
+becomes the reason people stop coming back. `sessionStorage` is written too,
+because a private window throws on the first call and that is exactly where a
+returning popup is most irritating. It cannot cover a different browser, a
+different device, or cleared site data — the IP check catches some of that, but
+only for people who actually submitted.
+
+**`?dwell=<n>` and `?popup=reset` clear the dismissal first.** Without that a
+test flag silently does nothing for anyone who has ever closed the popup, which
+is everyone who has tested it once — and the symptom is indistinguishable from
+the feature being broken.
+
+**`window.__improvtalkPopup.status()`** says why it is not showing:
+`suppressedBecause`, `msWatched`, `msNeeded`, `tabVisible`. `.reset()` clears
+everything and reloads. A popup that does not appear looks identical whether it
+is waiting, suppressed, or broken, so it has to be able to say which.
 
 **`AFTER_MS` is 50_000.** It started at 150_000 and almost nobody reached it —
 measured live, the counter needs ~155s of visible time from landing because it

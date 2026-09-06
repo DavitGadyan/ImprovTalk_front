@@ -6,7 +6,7 @@ import { LogoMark } from '@/components/ui/logo'
 import { Button } from '@/components/ui/button'
 import { SurveyClient } from '@/app/survey/survey-client'
 import { STORAGE_KEY } from '@/content/survey'
-import { clearDwell, watchDwell } from '@/lib/dwell'
+import { clearDwell, dwellSoFar, watchDwell } from '@/lib/dwell'
 import { alreadySubmitted } from '@/lib/supabase'
 import { track } from '@/lib/analytics'
 
@@ -52,30 +52,67 @@ function refused(): boolean {
   return false
 }
 
+/** Clears every trace, so a test flag or a reset actually starts from zero. */
+function forget() {
+  for (const store of [
+    () => localStorage,
+    () => sessionStorage,
+  ]) {
+    try {
+      store().removeItem(DISMISS_KEY)
+    } catch {
+      /* nothing to clear here */
+    }
+  }
+  try {
+    localStorage.removeItem(STORAGE_KEY)
+  } catch {
+    /* nothing to clear */
+  }
+  clearDwell()
+}
+
+/** Why it is not showing — see `window.__improvtalkPopup.status()`. */
+function reason(): string | null {
+  try {
+    if (localStorage.getItem(STORAGE_KEY)) return 'already completed the survey'
+    if (localStorage.getItem(DISMISS_KEY)) return 'dismissed for good on this device'
+  } catch {
+    /* fall through */
+  }
+  try {
+    if (sessionStorage.getItem(DISMISS_KEY)) return 'closed earlier on this device'
+  } catch {
+    /* fall through */
+  }
+  return null
+}
+
 /**
- * Two strengths of no.
+ * Closing it is a permanent no.
  *
- * `'session'` — they closed it. Not now, and not again this visit, but a
- * closed dialog is not a refusal and should not cost us the visitor for good.
- * `'forever'` — they pressed the button that says "don't ask again", or they
- * finished the survey. That one is permanent.
+ * Someone who shuts the dialog on sight has answered the question, and asking
+ * again next week is how a popup becomes the reason people stop coming back.
+ * So it goes to localStorage and survives closing the laptop.
  *
- * Either way sessionStorage is written, so the visit is quiet even when
- * localStorage throws — a private window is exactly where a popup that keeps
- * coming back becomes a complaint.
+ * sessionStorage is written too, because a private window or a browser set to
+ * block site data throws on the first call — and that is exactly the context
+ * where a popup that keeps returning is most irritating.
+ *
+ * What it cannot cover: a different browser, a different device, or cleared
+ * site data. The IP check catches some of that, but only for people who
+ * actually submitted.
  */
-function remember(scope: 'session' | 'forever') {
+function remember() {
+  try {
+    localStorage.setItem(DISMISS_KEY, '1')
+  } catch {
+    /* the session record below still stops this visit */
+  }
   try {
     sessionStorage.setItem(DISMISS_KEY, '1')
   } catch {
-    /* nothing persists here; the in-memory guard below still holds the page */
-  }
-  if (scope === 'forever') {
-    try {
-      localStorage.setItem(DISMISS_KEY, '1')
-    } catch {
-      /* the session record above still stops this visit */
-    }
+    /* nothing persists here; the dialog stays shut for this page either way */
   }
 }
 
@@ -99,10 +136,36 @@ export function TipsPopup() {
   const [open, setOpen] = useState(false)
   const [started, setStarted] = useState(false)
 
+  /*
+   * Diagnosis, because the failure is silent by nature: a popup that does not
+   * appear looks identical whether it is waiting, suppressed, or broken.
+   * `__improvtalkPopup.status()` says which, and `.reset()` clears it.
+   */
+  useEffect(() => {
+    const w = window as unknown as Record<string, unknown>
+    w.__improvtalkPopup = {
+      status: () => ({
+        suppressedBecause: reason(),
+        msWatched: dwellSoFar(),
+        msNeeded: threshold(),
+        tabVisible: document.visibilityState === 'visible',
+      }),
+      reset: () => {
+        forget()
+        location.reload()
+      },
+    }
+  }, [])
+
   useEffect(() => {
     if (pathname?.startsWith('/survey')) return
 
-    if (refused()) return
+    /* An explicit test flag has to beat a previous dismissal. Without this,
+       ?dwell= silently does nothing for anyone who has ever closed the popup —
+       which is everyone who has tested it once. */
+    const params = new URLSearchParams(window.location.search)
+    if (params.has('dwell') || params.get('popup') === 'reset') forget()
+    else if (refused()) return
 
     return watchDwell(threshold(), async () => {
       /* Someone mid-install is not someone to interrupt. Try again on the
@@ -113,7 +176,7 @@ export function TipsPopup() {
          runs here rather than on mount so it costs nothing for the many
          visitors who never reach the threshold. */
       if (await alreadySubmitted()) {
-        remember('forever')
+        remember()
         return
       }
 
@@ -142,13 +205,12 @@ export function TipsPopup() {
     }
   }, [open])
 
-  /* Closing by any route — the Close button, Escape, a backdrop click — ends it
-     for this visit. Only the explicit No button ends it for good. The dwell
-     counter is wiped either way, so nothing can restart it mid-visit. */
-  const close = useCallback((scope: 'session' | 'forever' = 'session') => {
+  /* Every route out — the x, Escape, a backdrop click — is final. The dwell
+     counter is wiped too, so nothing can restart it. */
+  const close = useCallback(() => {
     setOpen(false)
     clearDwell()
-    remember(scope)
+    remember()
   }, [])
 
   const onBackdrop = useCallback(
@@ -157,7 +219,7 @@ export function TipsPopup() {
          questions to a stray click is the worst thing this component could do. */
       if (e.target === ref.current && !started) {
         track('tips_popup_dismiss')
-        close('session')
+        close()
       }
     },
     [close, started],
@@ -166,7 +228,7 @@ export function TipsPopup() {
   return (
     <dialog
       ref={ref}
-      onClose={() => close('session')}
+      onClose={close}
       onClick={onBackdrop}
       aria-labelledby="tips-title"
       /* m-auto is not decoration: the UA stylesheet centres a modal <dialog>
@@ -184,7 +246,7 @@ export function TipsPopup() {
             type="button"
             onClick={() => {
               if (!started) track('tips_popup_dismiss')
-              close('session')
+              close()
             }}
             aria-label="Close"
             className="-mr-2 -mt-2 flex size-9 shrink-0 items-center justify-center rounded-full text-[22px] leading-none text-[#ff375f] transition-colors hover:bg-[#ff375f]/12 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff375f]"
@@ -236,7 +298,7 @@ export function TipsPopup() {
 
             <p className="mt-6 border-t border-line pt-5 text-[12.5px] leading-relaxed text-subtle">
               No email address, no account. Nothing here identifies you, and the PDF is
-              built in your own browser. Close it and it will not open again this visit.
+              built in your own browser. Close it and it will not come back.
             </p>
           </div>
         )}

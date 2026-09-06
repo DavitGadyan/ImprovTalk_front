@@ -80,6 +80,11 @@ export function watchDwell(thresholdMs: number, onReach: () => void): () => void
   }
 }
 
+/** Current total, for diagnostics. */
+export function dwellSoFar(): number {
+  return read()
+}
+
 /** Wipe the counter — used once the offer has been taken or refused. */
 export function clearDwell() {
   try {
