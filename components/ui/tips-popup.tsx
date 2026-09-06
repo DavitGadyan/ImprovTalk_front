@@ -234,7 +234,7 @@ export function TipsPopup() {
       /* m-auto is not decoration: the UA stylesheet centres a modal <dialog>
          with margin:auto, and Tailwind's preflight resets margin to 0, which
          pins it to the top-left corner. */
-      className="m-auto max-h-[calc(100dvh-2rem)] w-[min(40rem,calc(100vw-2rem))] overflow-y-auto rounded-2xl border border-line bg-surface p-0 text-ink backdrop:bg-black/70 backdrop:backdrop-blur-sm"
+      className="pop-in relative m-auto max-h-[calc(100dvh-2rem)] w-[min(40rem,calc(100vw-2rem))] overflow-y-auto rounded-2xl border border-line bg-surface p-0 text-ink backdrop:bg-black/70 backdrop:backdrop-blur-sm"
     >
       <div className="p-7 md:p-9">
         <div className="flex items-start justify-between gap-6">
@@ -263,25 +263,39 @@ export function TipsPopup() {
         ) : (
           <div className="mt-7">
             {/*
-              The offer. This is the one string to change if you want the
-              "you have been selected" framing instead — everyone who reads for
-              2.5 minutes sees this, so nobody has actually been selected, and
-              saying so is a claim App Review and consumer-protection rules both
-              read literally.
+              "Selected" is the client's call, made twice. Everyone who reads for
+              50 seconds sees this, so nobody has been selected in any real
+              sense — one word ("You are invited") makes it true if App Review
+              or a consumer-protection question ever lands on it.
             */}
             <h2 id="tips-title" className="display-md text-ink">
-              Free personal tips, written for how you come across
+              You have been selected for a personal assessment
             </h2>
-            <p className="mt-4 text-[15.5px] leading-relaxed text-ink-soft">
-              You have been reading for a few minutes, so here is the thing we made for
-              people who do. Six questions, ninety seconds, and you get a one-page PDF
-              built from your own answers — not a generic list.
+            <p className="mt-3 text-[15.5px] leading-relaxed text-ink-soft">
+              Specialised hints for your situation.
             </p>
 
-            <ul className="mt-6 grid gap-2.5 text-[14.5px] text-muted">
-              <li>· What your situation actually is, said back to you</li>
-              <li>· Four moves for it, and the one to start with</li>
-              <li>· Where to begin in the app</li>
+            <ul className="mt-7 grid gap-3">
+              {['No email', 'No sign-up', 'Free PDF with your hints'].map((line, i) => (
+                <li
+                  key={line}
+                  className="tick-row flex items-center gap-3 text-[15px] text-ink-soft"
+                  style={{ '--i': i } as React.CSSProperties}
+                >
+                  <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-[#30d158]/15">
+                    <svg viewBox="0 0 24 24" className="size-3.5" fill="none" aria-hidden="true">
+                      <path
+                        d="M4 12.5l5 5L20 6.5"
+                        stroke="#30d158"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  {line}
+                </li>
+              ))}
             </ul>
 
             <div className="mt-8">
@@ -292,14 +306,9 @@ export function TipsPopup() {
                   track('tips_popup_start')
                 }}
               >
-                Get my tips
+                Get my hints
               </Button>
             </div>
-
-            <p className="mt-6 border-t border-line pt-5 text-[12.5px] leading-relaxed text-subtle">
-              No email address, no account. Nothing here identifies you, and the PDF is
-              built in your own browser. Close it and it will not come back.
-            </p>
           </div>
         )}
       </div>

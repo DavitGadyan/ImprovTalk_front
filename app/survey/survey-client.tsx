@@ -25,6 +25,8 @@ import {
 } from '@/content/survey'
 import { submitEnabled, submitSurvey } from '@/lib/supabase'
 import { track } from '@/lib/analytics'
+import { cn } from '@/lib/utils'
+import { Confetti } from '@/components/ui/confetti'
 
 /**
  * The goal question stays at seven options because fifteen on one screen is a
@@ -168,8 +170,31 @@ export function SurveyClient({ inDialog = false }: { inDialog?: boolean } = {}) 
       ? Boolean(goal) && (goal !== 'other' || goalOther.trim().length > 1)
       : true
 
+  /*
+   * Enter moves forward. Picking a pill with the mouse leaves focus nowhere
+   * useful, so the handler sits on the wrapper and reads the current step's
+   * own guard rather than relying on a focused control.
+   *
+   * A textarea keeps Enter for newlines, and the select keeps it for its own
+   * open/close behaviour.
+   */
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key !== 'Enter' || e.shiftKey) return
+    const el = e.target as HTMLElement
+    if (el.tagName === 'TEXTAREA' || el.tagName === 'SELECT') return
+    /* A focused button or link should do its own thing, not this. */
+    if (el.tagName === 'BUTTON' || el.tagName === 'A') return
+
+    e.preventDefault()
+    if (current === 'Done') {
+      if (consent && !sending) void onSubmit()
+    } else if (canAdvance) {
+      go(step + 1)
+    }
+  }
+
   return (
-    <div className="mx-auto max-w-[42rem]">
+    <div className="mx-auto max-w-[42rem]" onKeyDown={onKeyDown}>
       <Progress step={step} steps={steps} />
 
       <div className="mt-10">
@@ -405,7 +430,8 @@ function Result({
   }
 
   return (
-    <div className="mx-auto max-w-[42rem]">
+    <div className={cn('mx-auto max-w-[42rem]', inDialog && 'result-rise')}>
+      {inDialog && <Confetti />}
       <p className="eyebrow" style={{ color: top.hex }}>
         {top.label} · {second.label}
       </p>

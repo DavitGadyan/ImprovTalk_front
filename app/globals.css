@@ -258,6 +258,51 @@
   }
 }
 
+/* --------------------------------------------------- the tips popup ---- */
+/* Entry, and the celebration when the result lands. Everything here is
+   cancelled wholesale by the reduced-motion block below. */
+
+@keyframes pop-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes pop-backdrop {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes tick-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* The check draws itself rather than fading in — it reads as confirmation. */
+@keyframes tick-draw {
+  from { stroke-dashoffset: 22; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes result-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.pop-in { animation: pop-in 0.42s var(--ease-out-soft) both; }
+.pop-in::backdrop { animation: pop-backdrop 0.3s ease-out both; }
+
+.tick-row {
+  animation: tick-in 0.4s var(--ease-out-soft) both;
+  animation-delay: calc(var(--i) * 90ms + 120ms);
+}
+.tick-row svg path {
+  stroke-dasharray: 22;
+  animation: tick-draw 0.4s var(--ease-out-soft) both;
+  animation-delay: calc(var(--i) * 90ms + 260ms);
+}
+
+.result-rise { animation: result-rise 0.5s var(--ease-out-soft) both; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 

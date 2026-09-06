@@ -315,10 +315,25 @@ here; `?dwell=<seconds>` overrides it per page load instead.
 3. **A backdrop click only closes the offer screen,** never the form. Losing
    four answered questions to a stray click is the worst thing it could do.
 
-**The copy does not say "you have been selected."** Everyone who reads for 2.5
-minutes sees it, so nobody was selected, and App Review and consumer-protection
-rules both read that literally. The heading in `tips-popup.tsx` is one string if
-that call changes.
+**The heading says "you have been selected", on the client's instruction, asked
+twice.** Everyone who reads for 50 seconds sees it, so nobody has been selected
+in any real sense. One word — "You are invited" — makes it true if App Review or
+a consumer-protection question ever lands on it. Flagged in the component.
+
+**The offer screen is 157 characters.** Heading, one line, three green checks
+(no email / no sign-up / free PDF), one button. It was ~600 and read as a
+brochure.
+
+**Motion.** `pop-in` on the dialog and its backdrop, `tick-row` staggering the
+checks with the tick stroke drawing itself, `result-rise` on the result, and a
+canvas confetti burst from two vents. All of it is cancelled by the existing
+`prefers-reduced-motion` block. The confetti is hand-rolled — canvas-confetti is
+25KB for forty lines of physics, and a library's fixed-position canvas lands
+*behind* a `<dialog>` rather than inside its stacking context.
+
+**Enter advances the form.** The handler is on the wrapper, not a focused
+control, because clicking a pill with the mouse leaves focus nowhere useful.
+Textareas keep Enter for newlines and selects keep it for their own behaviour.
 
 ## The tips PDF: three pages, built from the app
 
