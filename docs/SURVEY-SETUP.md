@@ -36,15 +36,67 @@ create table public.survey_responses (
   utm_content     text
 );
 
+-- One-way hash of the submitter's address. Never the address itself, and
+-- computed inside Postgres so the browser neither sees nor sends it.
+alter table public.survey_responses add column ip_hash text;
+create index on public.survey_responses (ip_hash);
+
 alter table public.survey_responses enable row level security;
 
--- The anon key ships in the browser. It may add a row and do nothing else:
--- no select, no update, no delete. There is deliberately no select policy.
-create policy "anon can insert only"
-  on public.survey_responses
-  for insert
-  to anon
-  with check (true);
+-- The anon key ships in the browser. With the two functions below it does not
+-- need table access at all, so there is no policy of any kind: no insert, no
+-- select, no update, no delete. Everything goes through security-definer RPCs.
+
+-- The salt. Not readable by anon; only the definer functions see it.
+create table if not exists private_config (k text primary key, v text not null);
+alter table private_config enable row level security;
+insert into private_config (k, v)
+  values ('ip_salt', encode(gen_random_bytes(32), 'hex'))
+  on conflict (k) do nothing;
+
+create extension if not exists pgcrypto;
+
+create or replace function ip_fingerprint() returns text
+language sql security definer stable set search_path = public as $$
+  select encode(digest(
+    coalesce(
+      split_part(current_setting('request.headers', true)::json->>'x-forwarded-for', ',', 1),
+      'unknown'
+    ) || (select v from private_config where k = 'ip_salt'),
+    'sha256'), 'hex');
+$$;
+
+-- Insert. Takes the whole payload as one object so the column list lives in
+-- one place, and stamps the fingerprint server-side.
+create or replace function survey_submit(payload jsonb) returns void
+language plpgsql security definer set search_path = public as $$
+begin
+  insert into survey_responses (
+    version, goal, goal_other, persona, blend,
+    age_band, gender, country, wanted_feature, expectation,
+    variant, utm_content, ip_hash
+  ) values (
+    coalesce((payload->>'version')::int, 2),
+    payload->>'goal', payload->>'goal_other', payload->>'persona',
+    payload->'blend',
+    payload->>'age_band', payload->>'gender', payload->>'country',
+    payload->>'wanted_feature', payload->>'expectation',
+    payload->>'variant', payload->>'utm_content',
+    ip_fingerprint()
+  );
+end;
+$$;
+
+-- Returns a boolean and nothing else. No row is ever exposed.
+create or replace function survey_already_submitted() returns boolean
+language sql security definer stable set search_path = public as $$
+  select exists (select 1 from survey_responses where ip_hash = ip_fingerprint());
+$$;
+
+revoke all on function survey_submit(jsonb) from public;
+revoke all on function survey_already_submitted() from public;
+grant execute on function survey_submit(jsonb) to anon;
+grant execute on function survey_already_submitted() to anon;
 
 -- Keep the free text from being used as storage by someone with the key.
 alter table public.survey_responses
@@ -64,20 +116,29 @@ Settings → API → copy the **anon / public** key, then in a terminal:
 ```bash
 URL="https://YOUR-PROJECT.supabase.co"
 ANON="your-anon-key"
+H=(-H "apikey: $ANON" -H "Authorization: Bearer $ANON" -H "Content-Type: application/json")
 
-# Should return 201
-curl -s -o /dev/null -w "insert: %{http_code}\n" -X POST "$URL/rest/v1/survey_responses" \
-  -H "apikey: $ANON" -H "Authorization: Bearer $ANON" \
-  -H "Content-Type: application/json" -H "Prefer: return=minimal" \
-  -d '{"goal":"shyness","blend":{"red":25,"blue":25,"yellow":25,"green":25}}'
+# 1. Insert through the function. Should return 204.
+curl -s -o /dev/null -w "submit: %{http_code}\n" -X POST "$URL/rest/v1/rpc/survey_submit" \
+  "${H[@]}" -d '{"payload":{"goal":"shyness","blend":{"red":25,"blue":25,"yellow":25,"green":25}}}'
 
-# Should return 200 with an EMPTY array — not your row
-curl -s "$URL/rest/v1/survey_responses?select=*" \
-  -H "apikey: $ANON" -H "Authorization: Bearer $ANON"
+# 2. The address check. Should now return true, from the same machine.
+curl -s -X POST "$URL/rest/v1/rpc/survey_already_submitted" "${H[@]}" -d '{}'; echo
+
+# 3. The table itself must stay shut. Should be 401 or 404 — NOT your row.
+curl -s -o /dev/null -w "direct read: %{http_code}\n" \
+  "$URL/rest/v1/survey_responses?select=*" "${H[@]}"
+
+# 4. And the salt must be unreachable. Should also be 401 or 404.
+curl -s -o /dev/null -w "salt read:   %{http_code}\n" \
+  "$URL/rest/v1/private_config?select=*" "${H[@]}"
 ```
 
-`insert: 201` and `[]` is correct. **If the second command returns your row, stop
-and fix the policy** — there should be no `for select` policy on this table.
+`submit: 204`, `true`, and **401 or 404 on both reads** is correct. If step 3
+returns your row, the key you just published reads every respondent's answers —
+stop and remove the select policy. If step 4 returns the salt, the fingerprints
+are reversible: an IPv4 space is small enough to brute-force against a known
+salt in minutes.
 
 Delete the test row from the table editor afterwards.
 

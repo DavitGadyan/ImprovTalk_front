@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { SurveyClient } from '@/app/survey/survey-client'
 import { STORAGE_KEY } from '@/content/survey'
 import { clearDwell, watchDwell } from '@/lib/dwell'
+import { alreadySubmitted } from '@/lib/supabase'
 import { track } from '@/lib/analytics'
 
 /** 2.5 minutes of visible reading, accumulated across pages. */
@@ -72,10 +73,19 @@ export function TipsPopup() {
 
     if (refused()) return
 
-    return watchDwell(AFTER_MS, () => {
+    return watchDwell(AFTER_MS, async () => {
       /* Someone mid-install is not someone to interrupt. Try again on the
          next page, where the dwell total is already past the threshold. */
       if (document.querySelector('dialog[open]')) return
+
+      /* Cleared storage, or a second device on the same connection. The check
+         runs here rather than on mount so it costs nothing for the many
+         visitors who never reach the threshold. */
+      if (await alreadySubmitted()) {
+        remember()
+        return
+      }
+
       setOpen(true)
       track('tips_popup_shown')
     })

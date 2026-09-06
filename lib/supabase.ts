@@ -42,22 +42,53 @@ export type SurveyPayload = {
 
 export type SubmitResult = { ok: true } | { ok: false; reason: string }
 
+/**
+ * Both calls go through Postgres functions rather than the table.
+ *
+ * The reason is the IP check. The browser cannot know its own address without
+ * asking a third party, and we are not going to hand a visitor's IP to one —
+ * so the address is read inside Supabase, from the request headers, by a
+ * `security definer` function. It is hashed with a salt the anon role cannot
+ * read and only the hash is stored. The browser never sees it, never sends it,
+ * and the table stays INSERT-only with no read policy at all.
+ */
+const rpc = (fn: string, body: unknown) =>
+  fetch(`${URL_}/rest/v1/rpc/${fn}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      apikey: KEY_,
+      Authorization: `Bearer ${KEY_}`,
+    },
+    body: JSON.stringify(body),
+  })
+
+/**
+ * Has someone already answered from this address?
+ *
+ * Returns the function's boolean, and `false` on any failure — a network error
+ * must not silently suppress the offer for everyone. Deliberately used only to
+ * hide the popup: `/survey/` still works if someone goes there directly,
+ * because an IP is a weak identity and one submission behind an office or
+ * mobile-carrier NAT would otherwise lock out everyone sharing it.
+ */
+export async function alreadySubmitted(): Promise<boolean> {
+  if (!submitEnabled) return false
+  try {
+    const res = await rpc('survey_already_submitted', {})
+    if (!res.ok) return false
+    return (await res.json()) === true
+  } catch {
+    return false
+  }
+}
+
 export async function submitSurvey(payload: SurveyPayload): Promise<SubmitResult> {
   if (!submitEnabled) return { ok: false, reason: 'not-configured' }
 
   try {
-    const res = await fetch(`${URL_}/rest/v1/survey_responses`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        apikey: KEY_,
-        Authorization: `Bearer ${KEY_}`,
-        /* Ask PostgREST not to echo the row back. We have no read policy, and
-           requesting a representation we are not permitted to see turns a
-           successful insert into a 401. */
-        Prefer: 'return=minimal',
-      },
-      body: JSON.stringify({ ...payload, version: SURVEY_VERSION }),
+    const res = await rpc('survey_submit', {
+      payload: { ...payload, version: SURVEY_VERSION },
     })
 
     if (!res.ok) {

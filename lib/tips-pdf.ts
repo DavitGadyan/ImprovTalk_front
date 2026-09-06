@@ -11,6 +11,8 @@
 
 import { A4, createDoc, download, rgb, type Doc, type Rgb } from '@/lib/pdf'
 import { COLOR_NOTE, tipsFor } from '@/content/tips'
+import { CORE, FLOW, PRINCIPLES, angleFor, openerFor } from '@/content/coach'
+import { planFor } from '@/content/scenarios'
 import {
   COLORS,
   blendSummary,
@@ -32,16 +34,35 @@ const LINE = rgb('#243044')
 const MARGIN = 46
 const COL = A4.width - MARGIN * 2
 
+/** The footer sits on every page, so it is drawn rather than positioned once. */
+function paintFooter(doc: Doc, hue: Rgb) {
+  const y = A4.height - MARGIN + 6
+  doc.rect(0, A4.height - 5, A4.width, 5, hue)
+  doc.line('improvtalk.vip', MARGIN, y, { size: 8.5, font: 'bold', color: SUBTLE })
+  doc.line(
+    'Generated from your own answers. Nothing here identifies you.',
+    MARGIN + 72,
+    y,
+    { size: 8.5, color: SUBTLE },
+  )
+}
+
 /** Cursor + page breaking. The document is one page in practice; this keeps a
  *  long free-text goal or a wide blend legend from silently running off it. */
 function layout(doc: Doc, hue: Rgb) {
+  /* Background, top rule and footer are page furniture — every page gets them,
+     including the ones a mid-section overflow creates. */
   const paint = () => {
     doc.rect(0, 0, A4.width, A4.height, CANVAS)
     doc.rect(0, 0, A4.width, 5, hue)
+    paintFooter(doc, hue)
   }
   paint()
 
   let y = MARGIN + 40
+  const reset = () => {
+    y = MARGIN + 40
+  }
   return {
     get y() {
       return y
@@ -50,10 +71,16 @@ function layout(doc: Doc, hue: Rgb) {
       y += dy
     },
     need(h: number) {
-      if (y + h <= A4.height - MARGIN - 22) return
+      if (y + h <= A4.height - MARGIN - 26) return
       doc.newPage()
       paint()
-      y = MARGIN + 46
+      reset()
+    },
+    /** Deliberate page break, for a section that should start clean. */
+    page() {
+      doc.newPage()
+      paint()
+      reset()
     },
     set(v: number) {
       y = v
@@ -156,16 +183,107 @@ export function buildTipsPdf({ goal, personaId, blend }: TipsInput): Uint8Array 
   label('In the app')
   body(tips.scenario)
 
-  /* ------------------------------------------------------------- footer -- */
+  /* ------------------------------------------------ page 2: what to do -- */
 
-  const footer = A4.height - MARGIN + 6
-  doc.line('improvtalk.vip', MARGIN, footer, { size: 8.5, font: 'bold', color: SUBTLE })
-  doc.line(
-    'Generated from your own answers. Nothing here identifies you.',
-    MARGIN + 72,
-    footer,
-    { size: 8.5, color: SUBTLE },
+  const opener = openerFor(g.tips, top.key)
+  const angle = angleFor(g.tips, top.key)
+
+  L.page()
+
+  doc.line('YOUR PRACTICE PLAN', MARGIN, L.y, { size: 8.5, font: 'bold', color: hue })
+  L.move(28)
+  doc.line('Three scenarios, in this order', MARGIN, L.y, { size: 20, font: 'bold', color: INK })
+  L.move(20)
+  body(
+    `Picked for ${g.label.toLowerCase()} and for a ${top.label.toLowerCase()} style. Every one of these exists in the app today.`,
+    MUTED,
   )
+  L.move(18)
+
+  planFor(g.tips, top.key).forEach((step, i) => {
+    L.need(96)
+    const n = String(i + 1).padStart(2, '0')
+    doc.line(n, MARGIN, L.y, { size: 9.6, font: 'bold', color: hue })
+    doc.line(step.scenario.title, MARGIN + 24, L.y, { size: 11.8, font: 'bold', color: INK })
+    L.move(14)
+    doc.line(
+      `${step.role}  ·  difficulty ${step.scenario.difficulty} of 3  ·  ${step.scenario.tier}`,
+      MARGIN + 24,
+      L.y,
+      { size: 8.6, font: 'bold', color: SUBTLE },
+    )
+    L.move(14)
+    L.set(
+      doc.paragraph(step.scenario.drills, MARGIN + 24, L.y, {
+        size: 9.9,
+        color: MUTED,
+        width: COL - 24,
+        leading: 14,
+      }),
+    )
+    L.move(13)
+  })
+
+  L.move(8)
+  doc.rect(MARGIN, L.y, COL, 1, LINE)
+  L.move(26)
+
+  label('How to open')
+  doc.line(opener.label, MARGIN, L.y, { size: 12.5, font: 'bold', color: INK })
+  L.move(17)
+  body(opener.how, INK_SOFT)
+  L.move(6)
+  body(opener.why, MUTED)
+  L.move(6)
+  body(`What kills it: ${opener.kills}`, MUTED)
+  L.move(20)
+
+  label('How to steer it after that')
+  doc.line(angle.label, MARGIN, L.y, { size: 12.5, font: 'bold', color: INK })
+  L.move(17)
+  body(angle.how, INK_SOFT)
+  L.move(6)
+  body(`Watch for: ${angle.watch}`, MUTED)
+
+  /* --------------------------------------------- page 3: the constants -- */
+
+  L.page()
+
+  doc.line('THE PARTS THAT DO NOT CHANGE', MARGIN, L.y, { size: 8.5, font: 'bold', color: hue })
+  L.move(28)
+  doc.line('Four rules for your style', MARGIN, L.y, { size: 20, font: 'bold', color: INK })
+  L.move(24)
+
+  PRINCIPLES[top.key].forEach(([title, text]) => {
+    L.need(56)
+    doc.line(title, MARGIN, L.y, { size: 11.2, font: 'bold', color: INK })
+    L.move(15)
+    L.set(doc.paragraph(text, MARGIN, L.y, { size: 9.9, color: MUTED, width: COL, leading: 14 }))
+    L.move(13)
+  })
+
+  L.move(10)
+  doc.rect(MARGIN, L.y, COL, 1, LINE)
+  L.move(26)
+
+  label('The three things underneath all of it')
+  CORE.forEach(([title, text]) => {
+    L.need(44)
+    doc.line(title, MARGIN, L.y, { size: 10.6, font: 'bold', color: hue })
+    L.move(14)
+    L.set(doc.paragraph(text, MARGIN, L.y, { size: 9.7, color: MUTED, width: COL, leading: 13.6 }))
+    L.move(11)
+  })
+
+  L.move(14)
+  label('Where you are in a conversation')
+  FLOW.forEach(([title, text]) => {
+    L.need(40)
+    doc.line(title, MARGIN, L.y, { size: 10.2, font: 'bold', color: INK })
+    L.move(14)
+    L.set(doc.paragraph(text, MARGIN, L.y, { size: 9.7, color: MUTED, width: COL, leading: 13.6 }))
+    L.move(11)
+  })
 
   return doc.bytes()
 }

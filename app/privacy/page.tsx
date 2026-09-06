@@ -147,10 +147,14 @@ export default function PrivacyPage() {
         answers; it is not generated on a server and no copy of it is kept.
       </p>
       <p>
-        We do not ask for your name or your email, and we do not store an IP address or any
-        identifier that would let us recognise you again. That is deliberate, and it has a
-        trade-off worth stating: <strong>we cannot look your answers up on request</strong>, because
-        there is nothing to look them up by. If you want a response removed, email{' '}
+        We do not ask for your name or your email. We do store a{' '}
+        <strong>one-way hash of your IP address</strong> — not the address itself, which never
+        reaches us and is never sent by your browser. It is computed inside the database, salted
+        with a secret we hold, and used for exactly one thing: not asking you again if you have
+        already answered. It cannot be turned back into your address, and nothing else is derived
+        from it. That still has a trade-off worth stating:{' '}
+        <strong>we cannot look your answers up on request</strong>, because there is nothing
+        readable to look them up by. If you want a response removed, email{' '}
         <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a> with roughly when you submitted it
         and what you wrote, and we will find and delete it by hand.
       </p>

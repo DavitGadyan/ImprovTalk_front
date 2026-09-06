@@ -285,6 +285,68 @@ minutes sees it, so nobody was selected, and App Review and consumer-protection
 rules both read that literally. The heading in `tips-popup.tsx` is one string if
 that call changes.
 
+## The tips PDF: three pages, built from the app
+
+Page 1 is the situation and the four moves. **Page 2 is a practice plan** — three
+real scenarios in the order to do them, with difficulty and tier — plus the
+opener and the steering angle for that person. Page 3 is four principles for
+their dominant colour, the presence/power/warmth core, and where they are in a
+conversation. All 88 persona x colour combinations verified at exactly 3 pages.
+
+**Everything on pages 2 and 3 comes from the app repo, not from here:**
+
+- `content/scenarios.ts` — the **16 live scenarios in 11 categories**, counted
+  from `packages/shared/scenarios/*.json`. Ids, titles, difficulty and tier are
+  copied. A sheet that sends someone to a scenario the app does not have is
+  worse than no sheet. **`history.md` previously recorded "70 live scenarios /
+  13 venues" and that does not match the directory today** — 16 is what was
+  counted. The 225 scenarios / 19 venues figure is the *simulator* set in
+  `packages/shared/pickup_simulator/`, which is a different thing.
+- `content/coach.ts` — the opener strategies from `_OPENER_STRATEGIES`, the
+  steering angles from `_EXPLORATION_ANGLES`, and the `charisma_core` and
+  `stage_flow` blocks every venue carries.
+
+**Two things do not cross over from that engine.**
+
+1. **No names.** The knowledge-base files are titled after the books and people
+   they were distilled from, and one opener strategy names an author inline.
+   The distillation is ours; the material is not.
+2. **Two of the eleven opener strategies are withheld-tease patterns** built on
+   backhanded compliments about appearance. They are weight 0 in the app and
+   fire only when a scenario pins them. They are not on the site at all — the
+   published line is that noticing a no early is the skill, and App Review reads
+   this site.
+
+**The opener is goal-aware, not just colour-aware.** Nobody opens a leadership
+review with a small favour, so the work family gets "answer first, then the
+reasoning" instead. A colour-only mapping shipped an outlet-favour opener to
+someone practising interviews before this was caught.
+
+## IP de-duplication, without a backend and without holding an IP
+
+The popup asks Supabase whether this address has already answered. Everything
+happens inside Postgres:
+
+- `ip_fingerprint()` reads `x-forwarded-for` from `request.headers` and hashes
+  it with a salt in `private_config`. **The browser never sees or sends an IP**,
+  and asking a third-party IP service was rejected for exactly that reason.
+- `survey_submit(payload)` and `survey_already_submitted()` are `security
+  definer`. The second returns a boolean and never a row.
+- The table now has **no RLS policy at all** — not even insert. The anon key
+  cannot touch it directly; both functions are granted instead.
+
+**The salt must be unreadable.** An IPv4 space brute-forces against a known salt
+in minutes, so `docs/SURVEY-SETUP.md` step 4 checks `private_config` returns
+401/404.
+
+**It only hides the popup.** `/survey/` still works for anyone who goes there,
+because an IP is a weak identity: one submission behind an office or carrier NAT
+would otherwise lock out everyone sharing it.
+
+**`/privacy` had to change.** It promised "we do not store an IP address or any
+identifier that would let us recognise you again." That is now false, so it says
+what is actually stored and why.
+
 ## The deploy that succeeds while the site serves a README
 
 **Symptom:** `improvtalk.vip/` returns 200 with the title
