@@ -19,7 +19,21 @@ import { SURVEY_VERSION, type Blend, type GoalSlug } from '@/content/survey'
  * exchange must not depend on our storage being configured.
  */
 const URL_ = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
-const KEY_ = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ''
+
+/*
+ * Supabase renamed these. New projects issue a `sb_publishable_…` key and the
+ * dashboard's own snippet calls it NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY; older
+ * ones issue a JWT called the anon key. Both are the same thing for our
+ * purposes — the public, row-level-security-bound key — so read either rather
+ * than making the name a thing that can silently be wrong.
+ *
+ * Next.js inlines these literally, so both must be referenced as full static
+ * property accesses. `process.env[name]` does not work in a client bundle.
+ */
+const KEY_ =
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
+  ''
 
 export const submitEnabled = Boolean(URL_ && KEY_)
 

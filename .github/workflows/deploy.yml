@@ -56,6 +56,7 @@ jobs:
           # see docs/SURVEY-SETUP.md. Never put service_role here or anywhere.
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
 
       - name: Verify tracking invariants
         # The money path breaks silently: a removed id or a renamed label still

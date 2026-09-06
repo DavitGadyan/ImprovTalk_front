@@ -11,7 +11,12 @@ sensible default.
 
 ## 2. Create the table and lock it down
 
-SQL Editor → New query → paste and run:
+SQL Editor → New query → paste and run. **Use
+[`survey-setup.sql`](survey-setup.sql)** rather than the block below — it is the
+same schema, made idempotent, with `pgcrypto` created before its first use and
+`search_path = public, extensions` on the definer functions so `digest()`
+resolves wherever Supabase put the extension. The block below is kept because it
+is what the running project was built from:
 
 ```sql
 create table public.survey_responses (
@@ -125,20 +130,44 @@ curl -s -o /dev/null -w "submit: %{http_code}\n" -X POST "$URL/rest/v1/rpc/surve
 # 2. The address check. Should now return true, from the same machine.
 curl -s -X POST "$URL/rest/v1/rpc/survey_already_submitted" "${H[@]}" -d '{}'; echo
 
-# 3. The table itself must stay shut. Should be 401 or 404 — NOT your row.
-curl -s -o /dev/null -w "direct read: %{http_code}\n" \
-  "$URL/rest/v1/survey_responses?select=*" "${H[@]}"
+# 3. The table itself must stay shut. Expect `[]` — NOT your row.
+curl -s "$URL/rest/v1/survey_responses?select=*" "${H[@]}"; echo
 
-# 4. And the salt must be unreachable. Should also be 401 or 404.
-curl -s -o /dev/null -w "salt read:   %{http_code}\n" \
-  "$URL/rest/v1/private_config?select=*" "${H[@]}"
+# 4. And the salt must be unreachable. Expect `[]` — NOT the salt.
+curl -s "$URL/rest/v1/private_config?select=*" "${H[@]}"; echo
 ```
 
-`submit: 204`, `true`, and **401 or 404 on both reads** is correct. If step 3
-returns your row, the key you just published reads every respondent's answers —
-stop and remove the select policy. If step 4 returns the salt, the fingerprints
-are reversible: an IPv4 space is small enough to brute-force against a known
-salt in minutes.
+`submit: 204`, `true`, and **an empty array from both reads** is correct.
+
+**Read the body, not the status code.** These tables have RLS enabled with no
+policies at all, and the browser key is the `anon` role. PostgREST does not
+reject that with 401 — it runs the query, RLS filters every row out, and it
+returns **`200 []`**. So a 200 proves nothing on its own:
+
+| Response | Meaning |
+|---|---|
+| `200 []` | Correct. RLS is doing its job. |
+| `200 [{…}]` | **Critical.** The key you published reads your data. Stop. |
+| `401` / `404` | Also fine — not exposed, or not created yet. |
+
+An earlier version of this document told you to expect 401 or 404 here. That is
+wrong for this design and reports a false alarm on a correctly locked table.
+
+`private_config` is the decisive one, because it always holds exactly one row
+(`ip_salt`) — so an empty array there can only mean RLS blocked the read.
+`survey_responses` may be legitimately empty, which makes `[]` ambiguous until
+you have inserted a test row and tried to read it back in the same run.
+
+`scripts/verify-survey.sh` does all four checks and judges them on the body:
+
+```bash
+./scripts/verify-survey.sh --write    # insert a row, then try to read it back
+```
+
+If step 3 returns your row, the key you just published reads every respondent's
+answers — stop and remove the select policy. If step 4 returns the salt, the
+fingerprints are reversible: an IPv4 space is small enough to brute-force
+against a known salt in minutes.
 
 Delete the test row from the table editor afterwards.
 
