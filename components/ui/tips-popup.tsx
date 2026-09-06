@@ -282,17 +282,22 @@ export function TipsPopup() {
                   className="tick-row flex items-center gap-3 text-[15px] text-ink-soft"
                   style={{ '--i': i } as React.CSSProperties}
                 >
-                  <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-[#30d158]/15">
-                    <svg viewBox="0 0 24 24" className="size-3.5" fill="none" aria-hidden="true">
-                      <path
-                        d="M4 12.5l5 5L20 6.5"
-                        stroke="#30d158"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
+                  {/* A bare check, not a badge. The tinted bubble read as an
+                      app sticker; the glyph on its own reads as a spec sheet. */}
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="size-[18px] shrink-0"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M4 12.5l5.2 5.2L20 6.8"
+                      stroke="#30d158"
+                      strokeWidth="2.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                   {line}
                 </li>
               ))}

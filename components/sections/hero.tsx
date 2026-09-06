@@ -165,6 +165,13 @@ function LivePracticeScreen() {
 }
 
 /** The home screen, shown on the back device of the cluster. */
+/** Streak, score and rate, as glyphs rather than emoji. */
+const STATS = [
+  { label: '12', hue: 'var(--color-learn)', d: 'M13 2L4.5 13.5H11l-1 8.5 8.5-11.5H12l1-8.5z' },
+  { label: '71', hue: 'var(--color-accent)', d: 'M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z' },
+  { label: '38%', hue: 'var(--color-practice)', d: 'M12 21c3.9 0 6.5-2.5 6.5-6 0-3.9-3.5-5.6-3.5-9.5-2 1-3 2.7-3 4.5-1.2-.6-1.8-1.7-1.8-3C8.2 8.4 5.5 10.6 5.5 15c0 3.5 2.6 6 6.5 6z' },
+] as const
+
 function HomeScreen() {
   const tiles = [
     { name: 'Simulate', hue: 'var(--color-simulate)' },
@@ -176,10 +183,24 @@ function HomeScreen() {
   ]
   return (
     <>
+      {/* Drawn, not typed. Emoji render as a different typeface on every OS —
+          colour, weight and baseline all shift — so a mockup that is meant to
+          look like the app looks like three pasted stickers instead. */}
       <div className="flex items-center justify-between pb-4 pt-1">
-        <span className="numeric text-[11px] text-ink-soft">⚡ 12</span>
-        <span className="numeric text-[11px] text-ink-soft">★ 71</span>
-        <span className="numeric text-[11px] text-ink-soft">🔥 38%</span>
+        {STATS.map((s) => (
+          <span key={s.label} className="flex items-center gap-1.5">
+            <svg viewBox="0 0 24 24" className="size-3" fill="none" aria-hidden="true">
+              <path
+                d={s.d}
+                stroke={s.hue}
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span className="numeric text-[11px] text-ink-soft">{s.label}</span>
+          </span>
+        ))}
       </div>
       <div className="grid grid-cols-2 gap-2.5">
         {tiles.map((t) => (

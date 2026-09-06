@@ -320,6 +320,14 @@ twice.** Everyone who reads for 50 seconds sees it, so nobody has been selected
 in any real sense. One word — "You are invited" — makes it true if App Review or
 a consumer-protection question ever lands on it. Flagged in the component.
 
+**No emoji anywhere in the shipped UI.** The three in the hero mockup —
+`⚡ 12`, `★ 71`, `🔥 38%` — are drawn SVG paths in the brand hues now. Emoji
+render in a different typeface on every OS, so colour, weight and baseline all
+shift: a mockup meant to look like the app looked like three pasted stickers,
+differently on each machine. The popup's checks are bare green glyphs rather
+than tinted badges — a badge is an app convention, a bare check reads as a spec
+sheet. Typographic arrows (`→`, `←`) are punctuation, not emoji, and stay.
+
 **The offer screen is 157 characters.** Heading, one line, three green checks
 (no email / no sign-up / free PDF), one button. It was ~600 and read as a
 brochure.
