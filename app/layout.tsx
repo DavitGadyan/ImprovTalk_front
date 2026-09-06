@@ -4,6 +4,7 @@ import { Providers } from './providers'
 import { GoogleTags } from '@/components/analytics/gtag'
 import { VariantAssign } from '@/components/variant-assign'
 import { ConsentBanner } from '@/components/analytics/consent-banner'
+import { TipsPopup } from '@/components/ui/tips-popup'
 import { site } from '@/content/site'
 import './globals.css'
 
@@ -100,6 +101,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <GoogleTags />
         <Providers>{children}</Providers>
         <ConsentBanner />
+        <TipsPopup />
       </body>
     </html>
   )

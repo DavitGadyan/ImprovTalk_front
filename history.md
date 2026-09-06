@@ -250,6 +250,41 @@ which is the point.
 check in `docs/SURVEY-SETUP.md`. Until then `submitEnabled` is false, the survey
 runs, and the PDF is still produced — only the write is skipped.
 
+## The tips popup
+
+Opens **once**, after **2.5 minutes of visible reading accumulated across pages**
+(`lib/dwell.ts`), and carries the whole exchange itself: the offer, the six-step
+form, and the personalised PDF. It renders `<SurveyClient>` inside a native
+`<dialog>` rather than reimplementing the form, so there is one form in the
+codebase and Supabase has one shape to accept.
+
+**Why the timer is not per-page.** The site is a static export, so every
+navigation is a fresh document. A per-page timer resets each time and someone
+reading five pages for forty seconds each would never reach the threshold. The
+total lives in `localStorage`, and only *visible* time counts — a tab left open
+in the background has not been reading, and firing a modal into it means
+returning to a dialog over a forgotten page.
+
+**"No" is final, and written twice.** `localStorage` keeps it for good and
+`sessionStorage` holds it for the visit if the first throws — private windows
+and blocked site data are exactly where a popup that will not take no becomes a
+complaint. Every exit is final: the No button, Close, Escape and a backdrop
+click all suppress it permanently.
+
+**Rules it must not break:**
+
+1. **Never on `/survey/`** — the same form is already the page.
+2. **Never over another dialog.** The install panel is the conversion; a second
+   modal on top of it buries the thing we measure. It retries on the next page,
+   where the dwell total is already past the threshold.
+3. **A backdrop click only closes the offer screen,** never the form. Losing
+   four answered questions to a stray click is the worst thing it could do.
+
+**The copy does not say "you have been selected."** Everyone who reads for 2.5
+minutes sees it, so nobody was selected, and App Review and consumer-protection
+rules both read that literally. The heading in `tips-popup.tsx` is one string if
+that call changes.
+
 ## The deploy that succeeds while the site serves a README
 
 **Symptom:** `improvtalk.vip/` returns 200 with the title

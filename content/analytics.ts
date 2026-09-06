@@ -55,6 +55,11 @@ export const trackingEnabled = hasGA || hasAds
  *                     shows where people give up rather than only that they did.
  *   survey_complete   Submitted. `goal` carries which persona they picked, so
  *                     completion can be read per audience.
+ *   tips_popup_shown  The timed offer opened. The denominator for the two
+ *                     below, and the only way to tell a low completion rate
+ *                     from a popup nobody ever saw.
+ *   tips_popup_start  They began the form from inside it.
+ *   tips_popup_dismiss Closed without starting.
  *   tips_download     They took the PDF. Separate from survey_complete because
  *                     the two answer different questions: whether the exchange
  *                     was worth finishing, and whether what we gave back was
@@ -69,3 +74,6 @@ export type TrackEvent =
   | 'survey_step'
   | 'survey_complete'
   | 'tips_download'
+  | 'tips_popup_shown'
+  | 'tips_popup_start'
+  | 'tips_popup_dismiss'
