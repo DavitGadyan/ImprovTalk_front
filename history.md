@@ -273,9 +273,9 @@ permanent. `sessionStorage` is written on both paths, so the visit stays quiet
 even where `localStorage` throws — a private window is exactly where a popup
 that keeps coming back becomes a complaint.
 
-**`AFTER_MS` is currently 15 seconds for testing.** Restore it to `150_000`
-before production. `?dwell=<seconds>` overrides it per page load, so testing
-never needs a code change.
+**`AFTER_MS` is 150_000 — 2.5 minutes.** Do not commit a test value here;
+`?dwell=<seconds>` overrides it per page load instead, so testing never needs a
+code change.
 
 **Rules it must not break:**
 

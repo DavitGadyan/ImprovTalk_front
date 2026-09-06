@@ -13,14 +13,11 @@ import { track } from '@/lib/analytics'
 /**
  * Visible reading time before the offer opens, accumulated across pages.
  *
- * TEMPORARILY 15 SECONDS FOR TESTING — restore to 150_000 (2.5 minutes) before
- * this goes anywhere near production.
- *
- * `?dwell=<seconds>` overrides it for one page load, so the next round of
- * testing does not need a code change at all: /?dwell=5 fires almost at once,
- * and the production value stays untouched.
+ * 2.5 minutes. `?dwell=<seconds>` overrides it for one page load, so testing
+ * never needs a code change: /?dwell=5 fires almost at once and this value
+ * stays where it is.
  */
-const AFTER_MS = 15_000
+const AFTER_MS = 150_000
 
 function threshold(): number {
   if (typeof window === 'undefined') return AFTER_MS
