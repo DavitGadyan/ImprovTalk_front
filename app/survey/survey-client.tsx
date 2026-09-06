@@ -34,7 +34,7 @@ import { track } from '@/lib/analytics'
  */
 const TAIL = ['Style', 'About you', 'Where', 'Wishes', 'Done'] as const
 
-export function SurveyClient() {
+export function SurveyClient({ inDialog = false }: { inDialog?: boolean } = {}) {
   const [step, setStep] = useState(0)
   const [started, setStarted] = useState(false)
 
@@ -154,6 +154,7 @@ export function SurveyClient() {
         goal={goal}
         blend={blend}
         personaId={persona}
+        inDialog={inDialog}
         onRetake={() => {
           setDone(false)
           setStep(0)
@@ -373,11 +374,15 @@ function Result({
   goal,
   blend,
   personaId,
+  inDialog,
   onRetake,
 }: {
   goal: GoalSlug
   blend: Blend
   personaId: string | null
+  /** Inside the popup the download is the only action — a link out of a modal
+      loses the result, and "take it again" has nothing to return to. */
+  inDialog?: boolean
   onRetake: () => void
 }) {
   const g = goalBySlug(goal)!
@@ -455,7 +460,7 @@ function Result({
             <Button variant="solid" size="sm" onClick={onDownload} disabled={building}>
               {building ? 'Preparing…' : 'Download your tips'}
             </Button>
-            {g.page && (
+            {!inDialog && g.page && (
               <Button asChild variant="outline" size="sm">
                 <Link href={g.page}>See the app</Link>
               </Button>
@@ -464,13 +469,15 @@ function Result({
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={onRetake}
-        className="mt-8 text-[13px] text-subtle underline underline-offset-4 hover:text-ink"
-      >
-        Take it again
-      </button>
+      {!inDialog && (
+        <button
+          type="button"
+          onClick={onRetake}
+          className="mt-8 text-[13px] text-subtle underline underline-offset-4 hover:text-ink"
+        >
+          Take it again
+        </button>
+      )}
     </div>
   )
 }

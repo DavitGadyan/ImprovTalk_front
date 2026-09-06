@@ -129,6 +129,19 @@ export function TipsPopup() {
     else if (!open && el.open) el.close()
   }, [open])
 
+  /* showModal() makes the page inert but does not stop it scrolling — a wheel
+     or a trackpad swipe still moves the document behind the dialog. Lock the
+     body while it is open and put the previous value back afterwards, rather
+     than assuming it was ''. */
+  useEffect(() => {
+    if (!open) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = prev
+    }
+  }, [open])
+
   /* Closing by any route — the Close button, Escape, a backdrop click — ends it
      for this visit. Only the explicit No button ends it for good. The dwell
      counter is wiped either way, so nothing can restart it mid-visit. */
@@ -174,15 +187,16 @@ export function TipsPopup() {
               close('session')
             }}
             aria-label="Close"
-            className="-mr-2 -mt-1 rounded-full px-3 py-1.5 text-[13px] text-subtle transition-colors hover:text-ink"
+            className="-mr-2 -mt-2 flex size-9 shrink-0 items-center justify-center rounded-full text-[22px] leading-none text-[#ff375f] transition-colors hover:bg-[#ff375f]/12 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff375f]"
           >
-            Close
+            {/* A multiplication sign, not a letter x — it has even arms. */}
+            &times;
           </button>
         </div>
 
         {started ? (
           <div className="mt-8">
-            <SurveyClient />
+            <SurveyClient inDialog />
           </div>
         ) : (
           <div className="mt-7">
@@ -208,7 +222,7 @@ export function TipsPopup() {
               <li>· Where to begin in the app</li>
             </ul>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-8">
               <Button
                 variant="brand"
                 onClick={() => {
@@ -218,21 +232,11 @@ export function TipsPopup() {
               >
                 Get my tips
               </Button>
-              <button
-                type="button"
-                onClick={() => {
-                  track('tips_popup_dismiss')
-                  close('forever')
-                }}
-                className="rounded-full border border-line-strong px-5 py-2.5 text-[13.5px] font-medium text-muted transition-colors hover:border-muted hover:text-ink"
-              >
-                No, don&rsquo;t ask again
-              </button>
             </div>
 
             <p className="mt-6 border-t border-line pt-5 text-[12.5px] leading-relaxed text-subtle">
               No email address, no account. Nothing here identifies you, and the PDF is
-              built in your own browser. Say no and this will not open again.
+              built in your own browser. Close it and it will not open again this visit.
             </p>
           </div>
         )}

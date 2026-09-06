@@ -265,7 +265,24 @@ total lives in `localStorage`, and only *visible* time counts — a tab left ope
 in the background has not been reading, and firing a modal into it means
 returning to a dialog over a forgotten page.
 
-**Two strengths of no.** Closing it — the Close button, Escape, a backdrop
+**The red x is the only way out.** The offer screen has one action, "Get my
+tips", and the x. The second dismiss button was removed, and inside the dialog
+the result screen drops "See the app" and "Take it again" — a link out of a
+modal loses the result, and there is nothing to go back to.
+
+**`showModal()` does not stop the page scrolling.** It makes the background
+inert, but a wheel or trackpad swipe still moves the document behind the
+dialog. `document.body.style.overflow` is locked while open and the previous
+value restored on close, rather than assuming it was `''`.
+
+**The PDF prints on white.** The dark canvas is right for a screen and wrong for
+a document: it lays down a solid block of toner, photocopies badly and reads as
+a slide. The feature hues were picked for a dark background, so amber and green
+fall under 3:1 on paper — bars and rules keep the true colour, anything set as
+type takes a 0.72 shade. The top accent is inset to the margin, because most
+printers cannot reach the paper edge.
+
+**Two strengths of no.** Closing it — the x, Escape, a backdrop
 click — writes `sessionStorage` only: quiet for the rest of the visit, offered
 again next time, because a closed dialog is not a refusal. The **No, don't ask
 again** button and a completed survey write `localStorage` as well and are

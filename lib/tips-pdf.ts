@@ -24,12 +24,31 @@ import {
   type GoalSlug,
 } from '@/content/survey'
 
-const CANVAS = rgb('#0b1220')
-const INK = rgb('#f8fafc')
-const INK_SOFT = rgb('#cbd5e1')
-const MUTED = rgb('#94a3b8')
-const SUBTLE = rgb('#7c8ba1')
-const LINE = rgb('#243044')
+/*
+ * Printed on paper, not rendered on the site.
+ *
+ * The dark canvas is right for a screen and wrong for a document: it prints as
+ * a solid block of toner, photocopies badly, and reads as a slide rather than
+ * as something you would keep. This is a white sheet with the brand hue used
+ * only for rules, numbers and the one line at the top.
+ */
+const PAPER = rgb('#ffffff')
+const INK = rgb('#111827')
+const INK_SOFT = rgb('#374151')
+const MUTED = rgb('#4b5563')
+const SUBTLE = rgb('#6b7280')
+const LINE = rgb('#e5e7eb')
+const LINE_STRONG = rgb('#d1d5db')
+
+/**
+ * The feature hues were picked for a dark background. Amber and green in
+ * particular fall under 3:1 on white, so anything set as *text* gets a
+ * darkened variant while bars and rules keep the true colour.
+ */
+function shade(hex: string, factor: number): Rgb {
+  const [r, g, b] = rgb(hex)
+  return [r * factor, g * factor, b * factor]
+}
 
 const MARGIN = 46
 const COL = A4.width - MARGIN * 2
@@ -37,7 +56,7 @@ const COL = A4.width - MARGIN * 2
 /** The footer sits on every page, so it is drawn rather than positioned once. */
 function paintFooter(doc: Doc, hue: Rgb) {
   const y = A4.height - MARGIN + 6
-  doc.rect(0, A4.height - 5, A4.width, 5, hue)
+  doc.rect(MARGIN, y - 16, A4.width - MARGIN * 2, 0.75, LINE)
   doc.line('improvtalk.vip', MARGIN, y, { size: 8.5, font: 'bold', color: SUBTLE })
   doc.line(
     'Generated from your own answers. Nothing here identifies you.',
@@ -53,8 +72,10 @@ function layout(doc: Doc, hue: Rgb) {
   /* Background, top rule and footer are page furniture — every page gets them,
      including the ones a mid-section overflow creates. */
   const paint = () => {
-    doc.rect(0, 0, A4.width, A4.height, CANVAS)
-    doc.rect(0, 0, A4.width, 5, hue)
+    doc.rect(0, 0, A4.width, A4.height, PAPER)
+    /* Inset, not full-bleed: most printers cannot reach the paper edge, so a
+       bar at y=0 either clips or prints as a grey smear. */
+    doc.rect(MARGIN, MARGIN - 16, 46, 3, hue)
     paintFooter(doc, hue)
   }
   paint()
@@ -100,6 +121,8 @@ export function buildTipsPdf({ goal, personaId, blend }: TipsInput): Uint8Array 
   const persona = personaById(personaId)
   const top = ranked(blend)[0]!
   const hue = rgb(tips.hue)
+  /* Bars and rules keep the true hue; type takes the darkened one. */
+  const hueInk = shade(tips.hue, 0.72)
 
   const doc = createDoc(A4)
   const L = layout(doc, hue)
@@ -117,7 +140,7 @@ export function buildTipsPdf({ goal, personaId, blend }: TipsInput): Uint8Array 
 
   /* ------------------------------------------------------------- header -- */
 
-  doc.line('IMPROVTALK', MARGIN, L.y, { size: 8.5, font: 'bold', color: hue })
+  doc.line('IMPROVTALK', MARGIN, L.y, { size: 8.5, font: 'bold', color: hueInk })
   L.move(32)
   doc.line(tips.title, MARGIN, L.y, { size: 26, font: 'bold', color: INK })
   L.move(19)
@@ -154,7 +177,7 @@ export function buildTipsPdf({ goal, personaId, blend }: TipsInput): Uint8Array 
   tips.moves.forEach(([title, text], i) => {
     L.need(62)
     const n = String(i + 1).padStart(2, '0')
-    doc.line(n, MARGIN, L.y, { size: 9.6, font: 'bold', color: hue })
+    doc.line(n, MARGIN, L.y, { size: 9.6, font: 'bold', color: hueInk })
     doc.line(title, MARGIN + 24, L.y, { size: 11.2, font: 'bold', color: INK })
     L.move(16)
     L.set(
@@ -173,7 +196,7 @@ export function buildTipsPdf({ goal, personaId, blend }: TipsInput): Uint8Array 
   /* ------------------------------------------------------------- what next */
 
   L.need(110)
-  doc.rect(MARGIN, L.y, COL, 1, LINE)
+  doc.rect(MARGIN, L.y, COL, 0.75, LINE_STRONG)
   L.move(24)
 
   label('Start with this one')
@@ -190,7 +213,7 @@ export function buildTipsPdf({ goal, personaId, blend }: TipsInput): Uint8Array 
 
   L.page()
 
-  doc.line('YOUR PRACTICE PLAN', MARGIN, L.y, { size: 8.5, font: 'bold', color: hue })
+  doc.line('YOUR PRACTICE PLAN', MARGIN, L.y, { size: 8.5, font: 'bold', color: hueInk })
   L.move(28)
   doc.line('Three scenarios, in this order', MARGIN, L.y, { size: 20, font: 'bold', color: INK })
   L.move(20)
@@ -203,7 +226,7 @@ export function buildTipsPdf({ goal, personaId, blend }: TipsInput): Uint8Array 
   planFor(g.tips, top.key).forEach((step, i) => {
     L.need(96)
     const n = String(i + 1).padStart(2, '0')
-    doc.line(n, MARGIN, L.y, { size: 9.6, font: 'bold', color: hue })
+    doc.line(n, MARGIN, L.y, { size: 9.6, font: 'bold', color: hueInk })
     doc.line(step.scenario.title, MARGIN + 24, L.y, { size: 11.8, font: 'bold', color: INK })
     L.move(14)
     doc.line(
@@ -225,7 +248,7 @@ export function buildTipsPdf({ goal, personaId, blend }: TipsInput): Uint8Array 
   })
 
   L.move(8)
-  doc.rect(MARGIN, L.y, COL, 1, LINE)
+  doc.rect(MARGIN, L.y, COL, 0.75, LINE_STRONG)
   L.move(26)
 
   label('How to open')
@@ -249,7 +272,7 @@ export function buildTipsPdf({ goal, personaId, blend }: TipsInput): Uint8Array 
 
   L.page()
 
-  doc.line('THE PARTS THAT DO NOT CHANGE', MARGIN, L.y, { size: 8.5, font: 'bold', color: hue })
+  doc.line('THE PARTS THAT DO NOT CHANGE', MARGIN, L.y, { size: 8.5, font: 'bold', color: hueInk })
   L.move(28)
   doc.line('Four rules for your style', MARGIN, L.y, { size: 20, font: 'bold', color: INK })
   L.move(24)
@@ -263,13 +286,13 @@ export function buildTipsPdf({ goal, personaId, blend }: TipsInput): Uint8Array 
   })
 
   L.move(10)
-  doc.rect(MARGIN, L.y, COL, 1, LINE)
+  doc.rect(MARGIN, L.y, COL, 0.75, LINE_STRONG)
   L.move(26)
 
   label('The three things underneath all of it')
   CORE.forEach(([title, text]) => {
     L.need(44)
-    doc.line(title, MARGIN, L.y, { size: 10.6, font: 'bold', color: hue })
+    doc.line(title, MARGIN, L.y, { size: 10.6, font: 'bold', color: hueInk })
     L.move(14)
     L.set(doc.paragraph(text, MARGIN, L.y, { size: 9.7, color: MUTED, width: COL, leading: 13.6 }))
     L.move(11)
