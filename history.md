@@ -405,6 +405,59 @@ would otherwise lock out everyone sharing it.
 identifier that would let us recognise you again." That is now false, so it says
 what is actually stored and why.
 
+## Site audit — what it found
+
+**White text on the primary CTA measured 2.20:1.** `--gradient-brand` runs
+`#ff9500 → #ff2d55 → #af52de → #5856d6`; white clears AA on only the last stop,
+and `brand-pan` swept the label across all four every six seconds, on every
+page. `--gradient-brand-cta` drops the orange (darkening it to pass turns it
+brown) and eases the other two: worst point across the ramp, sampled every 1%,
+is **4.60:1**. The full gradient still carries the hero rule and the logo.
+
+**`focus:outline-none` was deleting the focus ring** on six survey controls.
+The utility layer beats the `@layer base` `:focus-visible` rule, so nothing but
+a 1px border change remained. Verified in the compiled CSS, not just the source.
+
+**The tips popup could destroy a finished survey.** `close()` writes a permanent
+dismissal and was wired to Escape, the x and the backdrop — but only the
+backdrop checked `started`. Now every exit asks first.
+
+Two bugs the *fix* introduced, both caught by testing rather than reading:
+
+1. Rendering the confirm **instead of** the form unmounted `SurveyClient`, so
+   "Keep going" came back to question one with every answer gone — precisely
+   what the guard existed to prevent. The form is hidden, never unmounted.
+2. The guard listens to the dialog's own `close` event, so an intentional close
+   was caught by it and immediately re-opened. An `allowClose` ref lets a
+   deliberate close through.
+
+**`submitSurvey`'s result was thrown away.** `SubmitResult` was consumed nowhere
+in the repo: a 500, a CORS failure or an ad blocker discarded the answers and
+still showed confetti. Note which way round it was — the failure the visitor
+*cannot* act on was disclosed, and the one they could retry was hidden.
+
+**"Take it again" reset nothing** — it cleared neither the storage key nor any
+field state, so a retake came back pre-filled with consent still ticked, and
+finishing it wrote a second row for the same person.
+
+**`/about/` claimed "fourteen curated sources".** There are **13** — counted from
+`knowledge_base/*.json`. Em-dash density on that page was 1 per 78 words against
+roughly 1 per 1,000 in edited prose; it is now 0.
+
+## Learn, and where its numbers come from
+
+The Learn hub is `apps/mobile/app/learn.tsx`. Counted, not estimated:
+
+- **26 catalogues**, **2,571 reference items** across art, music, film, places,
+  people, gestures and symbols (`packages/shared/reference/*.json`).
+- **13 sources distilled to 104 principles** — the `principles` arrays in
+  `knowledge_base/*.json` summing to 5+9+6+19+8+5+5+5+5+7+9+5+16.
+
+**Do not write "dozens of books".** Thirteen is not dozens, and two of the
+thirteen are field-data sets rather than books, which is why the copy says
+*sources*. The files are named after the works they distil and none of those
+names appear anywhere public.
+
 ## The deploy that succeeds while the site serves a README
 
 **Symptom:** `improvtalk.vip/` returns 200 with the title

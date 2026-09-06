@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="container-page flex min-h-dvh flex-col items-center justify-center py-16 text-center">
+    <main id="main" className="container-page flex min-h-dvh flex-col items-center justify-center py-16 text-center">
       <LogoMark size={56} className="rounded-[22.5%]" />
       <h1 className="display-md mt-7 text-ink">This page went quiet.</h1>
       <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-muted">

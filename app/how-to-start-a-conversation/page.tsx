@@ -229,7 +229,7 @@ export default function Page() {
       <p>
         The fix is volume somewhere a bad attempt costs nothing. Say the same opener
         twenty times, change one thing each time, and hear which version sounds like a
-        person rather than a script. The twentieth is not braver than the first — it is
+        person rather than a script. The twentieth is no braver than the first. It is
         just more practised, and from the outside those look identical.
       </p>
             </div>

@@ -308,7 +308,7 @@ export const PERSONAS: Persona[] = [
     id: 'late-starter',
     goal: 'dating',
     label: 'I have not really dated much',
-    hint: 'Not a technique problem — a practice problem.',
+    hint: 'Less a technique problem than a practice problem.',
     situation:
       'You did not get the decade of low-stakes practice most people got, and the gap that opens is one of repetitions rather than of anything about you. Repetitions are the one part of this that can be manufactured.',
   },
@@ -318,7 +318,7 @@ export const PERSONAS: Persona[] = [
     label: 'Back out after a long relationship',
     hint: 'You were fine at this once.',
     situation:
-      'You are resuming. What moved on is the format, not your ability to talk to someone, and the format is the easy half — it is the reps you have not had in years that account for the rest.',
+      'You are resuming. What moved on is the format, not your ability to talk to someone, and the format is the easy half. What accounts for the rest is the reps you have not had in years.',
   },
   {
     id: 'apps-not-in-person',
@@ -404,7 +404,7 @@ export const PERSONAS: Persona[] = [
     label: 'Client calls and pitches',
     hint: 'You talk for a living, and delivery costs deals.',
     situation:
-      'You do this professionally, so the gap is not knowledge — it is that pace, filler and rambling are invisible to you in the moment and obvious on a recording. You already measure everything else.',
+      'You do this professionally, so the gap is not knowledge. Pace, filler and rambling are invisible to you in the moment and obvious on a recording. You already measure everything else.',
   },
   {
     id: 'leading-a-team',

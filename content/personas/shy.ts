@@ -56,9 +56,9 @@ export const shy: Persona = {
     proof: 'Keep practising and the score goes up.',
   },
   inside: {
-    label: 'What you get',
-    title: 'Plenty to practise with.',
-    intro: 'You will not run out.',
+    label: 'Learn and practise',
+    title: 'Learn what to say, then say it.',
+    intro: 'The techniques, and enough to talk about that you will not run out.',
   },
   faq: [
     { q: 'Do I have to talk out loud?', a: 'Yes. You hold a button and speak, and it speaks back. There is no typing.' },

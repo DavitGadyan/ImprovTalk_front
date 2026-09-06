@@ -197,6 +197,6 @@ export const PRINCIPLES: Record<ColorKey, readonly (readonly [string, string])[]
     ['Make the ask while it is alive', 'You will wait for a better moment. The better moment is a worse moment that has cooled.'],
     ['Ask without over-qualifying', 'Your instinct is to give them an exit inside the question. Give the question, then the exit.'],
     ['Slow is your advantage', 'Calm, unhurried speech is what most people are trying to learn. Do not trade it for pace.'],
-    ['Leave cleanly', 'Reading a no early is the skill. Noticing it and going warmly is not a failure — it is the outcome.'],
+    ['Leave cleanly', 'Reading a no early is the skill. Noticing it and going warmly is not a failure. That is the outcome.'],
   ],
 }

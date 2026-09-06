@@ -57,9 +57,9 @@ export const rusty: Persona = {
     proof: 'Six weeks and the line moves.',
   },
   inside: {
-    label: 'What you get',
-    title: 'Plenty to practise with.',
-    intro: 'You will not run out.',
+    label: 'Learn and practise',
+    title: 'Plenty to talk about again.',
+    intro: 'The techniques, and enough material that nothing has to be forced.',
   },
   faq: [
     { q: 'Do I have to talk out loud?', a: 'Yes. You hold a button and speak, and she speaks back. There is no typing.' },

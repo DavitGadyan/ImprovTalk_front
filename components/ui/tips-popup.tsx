@@ -135,6 +135,8 @@ export function TipsPopup() {
   const ref = useRef<HTMLDialogElement>(null)
   const [open, setOpen] = useState(false)
   const [started, setStarted] = useState(false)
+  /* Raised instead of closing when there are answers to lose. */
+  const [confirming, setConfirming] = useState(false)
 
   /*
    * Diagnosis, because the failure is silent by nature: a popup that does not
@@ -205,38 +207,70 @@ export function TipsPopup() {
     }
   }, [open])
 
-  /* Every route out — the x, Escape, a backdrop click — is final. The dwell
-     counter is wiped too, so nothing can restart it. */
+  /* Every route out is final, so anything with answers in it asks first. The
+     guard used to be on the backdrop only, which meant Escape or the x six
+     questions in destroyed the lot and suppressed the popup for good. */
+  /* Set before an intentional close so the dialog's own close event, which the
+     guard below also listens to, does not treat it as an Escape and re-open. */
+  const allowClose = useRef(false)
+
   const close = useCallback(() => {
+    allowClose.current = true
     setOpen(false)
+    setConfirming(false)
     clearDwell()
     remember()
   }, [])
+
+  const requestClose = useCallback(() => {
+    if (started) setConfirming(true)
+    else close()
+  }, [started, close])
 
   const onBackdrop = useCallback(
     (e: React.MouseEvent<HTMLDialogElement>) => {
       /* Only the offer screen closes on a backdrop click. Losing four answered
          questions to a stray click is the worst thing this component could do. */
-      if (e.target === ref.current && !started) {
-        track('tips_popup_dismiss')
-        close()
+      if (e.target === ref.current) {
+        if (!started) track('tips_popup_dismiss')
+        requestClose()
       }
     },
-    [close, started],
+    [requestClose, started],
   )
 
   return (
     <dialog
       ref={ref}
-      onClose={close}
+      /* Escape fires the dialog's own close event; re-open it if there is
+         something to confirm, so the keypress cannot bypass the guard. */
+      onClose={() => {
+        if (allowClose.current) {
+          allowClose.current = false
+          return
+        }
+        if (started) {
+          setConfirming(true)
+          ref.current?.showModal()
+        } else {
+          close()
+        }
+      }}
       onClick={onBackdrop}
-      aria-labelledby="tips-title"
+      aria-labelledby="tips-dialog-title"
       /* m-auto is not decoration: the UA stylesheet centres a modal <dialog>
          with margin:auto, and Tailwind's preflight resets margin to 0, which
          pins it to the top-left corner. */
       className="pop-in relative m-auto max-h-[calc(100dvh-2rem)] w-[min(40rem,calc(100vw-2rem))] overflow-y-auto rounded-2xl border border-line bg-surface p-0 text-ink backdrop:bg-black/70 backdrop:backdrop-blur-sm"
     >
       <div className="p-7 md:p-9">
+        {/* The visible heading changes with the branch — offer, form, confirm,
+            result — so the dialog's accessible name lives here instead. It used
+            to point at the offer heading, which unmounts the moment the form
+            starts, leaving the dialog nameless for the whole survey. */}
+        <h2 id="tips-dialog-title" className="sr-only">
+          Free personal tips from ImprovTalk
+        </h2>
         <div className="flex items-start justify-between gap-6">
           <div className="flex items-center gap-3.5">
             <LogoMark size={38} />
@@ -246,7 +280,7 @@ export function TipsPopup() {
             type="button"
             onClick={() => {
               if (!started) track('tips_popup_dismiss')
-              close()
+              requestClose()
             }}
             aria-label="Close"
             className="-mr-2 -mt-2 flex size-9 shrink-0 items-center justify-center rounded-full text-[22px] leading-none text-[#ff375f] transition-colors hover:bg-[#ff375f]/12 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff375f]"
@@ -256,6 +290,43 @@ export function TipsPopup() {
           </button>
         </div>
 
+        {/* A closed <dialog> still ships its contents in the exported HTML, so
+            the offer used to appear on all 22 pages for anything that reads
+            markup rather than pixels. Nothing renders until it opens. */}
+        {open && confirming && (
+          <div className="mt-7">
+            <h2 className="display-md text-ink">
+              Discard your answers?
+            </h2>
+            <p className="mt-4 text-[15.5px] leading-relaxed text-ink-soft">
+              You have already answered some questions. Closing now throws them away,
+              and this will not open again.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Button variant="brand" onClick={() => setConfirming(false)}>
+                Keep going
+              </Button>
+              <button
+                type="button"
+                onClick={() => {
+                  track('tips_popup_dismiss')
+                  close()
+                }}
+                className="rounded-full border border-line-strong px-5 py-2.5 text-[13.5px] font-medium text-muted transition-colors hover:border-muted hover:text-ink"
+              >
+                Discard
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/*
+          Hidden rather than unmounted. Rendering the confirm *instead of* the
+          form threw away every answer the moment it appeared, so "Keep going"
+          came back to question one — the exact loss the guard exists to prevent.
+        */}
+        {open && (
+        <div hidden={confirming}>
         {started ? (
           <div className="mt-8">
             <SurveyClient inDialog />
@@ -268,7 +339,7 @@ export function TipsPopup() {
               sense — one word ("You are invited") makes it true if App Review
               or a consumer-protection question ever lands on it.
             */}
-            <h2 id="tips-title" className="display-md text-ink">
+            <h2 className="display-md text-ink">
               You have been selected for a personal assessment
             </h2>
             <p className="mt-3 text-[15.5px] leading-relaxed text-ink-soft">
@@ -315,6 +386,8 @@ export function TipsPopup() {
               </Button>
             </div>
           </div>
+        )}
+        </div>
         )}
       </div>
     </dialog>

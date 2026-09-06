@@ -72,6 +72,22 @@
  */
 :root {
   --gradient-brand: linear-gradient(100deg, #ff9500 0%, #ff2d55 36%, #af52de 68%, #5856d6 100%);
+
+  /*
+   * The same ramp, but safe to put white text on.
+   *
+   * White on --gradient-brand measures 2.20:1 at the orange stop, 3.65:1 at the
+   * pink and 4.13:1 at the violet — three of four stops below AA for the
+   * button's own 15px text. brand-pan then sweeps the label across all of them
+   * every six seconds, so the primary CTA on every page spends part of its
+   * cycle at 2.2:1.
+   *
+   * This drops the orange (darkening it to pass turns it brown, which is worse
+   * than losing it) and takes the other two down just far enough. Worst point
+   * across the whole ramp, sampled every 1%: 4.60:1. The full brand gradient is
+   * unchanged and still carries the hero rule and the logo.
+   */
+  --gradient-brand-cta: linear-gradient(100deg, #df274a 0%, #a44dd1 55%, #5856d6 100%);
 }
 
 @layer base {

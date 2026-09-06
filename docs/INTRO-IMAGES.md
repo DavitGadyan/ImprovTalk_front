@@ -437,8 +437,8 @@ DEPTH
 Three clearly separated planes: an out-of-focus element at the near edge of the
 frame, the subjects sharp in the middle distance, and a background falling well
 behind them. 35mm at a wide aperture so focus falls off naturally on both sides.
-Air in the scene: faint haze catching the light, specular highlights on glass
-and wet surfaces, contact shadows grounding everyone to the floor. Foreground
+Air in the scene: sea haze catching the low sun, specular highlights on wet
+sand and the water's edge, contact shadows grounding both of them to the sand. Foreground
 elements stay at the frame edges and inside the subjects' own third — nothing
 may cross the clear band. Depth comes from real lens behaviour, never from a
 render.

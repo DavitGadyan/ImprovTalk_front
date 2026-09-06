@@ -57,9 +57,9 @@ export const social: Persona = {
     proof: 'Keep practising and the score goes up.',
   },
   inside: {
-    label: 'What you get',
-    title: 'Somewhere new every time.',
-    intro: 'Enough places and people that it never becomes one memorised script.',
+    label: 'Learn and practise',
+    title: 'Something to say, in any room.',
+    intro: 'The techniques, and 2,766 things worth knowing about.',
   },
   faq: [
     { q: 'Do I have to talk out loud?', a: 'Yes. You hold a button and speak, and she speaks back. There is no typing.' },

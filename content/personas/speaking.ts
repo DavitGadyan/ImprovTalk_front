@@ -53,9 +53,9 @@ export const speaking: Persona = {
     proof: 'Keep practising and the numbers move.',
   },
   inside: {
-    label: 'What you get',
-    title: 'The situations that come up.',
-    intro: 'Interviews, networking, hard feedback, explaining something tricky.',
+    label: 'Learn and practise',
+    title: 'Learn the moves, then use them.',
+    intro: 'The techniques, and enough range to carry any room.',
   },
   faq: [
     { q: 'Do I have to talk out loud?', a: 'Yes. You cannot practise how you sound in your head. There is no typing.' },

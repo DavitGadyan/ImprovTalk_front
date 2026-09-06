@@ -41,7 +41,7 @@ export const TIPS: Tips[] = [
       ['Practise the landing', 'Say something, then close your mouth completely. The silence is shorter than it feels and it is where the other person joins in. This is the hardest of the four and the one that changes most.'],
     ],
     first:
-      'Say one opener out loud twenty times, changing one word each time. The twentieth is not braver than the first — it is more practised, and from the outside those look identical.',
+      'Say one opener out loud twenty times, changing one word each time. The twentieth is no braver than the first. It is more practised, and from the outside those look the same.',
     scenario:
       'Start in the café scene. Short window, low stakes, and the one most like the situations you actually freeze in.',
   },
@@ -59,7 +59,7 @@ export const TIPS: Tips[] = [
       ['Do not let anyone rescue you', 'The moment you hesitate, a kind bilingual person switches to English to help. Those four seconds of struggle were the rep. Ask people to stay in the language; most are relieved to be told.'],
     ],
     first:
-      'Accept a worse sentence. The three-word answer is not caused by a small vocabulary — it is caused by rejecting the imperfect sentence you already had at second two.',
+      'Accept a worse sentence. A small vocabulary is not what produces the three-word answer. Rejecting the imperfect sentence you already had at second two is.',
     scenario:
       'Pick your weaker language and start in the Barcelona café. The partner stays in the language you chose even when you stall, which is the entire point.',
   },
@@ -123,7 +123,7 @@ export const TIPS: Tips[] = [
     title: 'Getting it back',
     who: 'For: getting back after a break',
     situation:
-      'Nothing changed about you. Only how often you get to practise. This is not a skill to learn again — it is a habit that needs using.',
+      'Nothing changed about you. Only how often you get to practise. This is not a skill to pick up again. It is a habit that needs using.',
     moves: [
       ['Warm up before you go out', 'Two goes before you leave the house, so the first real conversation of the evening is not also the cold one. This is the highest-value single change on the list.'],
       ['Three minutes beats one big night', 'A short go every day rebuilds the habit faster than one hard evening a fortnight, and costs far less to keep doing.'],

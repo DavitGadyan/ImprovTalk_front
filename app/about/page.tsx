@@ -43,9 +43,8 @@ export default function AboutPage() {
       <h2>What it is</h2>
       <p>
         ImprovTalk is a voice-first conversation coach for iPhone. You hold a button and
-        talk to an AI that answers back in real time, in a scene you pick — a café
-        queue, a gym, a networking room — and afterwards you get a score with the
-        working shown.
+        talk to an AI that answers back in real time, in a scene you pick: a café queue,
+        a gym, a networking room. Afterwards you get a score with the working shown.
       </p>
       <p>
         It exists because conversation is a motor skill and real life is a terrible place
@@ -56,7 +55,7 @@ export default function AboutPage() {
       <h2>Who makes it</h2>
       <p>
         ImprovTalk is built and run independently, not by a large company. There is no
-        content team and no outsourced blog — everything on this site is written by the
+        content team and no outsourced blog. Everything on this site is written by the
         people building the app, which is also why it can tell you exactly which line of
         the scoring pipeline a number comes from.
       </p>
@@ -67,9 +66,9 @@ export default function AboutPage() {
 
       <h2>What the method is built on</h2>
       <p>
-        The conversation technique the app coaches — and everything in{' '}
-        <Link href="/blog/">the writing here</Link> — comes from a distilled corpus we
-        assembled: fourteen curated sources on approach, framing, humour, observation and
+        The conversation technique the app coaches, and everything in{' '}
+        <Link href="/blog/">the writing here</Link>, comes from a corpus we assembled
+        ourselves: thirteen sources on approach, framing, humour, observation and
         handling a no, classified into rules rather than kept as prose. The single
         largest source was a set of several hundred short coaching videos, topic-tagged
         so recurring principles could be separated from one-off opinions.
@@ -86,8 +85,8 @@ export default function AboutPage() {
         </li>
         <li>
           {stats.countries} nationalities, each with a phonetic greeting and a joke, which
-          shape who the AI partner is and how she sounds — they change her accent, not the
-          language she speaks.
+          shape who the AI partner is and how she sounds. They change her accent, not
+          the language she speaks.
         </li>
         <li>
           A reference library of {TOTAL_LIBRARY_ITEMS.toLocaleString('en')} items across
@@ -111,8 +110,8 @@ export default function AboutPage() {
         .
       </p>
       <p>
-        <strong>The delivery</strong> is measured from the recording itself — not
-        inferred, measured — and combines{' '}
+        <strong>The delivery</strong> is measured from the recording itself rather than
+        inferred, and combines{' '}
         {deliveryMeters.map((m, i) => (
           <span key={m.name}>
             {i > 0 ? (i === deliveryMeters.length - 1 ? ' and ' : ', ') : ''}
@@ -136,7 +135,7 @@ export default function AboutPage() {
       <ul>
         <li>
           <strong>The score is not fully deterministic.</strong> The measured delivery
-          half is — the same recording produces the same numbers. The rubric half is a
+          half is: the same recording produces the same numbers. The rubric half is a
           model judgement made the same way every time, which is not the same thing as
           identical every time.
         </li>
@@ -151,7 +150,7 @@ export default function AboutPage() {
         <li>
           <strong>No numbers we have not counted.</strong> Every figure on this site is
           counted from the app&rsquo;s own data files. When a count changes, the site
-          changes — we corrected one downward recently rather than leave it flattering.
+          changes. We corrected one downward recently rather than leave it flattering.
         </li>
       </ul>
 
@@ -163,7 +162,7 @@ export default function AboutPage() {
       </p>
       <p>
         The app will not coach coercion, and it is built to decline it. That is a product
-        decision, not a legal disclaimer — reading a no is the actual skill.
+        decision, not a legal disclaimer. Reading a no is the actual skill.
       </p>
 
       <h2>Privacy, briefly</h2>

@@ -37,6 +37,19 @@ export const catalogs: Catalog[] = [
 /** 2,571 reference items + 195 countries. Verified by counting the JSON. */
 export const TOTAL_LIBRARY_ITEMS = 2766
 
+/**
+ * The distilled method behind the Learn hub.
+ *
+ * Counted from ImprovTalk/packages/shared/pickup_simulator/knowledge_base/*.json:
+ * 13 source files, and the `principles` array in each summing to 104
+ * (5+9+6+19+8+5+5+5+5+7+9+5+16). Two of the thirteen are field-data sets rather
+ * than books, which is why the copy says "sources" and never "books".
+ *
+ * The sources are named in those filenames and are NOT named on the site. The
+ * distillation is ours; the material is not.
+ */
+export const KNOWLEDGE = { sources: 13, principles: 104 } as const
+
 /** Numbers used in the copy. All verified against the repo. */
 export const stats = {
   liveScenarios: 70,

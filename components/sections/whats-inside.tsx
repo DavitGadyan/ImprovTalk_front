@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Section, Reveal } from '@/components/ui/section'
 import { AnimatedNumber } from '@/components/ui/animated-number'
-import { catalogs, stats, TOTAL_LIBRARY_ITEMS } from '@/content/catalogs'
+import { KNOWLEDGE, catalogs, stats, TOTAL_LIBRARY_ITEMS } from '@/content/catalogs'
 import { fadeUp, staggerFast, viewportOnce } from '@/lib/motion'
 import type { Persona } from '@/content/personas'
 
@@ -21,9 +21,35 @@ import type { Persona } from '@/content/personas'
  */
 const headline = [
   { value: stats.liveScenarios, label: 'live scenarios' },
-  { value: stats.simScenarios, label: 'simulator runs' },
+  { value: KNOWLEDGE.principles, label: 'techniques to learn' },
   { value: TOTAL_LIBRARY_ITEMS, label: 'things to talk about' },
   { value: 3, label: 'languages' },
+]
+
+/*
+ * The Learn half of this section.
+ *
+ * Two different things sit under one heading and they answer different
+ * questions: the method teaches you *how* to talk, the library gives you
+ * *something* to talk about. Stating them separately is the point — the
+ * catalogue counts alone read as trivia rather than as a reason to open the app.
+ */
+const learn = [
+  {
+    title: `${KNOWLEDGE.principles} techniques, one at a time`,
+    body: `Distilled from ${KNOWLEDGE.sources} sources on conversation, rapport, humour and reading a room. You get the core of a shelf of books without reading the shelf, and each one arrives in the scene where you would actually use it.`,
+    hue: 'var(--color-learn)',
+  },
+  {
+    title: 'Art, music, film, places, people',
+    body: 'Paintings and sculpture, songs and genres, films and the scenes worth quoting, world attractions, gestures, symbols, what jobs are really like. Enough to have something to say when the conversation turns to any of it.',
+    hue: 'var(--color-accent)',
+  },
+  {
+    title: 'Read the room, on purpose',
+    body: 'Deduction, gestures, accents, insider terms, what different countries do differently. The observation half of a conversation, which is the half nobody teaches.',
+    hue: 'var(--color-simulate)',
+  },
 ]
 
 export function WhatsInside({ persona, index }: { persona: Persona; index: number }) {
@@ -66,6 +92,26 @@ export function WhatsInside({ persona, index }: { persona: Persona; index: numbe
           </motion.div>
         ))}
       </motion.dl>
+
+      <motion.div
+        variants={staggerFast}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        className="mb-14 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3"
+      >
+        {learn.map((l) => (
+          <motion.div key={l.title} variants={fadeUp} className="bg-canvas p-6">
+            <span
+              aria-hidden="true"
+              className="mb-4 block h-0.5 w-9 rounded-full"
+              style={{ background: l.hue }}
+            />
+            <h3 className="text-[17px] font-semibold text-ink">{l.title}</h3>
+            <p className="mt-2.5 text-[14.5px] leading-relaxed text-muted">{l.body}</p>
+          </motion.div>
+        ))}
+      </motion.div>
 
       <motion.ul
         variants={staggerFast}

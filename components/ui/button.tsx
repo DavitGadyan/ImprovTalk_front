@@ -20,7 +20,7 @@ const variants: Record<Variant, string> = {
    * brightens instead.
    */
   brand:
-    'text-white [background-image:var(--gradient-brand)] bg-[length:200%_100%] ' +
+    'text-white [background-image:var(--gradient-brand-cta)] bg-[length:200%_100%] ' +
     // The gradient drifts across itself. The attention halo is deliberately NOT
     // here: this variant is also used by the consent banner's Accept button, and
     // a pulsing Accept is a consent dark pattern — visual pressure on a choice

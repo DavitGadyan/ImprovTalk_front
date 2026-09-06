@@ -28,14 +28,13 @@ export const APP_STORE_URL = ''
  * would look fine to you because you are already signed in.
  */
 /*
- * Public TestFlight link.
- *
- * As of 31 Aug 2026 this answers "This beta isn't accepting any new testers
- * right now" — a public link only starts accepting once an external group has a
- * build that has passed Apple's Beta App Review. It is shipped anyway by
- * choice, so the email form stays visible beside it as a working path until the
- * beta opens. Re-check in a private window, not on your own signed-in device.
- */
+   * The public TestFlight link. Verified working: the beta accepts testers and
+   * has been installed from.
+   *
+   * An earlier comment here claimed Apple was refusing new testers and said the
+   * email form stayed visible beside it as a fallback. Both halves were wrong —
+   * the beta is open, and that form was deliberately removed in f3cffb5.
+   */
 export const TESTFLIGHT_URL = 'https://testflight.apple.com/join/TRmKruWt'
 
 /** Re-exported from site.ts so the address is defined exactly once. */

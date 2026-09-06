@@ -53,9 +53,9 @@ export const language: Persona = {
     proof: 'Keep practising and the pauses get shorter.',
   },
   inside: {
-    label: 'What you get',
-    title: 'Plenty to talk about.',
-    intro: 'In all three languages.',
+    label: 'Learn and practise',
+    title: 'Learn what to say, then say it out loud.',
+    intro: 'The techniques, and enough to talk about in either language.',
   },
   faq: [
     { q: 'Which languages?', a: 'English, Spanish and Russian. You pick before you start. The app menus are in English.' },

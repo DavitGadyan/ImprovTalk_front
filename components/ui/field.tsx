@@ -146,7 +146,7 @@ export function TextArea({
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-2xl border border-line-strong bg-white/[0.04] px-5 py-4 text-[15px] leading-relaxed text-ink placeholder:text-subtle focus:border-accent focus:outline-none"
+        className="w-full rounded-2xl border border-line-strong bg-white/[0.04] px-5 py-4 text-[16px] leading-relaxed text-ink placeholder:text-subtle focus:border-accent"
       />
       <p className="mt-2 text-right text-[12px] text-subtle">
         {value.length} / {maxLength}
@@ -179,7 +179,7 @@ export function Select({
         id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="h-14 w-full rounded-2xl border border-line-strong bg-white/[0.04] px-5 text-[15px] text-ink focus:border-accent focus:outline-none"
+        className="h-14 w-full rounded-2xl border border-line-strong bg-white/[0.04] px-5 text-[16px] text-ink focus:border-accent"
       >
         {placeholder && <option value="">{placeholder}</option>}
         {options.map((o) => (

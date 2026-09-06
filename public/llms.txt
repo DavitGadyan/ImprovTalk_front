@@ -10,16 +10,11 @@ by actually speaking them, not by reading about them.
 
 ## What makes it different
 
-- **You speak; it speaks back.** Live voice, in real time, over WebRTC. There is
-  no typing mode.
-- **Three conversation languages.** A session can run in English, Spanish or
-  Russian. The AI partner replies only in the language you picked, and the
-  written feedback comes back in that same language. (The app's own interface is
-  English only.)
-- **The score shows its work.** Every number opens to the measurements behind
-  it, for example "7 fillers in 3 minutes; pace 142 wpm; target band 130-160".
-- **No social risk.** You practise alone, on your phone, on your own schedule,
-  as many times as you want.
+ImprovTalk is voice-first: you speak and it speaks back, live, over WebRTC. A
+session can run in English, Spanish or Russian. Every number in a score opens to
+the measurements behind it, so nothing is a black box. And you practise alone, on
+your phone, on your own schedule, with no social risk attached to getting it
+wrong.
 
 ## How the score works
 

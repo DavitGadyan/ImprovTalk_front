@@ -55,6 +55,9 @@ export type SubmitResult = { ok: true } | { ok: false; reason: string }
 const rpc = (fn: string, body: unknown) =>
   fetch(`${URL_}/rest/v1/rpc/${fn}`, {
     method: 'POST',
+    /* Without this a stalled connection leaves the submit button disabled and
+       the label stuck on "Sending…" with no cancel and no retry — forever. */
+    signal: AbortSignal.timeout(8000),
     headers: {
       'Content-Type': 'application/json',
       apikey: KEY_,

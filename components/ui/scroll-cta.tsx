@@ -50,7 +50,7 @@ export function ScrollCta() {
       className={cn(
         'fixed right-4 top-[4.75rem] z-40 inline-flex items-center gap-2.5 rounded-full',
         'py-2.5 pl-2.5 pr-4 text-[13px] font-medium text-white',
-        '[background-image:var(--gradient-brand)] bg-[length:200%_100%]',
+        '[background-image:var(--gradient-brand-cta)] bg-[length:200%_100%]',
         'shadow-[0_10px_30px_-12px_rgb(175_82_222_/_0.9)]',
         'md:right-8 md:top-24',
         'transition-[transform,opacity] duration-500 ease-[var(--ease-out-soft)]',

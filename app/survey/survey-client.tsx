@@ -54,6 +54,9 @@ export function SurveyClient({ inDialog = false }: { inDialog?: boolean } = {}) 
 
   const [sending, setSending] = useState(false)
   const [done, setDone] = useState(false)
+  /* Non-null when the write failed. The result is still shown — they answered
+     the questions and have earned the PDF — but the failure is not hidden. */
+  const [saveError, setSaveError] = useState<string | null>(null)
 
   const blend = useMemo(() => normalise(raw), [raw])
   const options = useMemo(() => personasFor(goal), [goal])
@@ -116,9 +119,10 @@ export function SurveyClient({ inDialog = false }: { inDialog?: boolean } = {}) 
 
     /* A filled honeypot is a bot. Show the same result rather than an error —
        telling it that it failed only teaches it to try again. */
+    let failed: string | null = null
     if (!honey) {
       const params = new URLSearchParams(typeof window === 'undefined' ? '' : window.location.search)
-      await submitSurvey({
+      const res = await submitSurvey({
         goal,
         goal_other: goal === 'other' ? goalOther.trim() || null : null,
         persona,
@@ -137,7 +141,11 @@ export function SurveyClient({ inDialog = false }: { inDialog?: boolean } = {}) 
         })(),
         utm_content: params.get('utm_content'),
       })
+      /* Previously discarded. A 500, a CORS failure or an ad blocker threw the
+         answers away and still showed confetti. */
+      if (!res.ok && res.reason !== 'not-configured') failed = res.reason
     }
+    setSaveError(failed)
 
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ goal, blend, persona }))
@@ -158,6 +166,25 @@ export function SurveyClient({ inDialog = false }: { inDialog?: boolean } = {}) 
         personaId={persona}
         inDialog={inDialog}
         onRetake={() => {
+          /* A retake has to be a clean one. Leaving the answers in place meant
+             the form came back pre-filled with consent still ticked, and
+             finishing it wrote a second row for the same person. */
+          try {
+            localStorage.removeItem(STORAGE_KEY)
+          } catch {
+            /* nothing stored to clear */
+          }
+          setGoal(null)
+          setGoalOther('')
+          setPersona(null)
+          setRaw({ ...EVEN_BLEND })
+          setAgeBand('')
+          setGender('')
+          setCountry('')
+          setFeature('')
+          setExpectation('')
+          setConsent(false)
+          setSaveError(null)
           setDone(false)
           setStep(0)
         }}
@@ -337,6 +364,12 @@ export function SurveyClient({ inDialog = false }: { inDialog?: boolean } = {}) 
                 How we handle data
               </Link>
             </Checkbox>
+            {saveError && (
+              <p role="alert" className="mt-4 text-[13px] leading-relaxed text-practice">
+                We could not save your answers ({saveError}). Your tips are still
+                yours — press the button again to retry, or carry on and download them.
+              </p>
+            )}
             {!submitEnabled && (
               <p className="mt-4 text-[13px] text-subtle">
                 Storage is not configured in this build, so nothing will be recorded — you
@@ -418,12 +451,19 @@ function Result({
 
   /* The PDF writer is imported here and nowhere else, so it is fetched only by
      people who finished the survey and never by anyone loading a landing page. */
+  const [pdfError, setPdfError] = useState(false)
+
   async function onDownload() {
     setBuilding(true)
+    setPdfError(false)
     try {
       const { downloadTipsPdf } = await import('@/lib/tips-pdf')
       downloadTipsPdf({ goal, personaId, blend })
       track('tips_download', { goal })
+    } catch {
+      /* A stale deploy or an offline tab fails the chunk fetch. Without this the
+         button just flips back to its label at the last step of the funnel. */
+      setPdfError(true)
     } finally {
       setBuilding(false)
     }
@@ -478,9 +518,9 @@ function Result({
             Your tips
           </p>
           <p className="mt-3 text-[15.5px] leading-relaxed text-ink-soft">
-            A one-page PDF: four moves for {g.label.toLowerCase()}, the one to start with,
-            and where to begin in the app — written for how you come across, not for
-            everyone.
+            Three pages, written for how you come across. Four moves for{' '}
+            {g.label.toLowerCase()}, the one to start with, and three scenarios to
+            practise in, in order.
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <Button variant="solid" size="sm" onClick={onDownload} disabled={building}>
@@ -492,6 +532,12 @@ function Result({
               </Button>
             )}
           </div>
+          {pdfError && (
+            <p role="alert" className="mt-4 text-[13px] leading-relaxed text-practice">
+              The tips file did not build. Reload the page and press it again — your
+              answers are saved on this device.
+            </p>
+          )}
         </div>
       </div>
 

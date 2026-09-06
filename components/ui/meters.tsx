@@ -85,7 +85,7 @@ export function Waveform({ bars = 28, className }: { bars?: number; className?: 
         return (
           <span
             key={i}
-            className="w-[3px] shrink-0 rounded-full bg-accent/60"
+            className="w-[3px] rounded-full bg-accent/60"
             style={{ height: `${h}%` }}
           />
         )

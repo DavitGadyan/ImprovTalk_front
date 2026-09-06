@@ -68,7 +68,7 @@ export function DeviceFrame({
       )}
       style={transform ? { transform, transformStyle: 'preserve-3d' } : undefined}
       role="img"
-      aria-label={label ?? 'ImprovTalk app screen'}
+      aria-label={label || 'ImprovTalk app screen'}
     >
       <div className="relative flex aspect-[9/19.5] flex-col overflow-hidden rounded-[2.4rem] bg-canvas">
         {/* Status bar + Dynamic Island */}

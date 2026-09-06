@@ -17,7 +17,7 @@ export const faqs = [
   },
   {
     q: 'What does it cost?',
-    a: 'It is free to start, with three AI conversations a week. Paid tiers raise that limit and unlock the more capable models. Final pricing is confirmed at launch.',
+    a: 'It is free to start, with three AI conversations a week. Paid tiers raise that limit and give you the more capable models. Final pricing is confirmed at launch.',
   },
   {
     q: 'When can I get it?',
