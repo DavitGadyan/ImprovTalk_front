@@ -36,7 +36,14 @@ import { Confetti } from '@/components/ui/confetti'
  */
 const TAIL = ['Style', 'About you', 'Where', 'Wishes', 'Done'] as const
 
-export function SurveyClient({ inDialog = false }: { inDialog?: boolean } = {}) {
+export function SurveyClient({
+  inDialog = false,
+  onComplete,
+}: {
+  inDialog?: boolean
+  /** Lets a host dialog know the answers are safely away. */
+  onComplete?: () => void
+} = {}) {
   const [step, setStep] = useState(0)
   const [started, setStarted] = useState(false)
 
@@ -156,6 +163,7 @@ export function SurveyClient({ inDialog = false }: { inDialog?: boolean } = {}) 
     track('survey_complete', { goal })
     setSending(false)
     setDone(true)
+    onComplete?.()
   }
 
   if (done && goal) {
@@ -165,6 +173,7 @@ export function SurveyClient({ inDialog = false }: { inDialog?: boolean } = {}) 
         blend={blend}
         personaId={persona}
         inDialog={inDialog}
+        saveError={saveError}
         onRetake={() => {
           /* A retake has to be a clean one. Leaving the answers in place meant
              the form came back pre-filled with consent still ticked, and
@@ -185,6 +194,9 @@ export function SurveyClient({ inDialog = false }: { inDialog?: boolean } = {}) 
           setExpectation('')
           setConsent(false)
           setSaveError(null)
+          /* Without this, begin() short-circuits and the second attempt never
+             fires survey_start — retakes show as unmatched completions. */
+          setStarted(false)
           setDone(false)
           setStep(0)
         }}
@@ -364,12 +376,6 @@ export function SurveyClient({ inDialog = false }: { inDialog?: boolean } = {}) 
                 How we handle data
               </Link>
             </Checkbox>
-            {saveError && (
-              <p role="alert" className="mt-4 text-[13px] leading-relaxed text-practice">
-                We could not save your answers ({saveError}). Your tips are still
-                yours — press the button again to retry, or carry on and download them.
-              </p>
-            )}
             {!submitEnabled && (
               <p className="mt-4 text-[13px] text-subtle">
                 Storage is not configured in this build, so nothing will be recorded — you
@@ -433,6 +439,7 @@ function Result({
   blend,
   personaId,
   inDialog,
+  saveError,
   onRetake,
 }: {
   goal: GoalSlug
@@ -441,6 +448,10 @@ function Result({
   /** Inside the popup the download is the only action — a link out of a modal
       loses the result, and "take it again" has nothing to return to. */
   inDialog?: boolean
+  /** Non-null when the write failed. It has to be reported here: submitting
+      always advances to this screen, so an alert left behind on the form step
+      was never mounted and nobody ever saw it. */
+  saveError?: string | null
   onRetake: () => void
 }) {
   const g = goalBySlug(goal)!
@@ -472,6 +483,15 @@ function Result({
   return (
     <div className={cn('mx-auto max-w-[42rem]', inDialog && 'result-rise')}>
       {inDialog && <Confetti />}
+      {saveError && (
+        <p
+          role="alert"
+          className="mb-6 rounded-2xl border border-practice/40 bg-practice/10 px-5 py-4 text-[14px] leading-relaxed text-ink-soft"
+        >
+          Your tips are ready, but we could not save your answers ({saveError}).
+          Nothing is lost on your side — download the PDF below.
+        </p>
+      )}
       <p className="eyebrow" style={{ color: top.hex }}>
         {top.label} · {second.label}
       </p>

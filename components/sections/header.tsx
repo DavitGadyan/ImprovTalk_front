@@ -41,11 +41,12 @@ export function Header() {
   }, [])
 
   /*
-   * Four of the five links are hashes on `/`, so "current" means the whole
-   * landing page for those and an exact path for the rest.
+   * Only an exact path counts. Four of the five links are hashes on `/`, and
+   * marking them all current on the home page put aria-current="page" on four
+   * items at once — ARIA allows one, and four announcements of "current page"
+   * is worse than none.
    */
-  const isCurrent = (href: string) =>
-    href.startsWith('/#') ? pathname === '/' : pathname === href
+  const isCurrent = (href: string) => !href.startsWith('/#') && pathname === href
 
   return (
     <header
@@ -105,6 +106,10 @@ export function Header() {
            margin:auto, and Tailwind's preflight resets it to 0. */
         className="m-auto w-[min(22rem,calc(100vw-2rem))] rounded-2xl border border-line bg-surface p-0 text-ink backdrop:bg-black/70 backdrop:backdrop-blur-sm md:hidden"
       >
+        {/* Gated for the same reason as the tips popup: a closed <dialog> still
+            ships its children into the exported HTML of every page. */}
+        {open && (
+        <>
         <div className="flex items-center justify-between border-b border-line px-6 py-4">
           <Logo />
           <button
@@ -139,6 +144,8 @@ export function Header() {
             </a>
           ))}
         </nav>
+        </>
+        )}
       </dialog>
     </header>
   )

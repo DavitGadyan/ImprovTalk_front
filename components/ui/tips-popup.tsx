@@ -137,6 +137,9 @@ export function TipsPopup() {
   const [started, setStarted] = useState(false)
   /* Raised instead of closing when there are answers to lose. */
   const [confirming, setConfirming] = useState(false)
+  /* Set when the survey has been submitted. After that there is nothing to
+     lose, and asking "closing throws them away" would simply be untrue. */
+  const [completed, setCompleted] = useState(false)
 
   /*
    * Diagnosis, because the failure is silent by nature: a popup that does not
@@ -223,9 +226,9 @@ export function TipsPopup() {
   }, [])
 
   const requestClose = useCallback(() => {
-    if (started) setConfirming(true)
+    if (started && !completed) setConfirming(true)
     else close()
-  }, [started, close])
+  }, [started, completed, close])
 
   const onBackdrop = useCallback(
     (e: React.MouseEvent<HTMLDialogElement>) => {
@@ -249,7 +252,7 @@ export function TipsPopup() {
           allowClose.current = false
           return
         }
-        if (started) {
+        if (started && !completed) {
           setConfirming(true)
           ref.current?.showModal()
         } else {
@@ -263,6 +266,10 @@ export function TipsPopup() {
          pins it to the top-left corner. */
       className="pop-in relative m-auto max-h-[calc(100dvh-2rem)] w-[min(40rem,calc(100vw-2rem))] overflow-y-auto rounded-2xl border border-line bg-surface p-0 text-ink backdrop:bg-black/70 backdrop:backdrop-blur-sm"
     >
+      {/* Nothing at all until it opens. The gate used to sit below the header,
+          so the logo, the close button and the accessible-name heading still
+          shipped in the exported HTML of all 22 pages. */}
+      {open && (
       <div className="p-7 md:p-9">
         {/* The visible heading changes with the branch — offer, form, confirm,
             result — so the dialog's accessible name lives here instead. It used
@@ -293,7 +300,7 @@ export function TipsPopup() {
         {/* A closed <dialog> still ships its contents in the exported HTML, so
             the offer used to appear on all 22 pages for anything that reads
             markup rather than pixels. Nothing renders until it opens. */}
-        {open && confirming && (
+        {confirming && (
           <div className="mt-7">
             <h2 className="display-md text-ink">
               Discard your answers?
@@ -325,11 +332,10 @@ export function TipsPopup() {
           form threw away every answer the moment it appeared, so "Keep going"
           came back to question one — the exact loss the guard exists to prevent.
         */}
-        {open && (
         <div hidden={confirming}>
         {started ? (
           <div className="mt-8">
-            <SurveyClient inDialog />
+            <SurveyClient inDialog onComplete={() => setCompleted(true)} />
           </div>
         ) : (
           <div className="mt-7">
@@ -388,8 +394,8 @@ export function TipsPopup() {
           </div>
         )}
         </div>
-        )}
       </div>
+      )}
     </dialog>
   )
 }

@@ -32,7 +32,7 @@ export function Footer() {
             <FooterCol title="Product">
               <FooterLink href="/#how">How it works</FooterLink>
               <FooterLink href="/#scoring">Scoring</FooterLink>
-              <FooterLink href="/#inside">Library</FooterLink>
+              <FooterLink href="/#inside">Learn</FooterLink>
               <FooterLink href="/how-to-start-a-conversation/">How to start a conversation</FooterLink>
               <FooterLink href="/blog/">Blog</FooterLink>
               <FooterLink href="/get/">Get the app</FooterLink>

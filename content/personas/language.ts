@@ -55,7 +55,7 @@ export const language: Persona = {
   inside: {
     label: 'Learn and practise',
     title: 'Learn what to say, then say it out loud.',
-    intro: 'The techniques, and enough to talk about in either language.',
+    intro: 'The techniques, and enough to talk about in all three languages.',
   },
   faq: [
     { q: 'Which languages?', a: 'English, Spanish and Russian. You pick before you start. The app menus are in English.' },

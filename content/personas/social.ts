@@ -1,4 +1,5 @@
 import type { Persona } from './types'
+import { TOTAL_LIBRARY_ITEMS } from '@/content/catalogs'
 
 /**
  * Meeting people. Kept PG-13 and consent-aware, matching the app's own
@@ -59,7 +60,7 @@ export const social: Persona = {
   inside: {
     label: 'Learn and practise',
     title: 'Something to say, in any room.',
-    intro: 'The techniques, and 2,766 things worth knowing about.',
+    intro: `The techniques, and ${TOTAL_LIBRARY_ITEMS.toLocaleString('en')} things worth knowing about.`,
   },
   faq: [
     { q: 'Do I have to talk out loud?', a: 'Yes. You hold a button and speak, and she speaks back. There is no typing.' },

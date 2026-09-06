@@ -444,6 +444,32 @@ finishing it wrote a second row for the same person.
 `knowledge_base/*.json`. Em-dash density on that page was 1 per 78 words against
 roughly 1 per 1,000 in edited prose; it is now 0.
 
+## What the cloud review caught that testing did not
+
+Five real bugs, two of them introduced by the audit's own fixes:
+
+1. **The failure alert was unreachable.** `role="alert"` was rendered inside the
+   form step, but `setDone(true)` runs unconditionally and `Result` replaces the
+   form — so it never mounted, the failure stayed silent and the confetti still
+   fired. It belongs on the result screen, which is where submitting always
+   lands.
+2. **The discard guard lied after a successful save.** `started` never resets
+   when `SurveyClient` reaches its own result, so closing a *completed* flow
+   asked "closing throws them away" about answers already in Supabase. A
+   `completed` flag set through `onComplete` fixes it.
+3. **"in either language"** on a persona whose FAQ two lines below says English,
+   Spanish and Russian.
+4. **The footer still said "Library"** while the header said "Learn", same
+   anchor, every page. Renaming one side is how that happens.
+5. **`aria-current="page"` on four links at once** on the home page, because all
+   four hash links matched `pathname === '/'`. ARIA allows one; four
+   announcements of "current page" is worse than none. Exact paths only now.
+
+Plus: `social.ts` hard-coded `2,766` instead of importing `TOTAL_LIBRARY_ITEMS`,
+the retake did not reset `started` so `survey_start` never fired a second time,
+and the popup and menu chrome still shipped in all 22 pages because both gates
+sat below the header rather than around it.
+
 ## Learn, and where its numbers come from
 
 The Learn hub is `apps/mobile/app/learn.tsx`. Counted, not estimated:
