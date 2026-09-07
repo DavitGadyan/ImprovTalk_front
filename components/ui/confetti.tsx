@@ -15,9 +15,9 @@ import { useEffect, useRef } from 'react'
  * is exactly what that setting exists to stop.
  */
 
-/* The four data colours and white — the same values as the tokens in
+/* The four blend colours and white — the same values as the tokens in
    globals.css, spelled out because a canvas cannot read a CSS variable. */
-const COLORS = ['#ff6b6b', '#ffd166', '#7de2a6', '#849cff', '#e0b84a', '#ffffff']
+const COLORS = ['#ff6b6b', '#ffd166', '#7de2a6', '#849cff', '#ffffff']
 
 type Piece = {
   x: number

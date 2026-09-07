@@ -66,8 +66,8 @@ const svg = await satori(
       { type: 'img', props: { src: icon, width: 44, height: 44, style: { borderRadius: 10 } } },
       el('span', { fontSize: 24, fontWeight: 700, letterSpacing: -0.5 }, 'ImprovTalk'),
     ]),
-    el('div', { width: 640, fontSize: 62, fontWeight: 700, lineHeight: 1.02, letterSpacing: -1.6 }, tagline),
-    el('div', { width: 620, marginTop: 28, fontSize: 24, fontWeight: 400, lineHeight: 1.4, color: MUTED }, sub),
+    el('div', { width: 560, fontSize: 62, fontWeight: 700, lineHeight: 1.02, letterSpacing: -1.6 }, tagline),
+    el('div', { width: 540, marginTop: 28, fontSize: 24, fontWeight: 400, lineHeight: 1.4, color: MUTED }, sub),
   ]),
   {
     width: W,
@@ -85,7 +85,9 @@ const size = 440
 const render = await sharp(RENDER).resize(size, size, { fit: 'cover' }).png().toBuffer()
 
 await sharp(text)
-  .composite([{ input: render, left: W - size - 60, top: Math.round((H - size) / 2) }])
+  /* 72px in from the right edge, mirroring the text's left padding; the text
+     column is capped at 560px so the two never meet. */
+  .composite([{ input: render, left: W - size - 72, top: Math.round((H - size) / 2) }])
   .png({ compressionLevel: 9 })
   .toFile('public/og.png')
 

@@ -68,7 +68,7 @@ export function Header() {
       )}
     >
       <div className="container-page flex h-16 items-center justify-between gap-6 md:h-20">
-        <Link href="/" className="rounded-md" aria-label="ImprovTalk home">
+        <Link href="/" aria-label="ImprovTalk home">
           <Logo />
         </Link>
 

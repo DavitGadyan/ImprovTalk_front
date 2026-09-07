@@ -47,8 +47,9 @@ export function GetClient() {
        platform check below, but AdsBot-Google-Mobile identifies as an iPhone
        and was being sent straight to TestFlight — which Ads reads as a landing
        page that redirects. The page is noindex; a bot sees the same button a
-       person does, and nothing else. */
-    if (/bot|crawl|spider|slurp|inspectiontool/i.test(navigator.userAgent)) return
+       person does, and nothing else. Named crawlers rather than /bot/, which
+       also matches Cubot phones — real people who would have lost the forward. */
+    if (/googlebot|adsbot|bingbot|duckduckbot|baiduspider|yandex|applebot|slurp|crawler|spider|inspectiontool|facebookexternalhit|twitterbot|linkedinbot/i.test(navigator.userAgent)) return
 
     const target =
       p === 'ios' && (isLive.ios || isLive.testflight)

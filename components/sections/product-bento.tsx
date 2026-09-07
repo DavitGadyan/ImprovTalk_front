@@ -32,8 +32,11 @@ const TILES: { name: RenderName; caption: string; span: string }[] = [
     span: 'lg:col-span-2',
   },
   {
-    name: 'plan-max',
-    caption: 'Plans — Max first, and recommended.',
+    /* Not the Max plan card: it carries a price and a scenario count, and the
+       site publishes neither — pricing is a placeholder until launch, and the
+       number is not in the counted set. */
+    name: 'setup-blend',
+    caption: 'The blend — four personality sliders that always total 100.',
     span: 'lg:col-span-2',
   },
   {
@@ -57,7 +60,7 @@ export function ProductBento() {
       intro="Four surfaces and one journey: pick a scene, hold the disc and speak, then read the score and what to do about it."
     >
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-6 lg:gap-5">
-        {TILES.map(({ name, caption, span }, i) => {
+        {TILES.map(({ name, caption, span }) => {
           const r = RENDERS[name]
           return (
             <li key={name} className={span}>
@@ -69,7 +72,7 @@ export function ProductBento() {
                   width={r.width}
                   height={r.height}
                   alt={r.alt}
-                  loading={i < 2 ? 'eager' : 'lazy'}
+                  loading="lazy"
                   decoding="async"
                   className="h-auto w-full rounded-card"
                 />

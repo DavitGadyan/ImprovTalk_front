@@ -229,7 +229,7 @@ export function ScenarioFilm() {
 
           <div className="mt-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
             <p className="max-w-xl text-small text-muted">{current.caption}</p>
-            <p className="text-caption text-muted/80">
+            <p className="text-caption text-muted">
               {active + 1} of {scenarios.length} · plays the next one automatically
             </p>
           </div>

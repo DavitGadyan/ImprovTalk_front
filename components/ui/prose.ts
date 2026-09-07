@@ -8,7 +8,7 @@
  */
 export const PROSE = `text-body leading-[1.75] text-ink
   [&>p]:mt-6
-  [&>h2]:mt-14 [&>h2]:mb-4 [&>h2]:font-[family-name:var(--font-display)]
+  [&>h2]:mt-14 [&>h2]:mb-4
   [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:leading-tight
   [&>h2]:tracking-[-0.02em] [&>h2]:text-ink
   [&>ul]:mt-6 [&>ul]:space-y-3 [&>ul]:pl-5 [&>ul]:list-disc [&>ul]:marker:text-line

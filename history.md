@@ -533,3 +533,143 @@ artifact is never served at all.
 site after deploying and fails if it is not this app, if any key route 404s, or
 if the custom domain has been dropped. Green build, broken site is the one
 failure a build-time check cannot catch.
+
+## Design system B on the site
+
+The app shipped design system B (`ImprovTalk/apps/mobile/src/ui/theme.ts`,
+the case study in `~/Desktop/ImprovTalk-portfolio/`), and the proposal that
+chose it named the site's old navy-and-blue palette as the thing being replaced.
+The site now carries exactly the app's `darkColors` and nothing else:
+
+| Token | Value | Job |
+|---|---|---|
+| `canvas` | `#000000` | the page; every section starts here |
+| `surface` / `surface-elev` | `#1F1F1F` / `#2A2A2A` | cards, dialogs; a chip on a card |
+| `line` | `#313131` | the only hairline — borders, section edges |
+| `ink` / `muted` | `#FFFFFF` / `#8E8E93` | two text levels, no third |
+| `accent` + `on-accent` | `#849CFF` + `#000000` | **a fill with black text**: pill, active nav, filled bar, focus ring |
+| `accent-text` | `#849CFF` | violet as words, for links and the active nav label only |
+| `danger` `warn` `success` `gold` | `#FF6B6B` `#FFD166` `#7DE2A6` `#E0B84A` | numbers, dots, bars, glyphs — never chrome |
+
+**The brand gradient is zero CSS on the site.** It lives in the app icon and
+inside the app renders (the Hold-to-speak disc), which is where B confines it in
+the app. `--gradient-brand`, `--gradient-brand-cta`, `rule-brand` and `brand-pan`
+are gone; primary actions are the flat violet pill. CLAUDE.md rule 8 changed to
+say so.
+
+**Sections are all `canvas`, separated by a hairline.** B's own screens are a
+black ground with grey cards, not grey bands, so the `deep`/`brand`/`raised`
+tones and the curved band tops went. Cards use `panel` (surface + line +
+`rounded-card`, 24px — the one radius). Eyebrows are muted, never coloured.
+Category and personality colours are a dot beside grey text, never a tinted card.
+
+**Type is Satoshi Variable**, one family for display (700) and body (400/500),
+plus the italic — the hero's emphasis word uses it, as the app's own hero
+style does. The woff2 files were lifted from the design-system proposal
+artifact (they are Fontshare's own subset, 41 KB + 42 KB); `next/font/local`
+declares `300 900`, so `font-bold` is a real cut and the Inter-era "never above
+600" warning is gone. **Not preloaded**, deliberately: the old reasoning still
+holds (swap + adjustFontFallback, nothing to gain at the top of the critical
+path). `scripts/gen-og.mjs` needs static cuts because satori renders only a
+variable font's default instance; those come from Fontshare's CSS API and are
+cached under `assets/fonts/Satoshi-{400,700}.ttf`.
+
+**Icons are the app's Material Symbols Rounded subset**, baked by
+`scripts/bake-icons.mjs` the same way the app bakes its own (Google's CSS API
+with `icon_names=`, a Chrome UA for woff2), addressed by codepoint from
+`lib/icons.ts` through `<Icon name=…>`. Every inline SVG icon went, and so did
+the `→` in link labels (`arrow_forward`); the "Settings → Account" path arrows
+in the privacy and support prose stay — they are punctuation. The subset bakes
+a few names the site does not draw yet (the app's set); 5 KB, and one list to
+keep in step with the app.
+
+**The screenshots are real.** Every phone screen on the site was JSX in the old
+palette. Now `scripts/crop-renders.mjs` cuts the panels out of the two
+case-study composites in `assets/renders/` — panel bounds are detected by
+scanning for pixels that differ from the ground colour, so nothing is typed by
+hand and a re-export re-crops itself — and writes `public/app/*.webp` at 1400
+and 700 wide plus `lib/renders.ts` with real dimensions and alt text. The hero
+carries `score-disc` (the one panel with the gradient disc); the bento after it
+carries `live-session`, `score-screen`, `setup-rows`, `choice-list`,
+`setup-blend`, `tab-bar`, `icon-strip`; Scoring carries `score-screen`; Learn
+carries `home`. **`plan-max` is cropped but never placed:** it shows a weekly
+price and "131 scenarios", and the site publishes neither. The renders carry
+their own frames, grounds and corners; nothing is added around them.
+
+**Traps found on the way:**
+
+1. **tailwind-merge does not know custom names.** `cn()` treated `text-small`
+   and `text-on-accent` as two colours and dropped whichever came first — every
+   violet pill rendered white text (2.6:1), every nav link lost its size.
+   `lib/utils.ts` now tells it the four size names are font sizes. Any new
+   `--text-*` token has to be added there too.
+2. **A modal `<dialog>` must keep the UA's `position: fixed`.** The tips popup
+   carried `relative`, which put the card in normal flow at the top of the
+   document: opened after scrolling — which is when the dwell timer fires — the
+   visitor saw a blurred page and no dialog. Pre-existing; fixed and verified
+   at scroll 708 (card at top 96, in the viewport).
+3. **Dropping the radius scale changed unchanged lines.** `rounded-t-sm` on the
+   trend bars and `rounded-md` on the logo link fell back to Tailwind's
+   defaults (4px, 6px). The bars keep 4px on purpose — a 12px pill top on a
+   22px bar was a half-circle; the logo link lost the class.
+4. **Alpha modifiers undercut the contrast pass.** `text-muted/80` measured
+   4.38:1 and the disabled store badge's `opacity-55` took its label to 2.5:1;
+   both gone. Dim a glyph, not the words.
+5. **The site's port is not free on this machine.** `npm run serve:out` uses
+   3001, which Docker's Grafana holds; `serve` silently falls back to a random
+   port and a browser check against 3001 sees a Grafana login. Use another port
+   and confirm the title before trusting a capture.
+
+**Measured, not eyeballed** (`out/` served locally, Playwright): at 1440 the h1
+is Satoshi 700 at 76px on two lines, no gradient background anywhere in the
+rendered DOM, zero console errors; at 390 all five persona headlines sit on
+exactly two lines at 33.6px and no page (persona, blog, about, survey, get,
+method) scrolls horizontally. Contrast: black on `#849CFF` 8.2:1, `#8E8E93`
+5.1:1 on surface and 6.4:1 on black, `#849CFF` as text 8.2:1 on black.
+
+**The PDF did not change.** `lib/tips-pdf.ts` keeps the four blend hues it was
+tuned with on white paper in its own `BLEND_INK` table, so moving
+`COLORS[].hex` to the screen tokens moved nothing on the sheet; same text, same
+fonts, same geometry, so the 88-combination three-page check holds by
+construction. `GOALS[].hue` and `TIPS[].hue` are read only by the sheet and were
+left alone.
+
+**Deferred:** a light theme (B has a derived one; the site is dark only and
+`colorScheme` stays dark), and trimming the icon subset to the names in use.
+
+## The redirect report
+
+Search Console reported pages *not indexed — Page with redirect*. Audited every
+mechanism that can produce one; the internal links, sitemap, canonicals and
+robots were already clean (every `href` in `app/ components/ content/ lib/`
+ends in `/`).
+
+**Intentional and correct, and Google lists them anyway:** `http://` → 301
+`https://`, `www.` → 301 apex, and any slashless path → 301 its slash form
+(`trailingSlash: true` on Pages). A Domain property shows every one of these
+as "Page with redirect". Nothing to fix; confirm the reported URLs are these.
+
+**Already fixed, and Google's memory lags:** until `65831ba` (2 Sep 2026) the
+A/B `location.replace()` on `/` had no bot exclusion, so Googlebot had a 50%
+chance of being bounced from the canonical page into a then-`noindex` variant.
+If `https://improvtalk.vip/` itself is in the report, that is why — request
+indexing and validate the fix.
+
+**Two live leftovers, now closed:**
+
+1. `/?v=<slug>` still hard-redirected — the override was not gated by
+   `ACTIVE_SPLIT`, so any such link anywhere on the web was a live redirect off
+   the canonical page. Removed (`components/variant-assign.tsx`); every persona
+   is its own URL, so forcing one is a matter of opening it.
+2. `/get/` forwarded any iPhone UA straight to TestFlight with no delay —
+   including AdsBot-Google-Mobile, which identifies as an iPhone, so Ads would
+   read the page as a redirecting landing page. Named crawlers are now excluded
+   (`app/get/get-client.tsx`); the page is `noindex` and a bot sees the same
+   button a person does. Named, not `/bot/`, which also matches Cubot phones.
+
+**CI now asserts redirects instead of following them.** The smoke job used
+`curl -sL` everywhere, so a 301 into a 200 read as 200 and it could not see a
+redirect at all. `deploy.yml` now pins the three intentional 301s and requires
+`/`, `/second-language/` and `/blog/` to answer 200 with no `Location` — a
+canonical URL that starts redirecting fails the build.
+

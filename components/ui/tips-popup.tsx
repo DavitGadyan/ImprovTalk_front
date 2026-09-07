@@ -295,7 +295,7 @@ export function TipsPopup() {
               requestClose()
             }}
             aria-label="Close"
-            className="-mr-2 -mt-2 flex size-9 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:bg-surface-elev hover:text-ink"
+            className="-mr-2 -mt-2 flex size-9 shrink-0 items-center justify-center rounded-full border border-line text-muted transition-colors hover:border-muted hover:bg-surface-elev hover:text-ink"
           >
             {/* Quiet, not red. Closing is the normal way out, and a red x made
                 people hesitate over it — the same reason the app's End & score

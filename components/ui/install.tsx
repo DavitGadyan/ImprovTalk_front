@@ -56,8 +56,9 @@ function StoreBadge({
     'inline-flex items-center gap-2.5 rounded-xl border border-line px-4 py-2.5 text-ink transition-colors'
 
   if (!live) {
+    /* Dim the glyph, not the words: at 55% the muted line fell to 2.5:1. */
     return (
-      <span className={cn(base, 'cursor-default opacity-55')} aria-disabled="true">
+      <span className={cn(base, 'cursor-default [&>svg]:opacity-55')} aria-disabled="true">
         {inner}
       </span>
     )
