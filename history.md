@@ -624,8 +624,10 @@ their own frames, grounds and corners; nothing is added around them.
 6. **Do not remove what the owner reads as the brand.** The restyle hid the
    floating "Get early access" pill on desktop (`md:hidden`) and put a pill in
    the header instead, and swapped the gradient button for a violet one. Neither
-   was asked for; both came back within hours. A system rule from the app does
-   not override the site's own conversion path — ask before touching the CTA.
+   was asked for; both came back within hours, and so did the pill's drawn
+   arrow, which had become a font glyph that renders as nothing until the icon
+   font arrives. A system rule from the app does not override the site's own
+   conversion path — ask before touching the CTA.
 
 **Measured, not eyeballed** (`out/` served locally, Playwright): at 1440 the h1
 is Satoshi 700 at 76px on two lines, no gradient background anywhere in the

@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Icon } from '@/components/ui/icon'
 import { LogoMark } from '@/components/ui/logo'
 import { cn } from '@/lib/utils'
 
@@ -62,7 +61,18 @@ export function ScrollCta() {
     >
       <LogoMark size={22} />
       <span>Get early access</span>
-      <Icon name="arrow_upward" className="text-base" />
+      {/* Drawn, not a font glyph: the pill has to read the instant it slides in,
+          and an icon font that has not arrived yet renders as nothing. */}
+      <svg viewBox="0 0 16 16" className="size-3.5 shrink-0" aria-hidden="true">
+        <path
+          d="M8 13V3.5M3.5 8 8 3.4 12.5 8"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+      </svg>
     </button>
   )
 }
