@@ -21,9 +21,10 @@ sharing one set of components; two of them in a live A/B split.
 5. **Consent defaults run `beforeInteractive`,** before the gtag library.
 6. **Enhanced Conversions stays off** in Google Ads.
 7. **Headlines fit two lines at 390px.** Measure, do not eyeball.
-8. **The brand gradient is not a CSS value on this site.** It lives in the app
-   icon and inside the app renders (the Hold-to-speak disc). Primary actions are
-   the flat violet pill with black text — design system B, as the app ships it.
+8. **The brand gradient is site chrome on the primary action only** — the
+   install button, the floating pill, any `Button variant="brand"` — and in the
+   logo. Never on a card, a band, a rule or text. The floating pill shows on
+   every screen size; do not hide it or replace it with a header button.
 9. **Renders come from `assets/renders/` via `npm run gen:renders`,** never
    hand-cropped. Every `<img>` of one carries `width`, `height` and real `alt`.
 

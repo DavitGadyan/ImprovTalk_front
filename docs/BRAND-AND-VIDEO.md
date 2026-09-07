@@ -36,7 +36,7 @@ Eyebrows and captions are muted. There is no third, fainter level.
 
 | Name | Hex | Rule |
 |---|---|---|
-| Accent | **`#849CFF`** | A **fill** with black text on it (8.2:1): the pill, the active tab, a filled bar, the focus ring. As words, only for links and the active nav label |
+| Accent | **`#849CFF`** | A **fill** with black text on it (8.2:1): the active tab, a filled bar, the focus ring. As words, only for links and the active nav label. The primary button is the brand ramp, not the violet |
 | Danger | `#FF6B6B` | Numbers, dots, glyphs, the required mark. Never a card tint |
 | Warn | `#FFD166` | Same rule |
 | Success | `#7DE2A6` | The score delta, a full bar |
@@ -52,9 +52,10 @@ danger/accent/warn/success — the same four the app's sliders use.
 linear-gradient(90deg, #F0912F, #E6455F, #A95ACC)
 ```
 
-Orange → rose → purple: the logo's own sweep. **It is not a CSS value on the
-site.** It appears inside the app icon and inside the app renders — the
-Hold-to-speak disc — which is where the app confines it too. In a film, one
+Orange → rose → purple: the logo's own sweep. On the site it appears in the
+icon, inside the app renders (the Hold-to-speak disc), and — as the AA-safe
+ramp `linear-gradient(100deg, #DF274A, #A44DD1 55%, #5856D6)` with white text —
+on the primary button and the floating pill, nowhere else. In a film, one
 gradient moment is plenty: the disc, a light sweep, the end card. A
 gradient-washed background looks like a different product.
 

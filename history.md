@@ -547,15 +547,17 @@ The site now carries exactly the app's `darkColors` and nothing else:
 | `surface` / `surface-elev` | `#1F1F1F` / `#2A2A2A` | cards, dialogs; a chip on a card |
 | `line` | `#313131` | the only hairline — borders, section edges |
 | `ink` / `muted` | `#FFFFFF` / `#8E8E93` | two text levels, no third |
-| `accent` + `on-accent` | `#849CFF` + `#000000` | **a fill with black text**: pill, active nav, filled bar, focus ring |
+| `accent` + `on-accent` | `#849CFF` + `#000000` | **a fill with black text**: active nav, filled bar, focus ring, selection — not the primary button, which carries the ramp |
 | `accent-text` | `#849CFF` | violet as words, for links and the active nav label only |
 | `danger` `warn` `success` `gold` | `#FF6B6B` `#FFD166` `#7DE2A6` `#E0B84A` | numbers, dots, bars, glyphs — never chrome |
 
-**The brand gradient is zero CSS on the site.** It lives in the app icon and
-inside the app renders (the Hold-to-speak disc), which is where B confines it in
-the app. `--gradient-brand`, `--gradient-brand-cta`, `rule-brand` and `brand-pan`
-are gone; primary actions are the flat violet pill. CLAUDE.md rule 8 changed to
-say so.
+**The brand gradient is the primary action's fill, and nothing else's.** The
+first pass took B's app rule literally — flat violet pill, gradient confined to
+the icon and the renders — and the owner reverted it the same day: the
+rose → violet → indigo ramp (`--gradient-brand-cta`, white text at ≥ 4.60:1,
+the slow `brand-pan` drift, the rose pulse on the install CTA) is the brand's
+button and it stays. The full four-stop `--gradient-brand`, the hero rule and
+the blog gradient text are still gone. CLAUDE.md rule 8 says exactly this.
 
 **Sections are all `canvas`, separated by a hairline.** B's own screens are a
 black ground with grey cards, not grey bands, so the `deep`/`brand`/`raised`
@@ -619,6 +621,11 @@ their own frames, grounds and corners; nothing is added around them.
    3001, which Docker's Grafana holds; `serve` silently falls back to a random
    port and a browser check against 3001 sees a Grafana login. Use another port
    and confirm the title before trusting a capture.
+6. **Do not remove what the owner reads as the brand.** The restyle hid the
+   floating "Get early access" pill on desktop (`md:hidden`) and put a pill in
+   the header instead, and swapped the gradient button for a violet one. Neither
+   was asked for; both came back within hours. A system rule from the app does
+   not override the site's own conversion path — ask before touching the CTA.
 
 **Measured, not eyeballed** (`out/` served locally, Playwright): at 1440 the h1
 is Satoshi 700 at 76px on two lines, no gradient background anywhere in the

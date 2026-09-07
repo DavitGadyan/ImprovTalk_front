@@ -44,15 +44,17 @@ and for Meeting people it is also an App Review risk.
 - **Background:** `#000000`. The one lifted surface is `#1F1F1F`, the one
   hairline `#313131`. Never navy, never white. Design system B, exactly as the
   app ships it (`ImprovTalk/apps/mobile/src/ui/theme.ts`).
-- **One accent, as a fill:** violet `#849CFF` with black text on it — the pill,
-  the active tab, a filled bar. Violet as words only for links. Text is white
-  `#FFFFFF` with one muted level `#8E8E93`; eyebrows are muted, never coloured.
+- **One accent, as a fill:** violet `#849CFF` with black text on it — the
+  active tab, a filled bar, the focus ring. Violet as words only for links. Text
+  is white `#FFFFFF` with one muted level `#8E8E93`; eyebrows are muted, never
+  coloured.
 - **Colour on data, never on chrome:** danger `#FF6B6B`, warn `#FFD166`,
   success `#7DE2A6`, gold `#E0B84A`. A category or a personality colour is a
   dot beside grey text, not a tinted card. Blog categories: openers danger,
   attention warn, nerves gold, languages accent, delivery success.
-- **The brand gradient is not a CSS value on the site.** It appears in the app
-  icon and inside the app renders (the Hold-to-speak disc). On social that
+- **The brand gradient is the primary button, and nothing else.** On the site
+  it is the rose → violet → indigo ramp on "Get early access" (hero, floating
+  pill) and the logo; never a card, a band, a rule or text. On social that
   means the end card only.
 - **Type:** Satoshi Variable for everything — display at 700, body at 400/500.
   `public/fonts/Satoshi-Variable.woff2` and the italic. Icons are the app's

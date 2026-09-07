@@ -203,9 +203,9 @@ is trusted before it is finished.
 
 ### Visual system
 - **Design system B, as the app ships it:** ground `#000000`, one surface `#1F1F1F`, one hairline `#313131`, text `#FFFFFF` with a single muted level `#8E8E93`. **Never navy, never white.**
-- **One accent, as a fill:** violet `#849CFF` with black text on it (pill, active tab, filled bar); violet as words only for links. Eyebrows are muted, not coloured.
+- **One accent, as a fill:** violet `#849CFF` with black text on it (active tab, filled bar, focus ring); violet as words only for links. Eyebrows are muted, not coloured.
 - **Data colours, never chrome:** danger `#FF6B6B`, warn `#FFD166`, success `#7DE2A6`, gold `#E0B84A`. Blog categories: openers danger, attention warn, nerves gold, languages accent, delivery success. Personality blend red/blue/yellow/green → danger/accent/warn/success.
-- **The brand gradient is not a CSS value on the site.** It lives in the app icon and inside the app renders (the Hold-to-speak disc). On social: **the end card only.**
+- **The brand gradient is the primary button and nothing else:** the rose → violet → indigo ramp (`#DF274A → #A44DD1 → #5856D6`, white text ≥ 4.6:1) on "Get early access" — hero and floating pill — plus the logo and the Hold-to-speak disc inside the renders. Never a card, band, rule or text. On social: **the end card only.**
 - **Type:** Satoshi Variable throughout — display 700, body 400/500. Icons: the app's Material Symbols Rounded subset.
 - **Imagery:** real app renders cropped from the case-study composites (`assets/renders/` → `public/app/`), never drawn mockups and never a device frame added around them.
 - **Safe areas:** keep text out of the bottom 20% and right 15% of a 9:16 frame. On-screen text under 60 characters per card.

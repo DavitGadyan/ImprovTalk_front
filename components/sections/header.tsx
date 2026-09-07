@@ -3,19 +3,17 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon'
 import { Logo } from '@/components/ui/logo'
 import { nav } from '@/content/site'
-import { track } from '@/lib/analytics'
 import { cn } from '@/lib/utils'
 
 /**
- * Sticky, with the one call to action in it from `md` up — the same violet pill
- * the hero uses, pointing at /get/, which is the install page on every route.
- * Below `md` the menu is a native <dialog>, which brings the focus trap, the
- * Escape key and an inert background with it rather than reimplementing all
- * three; the pill sits at the bottom of that menu.
+ * Sticky, and deliberately without a call to action: the floating pill
+ * (components/ui/scroll-cta.tsx) is the way back to the install button once it
+ * has scrolled away, on every screen size. Below `md` the menu is a native
+ * <dialog>, which brings the focus trap, the Escape key and an inert background
+ * with it rather than reimplementing all three.
  */
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -52,14 +50,6 @@ export function Header() {
    */
   const isCurrent = (href: string) => !href.startsWith('/#') && pathname === href
 
-  const cta = (
-    <Button asChild size="sm">
-      <Link href="/get/" onClick={() => track('notify_click', { target: 'header' })}>
-        Get early access
-      </Link>
-    </Button>
-  )
-
   return (
     <header
       className={cn(
@@ -72,24 +62,21 @@ export function Header() {
           <Logo />
         </Link>
 
-        <div className="hidden items-center gap-8 md:flex">
-          <nav className="flex items-center gap-8" aria-label="Main">
-            {nav.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                aria-current={isCurrent(item.href) ? 'page' : undefined}
-                className={cn(
-                  'py-2 text-small transition-colors hover:text-ink',
-                  isCurrent(item.href) ? 'text-accent-text' : 'text-muted',
-                )}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-          {cta}
-        </div>
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
+          {nav.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              aria-current={isCurrent(item.href) ? 'page' : undefined}
+              className={cn(
+                'py-2 text-small transition-colors hover:text-ink',
+                isCurrent(item.href) ? 'text-accent-text' : 'text-muted',
+              )}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
 
         <button
           ref={toggleRef}
@@ -145,13 +132,6 @@ export function Header() {
                 </a>
               ))}
             </nav>
-            <div className="border-t border-line p-4">
-              <Button asChild size="md" className="w-full">
-                <Link href="/get/" onClick={() => track('notify_click', { target: 'menu' })}>
-                  Get early access
-                </Link>
-              </Button>
-            </div>
           </>
         )}
       </dialog>

@@ -9,9 +9,11 @@
    that is a fill with black text, never a text colour except for links. Four
    data colours live on numbers, icons, dots and bars and never on chrome.
 
-   The brand gradient is not a CSS value on this site. It appears inside the app
-   icon raster and inside the app renders (the Hold-to-speak disc), which is
-   where B confines it in the app too. Primary actions are the flat violet pill.
+   The brand gradient is site chrome in exactly one role: the primary action —
+   the install button, the floating pill, any Button variant="brand" — plus the
+   logo raster. Never on a card, a band, a rule or text. The accent violet
+   carries everything else that is "pressed": the active tab, a filled bar, the
+   focus ring, the selection.
 
    Every colour on the site comes from this block. If a component needs a hex,
    the answer is a token here, not a literal there.
@@ -58,6 +60,20 @@
 
   /* Motion */
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+ * The primary-action ramp, and the only gradient the site's CSS draws.
+ *
+ * The brand sweep is orange → rose → purple. White text on the orange stop
+ * measures 2.20:1, so the button drops the orange (darkening it to pass turns
+ * it brown, which is worse than losing it) and takes the other two down just
+ * far enough. Worst point across the whole ramp, sampled every 1%: 4.60:1.
+ * The full sweep stays where the app keeps it — the icon and the Hold-to-speak
+ * disc inside the renders.
+ */
+:root {
+  --gradient-brand-cta: linear-gradient(100deg, #df274a 0%, #a44dd1 55%, #5856d6 100%);
 }
 
 /*
@@ -228,14 +244,50 @@
 }
 
 /*
- * Attention ring on the install CTA — a halo that expands out of the pill and
- * fades, roughly every three seconds. Violet, because the pill is; opt in per
- * call site, never on a consent button.
+ * The primary button's ramp drifts slowly across itself. It is the one element
+ * on the page allowed to move on its own, and it is small — a button-sized
+ * composite, not a full-viewport layer. The reduced-motion block below
+ * collapses it to a still frame.
+ */
+@keyframes brand-pan {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/*
+ * Attention ring on the install CTA — a halo that expands out of the button and
+ * fades, roughly every three seconds.
+ *
+ * Driven by box-shadow rather than a scaled pseudo-element: the button's own
+ * gradient background sits on the element itself, so anything stacked behind it
+ * is simply covered. A spreading shadow escapes the box without needing an extra
+ * node, which also keeps <Button asChild> working unchanged.
+ *
+ * The rest colour is the practice rose from the ramp, so the halo reads as part
+ * of the brand rather than a generic glow. Opt in per call site — never on a
+ * consent button.
  */
 @keyframes cta-pulse {
-  0%   { box-shadow: 0 0 0 0 rgb(132 156 255 / 0.5); }
-  70%  { box-shadow: 0 0 0 16px rgb(132 156 255 / 0); }
-  100% { box-shadow: 0 0 0 0 rgb(132 156 255 / 0); }
+  0% {
+    box-shadow:
+      0 10px 34px -12px rgb(175 82 222 / 0.7),
+      0 0 0 0 rgb(255 55 95 / 0.55);
+  }
+  70% {
+    box-shadow:
+      0 10px 34px -12px rgb(175 82 222 / 0.7),
+      0 0 0 18px rgb(255 55 95 / 0);
+  }
+  100% {
+    box-shadow:
+      0 10px 34px -12px rgb(175 82 222 / 0.7),
+      0 0 0 0 rgb(255 55 95 / 0);
+  }
 }
 
 /* --------------------------------------------------- the tips popup ---- */

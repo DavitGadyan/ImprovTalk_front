@@ -285,7 +285,7 @@
     "line": "#313131",
     "ink": "#FFFFFF",
     "muted": "#8E8E93",
-    "accent": "#849CFF",
+    "accent": "#849CFF — a fill with black text for the active tab, filled bars, focus ring and selection; NOT the primary button",
     "on_accent": "#000000",
     "accent_text": "#849CFF (links and the active nav label only)",
     "data_colours": {
@@ -296,7 +296,7 @@
     },
     "never_navy_or_white_background": true,
     "brand_gradient": "linear-gradient(90deg, #f0912f, #e6455f, #a95acc)",
-    "brand_gradient_on_site": "zero CSS — appears only in the app icon and inside the app renders (Hold-to-speak disc)",
+    "brand_gradient_on_site": "the primary action only: the rose→violet→indigo ramp linear-gradient(100deg,#DF274A,#A44DD1 55%,#5856D6) with white text on 'Get early access' (hero button, floating pill) — plus the logo and the Hold-to-speak disc inside the renders; never a card, band, rule or text",
     "brand_gradient_on_social": "end card only",
     "eyebrows": "muted, never coloured",
     "colour_rule": "colour on data (numbers, dots, bars, glyphs), never on chrome; no tinted surfaces",
@@ -326,7 +326,8 @@
       "never redraw",
       "never on a light background",
       "never let a generative model render the wordmark or any text"
-    ]
+    ],
+    "cta_gradient": "linear-gradient(100deg, #DF274A 0%, #A44DD1 55%, #5856D6 100%) — white text, worst point 4.60:1"
   },
   "personas": [
     {
