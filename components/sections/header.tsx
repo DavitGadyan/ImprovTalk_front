@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Icon } from '@/components/ui/icon'
 import { Logo } from '@/components/ui/logo'
+import { useBackdropClose } from '@/components/ui/use-backdrop-close'
 import { nav } from '@/content/site'
 import { cn } from '@/lib/utils'
 
@@ -50,6 +51,8 @@ export function Header() {
    */
   const isCurrent = (href: string) => !href.startsWith('/#') && pathname === href
 
+  const backdrop = useBackdropClose(dialogRef, close)
+
   return (
     <header
       className={cn(
@@ -93,9 +96,8 @@ export function Header() {
       <dialog
         ref={dialogRef}
         onClose={close}
-        onClick={(e) => {
-          if (e.target === dialogRef.current) close()
-        }}
+        onPointerDown={backdrop.onPointerDown}
+        onClick={backdrop.onClick}
         aria-label="Menu"
         /* m-auto is not decoration: the UA centres a modal <dialog> with
            margin:auto, and Tailwind's preflight resets it to 0. */

@@ -310,6 +310,24 @@ measured live, the counter needs ~155s of visible time from landing because it
 starts at hydration, which outlasts most sessions. Do not commit a test value
 here; `?dwell=<seconds>` overrides it per page load instead.
 
+**A click is not where the pointer went down.** A `click` is delivered to the
+nearest common ancestor of the mousedown and mouseup targets. Select text in a
+textarea and let go over the dialog's own edge — or press the dialog's
+scrollbar, which the tall Wishes step has — and the click's target is the
+`<dialog>` element, which `e.target === ref.current` read as a backdrop click.
+Six answers in, that raised "Discard your answers?" for a text selection.
+`components/ui/use-backdrop-close.ts` requires both that the pointer went
+*down* on the dialog and that the click landed *outside* its box (every dialog
+here is `p-0`, so inside the box is content or scrollbar). The install dialog
+and the mobile menu had the same handler and use the same hook.
+
+**The download closes the dialog.** `SurveyClient` fires `onDownloaded` after
+the file is handed to the browser; the popup closes one second later, so
+nobody is left looking for a way out. It counts before that: the row is written
+and `survey_complete` fires on *See my result*, one step earlier; the download
+fires `tips_download` on its own. A person who reaches the result and never
+downloads is still a row.
+
 **Rules it must not break:**
 
 1. **Never on `/survey/`** — the same form is already the page.

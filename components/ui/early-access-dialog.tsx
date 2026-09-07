@@ -1,8 +1,9 @@
 'use client'
 
-import { useCallback, useEffect, useId, useRef } from 'react'
+import { useEffect, useId, useRef } from 'react'
 import Image from 'next/image'
 import { Icon } from '@/components/ui/icon'
+import { useBackdropClose } from '@/components/ui/use-backdrop-close'
 import { LogoMark } from '@/components/ui/logo'
 import { Button } from '@/components/ui/button'
 import { isLive, iosHref, SUPPORT_EMAIL } from '@/content/links'
@@ -48,12 +49,7 @@ export function EarlyAccessDialog({
     }
   }, [open])
 
-  const onBackdrop = useCallback(
-    (e: React.MouseEvent<HTMLDialogElement>) => {
-      if (e.target === ref.current) onClose()
-    },
-    [onClose],
-  )
+  const backdrop = useBackdropClose(ref, onClose)
 
   const betaLive = isLive.testflight || isLive.ios
   const isAndroid = platform === 'android'
@@ -62,7 +58,8 @@ export function EarlyAccessDialog({
     <dialog
       ref={ref}
       onClose={onClose}
-      onClick={onBackdrop}
+      onPointerDown={backdrop.onPointerDown}
+      onClick={backdrop.onClick}
       aria-labelledby={titleId}
       /* m-auto is not decoration: the UA stylesheet centres a modal <dialog>
          with margin:auto, and Tailwind's preflight resets margin to 0, which

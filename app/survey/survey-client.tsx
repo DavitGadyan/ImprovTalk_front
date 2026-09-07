@@ -39,10 +39,13 @@ const TAIL = ['Style', 'About you', 'Where', 'Wishes', 'Done'] as const
 export function SurveyClient({
   inDialog = false,
   onComplete,
+  onDownloaded,
 }: {
   inDialog?: boolean
   /** Lets a host dialog know the answers are safely away. */
   onComplete?: () => void
+  /** Fires once the PDF has been handed to the browser — the host may close. */
+  onDownloaded?: () => void
 } = {}) {
   const [step, setStep] = useState(0)
   const [started, setStarted] = useState(false)
@@ -174,6 +177,7 @@ export function SurveyClient({
         personaId={persona}
         inDialog={inDialog}
         saveError={saveError}
+        onDownloaded={onDownloaded}
         onRetake={() => {
           /* A retake has to be a clean one. Leaving the answers in place meant
              the form came back pre-filled with consent still ticked, and
@@ -440,6 +444,7 @@ function Result({
   personaId,
   inDialog,
   saveError,
+  onDownloaded,
   onRetake,
 }: {
   goal: GoalSlug
@@ -452,6 +457,7 @@ function Result({
       always advances to this screen, so an alert left behind on the form step
       was never mounted and nobody ever saw it. */
   saveError?: string | null
+  onDownloaded?: () => void
   onRetake: () => void
 }) {
   const g = goalBySlug(goal)!
@@ -471,6 +477,7 @@ function Result({
       const { downloadTipsPdf } = await import('@/lib/tips-pdf')
       downloadTipsPdf({ goal, personaId, blend })
       track('tips_download', { goal })
+      onDownloaded?.()
     } catch {
       /* A stale deploy or an offline tab fails the chunk fetch. Without this the
          button just flips back to its label at the last step of the funnel. */

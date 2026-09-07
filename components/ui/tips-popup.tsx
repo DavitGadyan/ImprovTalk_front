@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { LogoMark } from '@/components/ui/logo'
 import { Button } from '@/components/ui/button'
 import { Icon } from '@/components/ui/icon'
+import { useBackdropClose } from '@/components/ui/use-backdrop-close'
 import { SurveyClient } from '@/app/survey/survey-client'
 import { STORAGE_KEY } from '@/content/survey'
 import { clearDwell, dwellSoFar, watchDwell } from '@/lib/dwell'
@@ -231,16 +232,16 @@ export function TipsPopup() {
     else close()
   }, [started, completed, close])
 
-  const onBackdrop = useCallback(
-    (e: React.MouseEvent<HTMLDialogElement>) => {
-      /* Only the offer screen closes on a backdrop click. Losing four answered
-         questions to a stray click is the worst thing this component could do. */
-      if (e.target === ref.current) {
-        if (!started) track('tips_popup_dismiss')
-        requestClose()
-      }
-    },
-    [requestClose, started],
+  /* Only the offer screen closes on a backdrop click. Losing four answered
+     questions to a stray click is the worst thing this component could do —
+     and a text selection that ended on the dialog's edge used to count as one
+     (see use-backdrop-close.ts). */
+  const backdrop = useBackdropClose(
+    ref,
+    useCallback(() => {
+      if (!started) track('tips_popup_dismiss')
+      requestClose()
+    }, [requestClose, started]),
   )
 
   return (
@@ -260,7 +261,8 @@ export function TipsPopup() {
           close()
         }
       }}
-      onClick={onBackdrop}
+      onPointerDown={backdrop.onPointerDown}
+      onClick={backdrop.onClick}
       aria-labelledby="tips-dialog-title"
       /* m-auto is not decoration: the UA stylesheet centres a modal <dialog>
          with margin:auto, and Tailwind's preflight resets margin to 0, which
@@ -342,7 +344,14 @@ export function TipsPopup() {
         <div hidden={confirming}>
         {started ? (
           <div className="mt-8">
-            <SurveyClient inDialog onComplete={() => setCompleted(true)} />
+            <SurveyClient
+              inDialog
+              onComplete={() => setCompleted(true)}
+              /* The download is the end of the exchange. A beat later the
+                 dialog goes, so nobody is left looking for a way out — and by
+                 then the answers are in Supabase and the file is on its way. */
+              onDownloaded={() => window.setTimeout(close, 1000)}
+            />
           </div>
         ) : (
           <div className="mt-7">
