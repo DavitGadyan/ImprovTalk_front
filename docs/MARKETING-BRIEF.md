@@ -952,6 +952,14 @@ Google Ads links** (auto-tagging's `gclid` gets overwritten and attribution
 breaks) · **never tag internal links** (starts a new session and destroys the
 original attribution) · do not tag organic search.
 
+**Upwork** is `utm_source=upwork&utm_medium=referral&utm_campaign=portfolio`
+with `utm_content=profile` on the profile link and `case_study` on the project
+page — `referral`, not `social`, so GA4 files it where a marketplace profile
+belongs. Set up a custom channel group in GA4 (Admin → Data display → Channel
+groups: Upwork, Paid search, Google organic, then one channel per network by
+source) and read Traffic acquisition by that group; `docs/UTM-LINKS.md` has the
+exact rules.
+
 Persona URLs take UTMs the same way, and traffic sent to a variant URL is never
 reassigned by the split:
 ```

@@ -2255,7 +2255,16 @@
         "never tag internal links - starts a new session and destroys the original attribution",
         "do not tag organic search"
       ],
-      "variant_urls_keep_their_page": true
+      "variant_urls_keep_their_page": true,
+      "ready_to_paste": {
+        "upwork_profile": "https://improvtalk.vip/?utm_source=upwork&utm_medium=referral&utm_campaign=portfolio&utm_content=profile",
+        "upwork_case_study": "https://improvtalk.vip/?utm_source=upwork&utm_medium=referral&utm_campaign=portfolio&utm_content=case_study",
+        "instagram_bio": "https://improvtalk.vip/?utm_source=instagram&utm_medium=bio&utm_campaign=launch",
+        "tiktok_bio": "https://improvtalk.vip/?utm_source=tiktok&utm_medium=bio&utm_campaign=launch",
+        "youtube_description": "https://improvtalk.vip/?utm_source=youtube&utm_medium=social&utm_campaign=launch&utm_content=demo_video",
+        "reddit_comment": "https://improvtalk.vip/?utm_source=reddit&utm_medium=social&utm_campaign=launch&utm_content=r_socialskills",
+        "linkedin_post": "https://improvtalk.vip/speaking-up/?utm_source=linkedin&utm_medium=social&utm_campaign=launch&utm_content=post_01"
+      }
     },
     "ab_testing": {
       "status": "paused at one arm on purpose",
@@ -2264,6 +2273,49 @@
         "separating two arms needs 1500-3000 visitors each; traffic is two orders of magnitude below that"
       ],
       "note": "Message match, not significance, is what the four campaign pages are for. One ad group per persona pointing at its own page pays off immediately."
+    },
+    "ga4_channel_group": {
+      "name": "ImprovTalk origins",
+      "where": "Admin → Data display → Channel groups → Create new channel group; then Reports → Acquisition → Traffic acquisition, primary dimension = this group",
+      "rules_in_order": [
+        {
+          "channel": "Upwork",
+          "rule": "Source contains upwork"
+        },
+        {
+          "channel": "Paid search",
+          "rule": "Medium exactly matches cpc"
+        },
+        {
+          "channel": "Google organic",
+          "rule": "Source exactly matches google AND Medium exactly matches organic"
+        },
+        {
+          "channel": "TikTok",
+          "rule": "Source contains tiktok"
+        },
+        {
+          "channel": "Instagram",
+          "rule": "Source contains instagram"
+        },
+        {
+          "channel": "Facebook",
+          "rule": "Source contains facebook"
+        },
+        {
+          "channel": "YouTube",
+          "rule": "Source contains youtube"
+        },
+        {
+          "channel": "Reddit",
+          "rule": "Source contains reddit"
+        },
+        {
+          "channel": "LinkedIn",
+          "rule": "Source contains linkedin"
+        }
+      ],
+      "note": "applies to data collected after creation; utm_content is the built-in 'Session manual ad content' dimension"
     }
   },
   "content_engine": {

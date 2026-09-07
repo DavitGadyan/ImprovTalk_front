@@ -37,7 +37,21 @@ https://improvtalk.vip/?utm_source=youtube&utm_medium=social&utm_campaign=launch
 
 Reddit comment
 https://improvtalk.vip/?utm_source=reddit&utm_medium=social&utm_campaign=launch&utm_content=r_socialskills
+
+Upwork profile — the portfolio item's link
+https://improvtalk.vip/?utm_source=upwork&utm_medium=referral&utm_campaign=portfolio&utm_content=profile
+
+Upwork — the case-study project page
+https://improvtalk.vip/?utm_source=upwork&utm_medium=referral&utm_campaign=portfolio&utm_content=case_study
+
+LinkedIn post
+https://improvtalk.vip/speaking-up/?utm_source=linkedin&utm_medium=social&utm_campaign=launch&utm_content=post_01
 ```
+
+Upwork is `referral`, not `social`: it is a marketplace profile, and GA4's default
+channel grouping files `medium=referral` under **Referral**, which is where a
+visitor who came from a freelancer profile belongs. `social` would lump it in
+with TikTok.
 
 ## Rules that keep the data usable
 
@@ -62,6 +76,40 @@ https://improvtalk.vip/speaking-up/?utm_source=linkedin&utm_medium=social&utm_ca
 
 Traffic sent to a variant URL is never reassigned by the A/B split, so the
 person sees the page you chose.
+
+## Seeing every source side by side in GA4
+
+Nothing to install — GA4 reads the tags on arrival. Three views answer "where
+did they come from":
+
+1. **Reports → Acquisition → Traffic acquisition**, primary dimension set to
+   **Session source / medium**. One row per origin: `google / organic` (search,
+   detected without tags), `upwork / referral`, `tiktok / social`,
+   `instagram / bio`, `(direct) / (none)`. Add the secondary dimension
+   **Session manual ad content** to see *which post* (`utm_content`).
+2. **A custom channel group**, so Upwork and each network get their own line
+   instead of sharing "Referral" and "Organic Social". Admin → Data display →
+   Channel groups → *Create new channel group*, name it `ImprovTalk origins`,
+   and add channels in this order (first match wins):
+   - **Upwork** — Source contains `upwork`
+   - **Paid search** — Medium exactly matches `cpc`
+   - **Google organic** — Source exactly matches `google` AND Medium exactly matches `organic`
+   - **TikTok** — Source contains `tiktok`
+   - **Instagram** — Source contains `instagram`
+   - **Facebook** — Source contains `facebook`
+   - **YouTube** — Source contains `youtube`
+   - **Reddit** — Source contains `reddit`
+   - **LinkedIn** — Source contains `linkedin`
+   - everything else falls into **Direct** / **Other**.
+   Then in Traffic acquisition switch the primary dimension to that group.
+   Channel groups apply to data collected *after* they are created, the same as
+   custom dimensions.
+3. **Explore → Free form** with rows = the channel group, columns = **Landing
+   page**, values = Sessions and the `testflight_click` key event: which origin
+   lands on which persona page, and which of those convert.
+
+`gclid` traffic from Google Ads is auto-tagged and appears as `google / cpc`
+without any manual UTM — never add one to an Ads final URL.
 
 ## What happens to untagged traffic
 
