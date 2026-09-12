@@ -1,4 +1,4 @@
-import { price } from '@/content/pricing'
+import { priceLine } from '@/content/pricing'
 import type { Persona } from './types'
 
 /** Fluent on paper, stuck out loud. The language picker leads. */
@@ -68,7 +68,7 @@ export const language: Persona = {
     { q: 'Do I have to talk out loud?', a: 'Yes. Reading and writing are the parts you can already do. There is no typing.' },
     { q: 'Will it fix my grammar?', a: 'It tells you what worked and gives you a better way to say it. Your speed and pauses are measured from the recording.' },
     { q: 'What happens to my recordings?', a: 'Your voice is used to score the session and nothing else. Transcripts and scores stay until you delete them, and deleting your account removes them. No contacts, photos or location. No ads.' },
-    { q: 'What does it cost?', a: `Free to start, three conversations a week. Pro is ${price('pro')} a week and Max is ${price('max')}, both billed weekly and cancelled from the App Store.` },
+    { q: 'What does it cost?', a: `Free to start, three conversations a week. Pro is ${priceLine('pro', 'week')} or ${priceLine('pro', 'month')}; Max is ${priceLine('max', 'week')} or ${priceLine('max', 'month')}. Cancelled from the App Store.` },
     { q: 'How do I get it?', a: 'It is on TestFlight for iPhone. Tap Get early access and it takes you there.' },
   ],
   order: ['learnable', 'problem', 'how', 'scoring', 'realtalk', 'inside', 'faq'],

@@ -1,4 +1,4 @@
-import { price } from '@/content/pricing'
+import { priceLine } from '@/content/pricing'
 import type { Persona } from './types'
 
 /**
@@ -72,7 +72,7 @@ export const rusty: Persona = {
     { q: 'How long until it feels normal?', a: 'Most of it is warming up, not learning. The score works the same way every time, so you can watch the trend instead of guessing.' },
     { q: 'Is it just a guess?', a: 'No. Your speed, pauses and filler words are measured from the recording. Tap any score to see the numbers.' },
     { q: 'What happens to my recordings?', a: 'Your voice is used to score the session and nothing else. Transcripts and scores stay until you delete them, and deleting your account removes them. No contacts, photos or location. No ads.' },
-    { q: 'What does it cost?', a: `Free to start, three conversations a week. Pro is ${price('pro')} a week and Max is ${price('max')}, both billed weekly and cancelled from the App Store.` },
+    { q: 'What does it cost?', a: `Free to start, three conversations a week. Pro is ${priceLine('pro', 'week')} or ${priceLine('pro', 'month')}; Max is ${priceLine('max', 'week')} or ${priceLine('max', 'month')}. Cancelled from the App Store.` },
     { q: 'How do I get it?', a: 'It is on TestFlight for iPhone. Tap Get early access and it takes you there.' },
   ],
   order: ['learnable', 'problem', 'how', 'scoring', 'realtalk', 'inside', 'faq'],

@@ -1,4 +1,4 @@
-import { PRICES, price } from '@/content/pricing'
+import { PRICES, priceLine } from '@/content/pricing'
 import { site } from '@/content/site'
 import { faqs } from '@/content/faq'
 import { stats, TOTAL_LIBRARY_ITEMS } from '@/content/catalogs'
@@ -92,7 +92,8 @@ export const softwareLd = {
     'Solo drills for interviews, networking, storytelling and tough feedback',
     'Your voice is used to score the session and nothing else',
   ],
-  /* Three plans, from content/pricing.ts — the one place a figure lives. */
+  /* Three plans, two cadences, from content/pricing.ts — the one place a
+     figure lives. One Offer per priced product, as the App Store sells them. */
   offers: [
     {
       '@type': 'Offer',
@@ -101,20 +102,25 @@ export const softwareLd = {
       priceCurrency: PRICES.currency,
       description: `Free to start — ${stats.freeWeekly} AI conversations a week`,
     },
-    {
-      '@type': 'Offer',
-      name: 'Pro',
-      price: String(PRICES.pro),
-      priceCurrency: PRICES.currency,
-      description: `${price('pro')} a ${PRICES.period}, billed weekly — live practice, thirty conversations a week`,
-    },
-    {
-      '@type': 'Offer',
-      name: 'Max',
-      price: String(PRICES.max),
-      priceCurrency: PRICES.currency,
-      description: `${price('max')} a ${PRICES.period}, billed weekly — unlimited conversations, Real Talk, the most capable voice model`,
-    },
+    ...(['pro', 'max'] as const).flatMap((key) =>
+      (['week', 'month'] as const).map((interval) => ({
+        '@type': 'Offer',
+        name: `${key === 'pro' ? 'Pro' : 'Max'} (${interval === 'week' ? 'weekly' : 'monthly'})`,
+        price: String(PRICES[key][interval]),
+        priceCurrency: PRICES.currency,
+        priceSpecification: {
+          '@type': 'UnitPriceSpecification',
+          price: String(PRICES[key][interval]),
+          priceCurrency: PRICES.currency,
+          billingDuration: 1,
+          unitCode: interval === 'week' ? 'WEE' : 'MON',
+        },
+        description:
+          key === 'pro'
+            ? `${priceLine('pro', interval)} — live practice, thirty conversations a week`
+            : `${priceLine('max', interval)} — unlimited conversations, Real Talk, Custom Practice, the most capable voice model`,
+      })),
+    ),
   ],
 }
 

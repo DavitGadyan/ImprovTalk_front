@@ -12,6 +12,9 @@ sharing one set of components; two of them in a live A/B split.
 1. **Never claim a number that has not been counted** from the app's data files.
    The verified set is in `history.md`. Three languages is real; a translated app
    interface is not, and 195 nationalities change her *accent*, not her language.
+   Prices and billing cadence are facts from the app's `upgrade.tsx` too — read
+   it again before touching `content/pricing.ts`; the plans changed once already
+   under the site's feet.
 2. **The variant redirect must preserve `location.search`.** Losing `gclid`
    breaks Google Ads attribution silently.
 3. **`.nojekyll` and `CNAME` must be in `out/`.** Pages strips `_next/*` without

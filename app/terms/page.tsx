@@ -3,6 +3,7 @@ import { PageShell } from '@/components/ui/page-shell'
 import { SUPPORT_EMAIL } from '@/content/links'
 import { breadcrumbLd, pageJsonLd } from '@/lib/jsonld'
 import { site } from '@/content/site'
+import { priceLine } from '@/content/pricing'
 
 export const metadata: Metadata = {
   title: 'Terms of service',
@@ -78,8 +79,9 @@ export default function TermsPage() {
 
       <h2>Subscriptions and billing</h2>
       <p>
-        ImprovTalk is free to start, with a weekly limit on AI conversations. Pro is $25 a week
-        and Max is $49 a week; both are billed weekly. Subscriptions bought on iPhone are billed by Apple through your App Store
+        ImprovTalk is free to start, with a weekly limit on AI conversations. Pro is{' '}
+        {priceLine('pro', 'week')} or {priceLine('pro', 'month')}; Max is {priceLine('max', 'week')} or{' '}
+        {priceLine('max', 'month')}. Subscriptions bought on iPhone are billed by Apple through your App Store
         account and are governed by Apple&rsquo;s terms; subscriptions bought elsewhere are billed by
         our payment processor.
       </p>

@@ -89,11 +89,13 @@ users find out anyway.
 
 ### Pricing
 Published 12 Sep 2026. Free: 3 AI conversations a week, Learn, Stats, History.
-**Pro $25 a week**: adds live Practice, 30 conversations a week. **Max $49 a
-week**: unlimited, Real Talk, the most capable voice model. Billed weekly by
-Apple; there is no monthly or yearly plan. Source of every figure:
-`content/pricing.ts`. The plan matrix is the intended state — the app gates
-neither Practice nor Real Talk yet; see `history.md` "Pricing and Real Talk".
+**Pro $25 a week or $69 a month**: adds live Practice, Situational Pressure,
+30 conversations a week. **Max $49 a week or $129 a month**: unlimited, Real
+Talk, Custom Practice, the most capable voice model. Billed weekly or monthly
+by Apple; monthly is up to 39% less per week; there is no yearly plan yet.
+Source of every figure: `content/pricing.ts`, read from the app's
+`upgrade.tsx` (12 Sep 2026). The app gates Practice to Pro and Real Talk to
+Max since the same day; see `history.md` "Pricing and Real Talk".
 
 ---
 

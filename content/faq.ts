@@ -1,4 +1,4 @@
-import { price } from '@/content/pricing'
+import { priceLine } from '@/content/pricing'
 
 export const faqs = [
   {
@@ -19,7 +19,7 @@ export const faqs = [
   },
   {
     q: 'What does it cost?',
-    a: `It is free to start, with three AI conversations a week, Learn, Stats and History. Pro is ${price('pro')} a week and adds live practice with thirty conversations a week. Max is ${price('max')} a week: unlimited conversations, Real Talk, and the most capable voice model. Billed weekly by Apple; cancel any time.`,
+    a: `It is free to start, with three AI conversations a week, Learn, Stats and History. Pro is ${priceLine('pro', 'week')} or ${priceLine('pro', 'month')} and adds live practice with thirty conversations a week. Max is ${priceLine('max', 'week')} or ${priceLine('max', 'month')}: unlimited conversations, Real Talk, Custom Practice, and the most capable voice model. Billed weekly or monthly by Apple; cancel any time.`,
   },
   {
     q: 'When can I get it?',

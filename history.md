@@ -535,23 +535,54 @@ names appear anywhere public.
 
 ## Pricing and Real Talk — what the site claims, and where it over-claims
 
-**The plan matrix on `/pricing/` is the intended state, not today's code.** The
-owner chose to publish Free = Simulate/Learn/Stats/History, Pro = +Practice,
-Max = +Real Talk, and to gate the app to match afterwards. As of this note the
-app does neither: `get_advice.py` and `conversation_analysis.py` check sign-in
-only, and live Practice is on Free (120 scenarios, 3 a week). Until the app
-change ships, a Free user who reads the site and opens Real Talk finds it
-works. The app-side changes are written down in the plan file for this session
-and summarised here so nobody reads the gap as a mistake:
+**The plans were re-read from the app on 12 Sep 2026** after the owner
+changed them (`ImprovTalk` commits `63cdd1b` "Plans: Free / Pro / Max gate
+whole surfaces, billed weekly or monthly" and `515e5c7`). The authoritative
+file is `apps/mobile/app/upgrade.tsx`; `content/pricing.ts` carries the
+file:line for every figure. What changed and what the site now says:
 
-- Real Talk → Max: the `meets_tier` check that `realtime.py:350` already uses,
-  on the four conversation-analysis routes and `/v1/advice`; client gate in
-  `real-talk.tsx` the way `practice.tsx:122` gates Custom Practice.
-- Practice → Pro: `realtime.py:350` requires `premium` for scenarios the
-  catalog marks `"free"`; Simulate stays on Free.
-- `upgrade.tsx:102-110` gains the two rows so the app and the site agree.
-- Latent: `plan_limits.normalize_tier("pro")` → max, but
+- **Monthly exists.** Pro is $25 a week or $69 a month; Max is $49 a week or
+  $129 a month (`upgrade.tsx:46-50`, products `…{premium,max}.monthly`). The
+  app defaults to monthly (`:155`) and says "No yearly plan yet" (`:361`).
+  The site's "there is no monthly or yearly plan" sentence had been wrong
+  from that commit on; it lived in six places (pricing page, terms, FAQ,
+  five persona FAQs, llms.txt, the brief) and each now reads
+  `priceLine()` from `content/pricing.ts`. The saving — 36 % on Pro, 39 % on
+  Max — is the app's own formula (`:53-57`), computed, never typed.
+- **The comparison table is the app's `COMPARE`, verbatim** (`:122-134`),
+  eleven rows in the app's order. Six of them Free lacks, so the line above
+  the table says "Six things" — the count is spelled from the array's length.
+- **The app gates now.** Practice is on Pro (`entitlements.py:84`,
+  `practice.tsx:109`) and Real Talk on Max (`real-talk.tsx:55`, `require_tier`
+  on every Real Talk route). The over-claim window from the first version of
+  this section is closed.
+- **Two rows of the app's table have nothing behind them in code**, and the
+  site repeats them because it mirrors the paywall the owner wrote: *Voice
+  model — Pro: Standard* (`realtime.py:363-368` gives Pro the same
+  `gpt-realtime-2` as Max; only Free gets `gpt-realtime-mini`) and *Priority
+  when busy* (`openai_backoff.py:124` has no entitlement logic). The fix is
+  the app's: either give Pro `gpt-realtime-mini` and route by tier in the
+  backoff, or drop the two rows from `COMPARE`; the site follows whichever.
+- `PLANS` taglines are the app's ("Get a taste" / "For regular practice" /
+  "Everything, without a limit"); `PLAN_CARDS` holds the app's card lines,
+  and the Max one is drawn in the bento (see "Design system B").
+- Still latent: `plan_limits.normalize_tier("pro")` → max, but
   `entitlements.tier_rank("pro")` → 1. Pick one.
+
+**The plan table has the app's interval switch**, Weekly / Monthly, monthly
+first as the app defaults. The exported HTML carries the monthly figures. The
+Max figure counts up on entry (`AnimatedNumber`) and then, once the reader has
+touched the switch, changes in place — a second count read as the price being
+unsure of itself, and `AnimatedNumber`'s off-screen rewind was measured
+showing "$0" for a beat on a keyed remount, so the count is entry-only.
+
+**The features on `/pricing/` are an accordion**, native `<details
+name="feature">`: one row per Home tile — glyph, title, one sentence — that
+opens to the full account, the screenshot, and the Real Talk tools. The
+`name` attribute makes the group exclusive in Chrome 120 / Safari 17.2 /
+Firefox 130; `onToggle` closes the siblings by hand for anything older. Every
+closed panel is in the export (rule 4); measured: one open at a time after
+clicks and after Enter on a summary.
 
 **Real Talk's claims are the app's own words.** "2–3 openers" — the code caps
 at three and asks for two or three (`get_advice.py:54,110`). A direction's
@@ -562,8 +593,9 @@ five minutes, in English, Spanish or Russian. Do not round any of these up.
 **No Real Talk screenshots exist.** The renders pipeline needs a composite
 PNG; none has been exported. The pricing page and the persona section are
 text-first, and a `render` slot is wired per tile so a screenshot drops in
-when one lands. `plan-max` stays unplaced: its "131 scenarios" assumes 9 pro
-scenarios and the counted set is 15.
+when one lands. `plan-max` is cropped but unplaced: it is the paywall as it was
+before 12 Sep, and its "131 scenarios" assumed 9 pro scenarios where the
+counted set is 15.
 
 **The survey's monthly price bands are not plans.** `PRICE_BANDS` in
 `content/survey.ts` offers $149/$99/$59/$29 a month beside the real $49 a
@@ -651,48 +683,70 @@ scanning for pixels that differ from the ground colour, so nothing is typed by
 hand and a re-export re-crops itself — and writes `public/app/*.webp` at 1400
 and 700 wide plus `lib/renders.ts` with real dimensions and alt text. The hero
 carries `score-disc` (the one panel with the gradient disc); the bento after it
-carries `live-session`, `score-screen`, `setup-rows`, `choice-list`,
-`plan-max`, `tab-bar`, `icon-strip`; Scoring carries `score-screen`; Learn
-carries `home`; the pricing page carries `setup-blend`. The renders carry
-their own frames, grounds and corners; nothing is added around them.
+carries `live-session-phone` and `score-screen-phone` on one card, then
+`setup-rows`, `choice-list`, the drawn Max card, `tab-bar`, `icon-strip`;
+Scoring carries `score-screen`; Learn carries `home`; the pricing page
+carries `setup-blend`, `live-session`, `home` and `score-screen`. The
+renders carry their own frames, grounds and corners; nothing is added around
+them — except the two phone cutouts, which carry nothing but the phone.
 
-**`plan-max` is back in the bento by the owner's choice** (12 Sep 2026). It
-was swapped out on 7 Sep for `setup-blend` because it showed a weekly price the
-site did not publish; the price is published now (`content/pricing.ts`, and it
-happens to be the same $49/week), and the swap had broken row 2 — `setup-blend`
-is cut from the other composite at a different height, so the three cards no
-longer matched. Its "131 scenarios" is the app's own paywall figure and is
-stale (the counted pro set is 15, not the 9 that figure assumes); it is a
-screenshot of the app's screen, not site copy, and goes when the app re-exports
-the card.
+**The bento's first row is one card with two phones on it** (12 Sep 2026).
+The owner's complaint, twice: the live session and the score sat in two
+cards, each phone off-centre against a ground that was not the card's. The
+fix is not CSS on the panels — each panel is a phone drawn on its own card
+with its own lighting (`live-session` runs 38 → 24 across with a shadow to
+12 under the phone), and two grounds cannot share a card. So `crop-renders`
+cuts the phones out with alpha (`CUTOUTS`): a flood from the panel's edge
+over ground-like pixels, then only the largest opaque piece kept — the
+composite's corner arcs and ~140 anti-aliased specks along the card edge are
+separate pieces and go. Ground-like is per panel: for `live-session`,
+neutral and `12 ≤ hi ≤ 90` (the phone's outer ring is 9–10 over pure black,
+so the flood stops there; the 1–3 px highlight rim at 40 goes with the card,
+and the black frame behind it keeps the flood out of the screen); for
+`score-screen`, within 3 of the swapped `#1F1F1F`. The phone's own shadow
+goes with the card; the tile draws one with `drop-shadow`, which turns with
+the phone. The phones are placed as drawn — both are perspective renders
+(top edges slope ~2.5° one way, sides ~1° the other) and no rotation
+straightens a perspective.
 
-**Two panels were exported on a beige photograph, not a card.** The case study
-put `score-screen` and `setup-blend` on a blurred photo; the other nine are
-`#1F1F1F` cards on a `#0A0A0A` ground. On the site the beige read as a
-different page — the owner's "messed up with background color". `crop-renders`
-now swaps the photo for the card colour on `score-screen` by rule
-(`GROUND_SWAP`): a flood from the panel's edge over every pixel that is not the
-phone's neutral dark (`hi - lo ≤ 4 && hi ≤ 30` is phone; the photo's deepest
-shadow is a warm grey in the 30s, and a looser line leaves that shadow as a
-halo down the phone's left side). The phone is never touched, the pass is part
-of `npm run gen:renders`, and a re-export on a dark card makes it a no-op. The
-phone then measures centred (bbox centre 49.5% × 50.7%), so the CSS nudge that
-had been compensating for the beige margins went. **`setup-blend` cannot take
-the pass:** its stats card is glass tinted by the photo, and the flood walks
-through it and erases the streak, charisma and closed-rate figures. It keeps
-its photo until the case study re-exports it.
+They face each other: the left phone's left edge nearer, the right phone's
+right edge nearer. **In CSS a positive `rotateY` brings the left edge toward
+the viewer** (`x' = x cos θ + z sin θ`, `z' = −x sin θ`, so the right edge
+recedes), so the left phone is `+θ` and the right `−θ`. θ eases 20° → 10°
+across the section's own scroll range, so the pair opens as it passes and
+never leaves the centre — measured: the gap between the phones is centred on
+the card to the pixel at 390, 768 and 1440. Under reduced motion both are
+constant `MotionValue`s at ±14°, a constant rather than an absent style
+because the export carries the first frame inline and only a value that is
+set on the client overwrites it. The hover lift (`y −6`, a third of the old
+device tilt) is on every tile and off under reduced motion.
 
-**The bento's cells have fixed aspects, and it moves.** Panels in one row are
-not all the same height (the two strips are 272 and 236), so each `<li>` has
-an aspect per row (`1400/1235` and `992/1800` on row 1, `992/1040` on row 2,
-`11/2` on row 3; `3/4`, `1/1` and `5/1` at tablet) with `bg-surface` behind and
-the image covering — a short strip no longer leaves a gap. Motion is a
-staggered `popIn` reveal, a hover lift with a third of the old device tilt, and
-a scroll drift on the two tall tiles in opposite directions; all transform and
-opacity, and all still under reduced motion (the drift becomes a constant zero
-rather than an absent style, because the export carries the drift's first
-frame inline and only a value that is set on the client overwrites it).
-Measured at 1440: rows 650/651, 376/376/376, 100/100.
+**`score-screen`'s beige is gone from the card version too.** The case study
+exported it and `setup-blend` on a blurred photograph; `crop-renders` swaps
+the photo for the card colour on `score-screen` by rule (`GROUND_SWAP`: the
+phone is `hi − lo ≤ 4 && hi ≤ 30`; the photo's deepest shadow is a warm grey
+in the 30s and a looser line leaves it as a halo down the phone's left side).
+`setup-blend` cannot take the pass — its stats card is glass tinted by the
+photo, and the flood erases the streak, charisma and closed-rate figures — so
+it keeps its photo on the pricing page until re-exported.
+
+**The Max card in the bento is drawn, not cropped** (`PlanCardMock`,
+`components/ui/plan-card-mock.tsx`). The `plan-max` render is the paywall as
+it was before the plans changed; no export of the new one exists, and the
+owner wants every add-on on it. The card reads `PLAN_CARDS.max` and `PRICES`
+from `content/pricing.ts` — the app's own five lines, monthly price with the
+weekly beneath, crown, RECOMMENDED ribbon, the Choose button as the app draws
+it — so it is right whenever the plan changes again, and its lines are real
+text a crawler can read, which the screenshot never was. Its gold border,
+ribbon and button are a depiction of the app's screen, not site chrome; the
+site's own rule for gold is unchanged. It is the one tile in the bento that
+is not a screenshot, and it is the one whose content had to be current.
+
+**The bento's cells have fixed aspects.** Panels in one row are not all the
+same height (the two strips are 272 and 236), so each cell has an aspect per
+row (`5/3` for the pair at `lg`, `992/1040` on row 2, `11/2` on row 3; `5/6`,
+`3/4`–`1/1` and `5/1` at tablet) with `bg-surface` behind and the image
+covering. Measured at 1440: 670, 376/376/375, 99/98.
 
 **Gold's first use is the plan table**, and the rule held: it is on the Max
 price figure (a number, counted up through `AnimatedNumber`), the Recommended
