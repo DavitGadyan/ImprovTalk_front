@@ -46,5 +46,6 @@ export const nav = [
   { href: '/#scoring', label: 'Scoring' },
   { href: '/#inside', label: 'Learn' },
   { href: '/#faq', label: 'FAQ' },
+  { href: '/pricing/', label: 'Pricing' },
   { href: '/blog/', label: 'Blog' },
 ] as const

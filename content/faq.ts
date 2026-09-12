@@ -1,3 +1,5 @@
+import { price } from '@/content/pricing'
+
 export const faqs = [
   {
     q: 'Do I actually have to speak?',
@@ -17,7 +19,7 @@ export const faqs = [
   },
   {
     q: 'What does it cost?',
-    a: 'It is free to start, with three AI conversations a week. Paid tiers raise that limit and give you the more capable models. Final pricing is confirmed at launch.',
+    a: `It is free to start, with three AI conversations a week, Learn, Stats and History. Pro is ${price('pro')} a week and adds live practice with thirty conversations a week. Max is ${price('max')} a week: unlimited conversations, Real Talk, and the most capable voice model. Billed weekly by Apple; cancel any time.`,
   },
   {
     q: 'When can I get it?',

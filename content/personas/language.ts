@@ -1,3 +1,4 @@
+import { price } from '@/content/pricing'
 import type { Persona } from './types'
 
 /** Fluent on paper, stuck out loud. The language picker leads. */
@@ -52,6 +53,11 @@ export const language: Persona = {
     intro: 'It shows your speed and your pauses, so you can see the bits you got stuck on.',
     proof: 'Keep practising and the pauses get shorter.',
   },
+  realtalk: {
+    label: 'Real Talk',
+    title: 'The real one, in the real language.',
+    intro: 'Upload the recording or describe it, in English, Spanish or Russian, and see where the words went and where the pauses did. Then openers for next time.',
+  },
   inside: {
     label: 'Learn and practise',
     title: 'Learn what to say, then say it out loud.',
@@ -62,8 +68,8 @@ export const language: Persona = {
     { q: 'Do I have to talk out loud?', a: 'Yes. Reading and writing are the parts you can already do. There is no typing.' },
     { q: 'Will it fix my grammar?', a: 'It tells you what worked and gives you a better way to say it. Your speed and pauses are measured from the recording.' },
     { q: 'What happens to my recordings?', a: 'Your voice is used to score the session and nothing else. Transcripts and scores stay until you delete them, and deleting your account removes them. No contacts, photos or location. No ads.' },
-    { q: 'What does it cost?', a: 'Free to start — three conversations a week. Paid plans give you more.' },
+    { q: 'What does it cost?', a: `Free to start, three conversations a week. Pro is ${price('pro')} a week and Max is ${price('max')}, both billed weekly and cancelled from the App Store.` },
     { q: 'How do I get it?', a: 'It is on TestFlight for iPhone. Tap Get early access and it takes you there.' },
   ],
-  order: ['learnable', 'problem', 'how', 'scoring', 'inside', 'faq'],
+  order: ['learnable', 'problem', 'how', 'scoring', 'realtalk', 'inside', 'faq'],
 }

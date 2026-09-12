@@ -48,10 +48,11 @@ location are collected, and the app ships no advertising or analytics SDKs.
 Users can export or delete everything.
 
 ## Pricing
-
-Free to start, with 3 AI conversations a week. Paid tiers raise the limit. Final
-pricing is confirmed at launch.
-
+Three plans, billed weekly by Apple, cancel any time. Free: three AI
+conversations a week, Learn, Stats and History — a real tier, not a trial. Pro:
+$25 a week; adds live practice and thirty conversations a week. Max: $49 a week;
+unlimited conversations, Real Talk, and the most capable voice model. There is
+no monthly or yearly plan.
 ## Status
 
 Pre-launch, in TestFlight beta on iPhone. Not yet listed on the App Store.

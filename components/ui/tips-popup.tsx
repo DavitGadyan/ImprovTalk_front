@@ -123,7 +123,7 @@ function remember() {
  *
  * Opens once, after someone has actually read for a while, and carries the
  * whole exchange: the offer, the form, and the PDF at the end. It reuses
- * <SurveyClient> rather than reimplementing the six steps, so there is one
+ * <SurveyClient> rather than reimplementing the seven steps, so there is one
  * form in the codebase and Supabase only has one shape to accept.
  *
  * Rules it will not break:

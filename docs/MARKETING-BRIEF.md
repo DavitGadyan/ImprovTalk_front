@@ -88,10 +88,12 @@ code. **The app interface is English only. There is no i18n.** Say so plainly;
 users find out anyway.
 
 ### Pricing
-Free to start, **3 AI conversations a week**. Paid tiers raise the limit and
-unlock more capable models. **Final pricing is confirmed at launch — never
-publish a figure.** In-app values are contradictory placeholders (weekly SKUs
-rendering a "/day" label — a known bug).
+Published 12 Sep 2026. Free: 3 AI conversations a week, Learn, Stats, History.
+**Pro $25 a week**: adds live Practice, 30 conversations a week. **Max $49 a
+week**: unlimited, Real Talk, the most capable voice model. Billed weekly by
+Apple; there is no monthly or yearly plan. Source of every figure:
+`content/pricing.ts`. The plan matrix is the intended state — the app gates
+neither Practice nor Real Talk yet; see `history.md` "Pricing and Real Talk".
 
 ---
 

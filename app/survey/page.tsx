@@ -27,7 +27,7 @@ export default function SurveyPage() {
       bare
       title={TITLE}
       breadcrumb={[['Home', '/']]}
-      intro="Ninety seconds, six questions, no email address. Your result appears at the end — we are not going to send it to you later."
+      intro="Ninety seconds, seven questions, no email address. Your result appears at the end — we are not going to send it to you later."
     >
       <script
         type="application/ld+json"

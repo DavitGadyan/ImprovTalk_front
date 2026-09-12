@@ -32,9 +32,10 @@ const TILES: { name: RenderName; caption: string; span: string }[] = [
     span: 'lg:col-span-2',
   },
   {
-    /* Not the Max plan card: it carries a price and a scenario count, and the
-       site publishes neither — pricing is a placeholder until launch, and the
-       number is not in the counted set. */
+    /* Not the Max plan card. The price on it is published now (content/
+       pricing.ts), but it also shows "131 scenarios", and the counted "pro"
+       set is 15, not the 9 that number assumes — the card's figure is stale.
+       It stays unplaced until the app's card is re-exported with a real count. */
     name: 'setup-blend',
     caption: 'The blend — four personality sliders that always total 100.',
     span: 'lg:col-span-2',

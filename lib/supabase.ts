@@ -48,6 +48,8 @@ export type SurveyPayload = {
   country: string | null
   wanted_feature: string | null
   expectation: string | null
+  /** One of PRICE_BANDS' slugs, or null if skipped. */
+  willingness_to_pay: string | null
   /** Which persona page they were on, so answers tie back to the split. */
   variant: string | null
   /** utm_content, so a survey answer ties back to the video that sent them. */

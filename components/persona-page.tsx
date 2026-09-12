@@ -6,6 +6,7 @@ import { Problem } from '@/components/sections/problem'
 import { Learnable } from '@/components/sections/learnable'
 import { HowItWorks } from '@/components/sections/how-it-works'
 import { Scoring } from '@/components/sections/scoring'
+import { RealTalk } from '@/components/sections/real-talk'
 import { WhatsInside } from '@/components/sections/whats-inside'
 import { Faq } from '@/components/sections/faq'
 import { Footer } from '@/components/sections/footer'
@@ -31,6 +32,7 @@ const SECTIONS: Record<
   learnable: Learnable,
   how: HowItWorks,
   scoring: Scoring,
+  realtalk: RealTalk,
   inside: WhatsInside,
   faq: Faq,
 }

@@ -142,7 +142,8 @@ export default function PrivacyPage() {
       <p>
         If you fill in the <a href="/survey/">survey</a>, we store what you told us: your goal,
         which of the situations you picked as closest, the four-colour split you set, and — only if
-        you chose to answer — an age band, a gender, and a country. Plus the two free-text answers,
+        you chose to answer — an age band, a gender, a country, and what you said you would pay for
+        the Max plan. Plus the two free-text answers,
         which are the ones we actually read. Your tips PDF is built in your own browser from those
         answers; it is not generated on a server and no copy of it is kept.
       </p>

@@ -17,7 +17,7 @@ create extension if not exists pgcrypto with schema extensions;
 create table if not exists public.survey_responses (
   id              uuid primary key default gen_random_uuid(),
   submitted_at    timestamptz not null default now(),
-  version         int  not null default 2,
+  version         int  not null default 3,
 
   goal            text not null,
   goal_other      text,
@@ -34,6 +34,8 @@ create table if not exists public.survey_responses (
 
   variant         text,
   utm_content     text,
+  -- One of PRICE_BANDS' slugs in content/survey.ts, or null if skipped.
+  willingness_to_pay text,
 
   -- One-way hash of the submitter's address. Never the address itself, and
   -- computed inside Postgres so the browser neither sees nor sends it.
@@ -85,14 +87,15 @@ begin
   insert into survey_responses (
     version, goal, goal_other, persona, blend,
     age_band, gender, country, wanted_feature, expectation,
-    variant, utm_content, ip_hash
+    variant, utm_content, willingness_to_pay, ip_hash
   ) values (
-    coalesce((payload->>'version')::int, 2),
+    coalesce((payload->>'version')::int, 3),
     payload->>'goal', payload->>'goal_other', payload->>'persona',
     payload->'blend',
     payload->>'age_band', payload->>'gender', payload->>'country',
     payload->>'wanted_feature', payload->>'expectation',
     payload->>'variant', payload->>'utm_content',
+    payload->>'willingness_to_pay',
     ip_fingerprint()
   );
 end;
@@ -110,6 +113,10 @@ revoke all on function public.survey_already_submitted() from public;
 revoke all on function public.ip_fingerprint() from public;
 grant execute on function public.survey_submit(jsonb) to anon;
 grant execute on function public.survey_already_submitted() to anon;
+
+-- Existing tables: add the column the v3 survey sends. Without this the RPC
+-- silently ignores the key and the answer is lost with no error.
+alter table public.survey_responses add column if not exists willingness_to_pay text;
 
 -- ------------------------------------------------------------- constraints --
 -- Keeps the free text from being used as storage by someone with the key.
@@ -132,4 +139,9 @@ do $$
 begin
   alter table public.survey_responses
     add constraint persona_len check (char_length(persona) <= 60);
+exception when duplicate_object then null; end $$;
+do $$
+begin
+  alter table public.survey_responses
+    add constraint willingness_to_pay_len check (char_length(willingness_to_pay) <= 40);
 exception when duplicate_object then null; end $$;

@@ -37,7 +37,7 @@ export function SurveyPrompt() {
             Ninety seconds, and you get a one-page PDF written for how you come across.
           </p>
           <p className="mt-1.5 text-small leading-relaxed text-muted">
-            Six questions, no email address. It also tells us who the app is actually for.
+            Seven questions, no email address. It also tells us who the app is actually for.
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-4">

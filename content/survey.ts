@@ -197,6 +197,30 @@ export const AGE_BANDS = ['Under 18', '18–24', '25–34', '35–44', '45–54'
 export const GENDERS = ['Male', 'Female', 'Non-binary', 'Prefer not to say']
 
 /**
+ * Willingness to pay for Max.
+ *
+ * The weekly anchor is the published price (content/pricing.ts). The monthly
+ * rows are NOT plans — the app sells weekly only and the pricing page says so.
+ * They exist to learn whether people would pay more per week for a longer
+ * commitment, and they appear nowhere but this one question. Stored as the
+ * slug, so SQL can group on it.
+ */
+export type PriceBand = {
+  slug: string
+  label: string
+  hint?: string
+}
+
+export const PRICE_BANDS: PriceBand[] = [
+  { slug: 'weekly_49', label: '$49 a week', hint: 'What Max costs today' },
+  { slug: 'monthly_149', label: '$149 a month', hint: 'About $34 a week' },
+  { slug: 'monthly_99', label: '$99 a month', hint: 'About $23 a week' },
+  { slug: 'monthly_59', label: '$59 a month', hint: 'About $14 a week' },
+  { slug: 'monthly_29', label: '$29 a month', hint: 'About $7 a week' },
+  { slug: 'nothing', label: 'I would not pay for it' },
+]
+
+/**
  * ISO 3166-1 alpha-2. Names are rendered at runtime with Intl.DisplayNames so
  * this file stays small and the list appears in the visitor's own language.
  */
@@ -442,5 +466,5 @@ export const personaById = (id: string | null): Persona | null =>
 
 /* ------------------------------------------------------------------ meta -- */
 
-export const SURVEY_VERSION = 2
+export const SURVEY_VERSION = 3
 export const STORAGE_KEY = 'improvtalk-survey'

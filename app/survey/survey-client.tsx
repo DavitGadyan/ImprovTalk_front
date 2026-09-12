@@ -11,6 +11,7 @@ import {
   EVEN_BLEND,
   GENDERS,
   GOALS,
+  PRICE_BANDS,
   STORAGE_KEY,
   blendSummary,
   countryName,
@@ -34,7 +35,7 @@ import { Confetti } from '@/components/ui/confetti'
  * narrows inside it. Families with a single persona skip that step and assign
  * it, so the column is populated either way.
  */
-const TAIL = ['Style', 'About you', 'Where', 'Wishes', 'Done'] as const
+const TAIL = ['Style', 'About you', 'Where', 'Wishes', 'Worth', 'Done'] as const
 
 export function SurveyClient({
   inDialog = false,
@@ -59,6 +60,7 @@ export function SurveyClient({
   const [country, setCountry] = useState('')
   const [feature, setFeature] = useState('')
   const [expectation, setExpectation] = useState('')
+  const [price, setPrice] = useState<string | null>(null)
   const [consent, setConsent] = useState(false)
   const [honey, setHoney] = useState('')
 
@@ -142,6 +144,7 @@ export function SurveyClient({
         country: country || null,
         wanted_feature: feature.trim() || null,
         expectation: expectation.trim() || null,
+        willingness_to_pay: price,
         variant: (() => {
           try {
             return localStorage.getItem('improvtalk-variant')
@@ -196,6 +199,7 @@ export function SurveyClient({
           setCountry('')
           setFeature('')
           setExpectation('')
+          setPrice(null)
           setConsent(false)
           setSaveError(null)
           /* Without this, begin() short-circuits and the second attempt never
@@ -364,6 +368,22 @@ export function SurveyClient({
                 onChange={setExpectation}
               />
             </div>
+          </>
+        )}
+
+        {current === 'Worth' && (
+          <>
+            <Legend hint="Max is the whole app: unlimited practice, Real Talk, the best voice model. Weekly is how it is billed today; the monthly options are hypothetical.">
+              If Max gave you exactly what you need, what would you pay for it?
+            </Legend>
+            <ChoiceGroup
+              name="price"
+              legend="If Max gave you exactly what you need, what would you pay for it?"
+              value={price}
+              onChange={setPrice}
+              columns={2}
+              options={PRICE_BANDS.map((b) => ({ value: b.slug, label: b.label, hint: b.hint }))}
+            />
           </>
         )}
 

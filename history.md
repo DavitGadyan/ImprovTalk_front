@@ -51,8 +51,12 @@ OpenAI Realtime `instructions`.
   **English accent**, and accent is disabled unless the conversation is English.
 - Model pricing. An earlier draft said Opus 4.7 was $15/1M; it is $5. Prices
   drift — the site shows a relative spectrum, no figures.
-- Pricing tiers. In-app values are contradictory (€/day cards vs weekly SKUs) and
-  marked placeholder.
+- ~~Pricing tiers.~~ **Published as of 12 Sep 2026, by the owner's decision.**
+  Free $0, Pro $25 a week, Max $49 a week — the app's Plans screen
+  (`upgrade.tsx:62,76,89`). Weekly is the only cadence; there is no monthly or
+  yearly plan. `content/pricing.ts` is the single source and every figure on
+  the site reads from it. The older note about placeholder values was true of
+  the €/day era; the weekly SKUs are what ships.
 
 **Positioning:** communication / charisma coach. The app also ships a
 dating/approach angle; the `meeting-people` variant covers it and stays PG-13,
@@ -528,6 +532,43 @@ The Learn hub is `apps/mobile/app/learn.tsx`. Counted, not estimated:
 thirteen are field-data sets rather than books, which is why the copy says
 *sources*. The files are named after the works they distil and none of those
 names appear anywhere public.
+
+## Pricing and Real Talk — what the site claims, and where it over-claims
+
+**The plan matrix on `/pricing/` is the intended state, not today's code.** The
+owner chose to publish Free = Simulate/Learn/Stats/History, Pro = +Practice,
+Max = +Real Talk, and to gate the app to match afterwards. As of this note the
+app does neither: `get_advice.py` and `conversation_analysis.py` check sign-in
+only, and live Practice is on Free (120 scenarios, 3 a week). Until the app
+change ships, a Free user who reads the site and opens Real Talk finds it
+works. The app-side changes are written down in the plan file for this session
+and summarised here so nobody reads the gap as a mistake:
+
+- Real Talk → Max: the `meets_tier` check that `realtime.py:350` already uses,
+  on the four conversation-analysis routes and `/v1/advice`; client gate in
+  `real-talk.tsx` the way `practice.tsx:122` gates Custom Practice.
+- Practice → Pro: `realtime.py:350` requires `premium` for scenarios the
+  catalog marks `"free"`; Simulate stays on Free.
+- `upgrade.tsx:102-110` gains the two rows so the app and the site agree.
+- Latent: `plan_limits.normalize_tier("pro")` → max, but
+  `entitlements.tier_rank("pro")` → 1. Pick one.
+
+**Real Talk's claims are the app's own words.** "2–3 openers" — the code caps
+at three and asks for two or three (`get_advice.py:54,110`). A direction's
+likelihood is the string `high` or `medium`, never a percentage (`:62,:127`).
+The upload screen says **Charisma grade**, not score. Audio is 25 MB, about
+five minutes, in English, Spanish or Russian. Do not round any of these up.
+
+**No Real Talk screenshots exist.** The renders pipeline needs a composite
+PNG; none has been exported. The pricing page and the persona section are
+text-first, and a `render` slot is wired per tile so a screenshot drops in
+when one lands. `plan-max` stays unplaced: its "131 scenarios" assumes 9 pro
+scenarios and the counted set is 15.
+
+**The survey's monthly price bands are not plans.** `PRICE_BANDS` in
+`content/survey.ts` offers $149/$99/$59/$29 a month beside the real $49 a
+week, to learn whether people would pay more per week for a longer
+commitment. They appear in that one question and nowhere else.
 
 ## The deploy that succeeds while the site serves a README
 

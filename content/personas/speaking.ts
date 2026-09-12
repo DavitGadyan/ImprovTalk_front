@@ -1,3 +1,4 @@
+import { price } from '@/content/pricing'
 import type { Persona } from './types'
 
 /** Rambling, filler words, losing the room. The measurements lead. */
@@ -52,6 +53,11 @@ export const speaking: Persona = {
     intro: 'Not a mark out of ten. Real numbers from the recording, with the right range next to them.',
     proof: 'Keep practising and the numbers move.',
   },
+  realtalk: {
+    label: 'Real Talk',
+    title: 'The meeting that already happened, measured.',
+    intro: 'Upload the recording and get the delivery numbers from the room itself — pace, pauses, fillers — with the moments that landed and the ones that did not.',
+  },
   inside: {
     label: 'Learn and practise',
     title: 'Learn the moves, then use them.',
@@ -62,8 +68,8 @@ export const speaking: Persona = {
     { q: 'What does it measure?', a: 'Your speed in words per minute, how long you pause, how often you say um, and how steady your voice is — all from the recording.' },
     { q: 'Is it just a guess?', a: 'No. The delivery half is measured, not guessed. Tap any score to see the numbers behind it.' },
     { q: 'What happens to my recordings?', a: 'Your voice is used to score the session and nothing else. Transcripts and scores stay until you delete them, and deleting your account removes them. No contacts, photos or location. No ads.' },
-    { q: 'What does it cost?', a: 'Free to start — three conversations a week. Paid plans give you more.' },
+    { q: 'What does it cost?', a: `Free to start, three conversations a week. Pro is ${price('pro')} a week and Max is ${price('max')}, both billed weekly and cancelled from the App Store.` },
     { q: 'How do I get it?', a: 'It is on TestFlight for iPhone. Tap Get early access and it takes you there.' },
   ],
-  order: ['problem', 'learnable', 'scoring', 'how', 'inside', 'faq'],
+  order: ['problem', 'learnable', 'scoring', 'realtalk', 'how', 'inside', 'faq'],
 }

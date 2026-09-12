@@ -22,7 +22,7 @@ is what the running project was built from:
 create table public.survey_responses (
   id              uuid primary key default gen_random_uuid(),
   submitted_at    timestamptz not null default now(),
-  version         int  not null default 2,
+  version         int  not null default 3,
 
   goal            text not null,
   goal_other      text,
@@ -38,7 +38,9 @@ create table public.survey_responses (
   expectation     text,
 
   variant         text,
-  utm_content     text
+  utm_content     text,
+  -- One of PRICE_BANDS' slugs in content/survey.ts, or null if skipped.
+  willingness_to_pay text
 );
 
 -- One-way hash of the submitter's address. Never the address itself, and
@@ -79,14 +81,15 @@ begin
   insert into survey_responses (
     version, goal, goal_other, persona, blend,
     age_band, gender, country, wanted_feature, expectation,
-    variant, utm_content, ip_hash
+    variant, utm_content, willingness_to_pay, ip_hash
   ) values (
-    coalesce((payload->>'version')::int, 2),
+    coalesce((payload->>'version')::int, 3),
     payload->>'goal', payload->>'goal_other', payload->>'persona',
     payload->'blend',
     payload->>'age_band', payload->>'gender', payload->>'country',
     payload->>'wanted_feature', payload->>'expectation',
     payload->>'variant', payload->>'utm_content',
+    payload->>'willingness_to_pay',
     ip_fingerprint()
   );
 end;
@@ -108,7 +111,17 @@ alter table public.survey_responses
   add constraint wanted_feature_len check (char_length(wanted_feature) <= 2000),
   add constraint expectation_len    check (char_length(expectation)    <= 2000),
   add constraint goal_other_len     check (char_length(goal_other)     <=  200),
-  add constraint persona_len        check (char_length(persona)        <=   60);
+  add constraint persona_len        check (char_length(persona)        <=   60),
+  add constraint willingness_to_pay_len check (char_length(willingness_to_pay) <= 40);
+```
+
+**Already ran an earlier version?** The v3 survey sends one new key. Run this
+once, then re-run the `create or replace function survey_submit` block above —
+the RPC silently ignores keys it does not insert, so skipping this loses the
+answer with no error:
+
+```sql
+alter table public.survey_responses add column if not exists willingness_to_pay text;
 ```
 
 ## 3. Verify the lock, before shipping
@@ -206,6 +219,12 @@ select goal, count(*),
        round(avg((blend->>'yellow')::int)) as yellow,
        round(avg((blend->>'green')::int))  as green
 from survey_responses group by goal order by count desc;
+
+-- What would people pay for Max, and does the answer differ by goal?
+select willingness_to_pay, goal, count(*)
+from survey_responses
+where willingness_to_pay is not null
+group by 1,2 order by 3 desc;
 
 -- Which video sent the people who finished the survey?
 select utm_content, goal, count(*)
