@@ -172,6 +172,10 @@ export const ROWS: Row[] = [
   { label: 'Voice model', free: 'Standard', pro: 'Standard', max: 'Most capable' },
 ]
 
+/** The rows Free does not have. Derived, so the line above the table and the
+    highlighted rows can never disagree. */
+export const FREE_MISSES = ROWS.filter((r) => r.free === false).map((r) => r.label)
+
 export const price = (key: PlanKey) =>
   key === 'free' ? `${PRICES.symbol}0` : `${PRICES.symbol}${PRICES[key]}`
 

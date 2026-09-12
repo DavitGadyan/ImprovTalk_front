@@ -294,6 +294,16 @@
 /* Entry, and the celebration when the result lands. Everything here is
    cancelled wholesale by the reduced-motion block below. */
 
+/* The Recommended dot on the plan table: the install button's rose pulse, in
+   gold, at a fraction of the size. Gold is for numbers, dots, bars and glyphs
+   — this is a dot. */
+@keyframes gold-pulse {
+  0%   { box-shadow: 0 0 0 0 rgb(224 184 74 / 0.55); }
+  70%  { box-shadow: 0 0 0 8px rgb(224 184 74 / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(224 184 74 / 0); }
+}
+.gold-pulse { animation: gold-pulse 2.4s var(--ease-out-soft) infinite; }
+
 @keyframes pop-in {
   from { opacity: 0; transform: translateY(14px) scale(0.97); }
   to   { opacity: 1; transform: none; }

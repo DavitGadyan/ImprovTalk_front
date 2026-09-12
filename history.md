@@ -652,10 +652,55 @@ hand and a re-export re-crops itself — and writes `public/app/*.webp` at 1400
 and 700 wide plus `lib/renders.ts` with real dimensions and alt text. The hero
 carries `score-disc` (the one panel with the gradient disc); the bento after it
 carries `live-session`, `score-screen`, `setup-rows`, `choice-list`,
-`setup-blend`, `tab-bar`, `icon-strip`; Scoring carries `score-screen`; Learn
-carries `home`. **`plan-max` is cropped but never placed:** it shows a weekly
-price and "131 scenarios", and the site publishes neither. The renders carry
+`plan-max`, `tab-bar`, `icon-strip`; Scoring carries `score-screen`; Learn
+carries `home`; the pricing page carries `setup-blend`. The renders carry
 their own frames, grounds and corners; nothing is added around them.
+
+**`plan-max` is back in the bento by the owner's choice** (12 Sep 2026). It
+was swapped out on 7 Sep for `setup-blend` because it showed a weekly price the
+site did not publish; the price is published now (`content/pricing.ts`, and it
+happens to be the same $49/week), and the swap had broken row 2 — `setup-blend`
+is cut from the other composite at a different height, so the three cards no
+longer matched. Its "131 scenarios" is the app's own paywall figure and is
+stale (the counted pro set is 15, not the 9 that figure assumes); it is a
+screenshot of the app's screen, not site copy, and goes when the app re-exports
+the card.
+
+**Two panels were exported on a beige photograph, not a card.** The case study
+put `score-screen` and `setup-blend` on a blurred photo; the other nine are
+`#1F1F1F` cards on a `#0A0A0A` ground. On the site the beige read as a
+different page — the owner's "messed up with background color". `crop-renders`
+now swaps the photo for the card colour on `score-screen` by rule
+(`GROUND_SWAP`): a flood from the panel's edge over every pixel that is not the
+phone's neutral dark (`hi - lo ≤ 4 && hi ≤ 30` is phone; the photo's deepest
+shadow is a warm grey in the 30s, and a looser line leaves that shadow as a
+halo down the phone's left side). The phone is never touched, the pass is part
+of `npm run gen:renders`, and a re-export on a dark card makes it a no-op. The
+phone then measures centred (bbox centre 49.5% × 50.7%), so the CSS nudge that
+had been compensating for the beige margins went. **`setup-blend` cannot take
+the pass:** its stats card is glass tinted by the photo, and the flood walks
+through it and erases the streak, charisma and closed-rate figures. It keeps
+its photo until the case study re-exports it.
+
+**The bento's cells have fixed aspects, and it moves.** Panels in one row are
+not all the same height (the two strips are 272 and 236), so each `<li>` has
+an aspect per row (`1400/1235` and `992/1800` on row 1, `992/1040` on row 2,
+`11/2` on row 3; `3/4`, `1/1` and `5/1` at tablet) with `bg-surface` behind and
+the image covering — a short strip no longer leaves a gap. Motion is a
+staggered `popIn` reveal, a hover lift with a third of the old device tilt, and
+a scroll drift on the two tall tiles in opposite directions; all transform and
+opacity, and all still under reduced motion (the drift becomes a constant zero
+rather than an absent style, because the export carries the drift's first
+frame inline and only a value that is set on the client overwrites it).
+Measured at 1440: rows 650/651, 376/376/376, 100/100.
+
+**Gold's first use is the plan table**, and the rule held: it is on the Max
+price figure (a number, counted up through `AnimatedNumber`), the Recommended
+dot (with `gold-pulse`, the install button's rose pulse at 8px), the dot beside
+each row Free lacks, and the check glyphs in those rows. Never a card fill, a
+border or a band. The rows Free lacks are derived (`FREE_MISSES`) so the line
+above the table and the highlighted rows cannot disagree, and the count in that
+line is spelled from the array's length.
 
 **Traps found on the way:**
 

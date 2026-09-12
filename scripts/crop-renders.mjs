@@ -45,6 +45,79 @@ const TOL = 6 /* per-channel distance from the ground colour that counts as cont
 const MIN = 120 /* a band narrower than this is noise, not a panel */
 const WIDTHS = [1400, 700]
 
+/* Panels the case study exported on a blurred photograph instead of a card.
+   Every other panel is a #1F1F1F card on the composite ground; these sit on
+   a beige photo, and on the site they read as a different page. For the phone
+   panel the photo is swapped for the card colour here, by rule rather than by
+   hand: from the panel's edge, every pixel that is not the neutral dark of the
+   phone (or of the ground) is flooded with surface. The phone itself — its
+   bezel is a neutral #0A0A0A ring around pure black — is never touched, so
+   the alt text stays true. A re-export on a dark card makes the entry
+   redundant and the pass a no-op.
+
+   `setup-blend` is on the same photo but cannot take the pass: its stats card
+   is glass, tinted by the photo behind it, and the flood walks straight
+   through it and takes the streak, charisma and closed-rate figures with it.
+   That one keeps its photo until the case study re-exports it. */
+const SURFACE = [31, 31, 31]
+const GROUND_SWAP = new Set(['score-screen'])
+
+const swapGround = (raw, w, h, ch) => {
+  /* The phone's outer ring is #0A0A0A over pure black — neutral within two
+     levels and never above 30. The photo's deepest shadow, right against the
+     phone, is a grey-brown in the 30s; that is the line, and it is tight
+     because the shadow is what a looser one leaves behind as a halo. */
+  const isPhoto = (i) => {
+    const r = raw[i], g = raw[i + 1], b = raw[i + 2]
+    const hi = Math.max(r, g, b), lo = Math.min(r, g, b)
+    return hi - lo > 4 || hi > 30
+  }
+  const seen = new Uint8Array(w * h)
+  const queue = new Int32Array(w * h)
+  let head = 0, tail = 0
+  const push = (x, y) => {
+    const p = y * w + x
+    if (seen[p] || !isPhoto(p * ch)) return
+    seen[p] = 1
+    queue[tail++] = p
+  }
+  for (let x = 0; x < w; x++) { push(x, 0); push(x, h - 1) }
+  for (let y = 0; y < h; y++) { push(0, y); push(w - 1, y) }
+  while (head < tail) {
+    const p = queue[head++]
+    const x = p % w, y = (p - x) / w
+    if (x > 0) push(x - 1, y)
+    if (x < w - 1) push(x + 1, y)
+    if (y > 0) push(x, y - 1)
+    if (y < h - 1) push(x, y + 1)
+  }
+  /* The composite ground shows in the panel's rounded corners; it goes to
+     surface as well, so the corner is card and not a darker arc on a card. */
+  const isGround = (i) =>
+    Math.abs(raw[i] - 10) <= TOL && Math.abs(raw[i + 1] - 10) <= TOL && Math.abs(raw[i + 2] - 10) <= TOL
+  const corners = [[0, 0], [w - 1, 0], [0, h - 1], [w - 1, h - 1]]
+  for (const [cx, cy] of corners) {
+    const stack = [cy * w + cx]
+    while (stack.length) {
+      const p = stack.pop()
+      if (seen[p] || !isGround(p * ch)) continue
+      seen[p] = 1
+      const x = p % w, y = (p - x) / w
+      if (x > 0) stack.push(p - 1)
+      if (x < w - 1) stack.push(p + 1)
+      if (y > 0) stack.push(p - w)
+      if (y < h - 1) stack.push(p + w)
+    }
+  }
+  let swapped = 0
+  for (let p = 0; p < w * h; p++) {
+    if (!seen[p]) continue
+    raw[p * ch] = SURFACE[0]; raw[p * ch + 1] = SURFACE[1]; raw[p * ch + 2] = SURFACE[2]
+    swapped++
+  }
+  return swapped / (w * h)
+}
+
 const runs = (flags) => {
   const out = []
   let start = -1
@@ -97,10 +170,17 @@ for (const [file, rows] of Object.entries(LAYOUT)) {
       const name = rows[r][c]
       const box = { left: x0, top: y0, width: x1 - x0, height: y1 - y0 }
       const entry = { alt: ALT[name], sources: {} }
+      let panel = sharp(`assets/renders/${file}`).extract(box)
+      if (GROUND_SWAP.has(name)) {
+        const buf = await panel.raw().toBuffer()
+        const share = swapGround(buf, box.width, box.height, ch)
+        console.log(`  ${name}: photo ground swapped for surface on ${(share * 100).toFixed(0)}% of the panel`)
+        panel = sharp(buf, { raw: { width: box.width, height: box.height, channels: ch } })
+      }
       for (const w of WIDTHS) {
         const out = `public/app/${name}-${w}.webp`
-        const info = await sharp(`assets/renders/${file}`)
-          .extract(box)
+        const info = await panel
+          .clone()
           .resize({ width: Math.min(w, box.width), withoutEnlargement: true })
           .webp({ quality: 82 })
           .toFile(out)
