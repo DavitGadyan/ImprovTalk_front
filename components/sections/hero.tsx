@@ -6,7 +6,7 @@ import type { Persona } from '@/content/personas'
 /**
  * Text left, the product right — a drawn iPhone with the Practice screen in
  * it, floating on the page with nothing around it, over a field of faint
- * ripples. Hovering brings the phone forward and plays the app.
+ * ripples, turning slowly with the app running in it once it is in view.
  *
  * The still inside the phone is a plain <img> with its real dimensions,
  * fetched at high priority: it is the LCP candidate and nothing about it
@@ -47,7 +47,7 @@ export function Hero({ persona }: { persona: Persona }) {
 
           <div className="relative mx-auto w-full max-w-[17rem] py-6 sm:max-w-[19rem] lg:max-w-[20rem] lg:py-10 [perspective:1600px]">
             <Ripples className="absolute left-1/2 top-1/2 h-auto w-[230%] max-w-none -translate-x-1/2 -translate-y-1/2" />
-            <PhoneDemo priority rotateY={-12} tilt={4} className="relative" />
+            <PhoneDemo priority turn className="relative" />
           </div>
         </div>
       </div>

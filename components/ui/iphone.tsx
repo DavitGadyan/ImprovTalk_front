@@ -1,54 +1,49 @@
 import { cn } from '@/lib/utils'
 
 /**
- * An iPhone 13, drawn.
+ * An iPhone, drawn to the current Pro's proportions (149.6 × 71.5 mm, a
+ * titanium band around black glass, the Dynamic Island).
  *
  * The case study's renders are phones painted in perspective on their own
  * cards, which is why two of them could never be made to face each other and
- * why a video cannot play inside one. This is a flat device in CSS — the
- * 13's proportions (71.5 × 146.7 mm body, a 160 × 34 pt notch on a 390 pt
- * screen, ~12 % screen radius) — so the screen is a real rectangle a still or
- * a video fills, and any angle it takes is exactly the one set on it. The
- * notch is drawn a little deeper than the 13's so it also covers the Dynamic
- * Island the recordings carry (they were made on a 14 Pro).
+ * why a video cannot play inside one. This is a flat device in CSS, sized in
+ * container units so every radius and inset scales with the width: the
+ * screen is a real rectangle a still or a video fills, and any angle it
+ * takes is exactly the one set on it.
  *
- * The body is graphite: a 135° gradient with a lighter rim and a hair of
- * outer edge in the box-shadow stack, the four side buttons as bars just
- * outside the body, a diagonal glass highlight over the screen, and a soft
- * shadow beneath. `children` is the screen; `className` sizes the device.
+ * Layers, outside in: the titanium band (a brushed vertical gradient with
+ * light at both ends, and a sheen that travels as the phone turns), the
+ * black glass front with a faint radial lift, the screen inset from it, the
+ * island over the screen, a diagonal glass reflection, the four side
+ * buttons just outside the band, and a deep soft shadow with a faint glow.
+ * `children` is the screen; `className` sizes the device.
  */
 export function IPhone({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
     <div
-      className={cn('relative aspect-[71.5/146.7] w-full', className)}
-      style={{ transformStyle: 'preserve-3d' }}
+      className={cn('phone relative w-full', className)}
+      style={{ aspectRatio: '71.5 / 149.6', containerType: 'inline-size', transformStyle: 'preserve-3d' }}
     >
-      {/* Side buttons: mute, volume up, volume down on the left; power on the right. */}
-      <span aria-hidden="true" className="absolute -left-[1.1%] top-[15%] h-[3.6%] w-[1.4%] rounded-l-[2px] bg-[#232326]" />
-      <span aria-hidden="true" className="absolute -left-[1.1%] top-[22%] h-[7.2%] w-[1.4%] rounded-l-[2px] bg-[#232326]" />
-      <span aria-hidden="true" className="absolute -left-[1.1%] top-[31%] h-[7.2%] w-[1.4%] rounded-l-[2px] bg-[#232326]" />
-      <span aria-hidden="true" className="absolute -right-[1.1%] top-[24%] h-[10.5%] w-[1.4%] rounded-r-[2px] bg-[#232326]" />
+      {/* Side buttons: action, volume up, volume down; power on the right. */}
+      <span aria-hidden="true" className="phone-button absolute -left-[0.9cqw] top-[17cqw] h-[6cqw] w-[1.6cqw] rounded-l-[0.6cqw]" />
+      <span aria-hidden="true" className="phone-button absolute -left-[0.9cqw] top-[29cqw] h-[12cqw] w-[1.6cqw] rounded-l-[0.6cqw]" />
+      <span aria-hidden="true" className="phone-button absolute -left-[0.9cqw] top-[44cqw] h-[12cqw] w-[1.6cqw] rounded-l-[0.6cqw]" />
+      <span aria-hidden="true" className="phone-button absolute -right-[0.9cqw] top-[34cqw] h-[19cqw] w-[1.6cqw] rounded-r-[0.6cqw]" />
 
-      {/* The body. */}
-      <div
-        className="absolute inset-0 rounded-[15%] bg-[linear-gradient(135deg,#2c2c30_0%,#151517_45%,#0b0b0d_100%)]"
-        style={{
-          boxShadow:
-            'inset 0 0 0 1.5px #3a3a3e, inset 0 0 0 3px #17171a, 0 0 0 1px #4a4a4f, 0 30px 60px -20px rgb(0 0 0 / 0.8), 0 60px 120px -30px rgb(0 0 0 / 0.6)',
-        }}
-      />
+      {/* The titanium band. */}
+      <div className="phone-band absolute inset-0 rounded-[16.5cqw]" />
 
-      {/* The screen, inset from the body; the notch over it; the glass over both. */}
-      <div className="absolute inset-[3.4%] overflow-hidden rounded-[12%] bg-black">
-        <div className="absolute inset-0">{children}</div>
-        <span
-          aria-hidden="true"
-          className="absolute left-1/2 top-0 h-[4.6%] w-[41%] -translate-x-1/2 rounded-b-[1.1rem] bg-black"
-        />
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,rgb(255_255_255/0.09)_0%,rgb(255_255_255/0.03)_38%,transparent_42%,transparent_100%)]"
-        />
+      {/* The glass front, and the screen inside it. */}
+      <div className="phone-glass absolute inset-[1.7cqw] rounded-[15cqw]">
+        <div className="absolute inset-[2.6cqw] overflow-hidden rounded-[12.4cqw] bg-black">
+          <div className="absolute inset-0">{children}</div>
+          {/* The island, sized to cover the one the recordings carry. */}
+          <span
+            aria-hidden="true"
+            className="absolute left-1/2 top-[2.6cqw] h-[6.8cqw] w-[25cqw] -translate-x-1/2 rounded-full bg-black"
+          />
+          <span aria-hidden="true" className="phone-sheen pointer-events-none absolute inset-0" />
+        </div>
       </div>
     </div>
   )

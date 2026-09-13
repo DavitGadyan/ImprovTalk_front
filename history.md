@@ -690,7 +690,19 @@ carries `setup-blend`, `live-session`, `home` and `score-screen`. The
 renders carry their own frames, grounds and corners; nothing is added around
 them — except the two phone cutouts, which carry nothing but the phone.
 
-**The phones are drawn now** (13 Sep 2026). The owner's third complaint
+**The phones are drawn now** (13 Sep 2026), and redrawn the same day after
+the owner called the first frame ugly against Apple's own product shots: the
+device is now the current Pro's proportions with a brushed titanium band
+(light at both ends, a sheen that crosses the glass in step with the turn),
+black glass with a faint radial lift, the Dynamic Island, and container-unit
+sizing (`cqw`) so every radius scales with the width instead of going
+elliptical as a percentage would. The hero phone turns slowly on its own
+(`phone-turn`, ±11° yaw with a breath of pitch, twelve seconds out and back)
+with the app running in it — the clip plays whenever the phone is half in
+view, on every device, and pauses out of view; hover only adds a small step
+forward. Under reduced motion the turn is off (`.phone-turn { animation:
+none }`, not the shortened-to-0.01 ms fallback, which would park it at the
+last keyframe) and nothing autoplays. The owner's third complaint
 about the same row settled it: two renders could never be made to face each
 other, because each case-study panel is a phone *painted in perspective on
 its own card* — the baked tilt fought any angle set on it — and a video
