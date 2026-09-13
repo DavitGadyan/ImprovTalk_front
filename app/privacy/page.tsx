@@ -2,12 +2,13 @@ import type { Metadata } from 'next'
 import { PageShell } from '@/components/ui/page-shell'
 import { SUPPORT_EMAIL } from '@/content/links'
 import { breadcrumbLd, pageJsonLd } from '@/lib/jsonld'
+import { OG } from '@/lib/og'
 
 export const metadata: Metadata = {
   title: 'Privacy policy',
   description: 'What ImprovTalk collects, how long it keeps it, and how to get it deleted.',
   alternates: { canonical: '/privacy/' },
-  openGraph: { url: '/privacy/' },
+  openGraph: { ...OG, url: '/privacy/' },
 }
 
 /*

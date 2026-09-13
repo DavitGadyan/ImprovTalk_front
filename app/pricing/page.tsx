@@ -7,15 +7,16 @@ import { FeatureList } from '@/components/sections/feature-list'
 import { PlanTable } from '@/components/sections/plan-table'
 import { breadcrumbLd, faqLd, pageJsonLd } from '@/lib/jsonld'
 import { MAX_SAVINGS, PRICES, PRICING_FAQ, priceLine } from '@/content/pricing'
+import { OG } from '@/lib/og'
 
 const TITLE = 'Pricing & Features'
 const DESCRIPTION = `Every screen in the app and what it gives you, and the three plans: Free, Pro from ${priceLine('pro', 'week')}, Max from ${priceLine('max', 'week')}. Weekly or monthly, cancel any time.`
 
 export const metadata: Metadata = {
-  title: 'Pricing',
+  title: 'Pricing & Features — Free, Pro and Max',
   description: DESCRIPTION,
   alternates: { canonical: '/pricing/' },
-  openGraph: { url: '/pricing/', title: `${TITLE} · ImprovTalk`, description: DESCRIPTION },
+  openGraph: { ...OG, url: '/pricing/', title: `${TITLE} · ImprovTalk`, description: DESCRIPTION },
 }
 
 export default function PricingPage() {

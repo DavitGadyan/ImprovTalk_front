@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Section } from '@/components/ui/section'
-import { Ticker } from '@/components/ui/ticker'
+import { Typewriter } from '@/components/ui/typewriter'
 import { fadeUp, stagger, viewportOnce } from '@/lib/motion'
 import type { Persona } from '@/content/personas'
 
@@ -17,8 +17,8 @@ const hues = [
  * "It is fixable" — the reassurance beat, and for some personas the hook itself.
  * The second-language and out-of-practice variants lead with this section.
  *
- * Set a step larger than the rest of the page, and the four claims run past
- * once more as a line of display type, so nobody scrolls by them.
+ * Set a step larger than the rest of the page, and the four claims type
+ * themselves out one at a time above the grid, so nobody scrolls by them.
  */
 export function Learnable({ persona, index }: { persona: Persona; index: number }) {
   const { label, title, intro, points } = persona.learnable
@@ -31,7 +31,7 @@ export function Learnable({ persona, index }: { persona: Persona; index: number 
       title={title}
       intro={<span className="text-lg md:text-xl">{intro}</span>}
     >
-      <Ticker items={points.map((p) => p.title)} className="mb-14 md:mb-20" />
+      <Typewriter phrases={points.map((p) => p.title)} className="mb-14 md:mb-20" />
 
       <motion.ul
         variants={stagger}

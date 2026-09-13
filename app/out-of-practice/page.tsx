@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { PersonaPage } from '@/components/persona-page'
 import { personas } from '@/content/personas'
+import { OG } from '@/lib/og'
 
 const persona = personas.rusty
 
@@ -17,8 +18,7 @@ export const metadata: Metadata = {
   title: persona.meta.title,
   description: persona.meta.description,
   alternates: { canonical: persona.path },
-  openGraph: {
-    url: persona.path,
+  openGraph: { ...OG, url: persona.path,
     title: persona.meta.title,
     description: persona.meta.description,
   },

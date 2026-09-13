@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BlogPost } from '@/components/blog-post'
 import { postBySlug } from '@/content/posts'
+import { OG } from '@/lib/og'
 
 const post = postBySlug('how-to-break-the-ice')!
 
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   title: post.title,
   description: post.description,
   alternates: { canonical: post.path },
-  openGraph: { type: 'article', url: post.path, title: post.title, description: post.description },
+  openGraph: { ...OG, type: 'article', url: post.path, title: post.title, description: post.description },
 }
 
 export default function Page() {

@@ -3,12 +3,13 @@ import { PageShell } from '@/components/ui/page-shell'
 import { SUPPORT_EMAIL } from '@/content/links'
 import { faqs } from '@/content/faq'
 import { breadcrumbLd, faqLd, pageJsonLd } from '@/lib/jsonld'
+import { OG } from '@/lib/og'
 
 export const metadata: Metadata = {
   title: 'Support',
   description: 'Get help with ImprovTalk — installing, billing, account deletion and data export.',
   alternates: { canonical: '/support/' },
-  openGraph: { url: '/support/', title: 'Support · ImprovTalk' },
+  openGraph: { ...OG, url: '/support/', title: 'Support · ImprovTalk' },
 }
 
 export default function SupportPage() {

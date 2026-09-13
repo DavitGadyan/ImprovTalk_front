@@ -6,6 +6,7 @@ import { Footer } from '@/components/sections/footer'
 import { Icon } from '@/components/ui/icon'
 import { posts, type Post } from '@/content/posts'
 import { blogLd, breadcrumbLd, pageJsonLd } from '@/lib/jsonld'
+import { OG } from '@/lib/og'
 
 const TITLE = 'How to actually talk to people'
 const DESCRIPTION =
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: '/blog/' },
-  openGraph: { type: 'website', url: '/blog/', title: `${TITLE} · ImprovTalk`, description: DESCRIPTION },
+  openGraph: { ...OG, type: 'website', url: '/blog/', title: `${TITLE} · ImprovTalk`, description: DESCRIPTION },
 }
 
 function Meta({ post }: { post: Post }) {

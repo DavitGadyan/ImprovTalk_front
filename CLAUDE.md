@@ -21,7 +21,10 @@ sharing one set of components; two of them in a live A/B split.
    the first and drops the domain without the second. CI checks both.
 4. **Content must render server-side.** No gating on in-view state — crawlers and
    answer engines read the exported HTML, and the AEO work depends on it.
-5. **Consent defaults run `beforeInteractive`,** before the gtag library.
+5. **Consent defaults are inline markup in the document,** run by the parser
+   before the gtag library; so is the variant redirect. Not `next/script` — a
+   wallet extension injecting before the first body `<script>` threw React's
+   hydration off by one node when they were React elements.
 6. **Enhanced Conversions stays off** in Google Ads.
 7. **Headlines fit two lines at 390px.** Measure, do not eyeball.
 8. **The brand gradient is site chrome on the primary action only** — the

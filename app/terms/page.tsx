@@ -4,13 +4,14 @@ import { SUPPORT_EMAIL } from '@/content/links'
 import { breadcrumbLd, pageJsonLd } from '@/lib/jsonld'
 import { site } from '@/content/site'
 import { priceLine } from '@/content/pricing'
+import { OG } from '@/lib/og'
 
 export const metadata: Metadata = {
   title: 'Terms of service',
   description:
     'The rules for using ImprovTalk: your account, subscriptions and cancellation, acceptable use, and the limits of what we promise.',
   alternates: { canonical: '/terms/' },
-  openGraph: { url: '/terms/' },
+  openGraph: { ...OG, url: '/terms/' },
 }
 
 /*

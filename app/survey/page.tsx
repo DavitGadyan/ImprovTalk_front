@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { PageShell } from '@/components/ui/page-shell'
 import { breadcrumbLd, pageJsonLd } from '@/lib/jsonld'
 import { SurveyClient } from './survey-client'
+import { OG } from '@/lib/og'
 
 const TITLE = 'What are you working on?'
 const DESCRIPTION =
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: '/survey/' },
-  openGraph: { url: '/survey/', title: `${TITLE} · ImprovTalk`, description: DESCRIPTION },
+  openGraph: { ...OG, url: '/survey/', title: `${TITLE} · ImprovTalk`, description: DESCRIPTION },
 }
 
 export default function SurveyPage() {

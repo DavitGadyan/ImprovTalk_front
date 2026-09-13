@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
 import { PersonaPage } from '@/components/persona-page'
 import { personas } from '@/content/personas'
+import { OG } from '@/lib/og'
 
 export const metadata: Metadata = {
   title: {
     absolute: 'Practise conversations out loud with an AI — ImprovTalk',
   },
   alternates: { canonical: '/' },
-  openGraph: { url: '/' },
+  openGraph: { ...OG, url: '/' },
 }
 
 /**

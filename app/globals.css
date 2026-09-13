@@ -359,14 +359,13 @@ details[open] > summary > .gold-pulse { animation: none; }
 }
 .ripple { animation: ripple 9s ease-in-out infinite alternate; transform-origin: 50% 50%; }
 
-/* The running line: one track, its content twice, moved by half its width so
-   the loop is seamless. Pauses under the pointer so it can be read. */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+/* The caret on the typed line (components/ui/typewriter.tsx). Gold: a glyph. */
+@keyframes caret-blink {
+  0%, 45%  { opacity: 1; }
+  50%, 95% { opacity: 0; }
+  100%     { opacity: 1; }
 }
-.marquee { animation: marquee 32s linear infinite; }
-.marquee:hover { animation-play-state: paused; }
+.caret-blink { animation: caret-blink 1s steps(1) infinite; }
 
 @keyframes pop-in {
   from { opacity: 0; transform: translateY(14px) scale(0.97); }

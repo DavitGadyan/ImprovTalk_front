@@ -7,6 +7,7 @@ import { Icon } from '@/components/ui/icon'
 import { PostFilm } from '@/components/ui/post-film'
 import { PROSE } from '@/components/ui/prose'
 import { allVideosLd, breadcrumbLd, howToLd, pageJsonLd } from '@/lib/jsonld'
+import { OG } from '@/lib/og'
 
 const TITLE = 'How to start a conversation: four moves'
 const DESCRIPTION =
@@ -16,8 +17,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: '/how-to-start-a-conversation/' },
-  openGraph: {
-    type: 'article',
+  openGraph: { ...OG, type: 'article',
     url: '/how-to-start-a-conversation/',
     title: TITLE,
     description: DESCRIPTION,

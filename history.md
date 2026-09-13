@@ -602,6 +602,43 @@ counted set is 15.
 week, to learn whether people would pay more per week for a longer
 commitment. They appear in that one question and nowhere else.
 
+## Three things the audit of 13 Sep found
+
+**Every page was shipping without an `og:image`.** Next merges metadata
+shallowly: a page that sets `openGraph` at all replaces the layout's whole
+object — images, siteName, type included — and every page sets at least its
+`url`. Measured on the export, only the noindex pages (404, billing, get)
+had the image, because they set no openGraph of their own. `lib/og.ts` now
+carries the shared fields and every page spreads `...OG` first; measured
+after: all 23 pages carry `og:image`, `og:site_name`, `og:type` (`article`
+on the posts, which set it after the spread).
+
+**A wallet extension broke hydration in dev.** Leather injects its provider
+`<script>` before the first `<script>` in `<body>`; React pairs same-tag
+nodes positionally, so the consent `<Script>` got the extension's node and
+every script after it shifted by one — reproduced by inserting a script
+before the first body script, gone after the fix. The consent defaults and
+the variant redirect are now inline markup inside a hidden div
+(`dangerouslySetInnerHTML`, `suppressHydrationWarning`): the parser runs them
+(earlier than `beforeInteractive`'s queue, which is what `__next_s` is), and
+the extension's addition lands inside a div React compares once and never
+re-renders. `verify-tracking` still finds `gtag('consent', 'default'` inline
+on every page; `window.gtag` and the dataLayer measured present with the
+extension emulated. CLAUDE.md rule 5 reworded.
+
+**The running line is a typed line.** The owner did not want the marquee;
+the four claims of "Anyone can get better at this" now type themselves out
+one at a time (`components/ui/typewriter.tsx`): the first phrase is in the
+export in full, the full list is in a visually hidden element for assistive
+tech, the animated line is `aria-hidden`, the caret is gold (a glyph), and
+under reduced motion the phrases swap without typing.
+
+Also: `/pricing/`'s title was "Pricing · ImprovTalk"; it is now "Pricing &
+Features — Free, Pro and Max · ImprovTalk". The home page's referenced
+weight measured 1,055 KB across 31 assets with the 11 below-fold images
+lazy, the poster preloaded at high priority as the LCP image, and no
+`<video>` in the HTML.
+
 ## The deploy that succeeds while the site serves a README
 
 **Symptom:** `improvtalk.vip/` returns 200 with the title

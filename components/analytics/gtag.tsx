@@ -9,8 +9,8 @@ import { analytics, hasGA, hasAds, trackingEnabled } from '@/content/analytics'
  * Ordering is the part that is easy to get wrong and impossible to see when it
  * is wrong: the `consent default` call must run BEFORE the gtag library loads,
  * or the library initialises with storage already granted and the denial never
- * applies. That is why the defaults go in a `beforeInteractive` script and the
- * library itself in `afterInteractive`.
+ * applies. That is why the defaults are an inline script in the document
+ * itself, run by the parser, and the library loads lazyOnload.
  *
  * Everything is denied until the visitor accepts. Google has required Consent
  * Mode v2 for EEA traffic since March 2024 — without it, EEA conversion data is
@@ -27,8 +27,25 @@ export function GoogleTags() {
 
   return (
     <>
-      <Script id="consent-default" strategy="beforeInteractive">
-        {`
+      {/*
+        The consent defaults, inlined in the document itself — not through
+        next/script. Two reasons. One, an inline script in the server HTML
+        runs as the parser reaches it, earlier than beforeInteractive's queue.
+        Two, hydration: wallet extensions (Leather was the one seen) inject
+        their provider <script> before the first <script> in <body>, and React
+        pairs same-tag nodes positionally, so a consent <Script> element got
+        the extension's node and every script after it shifted by one — a
+        hydration error on every dev load. Inside a hidden div's innerHTML
+        the script is markup, not a React element: React compares the div's
+        innerHTML once, and suppressHydrationWarning tells it that the
+        extension's addition inside it is expected. The div itself never
+        re-renders, so nothing is ever patched over it.
+      */}
+      <div
+        hidden
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: `<script id="consent-default">
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 window.gtag = gtag;
@@ -42,8 +59,9 @@ gtag('consent', 'default', {
   wait_for_update: 500
 });
 gtag('js', new Date());
-        `}
-      </Script>
+</script>`,
+        }}
+      />
 
       {/*
         lazyOnload, not afterInteractive.

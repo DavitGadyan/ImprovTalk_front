@@ -5,6 +5,7 @@ import { SUPPORT_EMAIL } from '@/content/links'
 import { stats, TOTAL_LIBRARY_ITEMS } from '@/content/catalogs'
 import { pillars, deliveryMeters, VOICE_WEIGHT } from '@/content/features'
 import { breadcrumbLd, pageJsonLd } from '@/lib/jsonld'
+import { OG } from '@/lib/og'
 
 /* Just 'About' — the layout template appends the brand, and 'About ImprovTalk
    · ImprovTalk' repeats it, which is the boilerplate mistake Google calls out. */
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: '/about/' },
-  openGraph: { url: '/about/', title: `${TITLE} · ImprovTalk`, description: DESCRIPTION },
+  openGraph: { ...OG, url: '/about/', title: `${TITLE} · ImprovTalk`, description: DESCRIPTION },
 }
 
 const pct = (n: number) => `${Math.round(n * 100)}%`

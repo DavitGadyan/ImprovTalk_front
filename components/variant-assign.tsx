@@ -1,4 +1,3 @@
-import Script from 'next/script'
 import { personas, ACTIVE_SPLIT, DEFAULT } from '@/content/personas'
 
 const KEY = 'improvtalk-variant'
@@ -6,9 +5,13 @@ const KEY = 'improvtalk-variant'
 /**
  * Random, sticky assignment across the personas in the live split.
  *
- * Runs beforeInteractive so the redirect happens ahead of first paint — a
- * client-side swap after hydration would show the wrong copy for a beat, which
- * is both worse than no test and impossible to un-see once noticed.
+ * Inlined in the document as markup, so the parser runs it before first paint
+ * — a client-side swap after hydration would show the wrong copy for a beat,
+ * which is both worse than no test and impossible to un-see once noticed. It
+ * is the first <script> in <body>, which is where wallet extensions inject
+ * their own; as markup inside a hidden div (not a React <Script> element) that
+ * addition cannot shift React's hydration onto the wrong nodes — see the same
+ * note in components/analytics/gtag.tsx.
  *
  * THE PART THAT MATTERS: the redirect carries location.search and location.hash
  * through unchanged. Drop the query string and every gclid goes with it — Google
@@ -79,8 +82,10 @@ export function VariantAssign() {
   `.trim()
 
   return (
-    <Script id="variant-assign" strategy="beforeInteractive">
-      {js}
-    </Script>
+    <div
+      hidden
+      suppressHydrationWarning
+      dangerouslySetInnerHTML={{ __html: `<script id="variant-assign">${js}</script>` }}
+    />
   )
 }
