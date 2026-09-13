@@ -303,6 +303,27 @@
   100% { box-shadow: 0 0 0 0 rgb(224 184 74 / 0); }
 }
 .gold-pulse { animation: gold-pulse 2.4s var(--ease-out-soft) infinite; }
+/* Once a tool is open the dot has done its job. (Un-layered, so it outranks
+   the utilities layer the way .gold-pulse itself does.) */
+details[open] > summary > .gold-pulse { animation: none; }
+
+/* The ripple field behind the hero phone: concentric dotted rings that
+   breathe, the way the reference's sound lines do around its subject. Scale
+   and opacity only; the reduced-motion block below stops it. */
+@keyframes ripple {
+  from { transform: scale(0.96); opacity: 0.55; }
+  to   { transform: scale(1.04); opacity: 1; }
+}
+.ripple { animation: ripple 9s ease-in-out infinite alternate; transform-origin: 50% 50%; }
+
+/* The running line: one track, its content twice, moved by half its width so
+   the loop is seamless. Pauses under the pointer so it can be read. */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee { animation: marquee 32s linear infinite; }
+.marquee:hover { animation-play-state: paused; }
 
 @keyframes pop-in {
   from { opacity: 0; transform: translateY(14px) scale(0.97); }

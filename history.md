@@ -690,6 +690,88 @@ carries `setup-blend`, `live-session`, `home` and `score-screen`. The
 renders carry their own frames, grounds and corners; nothing is added around
 them — except the two phone cutouts, which carry nothing but the phone.
 
+**The phones are drawn now** (13 Sep 2026). The owner's third complaint
+about the same row settled it: two renders could never be made to face each
+other, because each case-study panel is a phone *painted in perspective on
+its own card* — the baked tilt fought any angle set on it — and a video
+cannot play inside a painted, skewed screen. `components/ui/iphone.tsx` is
+an iPhone 13 in CSS: the 13's body ratio (71.5 × 146.7 mm), a graphite
+gradient with a lighter rim and a hair of outer edge in the box-shadow
+stack, the four side buttons as bars outside the body, the screen inset
+3.4 % at 12 % radius, a diagonal glass highlight, and a notch drawn a little
+deeper than the 13's (4.6 %) so it also covers the Dynamic Island the
+recordings carry — they were made on a 14 Pro. It is not a render, so rule 9
+is untouched; what goes inside it is flat.
+
+**What goes inside it comes from `npm run gen:clip`** (`scripts/gen-clip.mjs`,
+ffmpeg + sharp, re-runnable like the renders):
+
+- The owner's screen recording of one Practice session (`assets/clips/
+  practice.mp4`, 77 s, 1180 × 2556, **light mode — the owner's choice to use
+  it as-is**; the source is gitignored, 39 MB has no business on Pages) is
+  cut to 18.8 s by a declared cut list: portrait and hint → the Coffee Shop
+  scenarios → the session brief → the personality sliders and Start talking
+  → Connecting → Picturing them → the portrait appears → Hold to speak, REC →
+  Hold to interrupt → End & score, Scoring. H.264, 720 × 1560, no audio,
+  faststart, 578 KB. The poster is the clip's first frame, so the still the
+  page shows is the frame the clip starts on and hovering never jumps.
+- The score screen is a **Simulator capture with a real session's numbers**:
+  the booted iPhone 14 Pro, light appearance to match the clip,
+  `improvtalk://score-result?payload=…` built from `session_scores` row
+  `3f1888f8…` in the dev database — Charisma 86, fluency 90, confidence 85,
+  improvisation 80, social attunement 90, the coach note verbatim — and the
+  same user's baseline session (`54898174…`, 60), so "+26 vs your baseline
+  (60)". Nothing on that screen was typed. The Simulator's user is an admin
+  and the screen ends with an admin-only persona-feedback card; the script
+  paints that region the app's ground and draws the home indicator back
+  where it was (`ADMIN_CARD_TOP`, `HOME_PILL`, both measured on the capture).
+  `assets/stills/score-screen.png` is the capture, gitignored.
+- `lib/clip.ts` is generated with the real dimensions (`CLIP`,
+  `SCORE_STILL`).
+
+**Hero and bento, without cards.** The hero's right column is a
+`PhoneDemo` — the drawn phone with the poster in it, a plain `<img>` with
+its dimensions and `fetchPriority="high"` (measured LCP element on `/`) —
+floating on the canvas at `rotateY(-12°) rotateX(4°)` over a field of twelve
+dotted rings (`components/ui/ripples.tsx`, `ripple` keyframes, muted at 42 %
+falling outward) after the owner's reference. The `score-disc` render is no
+longer placed anywhere; it stays cropped. The bento's first row is two drawn
+phones on the page itself, no `bg-surface`, facing each other (+16° / −16°,
+easing ±22° → ±10° with scroll; constants under reduced motion): the
+Practice session left, the score right; the gap between them measures
+centred on the tile at 390, 768 and 1440.
+
+**The clip plays on hover, and on touch in view.** `PhoneDemo` mounts the
+`<video>` only on the first play request — nothing about the fold waits for
+it. Pointer: `pointerenter` (mouse only) plays it and the phone comes forward
+(`scale 1.06, z 40`); `pointerleave` pauses and rewinds to 0, which is the
+poster frame. Touch: no hover to wait for, so an `IntersectionObserver` at
+0.6 plays it in view and pauses it out. Reduced motion: nothing autoplays and
+the phone does not move; hovering still plays, because that is the reader's
+own gesture. Measured: no `<video>` in the export; mounted and playing within
+900 ms of hover; paused at 0 on leave; playing in view on an emulated touch
+device; none under reduced motion.
+
+**The Max card lost its price** by the owner's decision — the parameters stay
+(the five inclusions), the figures live on `/pricing/` only.
+
+**"Anyone can get better at this" is a step larger** (titles 20 → 24 px,
+bodies 16 → 18 px at desktop) and its four claims also run past once more as
+a line of display type (`components/ui/ticker.tsx`, `marquee` keyframes, the
+content twice for a seamless loop, the copy hidden from assistive tech,
+paused under the pointer, still under reduced motion).
+
+**Real Talk's three tools are an accordion** (`details name="realtalk-tool"`,
+one open at a time, the first by default), a pulsing gold dot beside each
+closed title and the list inside landing check by check (`result-rise` with
+a stepped delay). **Trap:** React carries a nested `<details>`' toggle up its
+tree, so the feature accordion on `/pricing/` was closing the tool that had
+just opened inside it; both handlers now act only on their own toggle
+(`e.target === e.currentTarget`) and only on their own siblings (`:scope >
+li > details[name=…]`). And `.gold-pulse` is un-layered CSS, so
+`group-open:animate-none` (utilities layer) could not beat it; the stop is
+a plain `details[open] > summary > .gold-pulse` rule beside it.
+
 **The bento's first row is one card with two phones on it** (12 Sep 2026).
 The owner's complaint, twice: the live session and the score sat in two
 cards, each phone off-centre against a ground that was not the card's. The

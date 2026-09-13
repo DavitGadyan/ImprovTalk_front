@@ -25,9 +25,12 @@ const PLAN_LABEL = { free: 'Free', pro: 'Pro', max: 'Max' } as const
 export function FeatureList() {
   const closeOthers = (e: React.SyntheticEvent<HTMLDetailsElement>) => {
     const el = e.currentTarget
-    if (!el.open) return
-    el.parentElement
-      ?.querySelectorAll<HTMLDetailsElement>('details[open]')
+    /* React carries a nested <details>' toggle up the tree; only this row's
+       own toggle may close its siblings, and only its siblings — never the
+       Real Talk tools nested inside one of them. */
+    if (e.target !== el || !el.open) return
+    el.parentElement?.parentElement
+      ?.querySelectorAll<HTMLDetailsElement>(':scope > li > details[name="feature"][open]')
       .forEach((d) => d !== el && (d.open = false))
   }
 

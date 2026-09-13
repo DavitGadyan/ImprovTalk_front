@@ -1,15 +1,16 @@
 import { InstallBlock } from '@/components/ui/install'
-import { RENDERS } from '@/lib/renders'
+import { PhoneDemo } from '@/components/ui/phone-demo'
+import { Ripples } from '@/components/ui/ripples'
 import type { Persona } from '@/content/personas'
 
 /**
- * Text left, the product right — one render, not a drawn phone.
+ * Text left, the product right — a drawn iPhone with the Practice screen in
+ * it, floating on the page with nothing around it, over a field of faint
+ * ripples. Hovering brings the phone forward and plays the app.
  *
- * The render is the score screen with the Hold-to-speak disc: the one place the
- * brand gradient is allowed in design B, so the signature arrives with the
- * product instead of as chrome. It is a plain <img> with its real dimensions,
- * fetched at high priority: it is the LCP candidate and nothing about it should
- * wait for JavaScript.
+ * The still inside the phone is a plain <img> with its real dimensions,
+ * fetched at high priority: it is the LCP candidate and nothing about it
+ * waits for JavaScript. The clip only loads on the first hover.
  *
  * No entrance animation on this column. It starts above the fold on every
  * load, so a fade from opacity 0 buys a reveal nobody sees and defers the h1's
@@ -17,10 +18,9 @@ import type { Persona } from '@/content/personas'
  */
 export function Hero({ persona }: { persona: Persona }) {
   const { eyebrow, headline, sub, note } = persona.hero
-  const r = RENDERS['score-disc']
 
   return (
-    <section className="relative pb-16 pt-8 md:pb-24 md:pt-14">
+    <section className="relative overflow-hidden pb-16 pt-8 md:pb-24 md:pt-14">
       <div className="container-page">
         <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           <div>
@@ -45,18 +45,9 @@ export function Hero({ persona }: { persona: Persona }) {
             <p className="mt-6 text-small text-muted">{note}</p>
           </div>
 
-          <div className="mx-auto w-full max-w-[30rem] lg:max-w-none">
-            <img
-              src={r.src}
-              srcSet={r.srcSet}
-              sizes="(min-width: 1024px) 42vw, (min-width: 640px) 30rem, 100vw"
-              width={r.width}
-              height={r.height}
-              alt={r.alt}
-              fetchPriority="high"
-              decoding="async"
-              className="h-auto w-full rounded-card"
-            />
+          <div className="relative mx-auto w-full max-w-[17rem] py-6 sm:max-w-[19rem] lg:max-w-[20rem] lg:py-10 [perspective:1600px]">
+            <Ripples className="absolute left-1/2 top-1/2 h-auto w-[230%] max-w-none -translate-x-1/2 -translate-y-1/2" />
+            <PhoneDemo priority rotateY={-12} tilt={4} className="relative" />
           </div>
         </div>
       </div>

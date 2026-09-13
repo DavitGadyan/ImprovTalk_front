@@ -22,3 +22,7 @@ design_examples/
 # Persona one-pagers: generated HTML carries base64 images (~6MB) and is
 # rebuilt by gen.mjs. heights.json beside it is an input, so it stays tracked.
 docs/personas/src/html/*.html
+
+# Owner-supplied sources for npm run gen:clip — too large for Pages, never committed
+assets/clips/
+assets/stills/

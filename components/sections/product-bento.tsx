@@ -3,7 +3,10 @@
 import { useRef } from 'react'
 import { motion, useMotionValue, useReducedMotion, useScroll, useTransform, type MotionValue } from 'framer-motion'
 import { Section } from '@/components/ui/section'
+import { IPhone } from '@/components/ui/iphone'
+import { PhoneDemo } from '@/components/ui/phone-demo'
 import { PlanCardMock } from '@/components/ui/plan-card-mock'
+import { SCORE_STILL } from '@/lib/clip'
 import { RENDERS, type RenderName } from '@/lib/renders'
 import { easeOutSoft, popIn, stagger, viewportOnce } from '@/lib/motion'
 import { cn } from '@/lib/utils'
@@ -11,13 +14,15 @@ import { cn } from '@/lib/utils'
 /**
  * The product, as it ships: a bento of real screens straight after the hero.
  *
- * Row 1 is one card with two phones on it — the live session and the score,
- * cut out of their panels with alpha (scripts/crop-renders.mjs, CUTOUTS) so
- * they can share a ground, centred, and turned to face each other: the left
- * phone's left edge nearer, the right phone's right edge nearer. In CSS a
- * positive rotateY brings the left edge toward the viewer, so the left phone
- * is +θ and the right −θ. θ eases from 20° to 10° across the section's own
- * scroll range, so the pair opens as it passes and never leaves the centre.
+ * Row 1 is two drawn iPhones on the page itself — no card — with the app in
+ * them: the Practice session on the left (a still, and the clip on hover),
+ * the score on the right (a still from the Simulator). They face each other:
+ * the left phone's left edge nearer, the right phone's right edge nearer. In
+ * CSS a positive rotateY brings the left edge toward the viewer, so the left
+ * phone is +θ and the right −θ; θ eases from 22° to 10° across the section's
+ * own scroll range, so the pair opens as it passes and never leaves the
+ * centre. The renders could not do this: each is a phone painted in
+ * perspective on its own card, and that baked tilt fought any angle set on it.
  *
  * Rows 2 and 3 are crops of the case-study composite. The panels in a row
  * are not all the same height (the two strips are 272 and 236), so each cell
@@ -25,11 +30,12 @@ import { cn } from '@/lib/utils'
  * card is drawn from content/pricing.ts rather than cropped: the render shows
  * the paywall as it was before the plans changed (see PlanCardMock).
  *
- * Motion: a staggered reveal, a hover lift with a hint of the old device
- * tilt, and the facing angle on scroll. All transform/opacity, and all of it
- * goes still under prefers-reduced-motion — the angle becomes a constant, not
- * an absent style, because the export carries the first frame inline and
- * only a value that is set on the client overwrites it.
+ * Motion: a staggered reveal, a hover lift on the cards, the facing angle on
+ * scroll, and the phones themselves coming forward on hover. All
+ * transform/opacity, and all of it goes still under prefers-reduced-motion —
+ * the angle becomes a constant, not an absent style, because the export
+ * carries the first frame inline and only a value that is set on the client
+ * overwrites it.
  */
 const TILES: {
   name: RenderName
@@ -70,7 +76,7 @@ const STRIPS: typeof TILES = [
   },
 ]
 
-const FACING = 14
+const FACING = 16
 
 export function ProductBento() {
   const ref = useRef<HTMLUListElement>(null)
@@ -79,8 +85,8 @@ export function ProductBento() {
   /* The section's own scroll range, so the angle opens as it enters and
      settles as it leaves rather than tracking the whole page. */
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const openLeft = useTransform(scrollYProgress, [0, 1], [FACING + 6, FACING - 4])
-  const openRight = useTransform(scrollYProgress, [0, 1], [-FACING - 6, -FACING + 4])
+  const openLeft = useTransform(scrollYProgress, [0, 1], [FACING + 6, FACING - 6])
+  const openRight = useTransform(scrollYProgress, [0, 1], [-FACING - 6, -FACING + 6])
   const stillLeft = useMotionValue(FACING)
   const stillRight = useMotionValue(-FACING)
 
@@ -99,11 +105,7 @@ export function ProductBento() {
         viewport={viewportOnce}
         className="grid gap-4 sm:grid-cols-2 lg:grid-cols-6 lg:gap-5 [perspective:1200px]"
       >
-        <PairTile
-          left={reduced ? stillLeft : openLeft}
-          right={reduced ? stillRight : openRight}
-          lift={!reduced}
-        />
+        <PairTile left={reduced ? stillLeft : openLeft} right={reduced ? stillRight : openRight} />
         {TILES.map((t) => (
           <Tile key={t.name} {...t} lift={!reduced} />
         ))}
@@ -180,55 +182,44 @@ function Tile({
 const fromLeft = { hidden: { opacity: 0, x: -48 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: easeOutSoft } } }
 const fromRight = { hidden: { opacity: 0, x: 48 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: easeOutSoft } } }
 
-function PairTile({
-  left,
-  right,
-  lift,
-}: {
-  left: MotionValue<number>
-  right: MotionValue<number>
-  lift: boolean
-}) {
-  const a = RENDERS['live-session-phone']
-  const b = RENDERS['score-screen-phone']
-  const phone =
-    'h-full w-auto max-w-[44%] object-contain drop-shadow-[0_30px_40px_rgb(0_0_0/0.55)]'
+function PairTile({ left, right }: { left: MotionValue<number>; right: MotionValue<number> }) {
   return (
-    <Card
-      className="sm:col-span-2 lg:col-span-6"
-      caption="Live session, then the score — the portrait is the content and the disc the only control; the number stands on the page, and delivery is measured from the voice."
-      lift={lift}
-    >
-      <div className="relative aspect-[5/6] overflow-hidden rounded-card bg-surface [perspective:1400px] sm:aspect-[4/3] lg:aspect-[5/3]">
-        <div className="absolute inset-0 flex items-center justify-center gap-[5%] px-[8%] py-[4%]">
-          <motion.img
-            variants={fromLeft}
-            style={{ rotateY: left }}
-            src={a.src}
-            srcSet={a.srcSet}
-            sizes="(min-width: 1024px) 22vw, 40vw"
-            width={a.width}
-            height={a.height}
-            alt={a.alt}
-            loading="lazy"
-            decoding="async"
-            className={phone}
-          />
-          <motion.img
-            variants={fromRight}
-            style={{ rotateY: right }}
-            src={b.src}
-            srcSet={b.srcSet}
-            sizes="(min-width: 1024px) 22vw, 40vw"
-            width={b.width}
-            height={b.height}
-            alt={b.alt}
-            loading="lazy"
-            decoding="async"
-            className={phone}
-          />
+    <motion.li variants={popIn} className="sm:col-span-2 lg:col-span-6">
+      <figure>
+        <div className="flex items-center justify-center gap-[7%] px-[4%] py-6 [perspective:1600px] sm:gap-[9%] sm:px-[10%] lg:py-10">
+          <motion.div variants={fromLeft} className="w-[42%] max-w-[19rem]">
+            <PhoneDemo rotateY={left} />
+          </motion.div>
+          <motion.div variants={fromRight} style={{ rotateY: right, transformStyle: 'preserve-3d' }} className="w-[42%] max-w-[19rem]">
+            <IPhone>
+              {SCORE_STILL ? (
+                <img
+                  src={SCORE_STILL.src}
+                  width={SCORE_STILL.width}
+                  height={SCORE_STILL.height}
+                  alt={SCORE_STILL.alt}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 size-full object-cover"
+                />
+              ) : (
+                <img
+                  src={RENDERS['score-screen'].src}
+                  width={RENDERS['score-screen'].width}
+                  height={RENDERS['score-screen'].height}
+                  alt={RENDERS['score-screen'].alt}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 size-full object-cover"
+                />
+              )}
+            </IPhone>
+          </motion.div>
         </div>
-      </div>
-    </Card>
+        <figcaption className="mt-3 text-center text-caption text-muted">
+          Live session, then the score — the portrait is the content and the disc the only control; the number stands on the page, and delivery is measured from the voice.
+        </figcaption>
+      </figure>
+    </motion.li>
   )
 }

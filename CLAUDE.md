@@ -30,6 +30,9 @@ sharing one set of components; two of them in a live A/B split.
    every screen size; do not hide it or replace it with a header button.
 9. **Renders come from `assets/renders/` via `npm run gen:renders`,** never
    hand-cropped. Every `<img>` of one carries `width`, `height` and real `alt`.
+   The clip and the stills inside the drawn phones come from `npm run gen:clip`
+   the same way; their sources live in `assets/clips/` and `assets/stills/`,
+   gitignored — ask the owner for them, do not re-record or re-cut by hand.
 
 ## Verify before claiming done
 

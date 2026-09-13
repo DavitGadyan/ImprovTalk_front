@@ -1,5 +1,5 @@
 import { Icon } from '@/components/ui/icon'
-import { PLANS, PLAN_CARDS, price, priceLine, type PlanKey } from '@/content/pricing'
+import { PLANS, PLAN_CARDS, type PlanKey } from '@/content/pricing'
 import { cn } from '@/lib/utils'
 
 /**
@@ -10,8 +10,9 @@ import { cn } from '@/lib/utils'
  * plans changed on 12 Sep 2026, and no export of the new one exists. A card
  * drawn from content/pricing.ts shows every inclusion the plan has now, and
  * stays right when the plan changes again. It is the app's own card in the
- * app's own tokens — crown, RECOMMENDED ribbon, gold price, a check per line,
- * and the Choose button as the app draws it. The gold chrome here is a
+ * app's own tokens — crown, RECOMMENDED ribbon, a check per line, and the
+ * Choose button as the app draws it. No price: the owner wants the
+ * parameters here and the figures on /pricing/ only. The gold chrome here is a
  * depiction of the app's screen, not the site's; the site's own rule for
  * gold (numbers, dots, glyphs) is unchanged. The lines are real text, so the
  * inclusions are readable by crawlers, which the screenshot never was.
@@ -19,7 +20,6 @@ import { cn } from '@/lib/utils'
 export function PlanCardMock({ plan = 'max', className }: { plan?: PlanKey; className?: string }) {
   const p = PLANS.find((x) => x.key === plan)!
   const card = PLAN_CARDS[plan]
-  const paid = plan !== 'free'
   return (
     <div className={cn('flex size-full items-center justify-center p-[6%]', className)}>
       <div className="relative w-full rounded-[20px] border border-gold bg-canvas p-5 pt-6">
@@ -39,12 +39,6 @@ export function PlanCardMock({ plan = 'max', className }: { plan?: PlanKey; clas
             <p className="text-[11px] text-muted">{p.tagline}</p>
           </div>
         </div>
-
-        <p className="numeric mt-4 flex items-baseline gap-1.5 leading-none">
-          <span className="text-2xl font-bold text-gold">{price(plan, 'month')}</span>
-          {paid && <span className="text-[11px] text-muted">/month</span>}
-          {paid && <span className="ml-auto text-[11px] text-muted">or {priceLine(plan, 'week')}</span>}
-        </p>
 
         <ul className="mt-4 grid gap-1.5">
           {card.features.map((f) => (
