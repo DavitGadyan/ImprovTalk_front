@@ -627,6 +627,19 @@ feature list and llms.txt say the same counts. `upgrade.tsx` was re-read on
 the way: the Custom Practice line is "build any person you describe" now, and
 `ROWS` and `PLAN_CARDS` follow it.
 
+## The smoke job that failed every deploy while the site was fine (14 Sep 2026)
+
+Runs #64 and #65 went red on `smoke` with "not serving this app after 15
+attempts" — and printed the correct title in the same error. The check was
+`printf '%s' "$body" | grep -q '_next/static'` under `set -o pipefail`:
+`grep -q` exits on its first hit and closes the pipe, `printf` takes EPIPE
+on a page of this size (the fifteen "write error: Broken pipe" lines above
+the error), and pipefail turns the successful match into a non-zero pipeline
+— fifteen times, twelve seconds apart. It started when the home page grew
+past the pipe buffer. Now a bash pattern match (`[[ "$body" == *_next/static* ]]`)
+and here-strings for the header fields; the whole step was run locally
+against the live site before pushing and passed on attempt 1.
+
 ## Three things the audit of 13 Sep found
 
 **Every page was shipping without an `og:image`.** Next merges metadata

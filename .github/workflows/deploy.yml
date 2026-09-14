@@ -150,15 +150,20 @@ jobs:
 
           # Pages serves partial state for a minute or two after a deploy, so
           # poll rather than failing on the first miss.
+          #
+          # A shell match, not `printf | grep -q`: grep -q exits on the first
+          # hit and closes the pipe, printf takes EPIPE on a page this size,
+          # and under pipefail a successful match read as a miss — fifteen
+          # times, every deploy, with the right title in the error message.
           for i in $(seq 1 15); do
             body=$(curl -sL --max-time 20 "$SITE/?ci=$(date +%s)" || true)
-            if printf '%s' "$body" | grep -q '_next/static'; then
+            if [[ "$body" == *_next/static* ]]; then
               echo "live site is the Next export (attempt $i)"
               break
             fi
             if [ "$i" -eq 15 ]; then
               echo "::error::$SITE is not serving this app after 15 attempts."
-              echo "::error::Served title: $(printf '%s' "$body" | grep -o '<title>[^<]*</title>' | head -1)"
+              echo "::error::Served title: $(grep -o '<title>[^<]*</title>' <<< "$body" | head -1)"
               echo "::error::If this is a rendered README, Settings > Pages > Source is on"
               echo "::error::'Deploy from a branch'. It must be 'GitHub Actions'."
               exit 1
@@ -186,8 +191,8 @@ jobs:
           # Console reports as "Page with redirect", and it fails the build.
           expect() { # url  expected-code  expected-Location-prefix ('' = must not redirect)
             hdr=$(curl -sI --max-time 20 "$1" || true)
-            code=$(printf '%s' "$hdr" | head -1 | awk '{print $2}')
-            loc=$(printf '%s' "$hdr" | tr -d '\r' | awk 'tolower($1)=="location:"{print $2}' | head -1)
+            code=$(awk 'NR==1{print $2; exit}' <<< "$hdr")
+            loc=$(tr -d '\r' <<< "$hdr" | awk 'tolower($1)=="location:"{print $2; exit}')
             if [ "$code" != "$2" ] || { [ -n "$3" ] && [ "${loc#"$3"}" = "$loc" ]; } || { [ -z "$3" ] && [ -n "$loc" ]; }; then
               echo "::error::$1 -> $code ${loc:-<no location>} (expected $2 ${3:-<no redirect>})"
               fail=1
