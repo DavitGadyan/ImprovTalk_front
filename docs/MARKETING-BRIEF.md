@@ -125,7 +125,7 @@ These conflict **inside the repo**. Recount before any campaign uses them.
 
 | Claim | Source A | Source B |
 |---|---|---|
-| Live practice scenarios | 70 / 13 venues (`content/catalogs.ts`, `llms.txt`, `history.md`) | 16 files / 11 categories, counted (`content/scenarios.ts`) — and 111 in `docs/COMPETITIVE-CHARMXP.md` |
+| Live practice scenarios | 128 / 17 venue groups (`content/practice.ts` carries the breakdown: 94 approach scenes across 14 venues, 5 Situational Pressure, 6 Date, 5 Reverse Role, 16 drills, Free Improv, Custom) | The 70 / 13 figure was the pickup directory alone; 16 / 11 is the drills directory (`content/scenarios.ts`) |
 | Reference catalogues | 22 (`llms.txt`) · 23 entries in the array | 25 (`COMPETITIVE-CHARMXP.md`) · 26 (`history.md`, Learn hub) |
 
 ### 3c · Never claim, in any channel

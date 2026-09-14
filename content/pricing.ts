@@ -14,7 +14,8 @@
  *    the Apple product ids `…{premium,max}.{weekly,monthly}` (:84-89). The
  *    saving is the app's own formula (:53-57), computed here, never typed.
  *  - PLAN_CARDS and ROWS: upgrade.tsx:79-118 and :122-134, verbatim, in the
- *    app's order. Two of the table's claims have nothing behind them in code
+ *    app's order (re-read 14 Sep after 9fece72: the Custom Practice line is
+ *    "build any person you describe" now). Two of the table's claims have nothing behind them in code
  *    yet — Pro's "Standard" voice model (realtime.py:363-368 gives Pro the
  *    Max model) and "Priority when busy" (no tier-aware code) — recorded in
  *    history.md under "Pricing".
@@ -91,7 +92,7 @@ export const TILES: Tile[] = [
     title: 'Practice',
     icon: 'mic',
     line: 'Hold the disc and talk; it answers in voice.',
-    body: 'Hold the disc and talk. It answers in real time, in voice, and hesitates and interrupts the way people do. A scene to pick at every venue, Situational Pressure for the confrontations, improv and drills, a hint if you stall, and a Charisma Score with the working shown at the end.',
+    body: 'Hold the disc and talk. It answers in real time, in voice, and hesitates and interrupts the way people do. Ninety-four approach scenes across fourteen venues, five Situational Pressure scenes where someone comes at you, the Date and Reverse Role sets on Max, and sixteen improv drills — a hint if you stall, and a Charisma Score with the working shown at the end.',
     render: 'live-session',
     from: 'pro',
   },
@@ -195,7 +196,7 @@ export const PLAN_CARDS: Record<PlanKey, { features: string[]; cta: string }> = 
     features: [
       'Everything in Pro',
       'Real Talk — analyze recordings & chat screenshots, Get Advice',
-      'Custom Practice — build her from Instagram',
+      'Custom Practice — build any person you describe',
       'Unlimited conversations',
       'The most capable voice model',
     ],
@@ -225,7 +226,7 @@ export const ROWS: Row[] = [
   { label: 'Stats & History', free: true, pro: true, max: true },
   { label: 'Practice — live scenes at every venue', free: false, pro: true, max: true },
   { label: 'Situational Pressure, improv & drills', free: false, pro: true, max: true },
-  { label: 'Custom Practice — build her from Instagram', free: false, pro: false, max: true },
+  { label: 'Custom Practice — build any person you describe', free: false, pro: false, max: true },
   { label: 'Real Talk — recordings & chat screenshots', free: false, pro: false, max: true },
   { label: 'Get Advice before you walk over', free: false, pro: false, max: true },
   { label: 'Conversations a week', free: '3', pro: '30', max: 'Unlimited' },
@@ -259,6 +260,10 @@ export const PRICING_FAQ = [
   {
     q: 'What does unlimited mean on Max?',
     a: 'No weekly cap on conversations. Free is three a week and Pro is thirty; Max has no counter.',
+  },
+  {
+    q: 'What is in Practice?',
+    a: 'Ninety-four approach scenes across fourteen venues — bar, beach, café, coffee shop, gym, park, festival, campus, office, street and more — five Situational Pressure scenes (a jealous boyfriend, an angry relative, a drunk person, a police stop, a street hustler) on Pro, and on Max the six Date scenes and the five Reverse Role scenes, where he approaches and you practise the other side. Plus sixteen improv and drill scenarios. Every count is from the app’s own files.',
   },
   {
     q: 'Does Free run out?',

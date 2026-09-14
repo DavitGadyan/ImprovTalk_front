@@ -30,7 +30,10 @@ MTLD.
 
 ## What is in it
 
-- 70 live practice scenarios across 13 venues
+- 128 live practice scenes in 17 venue groups: 94 approach scenes across 14
+  venues, 5 Situational Pressure scenes (Pro) for staying calm when someone
+  comes at you, 6 Date scenes and 5 Reverse Role scenes (Max) — the evening
+  after the approach, and the other side of it — and 16 improv drills
 - 210 AI-vs-AI simulator scenarios across 19 venues
 - 2,766 reference items across 22 catalogues (countries, accents, films, music,
   art, professions, gestures and more)

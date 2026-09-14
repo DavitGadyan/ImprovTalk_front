@@ -52,8 +52,13 @@ export const KNOWLEDGE = { sources: 13, principles: 104 } as const
 
 /** Numbers used in the copy. All verified against the repo. */
 export const stats = {
-  liveScenarios: 70,
-  liveVenues: 13,
+  /* Everything a user can start in Practice, counted 14 Sep 2026 and broken
+     down in content/practice.ts: 94 approach scenes across 14 venues, the
+     5 + 6 + 5 of Situational Pressure, Date and Reverse Role, 16 improv and
+     drill scenarios, Free Improv and Custom Practice. The earlier 70 / 13 was
+     the pickup directory alone. */
+  liveScenarios: 128,
+  liveVenues: 17,
   /* Served, not shelved: the 19 files the loader reads hold 225 scenarios, but
      15 carry `disabled: true` and are filtered out before any of them reach a
      user. Counted from orchestrator.py's own _LOCATION_FILES list. */

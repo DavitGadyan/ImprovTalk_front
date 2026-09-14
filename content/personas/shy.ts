@@ -56,6 +56,11 @@ export const shy: Persona = {
     intro: 'Not just a number. It shows you the reason.',
     proof: 'Keep practising and the score goes up.',
   },
+  practice: {
+    label: 'Practice',
+    title: 'Not just the opener.',
+    intro: 'The approach at any venue, then the date, then his side of it — and the moments where someone comes at you. Every scene answers in voice and is scored.',
+  },
   realtalk: {
     label: 'Real Talk',
     title: 'The one you replay at 1am, graded.',
@@ -74,5 +79,5 @@ export const shy: Persona = {
     { q: 'What does it cost?', a: `Free to start, three conversations a week. Pro is ${priceLine('pro', 'week')} or ${priceLine('pro', 'month')}; Max is ${priceLine('max', 'week')} or ${priceLine('max', 'month')}. Cancelled from the App Store.` },
     { q: 'How do I get it?', a: 'It is on TestFlight for iPhone. Tap Get early access and it takes you there.' },
   ],
-  order: ['problem', 'learnable', 'how', 'scoring', 'realtalk', 'inside', 'faq'],
+  order: ['problem', 'learnable', 'how', 'practice', 'scoring', 'realtalk', 'inside', 'faq'],
 }

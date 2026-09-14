@@ -57,6 +57,11 @@ export const rusty: Persona = {
     intro: 'The same score every session, so week six against week one is a number, not a feeling.',
     proof: 'Six weeks and the line moves.',
   },
+  practice: {
+    label: 'Practice',
+    title: 'Every room you have been avoiding.',
+    intro: 'Bars, parties, the park, the gym — then the date, and the moments that go wrong. Every scene answers in voice and is scored.',
+  },
   realtalk: {
     label: 'Real Talk',
     title: 'The one from last night, rated rather than guessed.',
@@ -75,5 +80,5 @@ export const rusty: Persona = {
     { q: 'What does it cost?', a: `Free to start, three conversations a week. Pro is ${priceLine('pro', 'week')} or ${priceLine('pro', 'month')}; Max is ${priceLine('max', 'week')} or ${priceLine('max', 'month')}. Cancelled from the App Store.` },
     { q: 'How do I get it?', a: 'It is on TestFlight for iPhone. Tap Get early access and it takes you there.' },
   ],
-  order: ['learnable', 'problem', 'how', 'scoring', 'realtalk', 'inside', 'faq'],
+  order: ['learnable', 'problem', 'how', 'practice', 'scoring', 'realtalk', 'inside', 'faq'],
 }

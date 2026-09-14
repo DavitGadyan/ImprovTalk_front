@@ -32,7 +32,10 @@ Every persona is its own URL — open it directly. The `?v=` override is gone
 ## Facts that were verified — do not re-guess, do not overstate
 
 **Counted from the app's shipped data files:**
-- 70 live scenarios / 13 venues
+- 128 live practice scenes / 17 venue groups (14 Sep 2026; the breakdown is in
+  `content/practice.ts` — 94 approach scenes across 14 venues, Situational
+  Pressure 5, Date 6, Reverse Role 5, 16 drills, Free Improv, Custom). The
+  earlier 70 / 13 was the pickup directory alone.
 - 225 simulator scenarios / **19** venues (an early note said 20 — it is 19)
 - 2,766 library items (2,571 reference + 195 countries)
 - 195 countries, 631 face photos, 195 audio clips
@@ -601,6 +604,28 @@ counted set is 15.
 `content/survey.ts` offers $149/$99/$59/$29 a month beside the real $49 a
 week, to learn whether people would pay more per week for a longer
 commitment. They appear in that one question and nowhere else.
+
+## Practice is more than the approach now (14 Sep 2026)
+
+The app grew three named groups in `packages/shared/locations/` — Situational
+Pressure (`2b0750a`, five confrontation scenes with their own dials, Pro), and
+Date and Reverse Role (`9fece72`, six and five scenes, Max) — and the owner's
+brief for the site is the hub's own intro line: practise improvisation,
+deduction and emotional intelligence to create rapport, and stay calm when
+someone comes at you. `content/practice.ts` carries the counted breakdown
+and the verbatim titles, subtitles and scene names; `stats.liveScenarios`
+went from 70 / 13 (the pickup directory alone) to 128 / 17 (everything a user
+can start in Practice, defined in that file's header so it can be re-counted).
+
+A new `practice` section sits after "How it works" on every persona page —
+one card per mode with its plan dot, count and scene names — and each persona
+frames it in its own words; speaking-up leads with Situational Pressure
+(`practice.lead`) and puts the section before Scoring, because someone who
+freezes in meetings reads "Jealous Boyfriend" and "Angry Relative" as the
+office in disguise. The Practice tile on /pricing/, its FAQ, the JSON-LD
+feature list and llms.txt say the same counts. `upgrade.tsx` was re-read on
+the way: the Custom Practice line is "build any person you describe" now, and
+`ROWS` and `PLAN_CARDS` follow it.
 
 ## Three things the audit of 13 Sep found
 

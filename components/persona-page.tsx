@@ -5,6 +5,7 @@ import { CtaBand } from '@/components/sections/cta-band'
 import { Problem } from '@/components/sections/problem'
 import { Learnable } from '@/components/sections/learnable'
 import { HowItWorks } from '@/components/sections/how-it-works'
+import { PracticeModes } from '@/components/sections/practice-modes'
 import { Scoring } from '@/components/sections/scoring'
 import { RealTalk } from '@/components/sections/real-talk'
 import { WhatsInside } from '@/components/sections/whats-inside'
@@ -31,6 +32,7 @@ const SECTIONS: Record<
   problem: Problem,
   learnable: Learnable,
   how: HowItWorks,
+  practice: PracticeModes,
   scoring: Scoring,
   realtalk: RealTalk,
   inside: WhatsInside,

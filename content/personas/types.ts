@@ -6,7 +6,7 @@
  * same reader. Said generically a page speaks to none of them, so the copy and
  * the running order both come from here while the components stay shared.
  */
-export type SectionKey = 'problem' | 'learnable' | 'how' | 'scoring' | 'realtalk' | 'inside' | 'faq'
+export type SectionKey = 'problem' | 'learnable' | 'how' | 'practice' | 'scoring' | 'realtalk' | 'inside' | 'faq'
 
 export type Point = { title: string; body: string }
 
@@ -35,6 +35,8 @@ export type Persona = {
   learnable: SectionCopy & { points: Point[] }
   how: SectionCopy & { steps: Point[] }
   scoring: SectionCopy & { proof: string }
+  /** Practice: the approach venues, the pressure scenes, the date, the other side. */
+  practice: SectionCopy & { lead?: 'approach' | 'pressure' | 'date' | 'reverse' | 'drills' }
   /** Real Talk: the same score, on conversations that actually happened. */
   realtalk: SectionCopy
   inside: SectionCopy

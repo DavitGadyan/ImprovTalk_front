@@ -58,6 +58,11 @@ export const social: Persona = {
     intro: 'Not a verdict on you. Your speed, your pauses, and the moment it turned.',
     proof: 'Keep practising and the score goes up.',
   },
+  practice: {
+    label: 'Practice',
+    title: 'The whole evening, not one line.',
+    intro: 'Approach anywhere, run the date, take the other side of it, and stay calm when the night turns. Every scene answers in voice and is scored.',
+  },
   realtalk: {
     label: 'Real Talk',
     title: 'Last night, rated.',
@@ -76,5 +81,5 @@ export const social: Persona = {
     { q: 'What does it cost?', a: `Free to start, three conversations a week. Pro is ${priceLine('pro', 'week')} or ${priceLine('pro', 'month')}; Max is ${priceLine('max', 'week')} or ${priceLine('max', 'month')}. Cancelled from the App Store.` },
     { q: 'How do I get it?', a: 'It is on TestFlight for iPhone. Tap Get early access and it takes you there.' },
   ],
-  order: ['problem', 'how', 'learnable', 'inside', 'scoring', 'realtalk', 'faq'],
+  order: ['problem', 'how', 'practice', 'learnable', 'inside', 'scoring', 'realtalk', 'faq'],
 }

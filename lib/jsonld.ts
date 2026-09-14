@@ -89,7 +89,9 @@ export const softwareLd = {
     'Acoustic delivery analysis: pace, pauses, filler words, pitch, volume',
     'Every score shows the measurements behind it',
     `Reference library of ${TOTAL_LIBRARY_ITEMS.toLocaleString('en')} conversation topics`,
-    'Solo drills for interviews, networking, storytelling and tough feedback',
+    'Situational Pressure: five scenes for staying calm when someone comes at you',
+    'Date and Reverse Role scenes: the evening after the approach, and the other side of it',
+    'Improv drills for interviews, networking, storytelling and tough feedback',
     'Your voice is used to score the session and nothing else',
   ],
   /* Three plans, two cadences, from content/pricing.ts — the one place a

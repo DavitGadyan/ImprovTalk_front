@@ -53,6 +53,11 @@ export const language: Persona = {
     intro: 'It shows your speed and your pauses, so you can see the bits you got stuck on.',
     proof: 'Keep practising and the pauses get shorter.',
   },
+  practice: {
+    label: 'Practice',
+    title: 'The same scenes, in your language.',
+    intro: 'Every venue, the pressure scenes, the date: the live scenes answer in the language you pick — English, Spanish or Russian — and stay in it.',
+  },
   realtalk: {
     label: 'Real Talk',
     title: 'The real one, in the real language.',
@@ -71,5 +76,5 @@ export const language: Persona = {
     { q: 'What does it cost?', a: `Free to start, three conversations a week. Pro is ${priceLine('pro', 'week')} or ${priceLine('pro', 'month')}; Max is ${priceLine('max', 'week')} or ${priceLine('max', 'month')}. Cancelled from the App Store.` },
     { q: 'How do I get it?', a: 'It is on TestFlight for iPhone. Tap Get early access and it takes you there.' },
   ],
-  order: ['learnable', 'problem', 'how', 'scoring', 'realtalk', 'inside', 'faq'],
+  order: ['learnable', 'problem', 'how', 'practice', 'scoring', 'realtalk', 'inside', 'faq'],
 }
